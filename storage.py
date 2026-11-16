@@ -116,6 +116,51 @@ def get_or_create_player(name: str, avatar: str = "🦁", email: str = "") -> Di
     return data["players"][matched_id]
 
 
+def create_unique_player(name: str, avatar: str = "🦁", email: str = "") -> Dict[str, Any]:
+    """
+    Creates a brand new player profile even if the base name already exists,
+    assigning a unique identifier and display tag (e.g. 'Prabu #2', 'prabu_2').
+    """
+    clean_name = name.strip()
+    if not clean_name:
+        clean_name = "Player"
+
+    data = load_data()
+    if "players" not in data:
+        data["players"] = {}
+
+    base_id = clean_name.lower().replace(" ", "_")
+    new_id = base_id
+    new_display = clean_name
+    counter = 2
+
+    existing_pids = set(data["players"].keys())
+    existing_names = {p.get("name", "").strip().lower() for p in data["players"].values()}
+
+    if new_id in existing_pids or clean_name.lower() in existing_names:
+        while f"{base_id}_{counter}" in existing_pids:
+            counter += 1
+        new_id = f"{base_id}_{counter}"
+        new_display = f"{clean_name} #{counter}"
+
+    new_profile = {
+        "id": new_id,
+        "name": new_display,
+        "avatar": avatar,
+        "email": email.strip()
+    }
+    data["players"][new_id] = new_profile
+    save_data(data)
+
+    if is_db_connected():
+        try:
+            db_save_player(new_id, new_display, avatar, email)
+        except Exception:
+            pass
+
+    return new_profile
+
+
 def get_all_saved_players() -> List[Dict[str, Any]]:
     """
     Returns all registered player profiles from storage, sorted alphabetically by name.
@@ -259,6 +304,7 @@ def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
         scores = [a.get("score", 0) for a in p_attempts]
         total_pts = sum(scores)
         overall_avg = round(total_pts / count, 2) if count > 0 else 0.0
+        best_score = max(scores) if scores else 0
         unique_days = len(set(a.get("date") for a in p_attempts))
 
         summary.append({
@@ -267,10 +313,11 @@ def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
             "avatar": pinfo.get("avatar", "👤"),
             "total_attempts": count,
             "total_points": total_pts,
+            "best_score": best_score,
             "overall_average": overall_avg,
             "days_active": unique_days
         })
-    summary.sort(key=lambda x: (x["total_points"], x["overall_average"]), reverse=True)
+    summary.sort(key=lambda x: (x["best_score"], x["overall_average"], x["total_points"]), reverse=True)
     return summary
 
 

@@ -14,7 +14,9 @@ from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_b
 from src.components.duel_engine import (
     get_day_curriculum_questions,
     build_retake_question_set,
-    render_player_progress_dashboard
+    render_player_progress_dashboard,
+    render_dynamic_player_selector,
+    render_all_time_highs_sidebar
 )
 
 
@@ -68,74 +70,26 @@ def render_gender_view():
         col_setup, col_preview = st.columns([3, 2], gap="large")
 
         with col_setup:
-            st.markdown("### 1. ✍️ Select or Register Player")
-            saved_players = get_app_saved_players()
-            saved_names = [p["name"] for p in saved_players if p.get("name")]
+            player_info = render_dynamic_player_selector(category="gender", key_prefix="gender")
+            active_player_name = player_info["player_name"]
+            is_player_ready = player_info["is_ready"]
+            is_new_player = player_info.get("is_new", False)
+            force_unique = player_info.get("force_unique", False)
+            avatar_input = player_info["avatar"]
+            email_input = player_info["email"]
+            player_id_input = player_info.get("selected_player_id")
 
-            NEW_OPTION = "➕ Register New Player... (కొత్త పేరు / ಹೊಸ ಹೆಸರು)"
-            dropdown_options = saved_names + [NEW_OPTION]
+            if is_player_ready and active_player_name:
+                clean_pid = player_id_input or active_player_name.strip().lower().replace(" ", "_")
+                player_hist = storage.get_player_continuous_history(clean_pid, category="gender")
+                cur_day = player_hist["current_day_number"]
+                is_today_done = player_hist["is_played_today"]
 
-            default_idx = 0
-            if st.session_state.player_name and st.session_state.player_name in saved_names:
-                default_idx = saved_names.index(st.session_state.player_name)
-            elif not saved_names:
-                default_idx = 0
-
-            selected_choice = st.selectbox(
-                "Player Profile / మీ పేరు / ನಿಮ್ಮ ಹೆಸರು:",
-                options=dropdown_options,
-                index=default_idx,
-                help="Select your saved profile so you never re-type your name, or register a new one.",
-                key="gender_player_select"
-            )
-
-            if selected_choice == NEW_OPTION:
-                player_name_input = st.text_input(
-                    "Enter New Player Name:",
-                    value="",
-                    placeholder="e.g. Prabu, Arjun, Kavya, Suresh...",
-                    help="Saved permanently in the dropdown across server restarts!",
-                    key="gender_new_name_input"
-                )
-                col_av, col_em = st.columns([1, 2])
-                with col_av:
-                    avatar_input = st.selectbox("Choose Avatar:", options=AVATAR_CHOICES, index=0, key="gender_new_av")
-                with col_em:
-                    email_input = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com (for score alerts)", key="gender_new_em")
-                active_player_name = player_name_input
+                # Continuous Journey Progress Tracker for Selected Player (Gender)
+                render_player_progress_dashboard(clean_pid, active_player_name, category="gender", title_prefix="🏷️ Gender Duel (Der • Die • Das)")
             else:
-                existing_p = next((p for p in saved_players if p["name"] == selected_choice), None)
-                p_avatar = existing_p.get("avatar", "🦁") if existing_p else "🦁"
-                p_email = existing_p.get("email", "") if existing_p else ""
-
-                st.markdown(f"""<div style="background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 12px; padding: 12px 18px; margin: 8px 0 14px 0; display: flex; align-items: center; justify-content: space-between;">
-<div style="display: flex; align-items: center; gap: 12px;">
-<span style="font-size: 2rem;">{p_avatar}</span>
-<div>
-<div style="font-size: 1.15rem; font-weight: 800; color: #065f46;">{selected_choice}</div>
-<div style="font-size: 0.82rem; color: #64748b;">Saved Profile Active • Dedicated Gender Leaderboard Ranking</div>
-</div>
-</div>
-<span style="background: #059669; color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px;">Gender Profile</span>
-</div>""", unsafe_allow_html=True)
-
-                with st.expander("✏️ Update Avatar / Email (Optional)"):
-                    col_av, col_em = st.columns([1, 2])
-                    with col_av:
-                        cur_av_idx = AVATAR_CHOICES.index(p_avatar) if p_avatar in AVATAR_CHOICES else 0
-                        avatar_input = st.selectbox("Update Avatar:", options=AVATAR_CHOICES, index=cur_av_idx, key="gender_exist_av")
-                    with col_em:
-                        email_input = st.text_input("Update Email:", value=p_email, key="gender_exist_em")
-
-                active_player_name = selected_choice
-
-            clean_pid = active_player_name.strip().lower().replace(" ", "_") if active_player_name else "guest"
-            player_hist = storage.get_player_continuous_history(clean_pid, category="gender")
-            cur_day = player_hist["current_day_number"]
-            is_today_done = player_hist["is_played_today"]
-
-            # Continuous Journey Progress Tracker for Selected Player (Gender)
-            render_player_progress_dashboard(clean_pid, active_player_name or "Player", category="gender", title_prefix="🏷️ Gender Duel (Der • Die • Das)")
+                cur_day = 1
+                is_today_done = False
 
             st.markdown("---")
             st.markdown("### 2. 🌐 Meaning Annotations Language")
@@ -182,10 +136,13 @@ def render_gender_view():
             start_btn = st.button("🚀 START GENDER QUIZ NOW ➔", type="primary", use_container_width=True, key="gender_start_btn")
             if start_btn:
                 clean_name = active_player_name.strip()
-                if not clean_name:
-                    st.error("⚠️ Please select or enter your name to start the Gender duel!")
+                if not is_player_ready or not clean_name:
+                    st.error("⚠️ Please type or select your name above to start the Gender duel!")
                 else:
-                    saved_prof = storage.get_or_create_player(clean_name, avatar_input, email_input.strip())
+                    if is_new_player:
+                        saved_prof = storage.create_unique_player(clean_name, avatar_input, email_input.strip())
+                    else:
+                        saved_prof = storage.get_or_create_player(clean_name, avatar_input, email_input.strip())
                     canonical_name = saved_prof.get("name", clean_name)
 
                     st.session_state.player_name = canonical_name
@@ -235,14 +192,8 @@ def render_gender_view():
             else:
                 st.info("No one has taken today's Gender Challenge yet. Be the first to rank on the Gender scoreboard!")
 
-            # All-time Gender Champions
-            all_time_gender = storage.get_all_time_stats(category="gender")
-            if all_time_gender:
-                st.markdown("---")
-                st.markdown("#### 🌟 All-Time Gender Champions")
-                for rank, champ in enumerate(all_time_gender[:3], start=1):
-                    c_medal = "🏆" if rank == 1 else "🥈" if rank == 2 else "🥉"
-                    st.markdown(f"**{c_medal} {champ['avatar']} {champ['name']}** — {champ['total_points']} pts ({champ['total_attempts']} attempts, Avg: {champ['overall_average']:.2f})")
+            # 🌟 All-Time High Scores Leaderboard on the right hand side
+            render_all_time_highs_sidebar(category="gender")
 
             # Quick Tips on Articles
             st.markdown("---")

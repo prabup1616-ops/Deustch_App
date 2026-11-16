@@ -184,3 +184,204 @@ def render_player_progress_dashboard(
                     "Scores Log": str(h["scores"])
                 })
             st.table(table_rows)
+
+
+# ==============================================================================
+# 3. DYNAMIC TYPE-AHEAD PLAYER SELECTOR (BLANK INITIAL STATE)
+# ==============================================================================
+
+def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = "quiz") -> Dict[str, Any]:
+    """
+    Renders an initial empty input field with dynamic type-ahead suggestions from DB:
+    - Initially BLANK: Does NOT expose or pre-select any player names.
+    - When user types: dynamically filters and suggests matching saved players.
+    - If duplicate names exist, provides choice between 'Old Player (Existing)' and 'New Player (Register New)'.
+    - If 'New Player' with an existing name is chosen, assigns a unique key (e.g. 'Prabu #2', 'prabu_2').
+    """
+    from src.config import AVATAR_CHOICES
+
+    all_saved = storage.get_all_saved_players()
+    
+    st.markdown("### 1. ✍️ Player Identification")
+    typed_raw = st.text_input(
+        "Enter Player Name / మీ పేరును టైప్ చేయండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:",
+        value=st.session_state.get(f"{key_prefix}_typed_name_val", ""),
+        placeholder="Type your name here (e.g. Prabu)...",
+        key=f"{key_prefix}_typed_name_field",
+        help="Field is blank by default. Start typing to see suggestions if you have played before, or type a new name to register."
+    )
+    
+    clean_typed = typed_raw.strip()
+    
+    if not clean_typed:
+        st.info("👆 Please type your name in the blank box above to start or load your progress.")
+        return {
+            "selected_player_id": None,
+            "player_name": "",
+            "avatar": "🦁",
+            "email": "",
+            "is_ready": False,
+            "is_new": False
+        }
+
+    # Search for case-insensitive matches among saved players
+    matches = [p for p in all_saved if clean_typed.lower() in p.get("name", "").lower()]
+
+    if matches:
+        st.markdown(f"**🔍 Suggestions for '{clean_typed}':**")
+        options = []
+        for p in matches:
+            options.append(f"👤 Existing Player: {p.get('avatar', '👤')} {p['name']} (ID: {p['id']})")
+        options.append(f"➕ Register New Player: '{clean_typed}' (New Profile)")
+
+        selected_opt = st.radio(
+            "Select your profile / మీ ప్రొఫైల్ ఎంచుకోండి:",
+            options=options,
+            index=0,
+            key=f"{key_prefix}_profile_match_radio"
+        )
+
+        if "Existing Player" in selected_opt:
+            matched_id = selected_opt.split("ID: ")[1].split(")")[0].strip()
+            chosen_player = next((p for p in matches if p["id"] == matched_id), matches[0])
+            p_name = chosen_player["name"]
+            p_avatar = chosen_player.get("avatar", "🦁")
+            p_email = chosen_player.get("email", "")
+
+            st.markdown(f"""
+            <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 2rem;">{p_avatar}</span>
+                        <div>
+                            <div style="font-size: 1.15rem; font-weight: 800; color: #166534;">{p_name}</div>
+                            <div style="font-size: 0.82rem; color: #64748b;">Existing Profile Verified • Continuous Journey & Scores Active</div>
+                        </div>
+                    </div>
+                    <span style="background: #16a34a; color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Saved Profile</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            with st.expander("✏️ Customize Avatar / Email (Optional)"):
+                col_a, col_e = st.columns([1, 2])
+                with col_a:
+                    cur_idx = AVATAR_CHOICES.index(p_avatar) if p_avatar in AVATAR_CHOICES else 0
+                    new_av = st.selectbox("Avatar:", options=AVATAR_CHOICES, index=cur_idx, key=f"{key_prefix}_exist_av")
+                with col_e:
+                    new_em = st.text_input("Email:", value=p_email, key=f"{key_prefix}_exist_em")
+
+            return {
+                "selected_player_id": chosen_player["id"],
+                "player_name": p_name,
+                "avatar": new_av,
+                "email": new_em,
+                "is_ready": True,
+                "is_new": False
+            }
+        else:
+            # Register new player with unique identifier if name is taken
+            st.markdown(f"""
+            <div style="background: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
+                <span style="font-weight: 700; color: #854d0e;">➕ Creating a Brand New Profile for "{clean_typed}"</span>
+                <div style="font-size: 0.82rem; color: #713f12; margin-top: 4px;">
+                    A unique identifier (e.g. <code>{clean_typed} #2</code>) will be assigned so your scores and streaks remain completely independent!
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            col_a, col_e = st.columns([1, 2])
+            with col_a:
+                new_av = st.selectbox("Choose Avatar:", options=AVATAR_CHOICES, index=0, key=f"{key_prefix}_new_dup_av")
+            with col_e:
+                new_em = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com", key=f"{key_prefix}_new_dup_em")
+
+            return {
+                "selected_player_id": None,
+                "player_name": clean_typed,
+                "avatar": new_av,
+                "email": new_em,
+                "is_ready": True,
+                "is_new": True,
+                "force_unique": True
+            }
+    else:
+        # Brand new name with no matches
+        st.markdown(f"""
+        <div style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
+            <span style="font-weight: 700; color: #1e40af;">✨ Brand New Player: "{clean_typed}"</span>
+            <div style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">
+                You will start fresh on <strong>Day 1</strong> of the Goethe B1 curriculum!
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_a, col_e = st.columns([1, 2])
+        with col_a:
+            new_av = st.selectbox("Choose Avatar:", options=AVATAR_CHOICES, index=0, key=f"{key_prefix}_new_fresh_av")
+        with col_e:
+            new_em = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com", key=f"{key_prefix}_new_fresh_em")
+
+        return {
+            "selected_player_id": None,
+            "player_name": clean_typed,
+            "avatar": new_av,
+            "email": new_em,
+            "is_ready": True,
+            "is_new": True,
+            "force_unique": False
+        }
+
+
+# ==============================================================================
+# 4. ALL-TIME HIGHS SIDEBAR CARD
+# ==============================================================================
+
+def render_all_time_highs_sidebar(category: str = "pronoun"):
+    """
+    Renders the All-Time Highs leaderboard on the right-hand preview column:
+    - Ranked by highest single score (Best Score e.g. 5/5 ⭐), overall average, and total points.
+    - Medals for Top 3 (🥇, 🥈, 🥉).
+    """
+    theme_color = "#2563eb" if category == "pronoun" else "#059669"
+    st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 8px; margin: 20px 0 10px 0;">
+        <span style="font-size: 1.4rem;">👑</span>
+        <h3 style="margin: 0; font-size: 1.25rem; color: #1e293b;">All-Time High Scores</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    st.caption("Hall of Fame ranked by All-Time Best Scores, Average Mastery, and Total Points.")
+
+    all_time = storage.get_all_time_stats(category=category)
+
+    if all_time:
+        medals = ["🥇", "🥈", "🥉"]
+        for rank, p in enumerate(all_time[:5], start=1):
+            badge = medals[rank - 1] if rank <= 3 else f"#{rank}"
+            best_s = p.get("best_score", 0)
+            avg_s = p.get("overall_average", 0.0)
+            pts = p.get("total_points", 0)
+            attempts = p.get("total_attempts", 0)
+            days = p.get("days_active", 0)
+
+            is_perfect = (best_s == 5)
+            star = " ⭐" if is_perfect else ""
+
+            st.markdown(f"""
+            <div style="background: white; border: 1px solid #e2e8f0; border-left: 4px solid {theme_color}; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-weight: 800; font-size: 0.98rem; color: #1e293b;">
+                        {badge} {p['avatar']} {p['name']}
+                    </div>
+                    <div style="background: {'#fef3c7' if is_perfect else '#f1f5f9'}; color: {'#b45309' if is_perfect else theme_color}; font-weight: 800; font-size: 0.88rem; padding: 2px 10px; border-radius: 999px;">
+                        Best: {best_s}/5{star}
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; margin-top: 6px;">
+                    <span>Overall Avg: <strong>{avg_s:.2f} / 5.0</strong></span>
+                    <span>Total: <strong>{pts} pts</strong> ({attempts} tries • {days}d)</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.info("No all-time scores recorded yet. Complete your first duel to claim the #1 spot in the Hall of Fame!")
