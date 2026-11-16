@@ -557,11 +557,7 @@ def get_learned_topics(player_id: str) -> List[Dict[str, str]]:
                 existing_lower.append(gt.get("topic", "").strip().lower())
 
     # Default fallback: at least have Perfekt vs Präteritum
-    if not learned:
-        learned = [
-            {"topic": "Perfekt vs Präteritum", "date": date.today().isoformat()}
-        ]
-
+    # Do not auto-inject default topic if user cleared or has no topics yet
     return learned
 
 
@@ -597,7 +593,28 @@ def remove_learned_topic(player_id: str, topic: str) -> None:
     lsrw_store = data.get("lsrw_store", {})
     player_data = lsrw_store.get(clean_pid, {})
     learned = player_data.get("learned_topics", [])
-    player_data["learned_topics"] = [t for t in learned if t["topic"].lower() != topic.strip().lower()]
+    topic_clean = topic.strip().lower()
+    player_data["learned_topics"] = [t for t in learned if t["topic"].strip().lower() != topic_clean]
+    if player_data.get("current_topic") and str(player_data.get("current_topic")).strip().lower() == topic_clean:
+        player_data["current_topic"] = None
+    if "practiced_list" in player_data:
+        player_data["practiced_list"] = [t for t in player_data["practiced_list"] if t.strip().lower() != topic_clean]
+    if "explained_list" in player_data:
+        player_data["explained_list"] = [t for t in player_data["explained_list"] if t.strip().lower() != topic_clean]
+    save_data(data)
+
+
+def clear_learned_topics(player_id: str) -> None:
+    """Removes ALL grammar topics and exam history for the player to start completely fresh."""
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+    lsrw_store = data.setdefault("lsrw_store", {})
+    if clean_pid in lsrw_store:
+        lsrw_store[clean_pid]["learned_topics"] = []
+        lsrw_store[clean_pid]["current_topic"] = None
+        lsrw_store[clean_pid]["practiced_list"] = []
+        lsrw_store[clean_pid]["explained_list"] = []
+        lsrw_store[clean_pid]["module_scores"] = []
     save_data(data)
 
 

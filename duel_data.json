@@ -585,128 +585,32 @@
   ],
   "lsrw_store": {
     "__lsrw_test_player__": {
-      "practiced_list": [
-        "Relativsatz"
-      ],
-      "explained_list": [
-        "Passiv",
-        "weil vs obwohl"
-      ],
-      "has_seen_kasus": true,
-      "current_topic": "Passiv",
-      "current_stage": "scenario_selection",
-      "chat_history": [
-        {
-          "role": "assistant",
-          "content": "Hallo"
-        }
-      ]
-    },
-    "prabu": {
+      "learned_topics": [],
+      "current_topic": null,
       "practiced_list": [],
       "explained_list": [],
-      "has_seen_kasus": false,
-      "current_topic": "Verben mit Präpositionen",
-      "current_stage": "part1_hoeren",
-      "chat_history": [
-        {
-          "role": "assistant",
-          "content": "🇩🇪 **Goethe-Zertifikat B1 LSRW Master Hub**\n\nస్వాగతం! నేను మీ జర్మన్ భాషా గురువును. మేము గ్రామర్ అంశాలు మరియు LSRW (Hören, Sprechen, Lesen, Schreiben) మాడ్యూల్స్ నేర్చుకుందాం.\nಸ್ವಾಗತ! ನಾನು ನಿಮ್ಮ ಜರ್ಮನ್ ಭಾಷಾ ಬೋಧಕ. ನಾವು ವ್ಯಾಕರಣ ವಿಷಯಗಳು ಮತ್ತು LSRW (Hören, Sprechen, Lesen, Schreiben) ಮಾಡ್ಯೂಲ್ಗಳನ್ನು ಕಲಿಯೋಣ.\n\n---\n📋 **Menu / మెనూ / ಮೆನು:**\n- **TOPIC: &lt;topic&gt;** — Explain లేదా Practice ఎంచుకోండి / Explain ಅಥವಾ Practice ಆಯ್ಕೆಮಾಡಿ\n- **EXPLAIN** — అంశం వివరణ, వ్యాయామాలు లేకుండా / ವಿಷಯದ ವಿವರಣೆ, ವ್ಯಾಯಾಮಗಳಿಲ್ಲದೆ\n- **PRACTICE** — LSRW మాడ్యూల్ ప్రాక్టీస్ చేయండి (Hören > Sprechen > Lesen > Schreiben). నేను scenario లేదా \"random\" ఎంచుకుంటాను / LSRW ಮಾಡ್ಯೂಲ್ ಪ್ರಾಕ್ಟೀಸ್ ಮಾಡಿ (Hören > Sprechen > Lesen > Schreiben). ನಾನು scenario ಅಥವಾ \"random\" ಆಯ್ಕೆಮಾಡುತ್ತೇನೆ\n- **TOPIC LOG** — నా జాబితాలు చూపించు / ನನ್ನ ಪಟ್ಟಿಗಳನ್ನು ತೋರಿಸು\n- **ఏదైనా German వాక్యం / ಯಾವುದೇ German ವಾಕ್ಯ** — తప్పులు సరిదిద్ది, సరైనదాన్ని విశ్లేషిస్తాను / ತಪ್ಪುಗಳನ್ನು ಸರಿಪಡಿಸಿ, ಸರಿಯಾದದ್ದನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತೇನೆ\n\n💡 *క్రింద ఉన్న బటన్ల ద్వారా నేరుగా ఒక అంశాన్ని లేదా కమాండ్‌ను ఎంచుకోవచ్చు! / ಕೆಳಗಿನ ಬಟನ್‌ಗಳ ಮೂಲಕ ನೇರವಾಗಿ ಒಂದು ವಿಷಯ ಅಥವಾ ಆಜ್ಞೆಯನ್ನು ಆಯ್ಕೆಮಾಡಬಹುದು!*\n"
-        },
-        {
-          "role": "user",
-          "content": "verb with preposition"
-        },
-        {
-          "role": "assistant",
-          "content": "ఈ అంశం German వ్యాకరణంలో **Verben mit Präpositionen** (Preposition తో కలిపి ఉపయోగించే Verb - క్రియాపదం).\nಈ ವಿಷಯವು German ವ್ಯಾಕರಣದಲ್ಲಿ **Verben mit Präpositionen** (Preposition ಜೊತೆಗೆ ಬಳಸುವ Verb - ಕ್ರಿಯಾಪದ).\n\nExplain లేదా Practice?\nExplain ಅಥವಾ Practice?"
-        },
-        {
-          "role": "user",
-          "content": "practice"
-        },
-        {
-          "role": "assistant",
-          "content": "**Verben mit Präpositionen** ప్రాక్టీస్ కోసం దయచేసి క్రింది సందర్భాలలో (Scenarios) ఒకదాన్ని ఎంచుకోండి:\n**Verben mit Präpositionen** ಅಭ್ಯಾಸಕ್ಕಾಗಿ ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಸನ್ನಿವೇಶಗಳಲ್ಲಿ (Scenarios) ಒಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ:\n\n1. **Im Büro** (ఆఫీసులో పనులు, సహోద్యోగులతో ప్రాజెక్ట్ చర్చ)\n   **Im Büro** (ಕಚೇರಿಯಲ್ಲಿ ಕೆಲಸಗಳು, ಸಹೋದ್ಯೋಗಿಗಳೊಂದಿಗೆ ಪ್ರಾಜೆಕ್ಟ್ ಚರ್ಚೆ)\n2. **Reiseplanung** (సెలవుల ప్రయాణం, టికెట్లు, హోటల్ బుకింగ్)\n   **Reiseplanung** (ರಜಾದಿನಗಳ ಪ್ರಯಾಣ, ಟಿಕೆಟ್‌ಗಳು, ಹೋಟೆಲ್ ಬುಕಿಂಗ್)\n3. **Wohnungssuche** (కొత్త ఇల్లు వెతకడం, అద్దె నిబంధనలు)\n   **Wohnungssuche** (ಹೊಸ ಮನೆ ಹುಡುಕುವುದು, ಬಾಡಿಗೆ ನಿಯಮಗಳು)\n4. **Beim Arzt** (ఆరోగ్య సమస్యలు, అపాయింట్‌మెంట్ తీసుకోవడం)\n   **Beim Arzt** (ಆರೋಗ್ಯ ಸಮಸ್ಯೆಗಳು, ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ತೆಗೆದುಕೊಳ್ಳುವುದು)\n5. **Random** (Goethe A2/B1 అధికారిక పదజాలం నుండి ఏదైనా సాధారణ అంశం)\n   **Random** (Goethe A2/B1 ಅಧಿಕೃತ ಶಬ್ದಕೋಶದಿಂದ ಯಾವುದಾದರೂ ಸಾಮಾನ್ಯ ವಿಷಯ)\n\nదయచేసి మీ ఎంపికను టైప్ చేయండి (1-5 లేదా పేరు).\nದಯವಿಟ್ಟು ನಿಮ್ಮ ಆಯ್ಕೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ (1-5 ಅಥವಾ ಹೆಸರು)."
-        },
-        {
-          "role": "user",
-          "content": "Random"
-        },
-        {
-          "role": "assistant",
-          "content": "**పార్ట్ 1 - Hören (వినడం — Goethe B1 మోడల్)**\n**ಭಾಗ 1 - Hören (ಕೇಳುವುದು — Goethe B1 ಮಾದರಿ)**\n\nసందర్భం: వారాంతపు ప్రణాళికలు (Freizeit und Wochenende)\nಸನ್ನಿವೇಶ: ವಾರಾಂತ್ಯದ ಯೋಜನೆಗಳು (Freizeit und Wochenende)\n\nక్రింది సంభాషణను శ్రద్ధగా చదివి, ఇచ్చిన 3 ప్రశ్నలకు సమాధానాలు రాయండి:\nಕೆಳಗಿನ ಸಂಭಾಷಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಓದಿ, ಕೊಟ್ಟಿರುವ 3 ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಗಳನ್ನು ಬರೆಯಿರಿ:\n\n---\n\n### **Hörtext (Transkript)**\n*[Register: Gesprochen (Alltag)]*\n\n**Lukas:** Hallo Mia! Freust du dich auch schon auf das Wochenende?  \n**Mia:** Hallo Lukas! Ja, total! Aber ich ärgere mich ein bisschen über das Wetter. Es soll am Samstag viel regnen.  \n**Lukas:** Ach, wirklich? Schade! Ich habe so lange auf unsere Wanderung in den Bergen gewartet.  \n**Mia:** Das stimmt. Aber wir können uns trotzdem treffen. Denkst du bitte an meinen Regenschirm? Du hast ihn noch.  \n**Lukas:** Ja, klar. Wir können uns einfach in einem Café treffen und über unsere Urlaubspläne sprechen.  \n**Mia:** Das ist eine tolle Idee! Ich interessiere mich schon sehr für deine Reisepläne nach Italien.\n\n---\n\n### **Aufgaben (ప్రశ్నలు / ಪ್ರಶ್ನೆಗಳು)**\n\n**1. Mia freut sich über das Wetter am Wochenende.**  \n   a) Richtig  \n   b) Falsch  \n\n**2. Worauf hat Lukas lange gewartet?**  \n   a) Auf einen Besuch im Café  \n   b) Auf die Wanderung in den Bergen  \n   c) Auf seine Reise nach Italien  \n\n**3. Worüber möchten Mia und Lukas im Café sprechen?**  \n   a) Über das schlechte Wetter  \n   b) Über Lukas' Regenschirm  \n   c) Über ihre Urlaubspläne  \n\n---\n\nదయచేసి మీ సమాధానాలను టైప్ చేయండి (ఉదాహరణకు: 1a, 2b, 3c).\nದಯವಿಟ್ಟು ನಿಮ್ಮ ಉತ್ತರಗಳನ್ನು ಟೈಪ್ ಮಾಡಿ (ಉದಾಹರಣೆಗೆ: 1a, 2b, 3c)."
-        }
-      ]
+      "module_scores": []
+    },
+    "prabu": {
+      "learned_topics": [],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": []
     },
     "guest": {
-      "learned_topics": [
-        {
-          "topic": "Perfekt vs Präteritum",
-          "date": "2026-11-15"
-        }
-      ],
-      "module_scores": [
-        {
-          "module": "listening",
-          "score": 10,
-          "total": 10,
-          "topics": [
-            "Perfekt vs Präteritum"
-          ],
-          "date": "2026-11-15",
-          "timestamp": "2026-11-15T19:01:44.097723"
-        }
-      ]
+      "learned_topics": [],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": []
     },
     "gast": {
-      "learned_topics": [
-        {
-          "topic": "Perfekt vs Präteritum",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "Konjunktiv II",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "Infinitiv mit zu",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "Präpositionen (Wechselpräpositionen)",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "Verben mit Akkusativ",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "Verben mit Dativ",
-          "date": "2026-11-15"
-        },
-        {
-          "topic": "German Prepositions grouped by prepositions itself",
-          "date": "2026-11-16"
-        },
-        {
-          "topic": "prepositions brouped by prepositions so that one preposition has 3 to 4 use scenarios",
-          "date": "2026-11-16"
-        }
-      ],
-      "module_scores": [
-        {
-          "module": "listening",
-          "score": 4,
-          "total": 5,
-          "topics": [
-            "Perfekt vs Präteritum",
-            "Konjunktiv II"
-          ],
-          "date": "2026-11-15",
-          "timestamp": "2026-11-15T19:49:22.338275"
-        }
-      ]
+      "learned_topics": [],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": []
     }
   },
   "questions_repo": {

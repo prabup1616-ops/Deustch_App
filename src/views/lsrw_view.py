@@ -110,11 +110,20 @@ def _render_hub():
         return
 
     # Kumulative Grammatikthemen
-    st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
-    st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
-
-    learned = storage.get_learned_topics(pid)
-    topic_names = [t["topic"] for t in learned]
+    col_hdr1, col_hdr2 = st.columns([3, 1])
+    with col_hdr1:
+        st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
+        st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
+    with col_hdr2:
+        learned = storage.get_learned_topics(pid)
+        topic_names = [t["topic"] for t in learned]
+        if topic_names:
+            if st.button("🗑️ Alle löschen (Start Fresh)", key="btn_clear_all_topics", help="Entfernt alle Themen und setzt den LSRW-Fortschritt zurück"):
+                storage.clear_learned_topics(pid)
+                for key in list(st.session_state.keys()):
+                    if key.startswith("lsrw_"):
+                        st.session_state.pop(key, None)
+                st.rerun()
 
     if topic_names:
         cols_per_row = 4
@@ -123,11 +132,20 @@ def _render_hub():
             cols = st.columns(cols_per_row)
             for i, t in enumerate(row_topics):
                 with cols[i]:
-                    st.markdown(f"""<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 8px 12px; text-align: center; font-weight: 700; color: #1e40af; font-size: 0.9rem;">
+                    c_badge, c_del = st.columns([4, 1])
+                    with c_badge:
+                        st.markdown(f"""<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 6px 10px; text-align: center; font-weight: 700; color: #1e40af; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{t}">
 ✅ {t}
 </div>""", unsafe_allow_html=True)
+                    with c_del:
+                        if st.button("❌", key=f"del_topic_{t}", help=f"'{t}' entfernen"):
+                            storage.remove_learned_topic(pid, t)
+                            for k in list(st.session_state.keys()):
+                                if k.startswith("lsrw_"):
+                                    st.session_state.pop(k, None)
+                            st.rerun()
     else:
-        st.info("Noch keine Themen hinzugefügt. Wählen Sie unten Ihr erstes Grammatikthema aus!")
+        st.info("🌱 Noch keine Themen aktiv. Wählen Sie unten Ihr erstes Thema aus oder geben Sie ein eigenes Thema ein, um frische LSRW-Übungen zu starten!")
 
     col_add1, col_add2 = st.columns([2, 1])
     with col_add1:
@@ -165,7 +183,13 @@ def _render_hub():
     history = storage.get_lsrw_module_history(pid)
     if history:
         st.markdown("---")
-        st.markdown("### 📊 Letzte Prüfungsergebnisse")
+        col_hist_h1, col_hist_h2 = st.columns([3, 1])
+        with col_hist_h1:
+            st.markdown("### 📊 Letzte Prüfungsergebnisse")
+        with col_hist_h2:
+            if st.button("🗑️ Verlauf leeren", key="btn_clear_lsrw_hist", help="Löscht den Verlauf der bisherigen Prüfungsergebnisse"):
+                storage.clear_learned_topics(pid)
+                st.rerun()
         recent = history[-6:]
         for s in reversed(recent):
             emoji = "📖" if s["module"] == "reading" else "✍️" if s["module"] == "writing" else "🎧" if s["module"] == "listening" else "🗣️"
