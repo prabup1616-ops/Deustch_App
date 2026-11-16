@@ -1,5 +1,4 @@
 import streamlit as st
-from src.config import get_local_ip
 
 
 def render_home_view():
@@ -158,9 +157,3 @@ Public announcements, radio discussions, and audio comprehension tests.
         if st.button("🎧 Practice Hören ➔", use_container_width=True, key="btn_home_hoeren"):
             st.session_state.app_view = "lsrw"
             st.rerun()
-
-    st.markdown("---")
-    st.markdown("### 📡 Real-Time Server Sharing")
-    local_ip = get_local_ip()
-    st.write(f"Friends on your local Wi-Fi can connect right now at: `http://{local_ip}:8501`")
-    st.caption("Or run `share_with_friends.bat` for global Cloudflare tunnel access!")
