@@ -177,12 +177,6 @@ def render_gender_view():
                         initial_questions = get_topic_curriculum_questions(active_topic, category="gender", count=5, day_number=cur_day)
                     else:
                         initial_questions = get_gender_pack_questions(pack_num, count=5)
-                    st.session_state.gender_retake_notice = None
-
-                    if chosen_is_continuous:
-                        initial_questions = get_day_curriculum_questions("gender", cur_day, count=5)
-                    else:
-                        initial_questions = get_gender_pack_questions(pack_num, count=5)
 
                     st.session_state.gender_active_questions = initial_questions
                     st.session_state.gender_seen_q_ids = [q["id"] for q in initial_questions]
@@ -251,7 +245,7 @@ def render_gender_view():
         st.markdown(f"""
         <div style="background: linear-gradient(90deg, #065f46 0%, #059669 100%); padding: 14px 20px; border-radius: 14px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div style="font-size: 1.15rem; font-weight: 700;">
-                {p_avatar} Player: <strong>{p_name}</strong> | 🏷️ {pack_title}
+                {p_avatar} Player: <strong>{p_name}</strong> | 🏷️ {pack_title} • 📚 {st.session_state.get('active_gender_topic', 'Goethe B1 Nouns')}
             </div>
             <div style="font-size: 0.95rem; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px;">
                 Mode: <strong>Gender Duel (Der / Die / Das)</strong>
