@@ -39,6 +39,61 @@ def get_day_curriculum_questions(category: str, day_number: int, count: int = 5)
         return questions.get_day_pack_questions(pack_idx, count=count)
 
 
+def get_topic_curriculum_questions(
+    topic: str,
+    category: str = "pronoun",
+    count: int = 5,
+    day_number: int = 1
+) -> List[Dict[str, Any]]:
+    """
+    Fetches questions for the selected topic:
+    - If baseline topic: uses standard day curriculum questions.
+    - If custom unlocked topic (e.g. 'Weak Masculine Declination'):
+      1. Pulls questions from questions_repo (in DB / local).
+      2. If pool is small, supplements with starter topic questions from STARTER_TOPIC_QUESTIONS.
+      3. Mixes in 1-2 review questions from baseline questions to reinforce prior topics.
+    """
+    clean_topic = topic.strip()
+    is_baseline = ("baseline" in clean_topic.lower() or "possessivartikel" in clean_topic.lower() if category == "pronoun" else "nouns" in clean_topic.lower())
+
+    if is_baseline:
+        return get_day_curriculum_questions(category, day_number, count=count)
+
+    # 1. Fetch from questions_repo in DB / storage
+    repo_qs = storage.get_repo_questions_for_topic(clean_topic, category=category)
+
+    # 2. Supplement from starter questions if repo is small
+    try:
+        from src.ai_service import STARTER_TOPIC_QUESTIONS
+        if len(repo_qs) < 3:
+            for sk, sqs in STARTER_TOPIC_QUESTIONS.items():
+                if sk in clean_topic.lower() or clean_topic.lower() in sk:
+                    for q in sqs:
+                        if not any(eq.get("target_de") == q.get("target_de") for eq in repo_qs):
+                            repo_qs.append(q)
+    except Exception:
+        pass
+
+    # 3. Fallback to baseline if no questions found yet
+    if not repo_qs:
+        return get_day_curriculum_questions(category, day_number, count=count)
+
+    # Target: 3-4 questions from current topic + 1-2 questions from baseline (past topics)
+    topic_count = min(len(repo_qs), max(3, count - 1))
+    review_count = count - topic_count
+
+    selected_topic_qs = random.sample(repo_qs, topic_count) if len(repo_qs) >= topic_count else repo_qs
+
+    review_qs = []
+    if review_count > 0:
+        base_qs = get_day_curriculum_questions(category, day_number, count=5)
+        review_qs = random.sample(base_qs, min(review_count, len(base_qs)))
+
+    final_pool = selected_topic_qs + review_qs
+    random.shuffle(final_pool)
+    return final_pool[:count]
+
+
 def build_retake_question_set(
     per_q_results: List[Dict[str, Any]],
     all_pool: List[Dict[str, Any]],
@@ -187,6 +242,163 @@ def render_player_progress_dashboard(
 
 
 # ==============================================================================
+# 2B. 10-DAY MILESTONE TOPIC UNLOCK & SELECTOR
+# ==============================================================================
+
+def render_10day_topic_unlock_card(
+    player_id: str,
+    player_name: str,
+    category: str = "pronoun",
+    key_prefix: str = "quiz"
+):
+    """
+    Renders the 10-Day Milestone Card:
+    - If player has reached Day 10+ or completed >= 10 days of duels:
+      Shows an unlock card allowing the player to enter/choose their next grammar topic.
+    - Shows suggestions of topics unlocked by other learners in the community.
+    - Asynchronously triggers background AI question generation with Gemini and stores questions in questions_repo.
+    """
+    import threading
+
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    hist_data = storage.get_player_continuous_history(clean_pid, category=category)
+    total_days = hist_data.get("total_days_completed", 0)
+    cur_day = hist_data.get("current_day_number", 1)
+
+    is_milestone_reached = (total_days >= 10 or cur_day >= 10)
+
+    if not is_milestone_reached:
+        days_left = max(1, 10 - total_days)
+        st.markdown(f"""
+        <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 10px 14px; margin: 10px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748b;">
+                <span>🎯 <strong>10-Day Topic Unlock:</strong> {total_days}/10 days completed</span>
+                <span>{days_left} more day(s) to unlock custom grammar topics!</span>
+            </div>
+            <div style="width: 100%; background: #e2e8f0; height: 6px; border-radius: 999px; margin-top: 6px; overflow: hidden;">
+                <div style="width: {min(100, int((total_days / 10.0) * 100))}%; background: #2563eb; height: 100%;"></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        return
+
+    # 10 Days Milestone Reached!
+    community_topics = storage.get_community_topics(category=category)
+    player_unlocked = storage.get_player_unlocked_topics(clean_pid, category=category)
+    current_topic = storage.get_player_current_topic(clean_pid, category=category)
+
+    # Filter community topics that player hasn't added yet
+    available_community = [t for t in community_topics if t not in player_unlocked]
+
+    st.markdown(f"""
+    <div style="background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%); border: 2px solid #eab308; border-radius: 14px; padding: 18px 22px; margin: 14px 0; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.8rem;">🎉</span>
+            <div>
+                <h3 style="margin: 0; font-size: 1.22rem; color: #854d0e;">10-Day Goethe B1 Milestone Unlocked!</h3>
+                <p style="margin: 2px 0 0 0; font-size: 0.88rem; color: #713f12;">
+                    Congratulations, <strong>{player_name}</strong>! You have reached 10 days of continuous duels. You can now unlock your next grammar topic (e.g. <em>Weak Masculine Declination</em>, <em>Passiv</em>, <em>Relativsätze</em>).
+                </p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    with st.expander("🔓 Unlock a New Grammar Topic (Type or Choose from Community)", expanded=True):
+        col_type, col_com = st.columns([1, 1], gap="medium")
+
+        with col_type:
+            st.markdown("**Option A: Type Your Next Topic**")
+            new_custom_topic = st.text_input(
+                "Write your next grammar topic:",
+                placeholder="e.g. Weak Masculine Declination (N-Deklination)",
+                key=f"{key_prefix}_custom_topic_input"
+            )
+
+        with col_com:
+            st.markdown("**Option B: Community Topics from Other Learners**")
+            com_selection = st.selectbox(
+                "Choose from community pool:",
+                options=["-- Select a community topic --"] + (available_community if available_community else community_topics),
+                index=0,
+                key=f"{key_prefix}_community_topic_select"
+            )
+
+        unlock_clicked = st.button("🚀 Unlock & Feed Topic into DB Repository", type="primary", key=f"{key_prefix}_submit_new_topic_btn")
+
+        if unlock_clicked:
+            chosen_topic = ""
+            if new_custom_topic and new_custom_topic.strip():
+                chosen_topic = new_custom_topic.strip()
+            elif com_selection and not com_selection.startswith("--"):
+                chosen_topic = com_selection.strip()
+
+            if not chosen_topic:
+                st.warning("⚠️ Please type a new topic or select one from the community suggestions!")
+            else:
+                # 1. Register topic for player & community
+                storage.add_player_unlocked_topic(clean_pid, chosen_topic, category=category)
+                storage.set_player_current_topic(clean_pid, chosen_topic, category=category)
+
+                # 2. Check if questions already exist in questions_repo
+                existing_qs = storage.get_repo_questions_for_topic(chosen_topic, category=category)
+
+                # 3. Launch background AI generator with Gemini if fewer than 5 questions
+                if len(existing_qs) < 5:
+                    def _bg_generate(t_name, cat, pid):
+                        try:
+                            from src.ai_service import generate_topic_questions
+                            api_k = storage.get_gemini_api_key()
+                            past_t = storage.get_player_unlocked_topics(pid, category=cat)
+                            new_qs = generate_topic_questions(t_name, category=cat, count=10, api_key=api_k, past_topics=past_t)
+                            if new_qs:
+                                storage.save_repo_questions_for_topic(t_name, cat, new_qs, created_by=f"ai_{pid}")
+                        except Exception:
+                            pass
+
+                    bg_thread = threading.Thread(target=_bg_generate, args=(chosen_topic, category, clean_pid), daemon=True)
+                    bg_thread.start()
+
+                st.success(f"✨ Topic **'{chosen_topic}'** unlocked and set as your active duel topic! Questions are ready and syncing with DB in the background.")
+                st.rerun()
+
+
+def render_topic_selector(player_id: str, category: str = "pronoun", key_prefix: str = "quiz") -> str:
+    """
+    Renders the 'Choose Topic' dropdown in Step 3 of the lobby:
+    - Lists all topics unlocked by this player.
+    - Pre-selected with the player's active current_topic.
+    - If the player switches topic, immediately updates current_topic.
+    - Returns the selected topic.
+    """
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    unlocked_topics = storage.get_player_unlocked_topics(clean_pid, category=category)
+    current_topic = storage.get_player_current_topic(clean_pid, category=category)
+
+    if current_topic not in unlocked_topics:
+        unlocked_topics.append(current_topic)
+
+    cur_idx = unlocked_topics.index(current_topic) if current_topic in unlocked_topics else 0
+
+    st.markdown("---")
+    st.markdown("### 📚 Choose Grammar Topic / ವ್ಯಾಕರಣ ವಿಷಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ")
+    st.caption("Duel questions will focus on this topic, combined with review questions from prior topics.")
+
+    chosen_topic = st.selectbox(
+        "Select Active Topic for this Duel:",
+        options=unlocked_topics,
+        index=cur_idx,
+        key=f"{key_prefix}_active_topic_selector",
+        help="Questions will be drawn from this topic and reinforced with past topics."
+    )
+
+    if chosen_topic != current_topic:
+        storage.set_player_current_topic(clean_pid, chosen_topic, category=category)
+
+    return chosen_topic
+
+
+# ==============================================================================
 # 3. DYNAMIC PLAYER SELECTOR (DROPDOWN FIRST: OLD VS NEW)
 # ==============================================================================
 
@@ -228,8 +440,8 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
                 return []
             q = query.strip().lower()
             matches = [p for p in all_saved if q in p.get("name", "").lower()]
-            # Returns (Label, Value) tuples for the live dropdown menu
-            return [(f"{p.get('avatar', '👤')}  {p['name']} (ID: {p['id']})", p["id"]) for p in matches]
+            # Returns (Label, Value) tuples for the live dropdown menu (WITHOUT ID)
+            return [(f"{p.get('avatar', '👤')}  {p['name']}", p["id"]) for p in matches]
 
         selected_player_id = None
 
@@ -246,7 +458,7 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
             )
         except Exception:
             # Fallback to searchable selectbox if custom component not loaded
-            player_options = {f"{p.get('avatar', '👤')} {p['name']} (ID: {p['id']})": p["id"] for p in all_saved}
+            player_options = {f"{p.get('avatar', '👤')} {p['name']}": p["id"] for p in all_saved}
             choice = st.selectbox(
                 "Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
                 options=list(player_options.keys()),
@@ -254,6 +466,7 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
                 placeholder="🔍 Type to search your name (e.g. Prabu, Prakash)...",
                 key=f"{key_prefix}_fallback_player_selectbox",
             )
+            selected_player_id = player_options.get(choice) if choice else None
             selected_player_id = player_options.get(choice) if choice else None
 
         chosen_player = next((p for p in all_saved if p["id"] == selected_player_id), None) if selected_player_id else None

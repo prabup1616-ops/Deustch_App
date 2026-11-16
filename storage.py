@@ -19,7 +19,10 @@ try:
         db_save_attempt,
         db_get_attempts,
         db_add_learned_topic,
-        db_get_learned_topics
+        db_get_learned_topics,
+        db_save_repo_questions,
+        db_get_repo_questions,
+        db_get_all_community_topics
     )
     if is_db_connected():
         init_db()
@@ -637,3 +640,200 @@ def get_lsrw_module_history(player_id: str, module: str = None) -> List[Dict[str
     if module:
         return [s for s in scores if s.get("module") == module]
     return scores
+
+
+# ==============================================================================
+# 10-DAY MILESTONE & TOPIC REPOSITORY (CONTINUOUS DUEL TOPIC EXPANSION)
+# ==============================================================================
+
+PRESET_B1_TOPICS = [
+    "Weak Masculine Declination (N-Deklination)",
+    "Passiv (Präsens & Präteritum)",
+    "Relativsätze (Nominativ, Akkusativ, Dativ)",
+    "Konjunktiv II (Wünsche & Ratschläge)",
+    "Nebensätze mit weil, obwohl, da, dass",
+    "Adjektivdeklination (Typ 1, 2, 3)",
+    "Verben mit festen Präpositionen",
+    "Infinitivkonstruktionen (um...zu / ohne...zu)",
+    "Reflexive Verben im Akkusativ & Dativ"
+]
+
+
+def get_community_topics(category: str = "pronoun") -> List[str]:
+    """
+    Returns all topics unlocked across the entire learner community.
+    Includes presets plus any custom topic created by any player.
+    """
+    topics_set = set(PRESET_B1_TOPICS)
+
+    # 1. Fetch from Neon DB if connected
+    if is_db_connected():
+        try:
+            db_topics = db_get_all_community_topics(category=category)
+            for t in db_topics:
+                if t and t.strip():
+                    topics_set.add(t.strip())
+        except Exception:
+            pass
+
+    # 2. Fetch from local JSON storage
+    data = load_data()
+    saved_com = data.get("community_topics", {}).get(category, [])
+    for t in saved_com:
+        if t and t.strip():
+            topics_set.add(t.strip())
+
+    # Include topics from any player's unlocked topics
+    for p_obj in data.get("players", {}).values():
+        for t in p_obj.get("unlocked_topics", {}).get(category, []):
+            if t and t.strip():
+                topics_set.add(t.strip())
+
+    return sorted(list(topics_set))
+
+
+def get_player_unlocked_topics(player_id: str, category: str = "pronoun") -> List[str]:
+    """
+    Returns the list of topics unlocked by a player.
+    Always includes the baseline topic first:
+    - Translation Duel: 'Possessivartikel (Baseline)'
+    - Der/Die/Das Duel: 'Goethe B1 Nouns (Baseline)'
+    """
+    baseline = "Possessivartikel (Baseline)" if category == "pronoun" else "Goethe B1 Nouns (Baseline)"
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+
+    player_obj = data.get("players", {}).get(clean_pid, {})
+    unlocked = player_obj.get("unlocked_topics", {}).get(category, [])
+
+    result = [baseline]
+    for t in unlocked:
+        if t != baseline and t not in result:
+            result.append(t)
+    return result
+
+
+def add_player_unlocked_topic(player_id: str, topic: str, category: str = "pronoun") -> bool:
+    """
+    Unlocks a new grammar topic for a player and sets it as active.
+    Also registers the topic into community topics so other learners see it.
+    """
+    clean_topic = topic.strip()
+    if not clean_topic:
+        return False
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+
+    if "players" not in data:
+        data["players"] = {}
+    player_obj = data["players"].setdefault(clean_pid, {"id": clean_pid, "name": clean_pid})
+
+    unlocked_map = player_obj.setdefault("unlocked_topics", {})
+    topic_list = unlocked_map.setdefault(category, [])
+    if clean_topic not in topic_list:
+        topic_list.append(clean_topic)
+
+    # Set as active topic
+    player_obj.setdefault("current_topic", {})[category] = clean_topic
+
+    # Save to community topics
+    com_map = data.setdefault("community_topics", {})
+    com_list = com_map.setdefault(category, [])
+    if clean_topic not in com_list:
+        com_list.append(clean_topic)
+
+    save_data(data)
+
+    if is_db_connected():
+        try:
+            db_add_learned_topic(clean_pid, clean_topic)
+        except Exception:
+            pass
+
+    return True
+
+
+def get_player_current_topic(player_id: str, category: str = "pronoun") -> str:
+    """Returns the player's currently selected topic."""
+    baseline = "Possessivartikel (Baseline)" if category == "pronoun" else "Goethe B1 Nouns (Baseline)"
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+    player_obj = data.get("players", {}).get(clean_pid, {})
+    cur = player_obj.get("current_topic", {}).get(category)
+    return cur if cur else baseline
+
+
+def set_player_current_topic(player_id: str, topic: str, category: str = "pronoun") -> bool:
+    """Sets the player's active duel topic."""
+    clean_topic = topic.strip()
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+    if "players" not in data:
+        data["players"] = {}
+    player_obj = data["players"].setdefault(clean_pid, {"id": clean_pid, "name": clean_pid})
+    player_obj.setdefault("current_topic", {})[category] = clean_topic
+    save_data(data)
+    return True
+
+
+def get_repo_questions_for_topic(topic: str, category: str = "pronoun") -> List[Dict[str, Any]]:
+    """
+    Fetches stored questions for a given topic from DB (questions_repo) or local storage.
+    """
+    clean_topic = topic.strip()
+    # 1. Check Neon DB first
+    if is_db_connected():
+        try:
+            db_qs = db_get_repo_questions(clean_topic, category=category)
+            if db_qs:
+                return db_qs
+        except Exception:
+            pass
+
+    # 2. Check local JSON fallback
+    data = load_data()
+    repo = data.get("questions_repo", {}).get(category, {})
+    return repo.get(clean_topic, [])
+
+
+def save_repo_questions_for_topic(topic: str, category: str, questions_list: List[Dict[str, Any]], created_by: str = "ai") -> int:
+    """
+    Saves a batch of questions for a topic into both Neon DB (questions_repo) and local storage.
+    """
+    clean_topic = topic.strip()
+    if not clean_topic or not questions_list:
+        return 0
+
+    # Ensure each question has unique id & topic attribute
+    for idx, q in enumerate(questions_list, start=1001):
+        if "id" not in q:
+            q["id"] = int(f"{abs(hash(clean_topic)) % 10000}{idx}")
+        if "topic" not in q:
+            q["topic"] = clean_topic
+        if "category" not in q:
+            q["category"] = category
+
+    # 1. Save to Neon DB
+    db_saved = 0
+    if is_db_connected():
+        try:
+            db_saved = db_save_repo_questions(clean_topic, category, questions_list, created_by=created_by)
+        except Exception:
+            pass
+
+    # 2. Save to local JSON
+    data = load_data()
+    repo = data.setdefault("questions_repo", {}).setdefault(category, {})
+    existing = repo.setdefault(clean_topic, [])
+    # Append without duplicating by target_de
+    existing_targets = {q.get("target_de", "").strip().lower() for q in existing}
+    added = 0
+    for q in questions_list:
+        t_de = q.get("target_de", "").strip().lower()
+        if t_de and t_de not in existing_targets:
+            existing.append(q)
+            existing_targets.add(t_de)
+            added += 1
+    save_data(data)
+    return db_saved or added
+

@@ -141,11 +141,25 @@ def init_db():
             );
             """)
 
+            # 5. Questions Repository (Stores generated questions per topic for continuous duels)
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS questions_repo (
+                id SERIAL PRIMARY KEY,
+                topic VARCHAR(200) NOT NULL,
+                category VARCHAR(50) NOT NULL DEFAULT 'pronoun',
+                question_data JSONB NOT NULL,
+                created_by VARCHAR(100) DEFAULT 'ai',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
             # Indexes for ultra-fast lookups
             cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_scores_player ON player_scores(player_id);
             CREATE INDEX IF NOT EXISTS idx_scores_category ON player_scores(category);
             CREATE INDEX IF NOT EXISTS idx_bank_module_topic ON exercise_bank(module, topic);
+            CREATE INDEX IF NOT EXISTS idx_qrepo_topic ON questions_repo(topic);
+            CREATE INDEX IF NOT EXISTS idx_qrepo_category ON questions_repo(category);
             """)
 
         conn.commit()
@@ -352,3 +366,104 @@ def db_get_bank_exercises(module: str, topic: str) -> List[Dict[str, Any]]:
         return []
     finally:
         conn.close()
+
+
+# ==============================================================================
+# QUESTIONS REPO (PER-TOPIC QUESTIONS FOR 10-DAY ADVANCED DUELS)
+# ==============================================================================
+
+def db_save_repo_questions(topic: str, category: str, questions_list: List[Dict[str, Any]], created_by: str = "ai") -> int:
+    """
+    Saves a batch of Goethe B1 questions under a specific topic in the questions_repo.
+    Returns the count of successfully inserted questions.
+    """
+    conn = _get_connection()
+    if not conn or not questions_list:
+        return 0
+    clean_topic = topic.strip()
+    inserted = 0
+    try:
+        with conn.cursor() as cur:
+            for q in questions_list:
+                cur.execute("""
+                INSERT INTO questions_repo (topic, category, question_data, created_by)
+                VALUES (%s, %s, %s, %s);
+                """, (clean_topic, category, Json(q), created_by))
+                inserted += 1
+        conn.commit()
+        return inserted
+    except Exception as e:
+        logger.error(f"db_save_repo_questions error: {e}")
+        conn.rollback()
+        return 0
+    finally:
+        conn.close()
+
+
+def db_get_repo_questions(topic: str, category: str = "pronoun") -> List[Dict[str, Any]]:
+    """
+    Fetches all stored questions for a given topic from the questions_repo table.
+    """
+    conn = _get_connection()
+    if not conn:
+        return []
+    clean_topic = topic.strip()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("""
+            SELECT id, topic, category, question_data, created_by, created_at
+            FROM questions_repo
+            WHERE LOWER(topic) = LOWER(%s) AND category = %s
+            ORDER BY id ASC;
+            """, (clean_topic, category))
+            rows = cur.fetchall()
+            results = []
+            for r in rows:
+                qdata = r.get("question_data", {})
+                if isinstance(qdata, str):
+                    try:
+                        qdata = json.loads(qdata)
+                    except Exception:
+                        continue
+                if isinstance(qdata, dict):
+                    if "id" not in qdata:
+                        qdata["id"] = r["id"]
+                    if "topic" not in qdata:
+                        qdata["topic"] = r["topic"]
+                    results.append(qdata)
+            return results
+    except Exception as e:
+        logger.error(f"db_get_repo_questions error: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+def db_get_all_community_topics(category: str = "pronoun") -> List[str]:
+    """
+    Fetches all distinct grammar topics unlocked across all players and in questions_repo.
+    """
+    conn = _get_connection()
+    if not conn:
+        return []
+    topics_set = set()
+    try:
+        with conn.cursor() as cur:
+            # 1. From questions_repo
+            cur.execute("SELECT DISTINCT topic FROM questions_repo WHERE category = %s;", (category,))
+            for r in cur.fetchall():
+                if r[0] and r[0].strip():
+                    topics_set.add(r[0].strip())
+
+            # 2. From learned_topics
+            cur.execute("SELECT DISTINCT topic FROM learned_topics;")
+            for r in cur.fetchall():
+                if r[0] and r[0].strip():
+                    topics_set.add(r[0].strip())
+        return sorted(list(topics_set))
+    except Exception as e:
+        logger.error(f"db_get_all_community_topics error: {e}")
+        return sorted(list(topics_set))
+    finally:
+        conn.close()
+

@@ -13,8 +13,11 @@ from src.config import AVATAR_CHOICES
 from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_button
 from src.components.duel_engine import (
     get_day_curriculum_questions,
+    get_topic_curriculum_questions,
     build_retake_question_set,
     render_player_progress_dashboard,
+    render_10day_topic_unlock_card,
+    render_topic_selector,
     render_dynamic_player_selector,
     render_all_time_highs_sidebar
 )
@@ -87,6 +90,9 @@ def render_gender_view():
 
                 # Continuous Journey Progress Tracker for Selected Player (Gender)
                 render_player_progress_dashboard(clean_pid, active_player_name, category="gender", title_prefix="🏷️ Gender Duel (Der • Die • Das)")
+
+                # 10-Day Milestone Topic Unlock & Community Suggestions
+                render_10day_topic_unlock_card(clean_pid, active_player_name, category="gender", key_prefix="gender")
             else:
                 cur_day = 1
                 is_today_done = False
@@ -131,6 +137,12 @@ def render_gender_view():
                 pack_title = f"Gender Pack #{pack_num} (Nouns {(pack_num-1)*5 + 1} to {min(pack_num*5, len(GENDER_QUESTIONS_DATA))})"
                 chosen_is_continuous = False
 
+            # Choose Active Topic (Pre-selected with player's current topic)
+            if is_player_ready and active_player_name:
+                active_topic = render_topic_selector(clean_pid, category="gender", key_prefix="gender")
+            else:
+                active_topic = "Goethe B1 Nouns (Baseline)"
+
             st.markdown("<br>", unsafe_allow_html=True)
 
             start_btn = st.button("🚀 START GENDER QUIZ NOW ➔", type="primary", use_container_width=True, key="gender_start_btn")
@@ -158,6 +170,13 @@ def render_gender_view():
 
                     st.session_state.gender_pack_choice = pack_tag
                     st.session_state.gender_pack_title = pack_title
+                    st.session_state.active_gender_topic = active_topic
+                    st.session_state.gender_retake_notice = None
+
+                    if chosen_is_continuous:
+                        initial_questions = get_topic_curriculum_questions(active_topic, category="gender", count=5, day_number=cur_day)
+                    else:
+                        initial_questions = get_gender_pack_questions(pack_num, count=5)
                     st.session_state.gender_retake_notice = None
 
                     if chosen_is_continuous:

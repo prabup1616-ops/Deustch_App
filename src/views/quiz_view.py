@@ -8,8 +8,11 @@ from src.config import AVATAR_CHOICES
 from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_button
 from src.components.duel_engine import (
     get_day_curriculum_questions,
+    get_topic_curriculum_questions,
     build_retake_question_set,
     render_player_progress_dashboard,
+    render_10day_topic_unlock_card,
+    render_topic_selector,
     render_dynamic_player_selector,
     render_all_time_highs_sidebar
 )
@@ -59,6 +62,9 @@ def render_quiz_view():
 
                 # Continuous Journey Progress Tracker for Selected Player
                 render_player_progress_dashboard(clean_pid, active_player_name, category="pronoun", title_prefix="🎯 Translation Duel")
+
+                # 10-Day Milestone Topic Unlock & Community Suggestions
+                render_10day_topic_unlock_card(clean_pid, active_player_name, category="pronoun", key_prefix="quiz")
             else:
                 cur_day = 1
                 is_today_done = False
@@ -97,6 +103,12 @@ def render_quiz_view():
                 pack_title = f"Pack #{pack_num} (Questions {(pack_num-1)*5 + 1} to {min(pack_num*5, len(QUESTIONS_DATA))})"
                 chosen_is_continuous = False
 
+            # Choose Active Topic (Pre-selected with player's current topic)
+            if is_player_ready and active_player_name:
+                active_topic = render_topic_selector(clean_pid, category="pronoun", key_prefix="quiz")
+            else:
+                active_topic = "Possessivartikel (Baseline)"
+
             st.markdown("<br>", unsafe_allow_html=True)
 
             start_btn = st.button("🚀 START QUIZ NOW / క్విజ్ ప్రారంభించండి / ರಸಪ್ರಶ್ನೆ ಪ್ರಾರಂಭಿಸಿ", type="primary", use_container_width=True)
@@ -117,10 +129,11 @@ def render_quiz_view():
                     st.session_state.lang_choice = "te" if "Telugu" in lang_input else "kn"
                     st.session_state.pack_choice = pack_tag
                     st.session_state.pack_title = pack_title
+                    st.session_state.active_topic = active_topic
                     st.session_state.retake_notice = None
 
                     if chosen_is_continuous:
-                        initial_questions = get_day_curriculum_questions("pronoun", cur_day, count=5)
+                        initial_questions = get_topic_curriculum_questions(active_topic, category="pronoun", count=5, day_number=cur_day)
                     else:
                         initial_questions = get_day_pack_questions(pack_num, count=5)
 
@@ -176,7 +189,7 @@ def render_quiz_view():
         st.markdown(f"""
         <div style="background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); padding: 14px 20px; border-radius: 14px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div style="font-size: 1.15rem; font-weight: 700;">
-                {p_avatar} Player: <strong>{p_name}</strong> | 🎯 {pack_title}
+                {p_avatar} Player: <strong>{p_name}</strong> | 🎯 {pack_title} • 📚 {st.session_state.get('active_topic', 'Possessivartikel')}
             </div>
             <div style="font-size: 0.95rem; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px;">
                 Language: <strong>{'Telugu (తెలుగు)' if lang == 'te' else 'Kannada (ಕನ್ನಡ)'}</strong>

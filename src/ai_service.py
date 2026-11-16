@@ -585,3 +585,165 @@ LANGUAGE RULES (Strict, apply to the entire output)
         store_cached_exercise("explanation", [topic], {"text": result_text}, extra=depth_clean)
 
     return result_text
+
+
+# ==============================================================================
+# DYNAMIC TOPIC QUESTION GENERATOR (GOETHE B1 LEVEL)
+# ==============================================================================
+
+STARTER_TOPIC_QUESTIONS = {
+    "weak masculine declination (n-deklination)": [
+        {
+            "topic": "Weak Masculine Declination (N-Deklination)",
+            "prompt_te": "నేను ఆ విద్యార్థిని (student) లైబ్రరీలో కలిశాను.",
+            "prompt_kn": "ನಾನು ಆ ವಿದ್ಯಾರ್ಥಿಯನ್ನು (student) ಗ್ರಂಥಾಲಯದಲ್ಲಿ ಭೇಟಿಯಾದೆ.",
+            "target_de": "Ich habe den Studenten in der Bibliothek getroffen.",
+            "options": [
+                "Ich habe den Student in der Bibliothek getroffen.",
+                "Ich habe den Studenten in der Bibliothek getroffen.",
+                "Ich habe dem Student in der Bibliothek getroffen.",
+                "Ich habe des Studenten in der Bibliothek getroffen."
+            ],
+            "correct_index": 1,
+            "explanation": "'treffen' requires Akkusativ. 'der Student' is a weak masculine noun (N-Deklination), adding -(e)n in all cases except Nominativ Singular -> 'den Studenten'.",
+            "case": "Akkusativ",
+            "gender": "Maskulin (N-Deklination)"
+        },
+        {
+            "topic": "Weak Masculine Declination (N-Deklination)",
+            "prompt_te": "వైద్యుడు ఆ రోగికి (patient) చాలా ఓపికగా సహాయం చేస్తున్నాడు.",
+            "prompt_kn": "ವೈದ್ಯರು ಆ ರೋಗಿಗೆ (patient) ಬಹಳ ತಾಳ್ಮೆಯಿಂದ ಸಹಾಯ ಮಾಡುತ್ತಿದ್ದಾರೆ.",
+            "target_de": "Der Arzt hilft dem Patienten sehr geduldig.",
+            "options": [
+                "Der Arzt hilft dem Patient sehr geduldig.",
+                "Der Arzt hilft den Patienten sehr geduldig.",
+                "Der Arzt hilft dem Patienten sehr geduldig.",
+                "Der Arzt hilft des Patienten sehr geduldig."
+            ],
+            "correct_index": 2,
+            "explanation": "'helfen' takes Dativ. 'der Patient' belongs to N-Deklination, so Dativ Singular is 'dem Patienten'.",
+            "case": "Dativ",
+            "gender": "Maskulin (N-Deklination)"
+        },
+        {
+            "topic": "Weak Masculine Declination (N-Deklination)",
+            "prompt_te": "మేము మా కొత్త పొరుగువారితో (neighbor) తరచుగా మాట్లాడుతాము.",
+            "prompt_kn": "ನಾವು ನಮ್ಮ ಹೊಸ ನೆರೆಹೊರೆಯವರೊಂದಿಗೆ (neighbor) ಆಗಾಗ ಮಾತನಾಡುತ್ತೇವೆ.",
+            "target_de": "Wir sprechen oft mit unserem neuen Nachbarn.",
+            "options": [
+                "Wir sprechen oft mit unserem neuen Nachbar.",
+                "Wir sprechen oft mit unserem neuen Nachbarn.",
+                "Wir sprechen oft mit unseren neuen Nachbar.",
+                "Wir sprechen oft mit unserem neuem Nachbarn."
+            ],
+            "correct_index": 1,
+            "explanation": "Preposition 'mit' governs Dativ. 'der Nachbar' is an N-Deklination noun, taking '-n' -> 'unserem neuen Nachbarn'.",
+            "case": "Dativ",
+            "gender": "Maskulin (N-Deklination)"
+        },
+        {
+            "topic": "Weak Masculine Declination (N-Deklination)",
+            "prompt_te": "బెర్లిన్ నుండి వచ్చిన ఈ ప్రసిద్ధ ఫోటోగ్రాఫర్ (photographer) నీకు తెలుసా?",
+            "prompt_kn": "ಬರ್ಲಿನ್‌ನ ಈ ಪ್ರಸಿದ್ಧ ಛಾಯಾಗ್ರಾಹಕ (photographer) ನಿನಗೆ ಗೊತ್ತೇ?",
+            "target_de": "Kennst du diesen bekannten Fotografen aus Berlin?",
+            "options": [
+                "Kennst du dieser bekannte Fotograf aus Berlin?",
+                "Kennst du diesem bekannten Fotografen aus Berlin?",
+                "Kennst du diesen bekannten Fotografen aus Berlin?",
+                "Kennst du diesen bekannten Fotograf aus Berlin?"
+            ],
+            "correct_index": 2,
+            "explanation": "'kennen' takes Akkusativ object. 'der Fotograf' is N-Deklination -> 'diesen bekannten Fotografen'.",
+            "case": "Akkusativ",
+            "gender": "Maskulin (N-Deklination)"
+        },
+        {
+            "topic": "Weak Masculine Declination (N-Deklination)",
+            "prompt_te": "పోలీసు ఆ ప్రమాదం గురించి సాక్షిని (witness) ప్రశ్నిస్తున్నాడు.",
+            "prompt_kn": "ಪೊಲೀಸರು ಅಪಘಾತದ ಬಗ್ಗೆ ಸಾಕ್ಷಿಯನ್ನು (witness) ವಿಚಾರಿಸುತ್ತಿದ್ದಾರೆ.",
+            "target_de": "Der Polizist befragt den Zeugen zum Unfall.",
+            "options": [
+                "Der Polizist befragt der Zeuge zum Unfall.",
+                "Der Polizist befragt den Zeugen zum Unfall.",
+                "Der Polizist befragt dem Zeugen zum Unfall.",
+                "Der Polizist befragt den Zeuge zum Unfall."
+            ],
+            "correct_index": 1,
+            "explanation": "'befragen' takes Akkusativ. 'der Zeuge' ends in -e and is masculine N-Deklination -> 'den Zeugen'.",
+            "case": "Akkusativ",
+            "gender": "Maskulin (N-Deklination)"
+        }
+    ]
+}
+
+
+def generate_topic_questions(
+    topic: str,
+    category: str = "pronoun",
+    count: int = 5,
+    api_key: str = "",
+    past_topics: List[str] = None
+) -> List[Dict[str, Any]]:
+    """
+    Generates Goethe B1 level questions for a newly unlocked grammar topic.
+    Combines vocabulary from Goethe B1 Wortliste and reinforces past topics.
+    Returns a list of standardized question dicts.
+    """
+    clean_topic = topic.strip()
+    topic_key = clean_topic.lower()
+
+    # If key is missing, check starter templates
+    for starter_key, q_list in STARTER_TOPIC_QUESTIONS.items():
+        if starter_key in topic_key or topic_key in starter_key:
+            return q_list
+
+    if not api_key:
+        return STARTER_TOPIC_QUESTIONS.get("weak masculine declination (n-deklination)", [])
+
+    client = _get_client(api_key)
+    past_topics_str = ", ".join(past_topics) if past_topics else "Possessivartikel in Nominativ/Akkusativ/Dativ/Genitiv"
+
+    system_instruction = f"""You are an elite Goethe-Institut German B1 exam creator.
+Generate authentic, high-quality multiple choice German questions for the grammar topic: '{clean_topic}'.
+
+RULES:
+1. German level must strictly be Goethe-Zertifikat B1.
+2. Incorporate real Goethe B1 Wortliste vocabulary.
+3. If appropriate, subtly combine this with prior learned topics ({past_topics_str}).
+4. For each question, provide:
+   - prompt_te: Natural, grammatically accurate translation in Telugu.
+   - prompt_kn: Natural, grammatically accurate translation in Kannada.
+   - target_de: The correct full German sentence.
+   - options: Array of 4 German options. Only ONE is grammatically correct. The other 3 must reflect common student errors (wrong ending, wrong case, incorrect article).
+   - correct_index: Integer 0, 1, 2, or 3 indicating the index of the correct option in the options array.
+   - explanation: Clear, concise explanation in English of why the correct option is right and the grammar rule applied.
+   - case: e.g. "Akkusativ", "Dativ", "Nominativ", etc.
+   - gender: e.g. "Maskulin", "Feminin", "Neutral", etc.
+5. Return strictly valid JSON array of objects.
+"""
+
+    user_prompt = f"""Generate {count} distinct Goethe B1 questions for the topic '{clean_topic}'.
+Format as JSON array of objects with keys: topic, prompt_te, prompt_kn, target_de, options, correct_index, explanation, case, gender."""
+
+    try:
+        response = _call_gemini(client, [user_prompt], system_instruction=system_instruction, json_mode=True)
+        text = response.text or ""
+        # Clean markdown wrappers if any
+        if "```json" in text:
+            text = text.split("```json")[1].split("```")[0].strip()
+        elif "```" in text:
+            text = text.split("```")[1].split("```")[0].strip()
+
+        parsed = json.loads(text)
+        if isinstance(parsed, list) and len(parsed) > 0:
+            for idx, q in enumerate(parsed, start=1001):
+                q["id"] = idx
+                q["topic"] = clean_topic
+                q["category"] = category
+            return parsed
+    except Exception as e:
+        logger.warning(f"Gemini topic question generation failed: {e}")
+
+    # Fallback to starter questions if API failed
+    return STARTER_TOPIC_QUESTIONS.get("weak masculine declination (n-deklination)", [])
+
