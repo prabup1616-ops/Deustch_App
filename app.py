@@ -13,6 +13,7 @@ from src.views import (
     render_quiz_view,
     render_gender_view,
     render_lsrw_view,
+    render_learning_view,
 )
 
 # 1. Page Configuration
@@ -198,6 +199,8 @@ else:
 # 5. Route to Views
 if st.session_state.app_view == "home":
     render_home_view()
+elif st.session_state.app_view == "learning":
+    render_learning_view()
 elif st.session_state.app_view == "quiz":
     render_quiz_view()
 elif st.session_state.app_view == "gender":

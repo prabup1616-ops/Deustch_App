@@ -55,23 +55,48 @@ def render_home_view():
 
     st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
 
-    # 3. Goethe B1 Meisterstudio (Lernen • Lesen • Schreiben • Hören)
+    # 3. Goethe B1 Grammatik-Lernstudio (Lernen - Outside Meisterstudio)
+    st.markdown("""<div class="module-card unlocked" style="border-top: 4px solid #8b5cf6; background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%);">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<span style="font-size: 2.5rem;">🧠</span>
+<span style="background: #ede9fe; color: #6d28d9; font-weight: 700; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px;">
+● DEDICATED LEARNING STUDIO
+</span>
+</div>
+<h3 style="margin: 0; color: #5b21b6;">Goethe B1 Grammatik-Lernstudio (Lernen)</h3>
+<p style="font-size: 0.92rem; color: #4c1d95; margin: 8px 0 16px 0;">
+వ్యాకరణం నేర్చుకోండి (Overview / In-Detail) • ವ್ಯಾಕರಣ ಕಲಿಯಿರಿ — Zweisprachige Grammatikerklärungen auf <strong>Telugu (తెలుగు)</strong> und <strong>Kannada (ಕನ್ನಡ)</strong> mit authentischen Beispielen, Wortstellung und direktem Übergang zu Meisterstudio & Duels.
+</p>
+</div>
+</div>""", unsafe_allow_html=True)
+    if st.button("🧠 Enter Lernen Studio (వ్యాకరణం / ವ್ಯಾಕರಣ) ➔", type="primary", use_container_width=True, key="btn_home_learning"):
+        st.session_state.app_view = "learning"
+        st.query_params["view"] = "learning"
+        st.rerun()
+
+    st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
+
+    # 4. Goethe B1 Meisterstudio (LSRW: Lesen • Schreiben • Hören • Sprechen)
     st.markdown("""<div class="module-card unlocked" style="border-top: 4px solid #3b82f6;">
 <div>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 <span style="font-size: 2.5rem;">🎓📖✍️🎧</span>
 <span style="background: #eff6ff; color: #1d4ed8; font-weight: 700; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px;">
-● EXAM & LEARNING STUDIO
+● EXAM SIMULATION STUDIO
 </span>
 </div>
-<h3 style="margin: 0; color: #1e40af;">Goethe B1 Meisterstudio (Lernen • Lesen • Schreiben • Hören)</h3>
+<h3 style="margin: 0; color: #1e40af;">Goethe B1 Meisterstudio (LSRW: Lesen • Schreiben • Hören • Sprechen)</h3>
 <p style="font-size: 0.9rem; color: #475569; margin: 8px 0 16px 0;">
-Vollständiges Goethe-Zertifikat B1 Prüfungs- und Lernstudio mit zweisprachiger Grammatikerklärung auf <strong>Telugu (తెలుగు)</strong> und <strong>Kannada (ಕನ್ನಡ)</strong>, modularem Training und kumulativem Wiederholungszyklus.
+Vollständiges Goethe-Zertifikat B1 Prüfungstraining: <strong>Lesen</strong> (Leseverstehen), <strong>Schreiben</strong> (Briefe & Essays mit AI-Korrektur), <strong>Hören</strong> (Audio-Hörverstehen) und <strong>Sprechen</strong> (Themen-Präsentationen).
 </p>
 </div>
 </div>""", unsafe_allow_html=True)
-    if st.button("🎧 Enter Goethe B1 Meisterstudio ➔", type="primary", use_container_width=True, key="btn_home_lsrw"):
+    if st.button("🎧 Enter Meisterstudio (LSRW) ➔", type="primary", use_container_width=True, key="btn_home_lsrw"):
         st.session_state.app_view = "lsrw"
+        st.session_state.lsrw_module = "hub"
+        st.query_params["view"] = "lsrw"
+        st.query_params["mod"] = "hub"
         st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)

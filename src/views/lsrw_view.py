@@ -82,7 +82,9 @@ def render_lsrw_view():
 
     module = st.session_state.lsrw_module
     if module == "learning":
-        _render_learning_module()
+        from src.views.learning_view import render_learning_view
+        render_learning_view()
+        return
     elif module == "reading":
         _render_reading_module()
     elif module == "writing":
@@ -173,32 +175,29 @@ def _render_hub():
 <span style="font-weight: 700; color: #059669;">{s['score']} / {s['total']} Punkte</span>
 </div>""", unsafe_allow_html=True)
 
-    # 5 Übungsmodule (Lernen + LSRW)
+    # Verbindung zum eigenständigen Grammatik-Lernstudio (Lernen)
     st.markdown("---")
-    st.markdown("### 🎯 Prüfungsmodule & Lernstudio")
-    st.caption(f"Die Übungen testen alle Ihre {len(topic_names)} aktiven Themen: {', '.join(topic_names)}")
-
-    # 1. Feature-Card: Lernen (Grammatikstudio auf Telugu & Kannada)
-    st.markdown("""<div class="module-card unlocked" style="border-top: 4px solid #8b5cf6; background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%); margin-bottom: 16px;">
-<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    st.markdown("""<div style="background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%); border: 2px solid #8b5cf6; border-radius: 14px; padding: 16px 22px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
 <div style="display: flex; align-items: center; gap: 14px;">
-<span style="font-size: 2.8rem;">🧠</span>
-<div>
-<h3 style="margin: 0 0 4px 0; color: #5b21b6;">Lernen (Grammatik-Lernstudio — Telugu & Kannada)</h3>
-<p style="font-size: 0.92rem; color: #4c1d95; margin: 0;">
-వ్యాకరణం నేర్చుకోండి (Overview / In-Detail) • ವ್ಯಾಕರಣ ಕಲಿಯಿರಿ — తెలుగు & ಕನ್ನಡ వివరణలు, ఉదాహరణలతో పాటు నేరుగా LSRW శిక్షణ లూప్!
-</p>
-</div>
-</div>
+    <span style="font-size: 2.5rem;">🧠</span>
+    <div>
+        <h4 style="margin: 0 0 4px 0; color: #5b21b6; font-size: 1.1rem;">Möchten Sie zuerst Grammatik lernen? / వ్యాకరణం నేర్చుకోవాలా? / ವ್ಯಾಕರಣ ಕಲಿಯಬೇಕೆ?</h4>
+        <p style="margin: 0; font-size: 0.88rem; color: #6b21a8;">
+            Wechseln Sie zum eigenständigen <strong>Grammatik-Lernstudio</strong> für zweisprachige Erklärungen (Telugu & Kannada, Overview / In-Detail) vor dem Prüfungstraining.
+        </p>
+    </div>
 </div>
 </div>""", unsafe_allow_html=True)
-    if st.button("🧠 Grammatikthema lernen & LSRW-Schleife starten ➔", type="primary", use_container_width=True, key="btn_start_learning"):
-        st.session_state.lsrw_module = "learning"
-        st.query_params["mod"] = "learning"
-        st.session_state.pop("learn_active_topic", None)
-        st.session_state.pop("learn_depth", None)
-        st.session_state.pop("learn_explanation_text", None)
+    if st.button("🧠 Zum Grammatik-Lernstudio (వ్యాకరణం / ವ್ಯಾಕರಣ) wechseln ➔", use_container_width=True, key="btn_goto_learning_from_hub"):
+        st.session_state.app_view = "learning"
+        st.query_params["view"] = "learning"
+        st.query_params.pop("mod", None)
         st.rerun()
+
+    # Die 4 Prüfungsmodule (LSRW)
+    st.markdown("---")
+    st.markdown("### 🎯 Die 4 Goethe B1 Prüfungsmodule (LSRW)")
+    st.caption(f"Die Übungen testen alle Ihre {len(topic_names)} aktiven Themen: {', '.join(topic_names)}")
 
     col_r, col_w = st.columns(2, gap="medium")
     with col_r:
@@ -326,22 +325,24 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
                     st.session_state.pop("lsrw_speaking_evaluated", None)
                 st.rerun()
         else:
-            if st.button("🎉 Alle 4 Module abgeschlossen! Zurück zum Lernen ➔", type="primary", use_container_width=True, key=f"btn_loop_done_{current_module}"):
+            if st.button("🎉 Alle 4 Module abgeschlossen! Zurück zum Lernen Studio ➔", type="primary", use_container_width=True, key=f"btn_loop_done_{current_module}"):
                 st.session_state.lsrw_loop_queue = []
                 st.session_state.lsrw_loop_topic = None
-                st.session_state.lsrw_module = "learning"
-                st.query_params["mod"] = "learning"
+                st.session_state.app_view = "learning"
+                st.query_params["view"] = "learning"
+                st.query_params.pop("mod", None)
                 st.rerun()
 
     with col_new:
-        if st.button("➕ Neues Thema (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key=f"btn_loop_new_{current_module}"):
+        if st.button("➕ Neues Thema im Lernstudio (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key=f"btn_loop_new_{current_module}"):
             st.session_state.lsrw_loop_queue = []
             st.session_state.lsrw_loop_topic = None
             st.session_state.pop("learn_active_topic", None)
             st.session_state.pop("learn_depth", None)
             st.session_state.pop("learn_explanation_text", None)
-            st.session_state.lsrw_module = "learning"
-            st.query_params["mod"] = "learning"
+            st.session_state.app_view = "learning"
+            st.query_params["view"] = "learning"
+            st.query_params.pop("mod", None)
             st.rerun()
 
 
@@ -350,224 +351,11 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
 # ==============================================================================
 
 def _render_learning_module():
-    pid = _get_active_player_id()
-    api_key = storage.get_gemini_api_key()
+    """Delegiert an das eigenständige Grammatik-Lernstudio."""
+    from src.views.learning_view import render_learning_view
+    render_learning_view()
 
-    st.markdown("""<div style="background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%);
-border-radius: 16px; padding: 22px 28px; color: white; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(109,40,217,0.25);">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-<span style="font-size: 2.2rem;">🧠</span>
-<h2 style="margin: 0; color: #f5f3ff;">Lernen: Grammatik-Lernstudio (Telugu & Kannada)</h2>
-</div>
-<p style="margin: 0; color: #ddd6fe; font-size: 1rem;">
-వ్యాకరణ అంశాన్ని తెలుగు & కన్నడలలో నేర్చుకోండి • ವ್ಯಾಕರಣ ವಿಷಯವನ್ನು ತೆಲುಗು & ಕನ್ನಡದಲ್ಲಿ ಕಲಿಯಿರಿ
-</p>
-</div>""", unsafe_allow_html=True)
 
-    if not api_key:
-        render_api_key_prompt("Grammatik-Lernstudio (Telugu & Kannada)")
-        return
-
-    learned_list = [t["topic"] for t in storage.get_learned_topics(pid)]
-    available_topics = []
-    for t in learned_list:
-        if t not in available_topics:
-            available_topics.append(t)
-    for t in PRESET_TOPICS:
-        if t not in available_topics:
-            available_topics.append(t)
-
-    chosen_topic = st.session_state.get("learn_active_topic")
-    chosen_depth = st.session_state.get("learn_depth")
-
-    # STEP 1: Topic Selection
-    if not chosen_topic:
-        st.markdown("### 📌 1. వ్యాకరణ అంశాన్ని ఎంచుకోండి / ವ್ಯಾಕರಣ ವಿಷಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ")
-        st.caption("డ్రాప్‌డౌన్ నుండి ఎంచుకోండి లేదా మీ సొంత అంశాన్ని టైప్ చేయండి / ಡ್ರಾಪ್‌ಡೌನ್‌ನಿಂದ ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ನಿಮ್ಮ ಸ್ವಂತ ವಿಷಯವನ್ನು ಟೈಪ್ ಮಾಡಿ:")
-
-        col_sel, col_custom = st.columns([1, 1], gap="medium")
-        with col_sel:
-            preset_choice = st.selectbox(
-                "ప్రసిద్ధ Goethe B1 అంశాలు / ಜನಪ್ರಿಯ Goethe B1 ವಿಷಯಗಳು:",
-                options=["-- ఎంచుకోండి / ಆಯ್ಕೆಮಾಡಿ --"] + available_topics,
-                key="learn_preset_select"
-            )
-        with col_custom:
-            custom_choice = st.text_input(
-                "లేదా సొంత అంశం టైప్ చేయండి / ಅಥವಾ ಸ್ವಂತ ವಿಷಯ ಟೈಪ್ ಮಾಡಿ:",
-                placeholder="ఉదా: Verben mit Präpositionen, Relativsatz, Passiv...",
-                key="learn_custom_input"
-            )
-
-        col_btn, _ = st.columns([1, 1])
-        with col_btn:
-            if st.button("ఈ అంశాన్ని ఎంచుకోండి / ಈ ವಿಷಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ ➔", type="primary", use_container_width=True, key="btn_confirm_learn_topic"):
-                target_topic = custom_choice.strip() if custom_choice.strip() else (preset_choice if preset_choice != "-- ఎంచుకోండి / ಆಯ್ಕೆಮಾಡಿ --" else "")
-                if not target_topic:
-                    st.warning("దయచేసి ఒక అంశాన్ని ఎంచుకోండి లేదా టైప్ చేయండి! / ದಯವಿಟ್ಟು ಒಂದು ವಿಷಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ಟೈಪ್ ಮಾಡಿ!")
-                else:
-                    st.session_state.learn_active_topic = target_topic
-                    st.session_state.pop("learn_depth", None)
-                    st.session_state.pop("learn_explanation_text", None)
-                    st.rerun()
-        return
-
-    # STEP 2: Depth Selection (Overview vs In-Detail)
-    if not chosen_depth:
-        st.markdown(f"""<div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; padding: 14px 20px; margin-bottom: 16px;">
-<div style="font-size: 1.1rem; font-weight: 800; color: #1e40af;">
-📌 ఎంచుకున్న అంశం / ಆಯ್ಕೆಮಾಡಿದ ವಿಷಯ: <span style="color: #2563eb;">{chosen_topic}</span>
-</div>
-<div style="font-size: 0.88rem; color: #475569; margin-top: 4px;">
-దయచేసి వివరణ రకాన్ని ఎంచుకోండి / ದಯವಿಟ್ಟು ವಿವರಣೆಯ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ:
-</div>
-</div>""", unsafe_allow_html=True)
-
-        col_ov, col_det = st.columns(2, gap="medium")
-        with col_ov:
-            st.markdown("""<div style="background: #f0fdf4; border: 2px solid #22c55e; border-radius: 12px; padding: 16px; min-height: 110px;">
-<h4 style="margin: 0 0 6px 0; color: #15803d;">⚡ Overview (సమీక్ష / అవలోకన)</h4>
-<p style="margin: 0; font-size: 0.88rem; color: #166534;">
-సంక్షిప్త మరియు కీలక నియమం, 3-4 ముఖ్యమైన Goethe B1 ఉదాహరణలు, పరీక్ష చిట్కా.
-ಸಂಕ್ಷಿಪ್ತ ಮತ್ತು ಪ್ರಮುಖ ನಿಯಮ, 3-4 ಮುಖ್ಯ Goethe B1 ಉದಾಹರಣೆಗಳು, ಪರೀಕ್ಷಾ ಸಲಹೆ.
-</p>
-</div>""", unsafe_allow_html=True)
-            if st.button("⚡ Overview (సమీక్ష / అవలోకన) ఎంచుకోండి", type="primary", use_container_width=True, key="btn_choose_overview"):
-                st.session_state.learn_depth = "overview"
-                st.session_state.pop("learn_explanation_text", None)
-                st.rerun()
-
-        with col_det:
-            st.markdown("""<div style="background: #fdf4ff; border: 2px solid #c026d3; border-radius: 12px; padding: 16px; min-height: 110px;">
-<h4 style="margin: 0 0 6px 0; color: #86198f;">📚 In-Detail (వివరణాత్మక / ವಿವರವಾದ)</h4>
-<p style="margin: 0; font-size: 0.88rem; color: #701a75;">
-పూర్తి విశ్లేషణ, నియమాలు, మినహాయింపులు, వాక్య నిర్మాణం, 6+ రిజిస్టర్ ఉదాహరణలు, తప్పుల నివారణ.
-ಪೂರ್ಣ ವಿಶ್ಲೇಷಣೆ, ನಿಯಮಗಳು, ಅಪವಾದಗಳು, ವಾಕ್ಯ ರಚನೆ, 6+ ರಿಜಿಸ್ಟರ್ ಉದಾಹರಣೆಗಳು, ತಪ್ಪುಗಳ ತಡೆಗಟ್ಟುವಿಕೆ.
-</p>
-</div>""", unsafe_allow_html=True)
-            if st.button("📚 In-Detail (వివరణాత్మక / ವಿವರವಾದ) ఎంచుకోండి", type="primary", use_container_width=True, key="btn_choose_indetail"):
-                st.session_state.learn_depth = "indetail"
-                st.session_state.pop("learn_explanation_text", None)
-                st.rerun()
-
-        st.markdown("<div style='margin-top: 12px;'></div>", unsafe_allow_html=True)
-        if st.button("⬅️ మరొక అంశాన్ని ఎంచుకోండి / ಮತ್ತೊಂದು ವಿಷಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ (Thema wechseln)", key="btn_back_to_topics"):
-            st.session_state.pop("learn_active_topic", None)
-            st.session_state.pop("learn_depth", None)
-            st.session_state.pop("learn_explanation_text", None)
-            st.rerun()
-        return
-
-    # STEP 3: Explanation Rendering
-    if not st.session_state.get("learn_explanation_text"):
-        render_phrase_loader(f"🧠 Erstelle zweisprachige Grammatikerklärung ({chosen_depth.upper()}) zu '{chosen_topic}'...")
-        try:
-            exp_text = generate_topic_explanation(api_key, chosen_topic, depth=chosen_depth)
-            st.session_state.learn_explanation_text = exp_text
-            # Automatically add to cumulative learned topics
-            storage.add_learned_topic(pid, chosen_topic)
-            st.rerun()
-        except Exception as e:
-            st.error(f"Fehler bei der Erklärungserstellung: {e}")
-            return
-
-    dismiss_phrase_loader()
-
-    # Header badge with options to switch depth or pick new topic
-    col_t_info, col_t_ctrl = st.columns([3, 2])
-    with col_t_info:
-        depth_label = "⚡ Overview (సమీక్ష / అవలోకన)" if chosen_depth == "overview" else "📚 In-Detail (వివరణాత్మక / ವಿವರವಾದ)"
-        st.markdown(f"""<div style="font-size: 1.15rem; font-weight: 800; color: #1e3a8a; margin-bottom: 6px;">
-📖 Thema: <span style="color: #2563eb;">{chosen_topic}</span> ({depth_label})
-</div>""", unsafe_allow_html=True)
-    with col_t_ctrl:
-        c1, c2 = st.columns(2)
-        with c1:
-            other_depth = "indetail" if chosen_depth == "overview" else "overview"
-            other_label = "📚 In-Detail" if chosen_depth == "overview" else "⚡ Overview"
-            if st.button(f"Wechsel zu {other_label}", key="btn_toggle_depth", use_container_width=True):
-                st.session_state.learn_depth = other_depth
-                st.session_state.pop("learn_explanation_text", None)
-                st.rerun()
-        with c2:
-            if st.button("➕ Neues Thema", key="btn_learn_new_topic_top", use_container_width=True):
-                st.session_state.pop("learn_active_topic", None)
-                st.session_state.pop("learn_depth", None)
-                st.session_state.pop("learn_explanation_text", None)
-                st.rerun()
-
-    # The actual explanation card
-    st.markdown(f"""<div style="background: white; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px 28px; margin: 12px 0 20px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-{st.session_state.learn_explanation_text}
-</div>""", unsafe_allow_html=True)
-
-    # STEP 4: Post-Explanation Action Links & Looping Flow
-    st.markdown("---")
-    st.markdown("""<div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-border: 2px solid #22c55e; border-radius: 14px; padding: 18px 24px; margin-bottom: 16px;">
-<h3 style="margin: 0 0 6px 0; color: #166534;">🎯 Goethe B1 LSRW శిక్షణ ప్రారంభించండి / Goethe B1 LSRW ತರಬೇತಿ ಪ್ರಾರಂಭಿಸಿ</h3>
-<p style="margin: 0; font-size: 0.95rem; color: #15803d;">
-ఈ అంశంపై మీ ప్రాక్టీస్‌ను ప్రారంభించడానికి ఒక మాడ్యూల్‌ను ఎంచుకోండి (ఇది లూప్‌గా కొనసాగుతుంది):<br>
-ಈ ವಿಷಯದ ಮೇಲೆ ನಿಮ್ಮ ಅಭ್ಯಾಸವನ್ನು ಪ್ರಾರಂಭಿಸಲು ಒಂದು ಮಾಡ್ಯೂಲ್ ಆಯ್ಕೆಮಾಡಿ (ಇದು ಲೂಪ್ ಆಗಿ ಮುಂದುವರಿಯುತ್ತದೆ):
-</p>
-</div>""", unsafe_allow_html=True)
-
-    col1, col2, col3, col4 = st.columns(4, gap="small")
-    with col1:
-        if st.button("✍️ 1. Schreiben (Writing)", type="primary", use_container_width=True, key="btn_flow_writing"):
-            st.session_state.lsrw_loop_topic = chosen_topic
-            st.session_state.lsrw_loop_queue = ["reading", "listening", "speaking"]
-            st.session_state.lsrw_current_writing_topic = chosen_topic
-            st.session_state.pop("lsrw_writing_data", None)
-            st.session_state.pop("lsrw_writing_evaluated", None)
-            st.session_state.lsrw_module = "writing"
-            st.query_params["mod"] = "writing"
-            st.rerun()
-
-    with col2:
-        if st.button("📖 2. Lesen (Reading)", type="primary", use_container_width=True, key="btn_flow_reading"):
-            st.session_state.lsrw_loop_topic = chosen_topic
-            st.session_state.lsrw_loop_queue = ["writing", "listening", "speaking"]
-            st.session_state.lsrw_current_reading_topic = chosen_topic
-            st.session_state.pop("lsrw_reading_data", None)
-            st.session_state.pop("lsrw_reading_submitted", None)
-            st.session_state.lsrw_module = "reading"
-            st.query_params["mod"] = "reading"
-            st.rerun()
-
-    with col3:
-        if st.button("🎧 3. Hören (Listening)", type="primary", use_container_width=True, key="btn_flow_listening"):
-            st.session_state.lsrw_loop_topic = chosen_topic
-            st.session_state.lsrw_loop_queue = ["speaking", "reading", "writing"]
-            st.session_state.lsrw_current_listening_topic = chosen_topic
-            st.session_state.pop("lsrw_listening_data", None)
-            st.session_state.pop("lsrw_real_data", None)
-            st.session_state.pop("lsrw_listening_submitted", None)
-            st.session_state.pop("lsrw_real_submitted", None)
-            st.session_state.lsrw_module = "listening"
-            st.query_params["mod"] = "listening"
-            st.rerun()
-
-    with col4:
-        if st.button("🗣️ 4. Sprechen (Speaking)", type="primary", use_container_width=True, key="btn_flow_speaking"):
-            st.session_state.lsrw_loop_topic = chosen_topic
-            st.session_state.lsrw_loop_queue = ["listening", "reading", "writing"]
-            st.session_state.lsrw_current_speaking_topic = chosen_topic
-            st.session_state.pop("lsrw_speaking_cards", None)
-            st.session_state.pop("lsrw_speaking_revealed", None)
-            st.session_state.pop("lsrw_speaking_evaluated", None)
-            st.session_state.lsrw_module = "speaking"
-            st.query_params["mod"] = "speaking"
-            st.rerun()
-
-    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
-    if st.button("➕ Neues Thema lernen (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key="btn_flow_new_topic"):
-        st.session_state.pop("learn_active_topic", None)
-        st.session_state.pop("learn_depth", None)
-        st.session_state.pop("learn_explanation_text", None)
-        st.session_state.lsrw_loop_queue = []
-        st.session_state.lsrw_loop_topic = None
-        st.rerun()
 
 
 # ==============================================================================
