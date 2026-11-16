@@ -23,7 +23,7 @@ def render_api_key_banner():
             st.markdown("""
             <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 8px; padding: 6px 12px; font-size: 0.85rem; color: #854d0e; display: flex; align-items: center; gap: 8px;">
                 <span>🟡</span>
-                <span><strong>Entwickler-Schlüssel aktiv (Demo):</strong> Geteilte Rate-Limits. Kann bei vielen Nutzern überlastet werden.</span>
+                <span><strong>Entwickler-Schlüssel aktiv (Shared Demo Mode):</strong> Geteilte Rate-Limits. Kann bei gleichzeitigen Nutzern gedrosselt werden.</span>
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -49,15 +49,15 @@ def render_api_key_banner():
 def render_api_key_prompt(context_title: str = "Dieses KI-Modul", is_dialog: bool = False):
     """
     Renders the full API Key selection card:
-    1. Custom Key input (Recommended) with free key generation guide.
+    1. Custom Key input (Recommended) with free key generation guide for Gemini and other AIs.
     2. Shared Creator Key (Demo Mode) with explicit choking/throttling disclaimer.
     """
     st.markdown(f"""
     <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
                 border-radius: 16px; padding: 22px 24px; color: white; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(59,130,246,0.2);">
-        <h3 style="margin: 0 0 6px 0; color: #ffffff;">🔑 Gemini API-Aktivierung</h3>
+        <h3 style="margin: 0 0 6px 0; color: #ffffff;">🔑 KI-Aktivierung / AI API Key Setup</h3>
         <p style="margin: 0; font-size: 0.92rem; color: #bfdbfe;">
-            Für <strong>{context_title}</strong> (zweisprachige Grammatikerklärungen, Schreibkorrektur und Hörprüfungen) wird ein Google Gemini API-Schlüssel benötigt.
+            Für <strong>{context_title}</strong> (zweisprachige Grammatikerklärungen auf Telugu/Kannada, Schreibkorrektur und Hörprüfungen) wird ein KI-Schlüssel benötigt.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -69,25 +69,25 @@ def render_api_key_prompt(context_title: str = "Dieses KI-Modul", is_dialog: boo
     # ==========================================================================
     with col_user:
         st.markdown("""
-        <div style="border: 2px solid #22c55e; border-radius: 12px; padding: 16px 18px; background: #f0fdf4; height: 100%;">
+        <div style="border: 2px solid #22c55e; border-radius: 12px; padding: 16px 18px; background: #f0fdf4;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 1.1rem; font-weight: 800; color: #15803d;">Option 1: Eigener API-Schlüssel</span>
                 <span style="background: #dcfce7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;">EMPFOHLEN</span>
             </div>
-            <p style="font-size: 0.86rem; color: #1e293b; margin-bottom: 12px;">
-                Nutzen Sie Ihr persönliches, ungedrosseltes Kontingent. Ihr Schlüssel wird nur für Ihre aktuelle Sitzung verwendet und nicht öffentlich gespeichert.
+            <p style="font-size: 0.86rem; color: #1e293b; margin-bottom: 8px;">
+                Nutzen Sie Ihr persönliches Kontingent. Ihr Schlüssel wird nur temporär in Ihrer aktuellen Sitzung gespeichert und ist für niemanden sichtbar.
             </p>
         </div>
         """, unsafe_allow_html=True)
 
         user_input_key = st.text_input(
-            "Gemini API-Schlüssel hier einfügen:",
+            "Gemini API-Schlüssel hier einfügen (Paste your API key):",
             type="password",
             placeholder="AIzaSy...",
             key="input_user_custom_gemini_key"
         )
 
-        if st.button("🚀 Eigenen Schlüssel aktivieren", type="primary", use_container_width=True, key="btn_save_user_key"):
+        if st.button("🚀 Eigenen Schlüssel aktivieren (Save & Continue)", type="primary", use_container_width=True, key="btn_save_user_key"):
             clean_k = user_input_key.strip()
             if not clean_k:
                 st.warning("Bitte fügen Sie einen gültigen API-Schlüssel ein!")
@@ -98,16 +98,25 @@ def render_api_key_prompt(context_title: str = "Dieses KI-Modul", is_dialog: boo
                 st.success("✅ Eigener API-Schlüssel erfolgreich aktiviert!")
                 st.rerun()
 
-        # Step-by-step help guide
-        with st.expander("❓ Wie erhalte ich in 30 Sekunden einen kostenlosen Schlüssel?"):
+        # Step-by-step help guide for different AIs
+        with st.expander("❓ Wie erhalte ich einen kostenlosen API-Schlüssel? (How to get API keys)"):
             st.markdown("""
-            **100% kostenlos bei Google AI Studio:**
-            1. Öffnen Sie [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey).
-            2. Melden Sie sich mit Ihrem Google-Konto an.
-            3. Klicken Sie auf **"Create API key"** (Schlüssel erstellen).
-            4. Kopieren Sie den generierten Schlüssel (`AIzaSy...`) und fügen Sie ihn oben ein.
-            
-            *(Google bietet 15 kostenlose Anfragen pro Minute – keine Kreditkarte erforderlich!)*
+            ### 🌐 1. Google Gemini (100% Kostenlos — Für diese App benötigt)
+            * **Direktlink:** [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+            * **Schritte:**
+              1. Mit Ihrem Google-Konto anmelden.
+              2. Auf **"Create API key"** klicken.
+              3. Den Schlüssel (`AIzaSy...`) kopieren und oben einfügen.
+            * *Kostenlos: 15 Anfragen pro Minute dauerhaft gratis, keine Kreditkarte nötig.*
+
+            ---
+
+            ### 🔗 Weitere KI-Anbieter (Referenz):
+            * **OpenAI (ChatGPT API):** [platform.openai.com/api-keys](https://platform.openai.com/api-keys) *(Erfordert Guthaben)*
+            * **Anthropic (Claude API):** [console.anthropic.com](https://console.anthropic.com/) *(Erfordert Guthaben)*
+            * **Groq Cloud (Llama 3):** [console.groq.com/keys](https://console.groq.com/keys) *(Kostenlos mit Limit)*
+
+            > 💡 **Hinweis:** Diese App verwendet das Google Gemini Modell, da es als einziges Modell nativ **Telugu (తెలుగు)**, **Kannada (ಕನ್ನಡ)** und deutsches Goethe-B1-Prüfungswissen kostenlos und fehlerfrei beherrscht.
             """)
 
     # ==========================================================================
@@ -115,26 +124,27 @@ def render_api_key_prompt(context_title: str = "Dieses KI-Modul", is_dialog: boo
     # ==========================================================================
     with col_shared:
         st.markdown("""
-        <div style="border: 2px solid #f59e0b; border-radius: 12px; padding: 16px 18px; background: #fffbeb; height: 100%;">
+        <div style="border: 2px solid #f59e0b; border-radius: 12px; padding: 16px 18px; background: #fffbeb;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 1.1rem; font-weight: 800; color: #b45309;">Option 2: Entwickler-Schlüssel</span>
                 <span style="background: #fef3c7; color: #92400e; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;">DEMO-MODUS</span>
             </div>
-            <p style="font-size: 0.86rem; color: #1e293b; margin-bottom: 12px;">
-                Probieren Sie die App sofort aus, ohne einen eigenen Schlüssel zu erstellen.
+            <p style="font-size: 0.86rem; color: #1e293b; margin-bottom: 8px;">
+                Testen Sie die App sofort mit dem bereitgestellten Entwickler-Schlüssel, ohne einen eigenen Account anzulegen.
             </p>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 8px; padding: 10px 12px; margin: 10px 0; font-size: 0.82rem; color: #991b1b; line-height: 1.5;">
+        <div style="background: #fef2f2; border: 2px solid #ef4444; border-radius: 10px; padding: 12px 14px; margin: 12px 0; font-size: 0.85rem; color: #991b1b; line-height: 1.55;">
             ⚠️ <strong>Haftungsausschluss / Disclaimer:</strong><br>
-            Dieser Schlüssel wird von allen Besuchern weltweit gemeinsam geteilt. Wenn mehrere Nutzer gleichzeitig lernen, 
-            kann das Ratenlimit (15 Anfragen/Min) <strong>jederzeit blockiert oder überlastet werden (Choking / Rate-Limit Error)</strong>.
+            Dieser Schlüssel wird von allen Besuchern der Website weltweit gemeinsam genutzt. 
+            Wenn mehrere Nutzer gleichzeitig lernen, kann das Ratenlimit <strong>jederzeit überlastet werden (Choking / HTTP 429 Too Many Requests)</strong>.<br>
+            <em>Falls Anfragen fehlschlagen, wechseln Sie bitte zu Option 1 (eigener kostenloser Schlüssel).</em>
         </div>
         """, unsafe_allow_html=True)
 
-        if st.button("⚡ Entwickler-Schlüssel nutzen (Demo)", use_container_width=True, key="btn_use_shared_creator_key"):
+        if st.button("⚡ Entwickler-Schlüssel nutzen (Demo Mode)", use_container_width=True, key="btn_use_shared_creator_key"):
             st.session_state["user_gemini_api_key"] = ""
             st.session_state["use_shared_creator_key"] = True
             st.session_state["show_api_key_dialog"] = False

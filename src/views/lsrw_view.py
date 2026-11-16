@@ -103,11 +103,7 @@ def _render_hub():
     api_key = storage.get_gemini_api_key()
 
     if not api_key:
-        st.warning("⚠️ Bitte geben Sie Ihren kostenlosen Google AI Studio API-Schlüssel ein:")
-        new_key = st.text_input("Gemini API-Schlüssel:", type="password", key="lsrw_hub_key")
-        if st.button("Schlüssel speichern", key="btn_hub_save_key"):
-            storage.save_gemini_api_key(new_key.strip())
-            st.rerun()
+        render_api_key_prompt("Goethe B1 LSRW Meisterstudio")
         return
 
     # Kumulative Grammatikthemen
