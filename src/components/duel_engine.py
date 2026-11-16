@@ -187,62 +187,77 @@ def render_player_progress_dashboard(
 
 
 # ==============================================================================
-# 3. DYNAMIC TYPE-AHEAD PLAYER SELECTOR (BLANK INITIAL STATE)
+# 3. DYNAMIC PLAYER SELECTOR (DROPDOWN FIRST: OLD VS NEW)
 # ==============================================================================
 
 def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = "quiz") -> Dict[str, Any]:
     """
-    Renders an initial empty input field with dynamic type-ahead suggestions from DB:
-    - Initially BLANK: Does NOT expose or pre-select any player names.
-    - When user types: dynamically filters and suggests matching saved players.
-    - If duplicate names exist, provides choice between 'Old Player (Existing)' and 'New Player (Register New)'.
-    - If 'New Player' with an existing name is chosen, assigns a unique key (e.g. 'Prabu #2', 'prabu_2').
+    Renders the 2-step Player Identification system:
+    1. Dropdown for Player Type: 'Old Player (Returning)' vs 'New Player (Register)'.
+    2. If Old Player:
+       - 'Search your name' blank input field.
+       - As user types (e.g. 'P'), dynamic suggestions appear for matching existing profiles (Prabu, Prakash...).
+    3. If New Player:
+       - 'Register your name' blank input field.
+       - If the name already exists, automatically creates a unique identifier (e.g. 'Prabu #2', 'prabu_2').
     """
     from src.config import AVATAR_CHOICES
 
     all_saved = storage.get_all_saved_players()
     
     st.markdown("### 1. ✍️ Player Identification")
-    typed_raw = st.text_input(
-        "Enter Player Name / మీ పేరును టైప్ చేయండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:",
-        value=st.session_state.get(f"{key_prefix}_typed_name_val", ""),
-        placeholder="Type your name here (e.g. Prabu)...",
-        key=f"{key_prefix}_typed_name_field",
-        help="Field is blank by default. Start typing to see suggestions if you have played before, or type a new name to register."
+    
+    # Step 1: Dropdown for Old vs New Player
+    player_type = st.selectbox(
+        "Player Type / ప్లేయర్ రకం / ಆಟಗಾರನ ಪ್ರಕಾರ:",
+        options=["👤 Existing Player (Returning)", "➕ New Player (Register)"],
+        index=0,
+        key=f"{key_prefix}_player_type_dropdown",
+        help="Select 'Existing Player' to resume your saved streak, or 'New Player' to register fresh."
     )
-    
-    clean_typed = typed_raw.strip()
-    
-    if not clean_typed:
-        st.info("👆 Please type your name in the blank box above to start or load your progress.")
-        return {
-            "selected_player_id": None,
-            "player_name": "",
-            "avatar": "🦁",
-            "email": "",
-            "is_ready": False,
-            "is_new": False
-        }
 
-    # Search for case-insensitive matches among saved players
-    matches = [p for p in all_saved if clean_typed.lower() in p.get("name", "").lower()]
+    is_returning = ("Existing Player" in player_type)
 
-    if matches:
-        st.markdown(f"**🔍 Suggestions for '{clean_typed}':**")
-        options = []
-        for p in matches:
-            options.append(f"👤 Existing Player: {p.get('avatar', '👤')} {p['name']} (ID: {p['id']})")
-        options.append(f"➕ Register New Player: '{clean_typed}' (New Profile)")
-
-        selected_opt = st.radio(
-            "Select your profile / మీ ప్రొఫైల్ ఎంచుకోండి:",
-            options=options,
-            index=0,
-            key=f"{key_prefix}_profile_match_radio"
+    # --------------------------------------------------------------------------
+    # FLOW A: EXISTING RETURNING PLAYER (DYNAMIC SEARCH & SUGGESTIONS)
+    # --------------------------------------------------------------------------
+    if is_returning:
+        search_raw = st.text_input(
+            "Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
+            value=st.session_state.get(f"{key_prefix}_search_query_val", ""),
+            placeholder="Type to search (e.g. P, Prabu, Prakash, Preethi)...",
+            key=f"{key_prefix}_search_name_input",
+            help="Start typing any letter of your name to view dynamic matching profiles from the database."
         )
 
-        if "Existing Player" in selected_opt:
-            matched_id = selected_opt.split("ID: ")[1].split(")")[0].strip()
+        clean_search = search_raw.strip()
+
+        if not clean_search:
+            st.info("👆 Please type your name in the search box above to load your saved profile.")
+            return {
+                "selected_player_id": None,
+                "player_name": "",
+                "avatar": "🦁",
+                "email": "",
+                "is_ready": False,
+                "is_new": False
+            }
+
+        # Filter matches dynamically as user types
+        matches = [p for p in all_saved if clean_search.lower() in p.get("name", "").lower()]
+
+        if matches:
+            st.markdown(f"**🔍 Suggestions matching '{clean_search}':**")
+            match_options = [f"{p.get('avatar', '👤')} {p['name']} (ID: {p['id']})" for p in matches]
+
+            selected_match_str = st.radio(
+                "Select your profile / మీ ప్రొఫైల్ ఎంచుకోండి:",
+                options=match_options,
+                index=0,
+                key=f"{key_prefix}_matched_profile_radio"
+            )
+
+            matched_id = selected_match_str.split("ID: ")[1].split(")")[0].strip()
             chosen_player = next((p for p in matches if p["id"] == matched_id), matches[0])
             p_name = chosen_player["name"]
             p_avatar = chosen_player.get("avatar", "🦁")
@@ -280,56 +295,78 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
                 "is_new": False
             }
         else:
-            # Register new player with unique identifier if name is taken
+            st.warning(f"⚠️ No registered player found matching '{clean_search}'. If this is your first time, please change 'Player Type' above to '➕ New Player (Register)'!")
+            return {
+                "selected_player_id": None,
+                "player_name": "",
+                "avatar": "🦁",
+                "email": "",
+                "is_ready": False,
+                "is_new": False
+            }
+
+    # --------------------------------------------------------------------------
+    # FLOW B: NEW PLAYER REGISTRATION
+    # --------------------------------------------------------------------------
+    else:
+        new_name_raw = st.text_input(
+            "Register your name / కొత్త పేరును నమోదు చేయండి / ಹೊಸ ಹೆಸರನ್ನು ನೋಂದಾಯಿಸಿ:",
+            value=st.session_state.get(f"{key_prefix}_new_reg_name_val", ""),
+            placeholder="Enter your name (e.g. Suresh, Kavya, Arjun, Prabu)...",
+            key=f"{key_prefix}_new_reg_name_input",
+            help="Type your desired name. If the name is already taken, you will be assigned a unique tag (e.g. Prabu #2)."
+        )
+
+        clean_new_name = new_name_raw.strip()
+
+        if not clean_new_name:
+            st.info("👆 Please enter your name above to register as a new player.")
+            return {
+                "selected_player_id": None,
+                "player_name": "",
+                "avatar": "🦁",
+                "email": "",
+                "is_ready": False,
+                "is_new": True
+            }
+
+        # Check if name is taken by an existing player
+        is_taken = any(p.get("name", "").strip().lower() == clean_new_name.lower() for p in all_saved)
+
+        if is_taken:
             st.markdown(f"""
             <div style="background: #fefce8; border: 2px solid #fde047; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
-                <span style="font-weight: 700; color: #854d0e;">➕ Creating a Brand New Profile for "{clean_typed}"</span>
-                <div style="font-size: 0.82rem; color: #713f12; margin-top: 4px;">
-                    A unique identifier (e.g. <code>{clean_typed} #2</code>) will be assigned so your scores and streaks remain completely independent!
+                <span style="font-weight: 700; color: #854d0e;">💡 Duplicate Name Notice:</span><br>
+                <span style="font-size: 0.85rem; color: #713f12;">
+                    An existing player is already registered as <strong>"{clean_new_name}"</strong>.<br>
+                    Your new profile will be created with a unique identifier (e.g. <code>{clean_new_name} #2</code>) so your scores and streaks remain completely separate!
+                </span>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+            <div style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
+                <span style="font-weight: 700; color: #1e40af;">✨ Brand New Player: "{clean_new_name}"</span>
+                <div style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">
+                    You will start fresh on <strong>Day 1</strong> of the Goethe B1 curriculum!
                 </div>
             </div>
             """, unsafe_allow_html=True)
-
-            col_a, col_e = st.columns([1, 2])
-            with col_a:
-                new_av = st.selectbox("Choose Avatar:", options=AVATAR_CHOICES, index=0, key=f"{key_prefix}_new_dup_av")
-            with col_e:
-                new_em = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com", key=f"{key_prefix}_new_dup_em")
-
-            return {
-                "selected_player_id": None,
-                "player_name": clean_typed,
-                "avatar": new_av,
-                "email": new_em,
-                "is_ready": True,
-                "is_new": True,
-                "force_unique": True
-            }
-    else:
-        # Brand new name with no matches
-        st.markdown(f"""
-        <div style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 12px; padding: 12px 18px; margin: 8px 0;">
-            <span style="font-weight: 700; color: #1e40af;">✨ Brand New Player: "{clean_typed}"</span>
-            <div style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">
-                You will start fresh on <strong>Day 1</strong> of the Goethe B1 curriculum!
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
         col_a, col_e = st.columns([1, 2])
         with col_a:
             new_av = st.selectbox("Choose Avatar:", options=AVATAR_CHOICES, index=0, key=f"{key_prefix}_new_fresh_av")
         with col_e:
-            new_em = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com", key=f"{key_prefix}_new_fresh_em")
+            new_em = st.text_input("Your Email (Optional):", value="", placeholder="you@example.com (for score alerts)", key=f"{key_prefix}_new_fresh_em")
 
         return {
             "selected_player_id": None,
-            "player_name": clean_typed,
+            "player_name": clean_new_name,
             "avatar": new_av,
             "email": new_em,
             "is_ready": True,
             "is_new": True,
-            "force_unique": False
+            "force_unique": is_taken
         }
 
 
