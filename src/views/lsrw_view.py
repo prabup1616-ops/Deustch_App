@@ -8,6 +8,7 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 import storage
+from src.lsrw_cache import get_bank_count, get_bank_previous_exercise
 from src.components import (
     render_phrase_loader,
     dismiss_phrase_loader,
@@ -589,7 +590,7 @@ def _render_reading_module():
     st.markdown("## 📖 Modul 1: Leseverstehen")
     _render_loop_navigation_banner("reading")
 
-    col_t1, col_t2 = st.columns([3, 1])
+    col_t1, col_t2, col_t3 = st.columns([2, 1, 1])
     with col_t1:
         topic_options = available_topics if len(learned_list) <= 1 else [f"🎯 Alle {len(learned_list)} aktiven Themen (Kumulativ)"] + available_topics
         chosen_topic = st.selectbox(
@@ -597,14 +598,24 @@ def _render_reading_module():
             options=topic_options,
             key="lsrw_reading_topic_choice"
         )
+    active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
+    topics = active_topics
+
     with col_t2:
-        if st.button("🔄 Neue Lesetexte", key="btn_refresh_reading", use_container_width=True):
+        if st.button("🔄 Generate New (AI)", key="btn_refresh_reading", use_container_width=True):
             st.session_state.pop("lsrw_reading_data", None)
             st.session_state["lsrw_force_refresh_reading"] = True
             st.rerun()
 
-    active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
-    topics = active_topics
+    with col_t3:
+        r_bank_ct = get_bank_count("reading", active_topics)
+        btn_prev_label = f"📂 Practice Previous ({r_bank_ct})" if r_bank_ct > 0 else "📂 Practice Previous"
+        if st.button(btn_prev_label, key="btn_prev_reading", use_container_width=True, disabled=(r_bank_ct == 0)):
+            prev_ex = get_bank_previous_exercise("reading", active_topics)
+            if prev_ex:
+                st.session_state.lsrw_reading_data = prev_ex
+                st.session_state.lsrw_reading_submitted = False
+                st.rerun()
 
     last_r_topic = st.session_state.get("lsrw_current_reading_topic", None)
     if last_r_topic != chosen_topic:
@@ -754,7 +765,7 @@ def _render_writing_module():
     st.markdown("## ✍️ Modul 2: Schriftlicher Ausdruck")
     _render_loop_navigation_banner("writing")
 
-    col_t1, col_t2 = st.columns([3, 1])
+    col_t1, col_t2, col_t3 = st.columns([2, 1, 1])
     with col_t1:
         topic_options = available_topics if len(learned_list) <= 1 else [f"🎯 Alle {len(learned_list)} aktiven Themen (Kumulativ)"] + available_topics
         chosen_topic = st.selectbox(
@@ -762,13 +773,24 @@ def _render_writing_module():
             options=topic_options,
             key="lsrw_writing_topic_choice"
         )
+    active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
+    topics = active_topics
+
     with col_t2:
-        if st.button("🔄 Neue Schreibaufgabe", key="btn_refresh_writing", use_container_width=True):
+        if st.button("🔄 Generate New (AI)", key="btn_refresh_writing", use_container_width=True):
             st.session_state.pop("lsrw_writing_data", None)
             st.rerun()
 
-    active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
-    topics = active_topics
+    with col_t3:
+        w_bank_ct = get_bank_count("writing", active_topics)
+        btn_prev_w = f"📂 Practice Previous ({w_bank_ct})" if w_bank_ct > 0 else "📂 Practice Previous"
+        if st.button(btn_prev_w, key="btn_prev_writing", use_container_width=True, disabled=(w_bank_ct == 0)):
+            prev_w = get_bank_previous_exercise("writing", active_topics)
+            if prev_w:
+                st.session_state.lsrw_writing_data = prev_w
+                st.session_state.pop("lsrw_writing_evaluated", None)
+                st.session_state.pop("lsrw_writing_feedback", None)
+                st.rerun()
 
     last_w_topic = st.session_state.get("lsrw_current_writing_topic", None)
     if last_w_topic != chosen_topic:
@@ -913,6 +935,33 @@ def _render_listening_module():
     active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
     topics = active_topics
     is_real_mode = "Prüfung" in selected_mode
+    mod_key = "listening_real" if is_real_mode else "listening_easy"
+
+    col_btn_new, col_btn_prev = st.columns([1, 1])
+    with col_btn_new:
+        if st.button("🔄 Generate New (AI)", key="btn_refresh_listening", use_container_width=True):
+            if is_real_mode:
+                st.session_state.pop("lsrw_real_data", None)
+                st.session_state["lsrw_force_refresh_listening_real"] = True
+            else:
+                st.session_state.pop("lsrw_listening_data", None)
+                st.session_state["lsrw_force_refresh_listening_easy"] = True
+            st.rerun()
+
+    with col_btn_prev:
+        l_bank_ct = get_bank_count(mod_key, active_topics)
+        btn_prev_l = f"📂 Practice Previous ({l_bank_ct})" if l_bank_ct > 0 else "📂 Practice Previous"
+        if st.button(btn_prev_l, key="btn_prev_listening", use_container_width=True, disabled=(l_bank_ct == 0)):
+            prev_l = get_bank_previous_exercise(mod_key, active_topics)
+            if prev_l:
+                if is_real_mode:
+                    st.session_state.lsrw_real_data = prev_l
+                    st.session_state.lsrw_real_submitted = False
+                    st.session_state["lsrw_real_play_count"] = 0
+                else:
+                    st.session_state.lsrw_listening_data = prev_l
+                    st.session_state.lsrw_listening_submitted = False
+                st.rerun()
 
     if not api_key:
         render_api_key_prompt("Hörverstehen (Listening)")

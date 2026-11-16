@@ -1,0 +1,330 @@
+"""
+Database Service for German Goethe B1 Hub.
+Supports PostgreSQL (Supabase / Neon.tech) with automatic table creation
+and graceful offline fallback to local JSON.
+"""
+import os
+import json
+import logging
+from typing import Dict, Any, List, Optional
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
+
+try:
+    import psycopg2
+    from psycopg2.extras import RealDictCursor, Json
+    PSYCOPG2_AVAILABLE = True
+except ImportError:
+    PSYCOPG2_AVAILABLE = False
+
+
+def get_database_url() -> str:
+    """Returns database connection URL from Streamlit secrets or environment."""
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets"):
+            if "DATABASE_URL" in st.secrets:
+                return str(st.secrets["DATABASE_URL"]).strip()
+            if "postgres" in st.secrets and "url" in st.secrets["postgres"]:
+                return str(st.secrets["postgres"]["url"]).strip()
+            if "connections" in st.secrets and "postgresql" in st.secrets["connections"]:
+                return str(st.secrets["connections"]["postgresql"].get("url", "")).strip()
+    except Exception:
+        pass
+    return os.environ.get("DATABASE_URL", "").strip()
+
+
+def is_db_connected() -> bool:
+    """Checks whether a valid database connection can be established."""
+    if not PSYCOPG2_AVAILABLE:
+        return False
+    url = get_database_url()
+    if not url:
+        return False
+    try:
+        conn = psycopg2.connect(url, connect_timeout=3)
+        conn.close()
+        return True
+    except Exception:
+        return False
+
+
+def _get_connection():
+    """Returns an active PostgreSQL database connection."""
+    url = get_database_url()
+    if not url:
+        return None
+    try:
+        return psycopg2.connect(url, connect_timeout=5)
+    except Exception as e:
+        logger.warning(f"Database connection error: {e}")
+        return None
+
+
+def init_db():
+    """Initializes tables in PostgreSQL if they do not exist."""
+    conn = _get_connection()
+    if not conn:
+        return False
+
+    try:
+        with conn.cursor() as cur:
+            # 1. Player Profiles
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS players (
+                player_id VARCHAR(100) PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                avatar VARCHAR(20) DEFAULT '🦁',
+                email VARCHAR(200) DEFAULT '',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
+            # 2. Player Scores (Pronoun & Gender Duels, LSRW scores)
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS player_scores (
+                id SERIAL PRIMARY KEY,
+                player_id VARCHAR(100) NOT NULL,
+                category VARCHAR(50) NOT NULL,
+                score INT NOT NULL,
+                total INT NOT NULL,
+                topics TEXT DEFAULT '',
+                date VARCHAR(20) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
+            # 3. Cumulative Learned Topics
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS learned_topics (
+                id SERIAL PRIMARY KEY,
+                player_id VARCHAR(100) NOT NULL,
+                topic VARCHAR(200) NOT NULL,
+                added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(player_id, topic)
+            );
+            """)
+
+            # 4. AI Exercise Bank (Stores Gemini JSONs for Instant Re-take)
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS exercise_bank (
+                id SERIAL PRIMARY KEY,
+                module VARCHAR(50) NOT NULL,
+                topic VARCHAR(200) NOT NULL,
+                exercise_data JSONB NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
+            # Indexes for ultra-fast lookups
+            cur.execute("""
+            CREATE INDEX IF NOT EXISTS idx_scores_player ON player_scores(player_id);
+            CREATE INDEX IF NOT EXISTS idx_scores_category ON player_scores(category);
+            CREATE INDEX IF NOT EXISTS idx_bank_module_topic ON exercise_bank(module, topic);
+            """)
+
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"Error initializing database: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+# ==============================================================================
+# PLAYER & SCORE FUNCTIONS
+# ==============================================================================
+
+def db_save_player(player_id: str, name: str, avatar: str = "🦁", email: str = "") -> bool:
+    conn = _get_connection()
+    if not conn:
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO players (player_id, name, avatar, email)
+            VALUES (%s, %s, %s, %s)
+            ON CONFLICT (player_id) DO UPDATE
+            SET name = EXCLUDED.name, avatar = EXCLUDED.avatar, email = EXCLUDED.email;
+            """, (player_id, name, avatar, email))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_save_player error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+def db_get_players() -> Dict[str, Dict[str, Any]]:
+    conn = _get_connection()
+    if not conn:
+        return {}
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("SELECT * FROM players;")
+            rows = cur.fetchall()
+            return {
+                r["player_id"]: {
+                    "name": r["name"],
+                    "avatar": r.get("avatar", "🦁"),
+                    "email": r.get("email", "")
+                }
+                for r in rows
+            }
+    except Exception as e:
+        logger.error(f"db_get_players error: {e}")
+        return {}
+    finally:
+        conn.close()
+
+
+def db_save_attempt(player_id: str, category: str, score: int, total: int, topics: str = "", date_str: str = "") -> bool:
+    conn = _get_connection()
+    if not conn:
+        return False
+    if not date_str:
+        date_str = datetime.now().strftime("%Y-%m-%d")
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO player_scores (player_id, category, score, total, topics, date)
+            VALUES (%s, %s, %s, %s, %s, %s);
+            """, (player_id, category, score, total, topics, date_str))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_save_attempt error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+def db_get_attempts(category: Optional[str] = None) -> List[Dict[str, Any]]:
+    conn = _get_connection()
+    if not conn:
+        return []
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            if category:
+                cur.execute("SELECT * FROM player_scores WHERE category = %s ORDER BY created_at DESC;", (category,))
+            else:
+                cur.execute("SELECT * FROM player_scores ORDER BY created_at DESC;")
+            rows = cur.fetchall()
+            return [dict(r) for r in rows]
+    except Exception as e:
+        logger.error(f"db_get_attempts error: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+# ==============================================================================
+# LEARNED TOPICS
+# ==============================================================================
+
+def db_add_learned_topic(player_id: str, topic: str) -> bool:
+    conn = _get_connection()
+    if not conn:
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO learned_topics (player_id, topic)
+            VALUES (%s, %s)
+            ON CONFLICT (player_id, topic) DO NOTHING;
+            """, (player_id, topic))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_add_learned_topic error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+def db_get_learned_topics(player_id: str) -> List[Dict[str, Any]]:
+    conn = _get_connection()
+    if not conn:
+        return []
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("SELECT topic, added_at FROM learned_topics WHERE player_id = %s ORDER BY added_at ASC;", (player_id,))
+            rows = cur.fetchall()
+            return [{"topic": r["topic"], "added_at": r["added_at"].isoformat() if r.get("added_at") else ""} for r in rows]
+    except Exception as e:
+        logger.error(f"db_get_learned_topics error: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+# ==============================================================================
+# EXERCISE BANK & PRACTICE PREVIOUS
+# ==============================================================================
+
+def db_save_exercise_to_bank(module: str, topic: str, exercise_data: Dict[str, Any]) -> bool:
+    """Saves a generated Gemini JSON exercise into the database bank for instant re-take."""
+    conn = _get_connection()
+    if not conn:
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO exercise_bank (module, topic, exercise_data)
+            VALUES (%s, %s, %s);
+            """, (module, topic, Json(exercise_data)))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_save_exercise_to_bank error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+def db_count_bank_exercises(module: str, topic: str) -> int:
+    """Returns number of saved exercises available in the bank for a topic."""
+    conn = _get_connection()
+    if not conn:
+        return 0
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            SELECT COUNT(*) FROM exercise_bank WHERE module = %s AND topic = %s;
+            """, (module, topic))
+            row = cur.fetchone()
+            return row[0] if row else 0
+    except Exception as e:
+        logger.error(f"db_count_bank_exercises error: {e}")
+        return 0
+    finally:
+        conn.close()
+
+
+def db_get_bank_exercises(module: str, topic: str) -> List[Dict[str, Any]]:
+    """Retrieves all saved exercises for a topic in the bank."""
+    conn = _get_connection()
+    if not conn:
+        return []
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("""
+            SELECT id, exercise_data, created_at FROM exercise_bank
+            WHERE module = %s AND topic = %s
+            ORDER BY created_at DESC;
+            """, (module, topic))
+            rows = cur.fetchall()
+            return [r["exercise_data"] for r in rows if r.get("exercise_data")]
+    except Exception as e:
+        logger.error(f"db_get_bank_exercises error: {e}")
+        return []
+    finally:
+        conn.close()

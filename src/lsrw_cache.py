@@ -1,14 +1,21 @@
 """
 LSRW Exercise Cache and Seed Bank Manager.
-Provides instant 0.1-second loading for repeated or pre-generated topics,
-persisting exercises to lsrw_cache.json.
+Provides instant 0.1-second loading for repeated or pre-generated topics.
+Supports both Cloud PostgreSQL (Supabase / Neon) and local lsrw_cache.json fallback.
 """
 
 import json
 import os
 import hashlib
+import random
 from typing import Dict, Any, Optional, List
 from src.config import BASE_DIR
+from src.db import (
+    is_db_connected,
+    db_save_exercise_to_bank,
+    db_get_bank_exercises,
+    db_count_bank_exercises
+)
 
 CACHE_FILE = os.path.join(BASE_DIR, "lsrw_cache.json")
 
@@ -30,7 +37,8 @@ def load_cache() -> Dict[str, Any]:
             "writing": {},
             "listening_easy": {},
             "listening_real": {},
-            "speaking": {}
+            "speaking": {},
+            "explanation": {}
         }
         save_cache(initial)
         return initial
@@ -65,22 +73,35 @@ def save_cache(data: Dict[str, Any]) -> None:
 def get_cached_exercise(module: str, topics: List[str], extra: str = "") -> Optional[Dict[str, Any]]:
     """
     Retrieves a cached exercise in 0.001 seconds if available.
-    Returns None if not found or empty.
+    Checks PostgreSQL first if online, falls back to local seed bank.
     """
+    topic_str = ", ".join(sorted([t.strip() for t in topics if t.strip()]))
+    if is_db_connected():
+        bank = db_get_bank_exercises(module, topic_str)
+        if bank:
+            return bank[0]
+
     cache = load_cache()
     mod_store = cache.get(module, {})
     key = _get_cache_key(module, topics, extra)
     cached_list = mod_store.get(key, [])
     if cached_list and isinstance(cached_list, list) and len(cached_list) > 0:
-        # Return the latest or random one
         return cached_list[-1]
     return None
 
 
 def store_cached_exercise(module: str, topics: List[str], exercise_data: Dict[str, Any], extra: str = "") -> None:
-    """Stores a freshly generated exercise in the seed bank."""
+    """Stores a freshly generated exercise in both PostgreSQL DB bank and local cache."""
     if not exercise_data:
         return
+
+    topic_str = ", ".join(sorted([t.strip() for t in topics if t.strip()]))
+    if is_db_connected():
+        try:
+            db_save_exercise_to_bank(module, topic_str, exercise_data)
+        except Exception:
+            pass
+
     cache = load_cache()
     if module not in cache:
         cache[module] = {}
@@ -89,10 +110,39 @@ def store_cached_exercise(module: str, topics: List[str], exercise_data: Dict[st
     if key not in cache[module]:
         cache[module][key] = []
 
-    # Store up to 3 variations per topic combination for variety
     existing = cache[module][key]
     existing.append(exercise_data)
-    if len(existing) > 3:
+    if len(existing) > 5:
         existing.pop(0)
 
     save_cache(cache)
+
+
+def get_bank_count(module: str, topics: List[str]) -> int:
+    """Returns number of exercises stored in DB bank or local cache for this topic."""
+    topic_str = ", ".join(sorted([t.strip() for t in topics if t.strip()]))
+    if is_db_connected():
+        ct = db_count_bank_exercises(module, topic_str)
+        if ct > 0:
+            return ct
+
+    cache = load_cache()
+    key = _get_cache_key(module, topics)
+    return len(cache.get(module, {}).get(key, []))
+
+
+def get_bank_previous_exercise(module: str, topics: List[str]) -> Optional[Dict[str, Any]]:
+    """Returns a previous exercise from DB bank or local cache for instant replay (0 AI tokens)."""
+    topic_str = ", ".join(sorted([t.strip() for t in topics if t.strip()]))
+    if is_db_connected():
+        exercises = db_get_bank_exercises(module, topic_str)
+        if exercises:
+            return random.choice(exercises)
+
+    cache = load_cache()
+    mod_store = cache.get(module, {})
+    key = _get_cache_key(module, topics)
+    cached_list = mod_store.get(key, [])
+    if cached_list:
+        return random.choice(cached_list)
+    return None

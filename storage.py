@@ -10,6 +10,23 @@ import os
 from datetime import datetime, date
 from typing import Dict, Any, List
 
+try:
+    from src.db import (
+        is_db_connected,
+        init_db,
+        db_save_player,
+        db_get_players,
+        db_save_attempt,
+        db_get_attempts,
+        db_add_learned_topic,
+        db_get_learned_topics
+    )
+    if is_db_connected():
+        init_db()
+except Exception:
+    def is_db_connected():
+        return False
+
 DATA_FILE = os.path.join(os.path.dirname(__file__), "duel_data.json")
 
 DEFAULT_SETTINGS = {
@@ -91,6 +108,11 @@ def get_or_create_player(name: str, avatar: str = "🦁", email: str = "") -> Di
             data["players"][matched_id]["email"] = email.strip()
 
     save_data(data)
+    if is_db_connected():
+        try:
+            db_save_player(matched_id, clean_name, avatar, email)
+        except Exception:
+            pass
     return data["players"][matched_id]
 
 
@@ -135,6 +157,12 @@ def record_attempt(player_id: str, date_str: str, score: int, total: int = 5, de
     }
     data["attempts"].append(record)
     save_data(data)
+
+    if is_db_connected():
+        try:
+            db_save_attempt(clean_pid, category, score, total, "", date_str)
+        except Exception:
+            pass
 
     return get_player_daily_stats(clean_pid, date_str, data, category=category)
 
@@ -391,6 +419,12 @@ def add_learned_topic(player_id: str, topic: str) -> None:
         learned.append({"topic": clean_topic, "date": date.today().isoformat()})
         save_data(data)
 
+    if is_db_connected():
+        try:
+            db_add_learned_topic(clean_pid, clean_topic)
+        except Exception:
+            pass
+
 
 def remove_learned_topic(player_id: str, topic: str) -> None:
     """Removes a grammar topic from the player's learned list."""
@@ -422,6 +456,12 @@ def save_lsrw_module_score(player_id: str, module: str, score: int, total: int, 
         "timestamp": datetime.now().isoformat()
     })
     save_data(data)
+
+    if is_db_connected():
+        try:
+            db_save_attempt(clean_pid, f"lsrw_{module}", score, total, ", ".join(topics_tested), date.today().isoformat())
+        except Exception:
+            pass
 
 
 def get_lsrw_module_history(player_id: str, module: str = None) -> List[Dict[str, Any]]:
