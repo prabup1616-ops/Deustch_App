@@ -378,10 +378,21 @@ header[data-testid="stHeader"] {
 [data-testid="stToolbar"],
 [data-testid="stToolbarActions"],
 [data-testid="manage-app-button"],
+[class*="viewerBadge"],
+[class*="styles_viewerBadge"],
 .viewerBadge_container__1QSob,
+.styles_viewerBadge__1yB5_,
+.viewerBadge_link__1S137,
+.viewerBadge_text__1JaDK,
+#MainMenu,
+div[data-testid="stDecoration"],
 footer {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
 }
 
 [data-testid="stStatusWidget"] {

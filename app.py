@@ -28,7 +28,7 @@ css_content = load_css()
 if css_content:
     st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
 
-# Browser Back/Forward (←/→) Button Controller
+# Browser Back/Forward (←/→) Button Controller & Cloud Badge Suppressor
 components.html("""
 <script>
 (function() {
@@ -40,6 +40,52 @@ components.html("""
                 topWin.location.reload();
             });
         }
+        
+        // Suppress Streamlit Cloud bottom-right viewer badge & fork widget across frames
+        function purgeCloudBadge() {
+            try {
+                const docs = [document];
+                if (topWin && topWin.document && topWin.document !== document) {
+                    docs.push(topWin.document);
+                }
+                docs.forEach(function(d) {
+                    if (!d) return;
+                    // Inject hiding stylesheet to parent document if missing
+                    if (!d.getElementById('agy-hide-cloud-badge')) {
+                        const style = d.createElement('style');
+                        style.id = 'agy-hide-cloud-badge';
+                        style.innerHTML = `
+                            [class*="viewerBadge"],
+                            [class*="styles_viewerBadge"],
+                            .viewerBadge_container__1QSob,
+                            .styles_viewerBadge__1yB5_,
+                            .viewerBadge_link__1S137,
+                            .viewerBadge_text__1JaDK,
+                            [data-testid="manage-app-button"],
+                            [data-testid="stToolbarActions"],
+                            div[data-testid="stDecoration"],
+                            #MainMenu,
+                            footer {
+                                display: none !important;
+                                visibility: hidden !important;
+                                opacity: 0 !important;
+                                pointer-events: none !important;
+                                height: 0 !important;
+                                width: 0 !important;
+                            }
+                        `;
+                        d.head && d.head.appendChild(style);
+                    }
+                    const badges = d.querySelectorAll('[class*="viewerBadge"], [data-testid="manage-app-button"], [class*="styles_viewerBadge"]');
+                    badges.forEach(function(el) {
+                        el.style.setProperty('display', 'none', 'important');
+                        el.style.setProperty('visibility', 'hidden', 'important');
+                    });
+                });
+            } catch(e) {}
+        }
+        purgeCloudBadge();
+        setInterval(purgeCloudBadge, 600);
     } catch(e) {}
 })();
 </script>
