@@ -23,23 +23,17 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Inject External Modular CSS & Browser History Popstate Controller
+# 2. Inject External Modular CSS & Cloud Badge Suppressor
 css_content = load_css()
 if css_content:
     st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
 
-# Browser Back/Forward (←/→) Button Controller & Cloud Badge Suppressor
+# Cloud Badge Suppressor (Streamlit native popstate handles browser Back/Forward smoothly)
 components.html("""
 <script>
 (function() {
     try {
         const topWin = (window.parent && window.parent.location) ? window.parent : window;
-        if (!topWin._agy_popstate_ready) {
-            topWin._agy_popstate_ready = true;
-            topWin.addEventListener('popstate', function() {
-                topWin.location.reload();
-            });
-        }
         
         // Suppress Streamlit Cloud bottom-right viewer badge & fork widget across frames
         function purgeCloudBadge() {
@@ -182,16 +176,24 @@ with col_nav2:
     if st.session_state.app_view != "home":
         if st.button("🏠 Back to Home", use_container_width=True):
             st.session_state.app_view = "home"
-            st.query_params["view"] = "home"
-            st.query_params.pop("mod", None)
+            if st.query_params.get("view") != "home":
+                st.query_params["view"] = "home"
+            if "mod" in st.query_params:
+                del st.query_params["mod"]
             st.rerun()
 
-# Sync query params with current navigation state
-st.query_params["view"] = st.session_state.app_view
-if st.session_state.app_view == "lsrw":
-    st.query_params["mod"] = st.session_state.get("lsrw_module", "hub")
+# Sync query params with current navigation state (ONLY when view/mod actually changes to prevent history stack pollution)
+target_view = st.session_state.app_view
+if st.query_params.get("view") != target_view:
+    st.query_params["view"] = target_view
+
+if target_view == "lsrw":
+    target_mod = st.session_state.get("lsrw_module", "hub")
+    if st.query_params.get("mod") != target_mod:
+        st.query_params["mod"] = target_mod
 else:
-    st.query_params.pop("mod", None)
+    if "mod" in st.query_params:
+        del st.query_params["mod"]
 
 # 5. Route to Views
 if st.session_state.app_view == "home":
