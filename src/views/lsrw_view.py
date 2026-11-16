@@ -99,60 +99,89 @@ def render_lsrw_view():
 
 
 # ==============================================================================
-# PRÜFUNGSARCHIV & DETAILLIERTER VERLAUF (FULL SUBMISSIONS & AI CORRECTIONS)
+# PRÜFUNGSARCHIV & MODUL-VERLAUF (COLLAPSIBLE HISTORY PER MODULE & HUB)
 # ==============================================================================
 
-def _render_exam_history(pid: str):
+def _render_module_history(module: str, pid: str):
     """
-    Renders an interactive, expandable archive of all past LSRW submissions
-    including written essays, questions, user answers, and AI corrections.
+    Renders an expandable History & Previous Attempts archive at the bottom of the module view.
+    Collapsible button/expander (default collapsed).
+    Displays each attempt with marks and scenario/topic:
+      1. Scenario / Topic (e.g. Email for friend about new wohnung and furniture)
+         a. Points scored: X / Total
+         > Clicking arrow reveals the full text, questions and AI evaluation.
+    Includes English 'Clear History' button and clean empty state.
     """
-    submissions = storage.get_lsrw_submissions(pid, limit=20)
-    legacy_history = storage.get_lsrw_module_history(pid)
-
-    if not submissions and not legacy_history:
-        return
+    is_hub = (module == "all" or not module)
+    subs = storage.get_lsrw_submissions(pid, module=(None if is_hub else module), limit=30)
 
     st.markdown("---")
-    col_hist_h1, col_hist_h2 = st.columns([3, 1])
-    with col_hist_h1:
-        st.markdown("### 📊 Prüfungsarchiv & Detaillierter Verlauf")
-        st.caption("Klicken Sie auf einen Eintrag, um Ihre eingereichten Texte, Aufgaben und KI-Korrekturen einzusehen.")
-    with col_hist_h2:
-        if st.button("🗑️ Archiv leeren", key="btn_clear_lsrw_hist", help="Löscht den gesamten Prüfungsverlauf"):
-            storage.clear_lsrw_submissions(pid)
-            st.rerun()
+    count_label = f"({len(subs)})" if subs else "(0)"
+    title_name = "All Modules" if is_hub else module.title()
+    hist_header = f"📜 History & Previous Attempts {count_label}"
 
-    if submissions:
-        for idx, sub in enumerate(submissions):
-            mod = sub.get("module", "lsrw")
-            emoji = "📖" if mod == "reading" else "✍️" if mod == "writing" else "🎧" if mod == "listening" else "🗣️"
-            mod_title = "Lesen" if mod == "reading" else "Schreiben" if mod == "writing" else "Hören" if mod == "listening" else "Sprechen"
-            topic = sub.get("topic", "B1 Grammatik")
+    with st.expander(hist_header, expanded=False):
+        col_h1, col_h2 = st.columns([3, 1])
+        with col_h1:
+            st.markdown(f"#### 📁 {title_name} Practice History")
+            st.caption("Your saved submissions, scores, and AI evaluations.")
+        with col_h2:
+            if subs:
+                if st.button("🗑️ Clear History", key=f"btn_clear_hist_{module}", help="Delete your history records"):
+                    storage.clear_lsrw_submissions(pid)
+                    st.rerun()
+
+        if not subs:
+            st.info("No saved history yet for this section. Complete a practice task to see your attempts here.")
+            return
+
+        for idx, sub in enumerate(subs):
+            mod = sub.get("module", module or "lsrw")
+            p_data = sub.get("prompt_data") or {}
+            user_sub = sub.get("user_submission", "")
+            feedback = sub.get("feedback", "")
             score = sub.get("score", 0)
             total = sub.get("total", 10)
-            date_str = sub.get("date") or str(sub.get("created_at", ""))[:10] or "Heute"
+            topic = sub.get("topic", "B1 Grammatik")
+            date_str = sub.get("date") or str(sub.get("timestamp", ""))[:10] or "Today"
 
-            header_label = f"{emoji} {mod_title} — {topic} | 📅 {date_str} | ⭐ {score} / {total} Punkte"
-            with st.expander(header_label, expanded=(idx == 0)):
-                p_data = sub.get("prompt_data") or {}
-                user_sub = sub.get("user_submission", "")
-                feedback = sub.get("feedback", "")
+            if mod == "writing":
+                scen = p_data.get("scenario_de") or p_data.get("type", "Schreibaufgabe")
+                short_scen = (scen[:70] + "...") if len(scen) > 70 else scen
+                task_title = f"✍️ {p_data.get('type', 'E-Mail')}: {short_scen}"
+            elif mod == "reading":
+                p1_title = p_data.get("paragraph1", {}).get("title", "Lesetext")
+                task_title = f"📖 Leseverstehen: {p1_title}"
+            elif mod == "listening":
+                l_title = p_data.get("title") or "Hörverstehen"
+                task_title = f"🎧 Hörverstehen: {l_title}"
+            elif mod == "speaking":
+                c_title = p_data.get("card_title") or p_data.get("topic_de") or "Mündlicher Ausdruck"
+                task_title = f"🗣️ Sprechen: {c_title}"
+            else:
+                task_title = f"{mod.title()}: {topic}"
 
+            st.markdown(f"""<div style="background: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 10px 14px; margin: 10px 0 4px 0;">
+<div style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+{idx + 1}. {task_title}
+</div>
+<div style="font-size: 0.85rem; color: #475569; margin-top: 3px;">
+🎯 <strong>Thema:</strong> {topic} &nbsp;|&nbsp; 📅 <strong>Datum:</strong> {date_str} &nbsp;|&nbsp; 🏆 <strong>Points scored:</strong> <span style="color: #059669; font-weight: 800;">{score} / {total} Punkte</span>
+</div>
+</div>""", unsafe_allow_html=True)
+
+            with st.expander(f"▶ Points: {score} / {total} — Click arrow to view full text & evaluation", expanded=False):
                 if mod == "writing":
-                    st.markdown(f"**📝 Schreibaufgabe:** {p_data.get('type', 'E-Mail')} (Stil: *{p_data.get('register', 'informell')}*)")
                     if p_data.get("scenario_de"):
                         st.info(f"**Situation:** {p_data.get('scenario_de')}")
                     if p_data.get("leitpunkte"):
                         st.markdown("**Leitpunkte:**")
                         for lp in p_data.get("leitpunkte", []):
                             st.markdown(f"- {lp}")
-
                     st.markdown("**✍️ Ihr geschriebener Text:**")
                     st.markdown(f"""> {user_sub}""")
-
                     st.markdown("---")
-                    st.markdown("### 📋 Goethe B1 Bewertung & Korrektur")
+                    st.markdown("### 📋 Prüfungsbewertung & Korrektur:")
                     st.markdown(feedback)
 
                 elif mod == "reading":
@@ -160,7 +189,6 @@ def _render_exam_history(pid: str):
                         p1 = p_data.get("paragraph1", {})
                         st.markdown(f"**📖 Lesetext:** *{p1.get('title', '')}*")
                         st.caption(p1.get("text", ""))
-
                     st.markdown("**📋 Ihre Antworten & Auswertung:**")
                     try:
                         ans_dict = json.loads(user_sub) if isinstance(user_sub, str) and user_sub.startswith("{") else {}
@@ -179,13 +207,13 @@ def _render_exam_history(pid: str):
                     st.markdown("**🎧 Hörverstehen-Protokoll:**")
                     items = p_data.get("items") or p_data.get("questions") or []
                     for i, itm in enumerate(items):
-                        sentence = itm.get("spoken_sentence_de") or p_data.get("passage_de", "")
+                        sentence = itm.get("spoken_sentence_de") or p_data.get("passage_de", "") or p_data.get("full_audio_text", "")
                         q_text = itm.get("question_de", f"Frage {i+1}")
                         correct = itm.get("answer", "")
                         st.markdown(f"**{i+1}. {q_text}** (Lösung: `{correct}`)")
                         if sentence:
                             safe_sentence = sentence.replace("'", "\\'").replace('"', '&quot;')
-                            st.components.v1.html(f"""
+                            components.html(f"""
                             <button onclick="var u=new SpeechSynthesisUtterance('{safe_sentence}'); u.lang='de-DE'; u.rate=0.88; window.speechSynthesis.speak(u);"
                                 style="background: #0284c7; color: white; border: none; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 12px; font-weight: 600;">
                                 🔊 Satz anhören (Free Speech)
@@ -196,21 +224,13 @@ def _render_exam_history(pid: str):
                 elif mod == "speaking":
                     if p_data.get("card_title"):
                         st.markdown(f"**🗣️ Sprechkarte:** *{p_data.get('card_title')}*")
-                        if p_data.get("card_situation"):
-                            st.info(f"**Situation:** {p_data.get('card_situation')}")
+                    if p_data.get("card_situation"):
+                        st.info(f"**Situation:** {p_data.get('card_situation')}")
                     if user_sub:
                         st.markdown(f"**Ihr Beitrag:** {user_sub}")
                     st.markdown("---")
                     st.markdown("### 📋 Prüferbewertung:")
                     st.markdown(feedback)
-    else:
-        for s in reversed(legacy_history[-6:]):
-            emoji = "📖" if s["module"] == "reading" else "✍️" if s["module"] == "writing" else "🎧" if s["module"] == "listening" else "🗣️"
-            mod_title = "Lesen" if s["module"] == "reading" else "Schreiben" if s["module"] == "writing" else "Hören" if s["module"] == "listening" else "Sprechen"
-            st.markdown(f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 14px; margin-bottom: 6px; font-size: 0.88rem;">
-<span>{emoji} <strong>{mod_title}</strong> — {', '.join(s.get('topics', []))}</span>
-<span style="font-weight: 700; color: #059669;">{s['score']} / {s['total']} Punkte</span>
-</div>""", unsafe_allow_html=True)
 
 
 # ==============================================================================
@@ -226,20 +246,11 @@ def _render_hub():
         return
 
     # Kumulative Grammatikthemen
-    col_hdr1, col_hdr2 = st.columns([3, 1])
-    with col_hdr1:
-        st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
-        st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
-    with col_hdr2:
-        learned = storage.get_learned_topics(pid)
-        topic_names = [t["topic"] for t in learned]
-        if topic_names:
-            if st.button("🗑️ Alle löschen (Start Fresh)", key="btn_clear_all_topics", help="Entfernt alle Themen und setzt den LSRW-Fortschritt zurück"):
-                storage.clear_learned_topics(pid)
-                for key in list(st.session_state.keys()):
-                    if key.startswith("lsrw_"):
-                        st.session_state.pop(key, None)
-                st.rerun()
+    st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
+    st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
+
+    learned = storage.get_learned_topics(pid)
+    topic_names = [t["topic"] for t in learned]
 
     if topic_names:
         cols_per_row = 4
@@ -294,9 +305,6 @@ def _render_hub():
     if not topic_names:
         st.warning("⚠️ Bitte aktivieren Sie mindestens ein Grammatikthema oben, um zu beginnen.")
         return
-
-    # Detailliertes Prüfungsarchiv & Verlauf (Submissions & AI Corrections)
-    _render_exam_history(pid)
 
     # Verbindung zum eigenständigen Grammatik-Lernstudio (Lernen)
     st.markdown("---")
@@ -379,6 +387,9 @@ def _render_hub():
             st.query_params["mod"] = "speaking"
             st.session_state.pop("lsrw_speaking_cards", None)
             st.rerun()
+
+    # Detailliertes Prüfungsarchiv & Verlauf (Submissions & AI Corrections)
+    _render_module_history("all", pid)
 
 
 # ==============================================================================
@@ -582,10 +593,19 @@ def _render_reading_module():
             render_api_key_prompt("Leseverstehen (Reading)")
             return
         force_r = st.session_state.pop("lsrw_force_refresh_reading", False)
+        past_subs = storage.get_lsrw_submissions(pid, module="reading", limit=25)
+        topic_past = [s for s in past_subs if s.get("topic") == chosen_topic or chosen_topic in str(s.get("topic"))]
+        past_scenarios = [s.get("prompt_data", {}).get("paragraph1", {}).get("title") for s in topic_past if s.get("prompt_data")]
+        prior_topics = [t for t in learned_list if t != chosen_topic]
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("📖 Erstelle Lesetexte und Aufgaben zu Ihren Grammatikthemen...")
         try:
-            data = generate_reading_exercise(api_key, active_topics, lang="de", force_refresh=force_r)
+            data = generate_reading_exercise(
+                api_key, active_topics, lang="de",
+                force_refresh=force_r,
+                exclude_scenarios=past_scenarios,
+                prior_topics=prior_topics
+            )
             st.session_state.lsrw_reading_data = data
             st.session_state.lsrw_reading_submitted = False
             st.rerun()
@@ -729,6 +749,9 @@ def _render_reading_module():
             if st.button("✍️ Weiter zu Modul 2: Schreiben (Writing) ➔", type="primary", use_container_width=True, key="btn_r_to_writing"):
                 _switch_to_module("writing", active_t)
 
+    # Modulspezifischer Verlauf (Unten als aufklappbarer Bereich)
+    _render_module_history("reading", pid)
+
 
 # ==============================================================================
 # MODUL 2: SCHREIBEN (WRITING) — 100% Deutsch
@@ -764,6 +787,9 @@ def _render_writing_module():
     with col_t2:
         if st.button("🔄 Generate New (AI)", key="btn_refresh_writing", use_container_width=True):
             st.session_state.pop("lsrw_writing_data", None)
+            st.session_state.pop("lsrw_writing_evaluated", None)
+            st.session_state.pop("lsrw_writing_feedback", None)
+            st.session_state["lsrw_force_refresh_writing"] = True
             st.rerun()
 
     with col_t3:
@@ -788,10 +814,25 @@ def _render_writing_module():
         if not api_key:
             render_api_key_prompt("Schriftlicher Ausdruck (Writing)")
             return
+        force_r = st.session_state.pop("lsrw_force_refresh_writing", False)
+        past_subs = storage.get_lsrw_submissions(pid, module="writing", limit=25)
+        topic_past = [s for s in past_subs if s.get("topic") == chosen_topic or chosen_topic in str(s.get("topic"))]
+        past_scenarios = []
+        for s in topic_past:
+            pd = s.get("prompt_data", {})
+            sc = pd.get("scenario_de") or pd.get("type") or pd.get("instructions_de")
+            if sc and sc not in past_scenarios:
+                past_scenarios.append(sc[:80])
+        prior_topics = [t for t in learned_list if t != chosen_topic]
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("✍️ Erstelle Prüfungsaufgabe (Schreiben)...")
         try:
-            data = generate_writing_prompt(api_key, active_topics, lang="de")
+            data = generate_writing_prompt(
+                api_key, active_topics, lang="de",
+                force_refresh=force_r,
+                exclude_scenarios=past_scenarios,
+                prior_topics=prior_topics
+            )
             st.session_state.lsrw_writing_data = data
             st.session_state.lsrw_writing_evaluated = False
             st.rerun()
@@ -881,11 +922,15 @@ def _render_writing_module():
                 st.session_state.pop("lsrw_writing_data", None)
                 st.session_state.pop("lsrw_writing_evaluated", None)
                 st.session_state.pop("lsrw_writing_feedback", None)
+                st.session_state["lsrw_force_refresh_writing"] = True
                 st.rerun()
         with col_next_w:
             active_t = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else None)
             if st.button("🎧 Weiter zu Modul 3: Hören (Listening) ➔", type="primary", use_container_width=True, key="btn_w_to_listening"):
                 _switch_to_module("listening", active_t)
+
+    # Modulspezifischer Verlauf (Unten als aufklappbarer Bereich)
+    _render_module_history("writing", pid)
 
 
 # ==============================================================================
@@ -980,6 +1025,9 @@ def _render_listening_module():
     else:
         _render_listening_easy_mode(api_key, active_topics, pid)
 
+    # Modulspezifischer Verlauf (Unten als aufklappbarer Bereich)
+    _render_module_history("listening", pid)
+
 
 def _render_listening_easy_mode(api_key, topics, pid):
     """Einfacher Modus: 10 Sätze, jeweils 1 Audio pro Frage."""
@@ -990,10 +1038,20 @@ Klicken Sie auf 🔊, um den Satz anzuhören. Der Satztext bleibt verborgen!
 
     if "lsrw_listening_data" not in st.session_state:
         force_r = st.session_state.pop("lsrw_force_refresh_listening_easy", False)
+        past_subs = storage.get_lsrw_submissions(pid, module="listening", limit=25)
+        topic_past = [s for s in past_subs if s.get("topic") in topics or any(t in str(s.get("topic")) for t in topics)]
+        past_scenarios = [s.get("prompt_data", {}).get("title") for s in topic_past if s.get("prompt_data")]
+        learned_list = [t["topic"] for t in storage.get_learned_topics(pid)]
+        prior_topics = [t for t in learned_list if t not in topics]
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("🎧 Erstelle 5 Hörübungen zu Ihren Grammatikthemen...")
         try:
-            data = generate_listening_exercise(api_key, topics, lang="de", force_refresh=force_r)
+            data = generate_listening_exercise(
+                api_key, topics, lang="de",
+                force_refresh=force_r,
+                exclude_scenarios=past_scenarios,
+                prior_topics=prior_topics
+            )
             st.session_state.lsrw_listening_data = data
             st.session_state.lsrw_listening_submitted = False
             st.rerun()
@@ -1132,10 +1190,20 @@ Nach dem zweiten Mal ist das Abspielen gesperrt. Beantworten Sie anschließend d
 
     if "lsrw_real_data" not in st.session_state:
         force_r = st.session_state.pop("lsrw_force_refresh_listening_real", False)
+        past_subs = storage.get_lsrw_submissions(pid, module="listening", limit=25)
+        topic_past = [s for s in past_subs if s.get("topic") in topics or any(t in str(s.get("topic")) for t in topics)]
+        past_scenarios = [s.get("prompt_data", {}).get("title") for s in topic_past if s.get("prompt_data")]
+        learned_list = [t["topic"] for t in storage.get_learned_topics(pid)]
+        prior_topics = [t for t in learned_list if t not in topics]
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("🎧 Generiere zusammenhängenden Goethe-Prüfungstext und 5 Fragen...")
         try:
-            data = generate_real_listening_exam(api_key, topics, force_refresh=force_r)
+            data = generate_real_listening_exam(
+                api_key, topics,
+                force_refresh=force_r,
+                exclude_scenarios=past_scenarios,
+                prior_topics=prior_topics
+            )
             st.session_state.lsrw_real_data = data
             st.session_state.lsrw_real_submitted = False
             st.session_state["lsrw_real_play_count"] = 0
@@ -1347,10 +1415,19 @@ Sprechen Sie anschließend frei und auf Deutsch über das Thema in Ihr Mikrofon 
             render_api_key_prompt("Mündlicher Ausdruck (Sprechen)")
             return
         force_r = st.session_state.pop("lsrw_force_refresh_speaking", False)
+        past_subs = storage.get_lsrw_submissions(pid, module="speaking", limit=25)
+        topic_past = [s for s in past_subs if s.get("topic") == chosen_topic or chosen_topic in str(s.get("topic"))]
+        past_scenarios = [s.get("prompt_data", {}).get("card_title") for s in topic_past if s.get("prompt_data")]
+        prior_topics = [t for t in learned_list if t != chosen_topic]
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("🃏 Generiere 8 Prüfungskarten...")
         try:
-            cards = generate_speaking_cards(api_key, active_topics, force_refresh=force_r)
+            cards = generate_speaking_cards(
+                api_key, active_topics,
+                force_refresh=force_r,
+                exclude_scenarios=past_scenarios,
+                prior_topics=prior_topics
+            )
             st.session_state.lsrw_speaking_cards = cards
             st.session_state.lsrw_speaking_revealed = None
             st.session_state.lsrw_speaking_evaluated = False
@@ -1502,3 +1579,6 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
             active_t = topics[0] if topics else None
             if st.button("📖 Weiter zu Modul 1: Lesen (Reading) ➔", type="primary", use_container_width=True, key="btn_s_to_reading"):
                 _switch_to_module("reading", active_t)
+
+    # Modulspezifischer Verlauf (Unten als aufklappbarer Bereich)
+    _render_module_history("speaking", pid)

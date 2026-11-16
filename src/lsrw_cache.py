@@ -70,23 +70,55 @@ def save_cache(data: Dict[str, Any]) -> None:
         pass
 
 
-def get_cached_exercise(module: str, topics: List[str], extra: str = "") -> Optional[Dict[str, Any]]:
+def _is_excluded(ex: Any, exclude_titles: Optional[List[str]] = None) -> bool:
+    if not exclude_titles or not ex:
+        return False
+    candidates = []
+    if isinstance(ex, dict):
+        candidates.append(str(ex.get("scenario_de", "")))
+        candidates.append(str(ex.get("title", "")))
+        candidates.append(str(ex.get("full_audio_text", "")))
+        candidates.append(str(ex.get("card_title", "")))
+        if isinstance(ex.get("paragraph1"), dict):
+            candidates.append(str(ex.get("paragraph1", {}).get("title", "")))
+            candidates.append(str(ex.get("paragraph1", {}).get("text", "")))
+    elif isinstance(ex, list):
+        for item in ex:
+            if isinstance(item, dict):
+                candidates.append(str(item.get("card_title", "")))
+                candidates.append(str(item.get("situation", "")))
+
+    haystack = " ".join(candidates).lower()
+    for excl in exclude_titles:
+        if not excl:
+            continue
+        cleaned = str(excl).strip().lower()
+        if len(cleaned) >= 6 and (cleaned in haystack or haystack in cleaned):
+            return True
+    return False
+
+
+def get_cached_exercise(module: str, topics: List[str], extra: str = "", exclude_titles: Optional[List[str]] = None) -> Optional[Dict[str, Any]]:
     """
-    Retrieves a cached exercise in 0.001 seconds if available.
-    Checks PostgreSQL first if online, falls back to local seed bank.
+    Retrieves a cached exercise in 0.001 seconds if available,
+    filtering out any scenarios that the user has already practiced.
     """
     topic_str = ", ".join(sorted([t.strip() for t in topics if t.strip()]))
     if is_db_connected():
         bank = db_get_bank_exercises(module, topic_str)
         if bank:
-            return bank[0]
+            for b in bank:
+                if not _is_excluded(b, exclude_titles):
+                    return b
 
     cache = load_cache()
     mod_store = cache.get(module, {})
     key = _get_cache_key(module, topics, extra)
     cached_list = mod_store.get(key, [])
     if cached_list and isinstance(cached_list, list) and len(cached_list) > 0:
-        return cached_list[-1]
+        for c in reversed(cached_list):
+            if not _is_excluded(c, exclude_titles):
+                return c
     return None
 
 

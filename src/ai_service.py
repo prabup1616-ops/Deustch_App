@@ -147,11 +147,38 @@ Append at end: <!--LSRW_STATE {{"explained_list":...,"practiced_list":...,"curre
 
 from src.lsrw_cache import get_cached_exercise, store_cached_exercise
 
+def _build_prompt_variation_instructions(topics_str: str, exclude_scenarios: Optional[List[str]] = None, prior_topics: Optional[List[str]] = None) -> str:
+    instructions = []
+    if exclude_scenarios:
+        clean_excl = [str(s)[:70] for s in exclude_scenarios if s]
+        if clean_excl:
+            bullet_list = "\n".join(f"- {s}" for s in clean_excl[:4])
+            instructions.append(f"""WICHTIG (Abwechslung & Neues Szenario):
+Der Lerner hat für dieses Thema bereits folgende Szenarien/Aufgaben gelöst:
+{bullet_list}
+Wiederhole diese Szenarien KEINESFALLS! Erstelle ein VOLLKOMMEN NEUES, abwechslungsreiches Szenario aus einem anderen Lebensbereich (z.B. Arbeitsplatz, Reklamation, Reise, Vereinsfest, Nachbarschaft, Sport, Gesundheit, Restaurant).""")
+
+    if prior_topics:
+        prior_str = ", ".join(str(p) for p in prior_topics[:4])
+        instructions.append(f"""Kumulative Wiederholung (Frühere Themen einbinden):
+Der Lerner beherrscht aus früheren Tagen bereits: {prior_str}.
+Hauptthema heute ist: {topics_str}.
+Gestalte das Szenario so, dass das Hauptthema im Zentrum steht, aber natürliche Berührungspunkte zu {prior_str} bestehen.""")
+
+    return "\n\n".join(instructions)
+
 # ==============================================================================
 # LSRW MODULAR EXERCISES — 100% DEUTSCH (LEAN 5-QUESTION EXAM CHUNKS + CACHE)
 # ==============================================================================
 
-def generate_reading_exercise(api_key: str, topics: List[str], lang: str = "de", force_refresh: bool = False) -> Dict[str, Any]:
+def generate_reading_exercise(
+    api_key: str,
+    topics: List[str],
+    lang: str = "de",
+    force_refresh: bool = False,
+    exclude_scenarios: Optional[List[str]] = None,
+    prior_topics: Optional[List[str]] = None
+) -> Dict[str, Any]:
     """
     Generates a Goethe B1 reading exercise in 100% German:
     - 1 cohesive German paragraph (100-140 words)
@@ -160,7 +187,7 @@ def generate_reading_exercise(api_key: str, topics: List[str], lang: str = "de",
     Loads in 0.001s if cached, or 5-8s on first AI call.
     """
     if not force_refresh:
-        cached = get_cached_exercise("reading", topics)
+        cached = get_cached_exercise("reading", topics, exclude_titles=exclude_scenarios)
         if cached:
             return cached
 
@@ -171,6 +198,7 @@ def generate_reading_exercise(api_key: str, topics: List[str], lang: str = "de",
 
     client = genai.Client(api_key=api_key)
     topics_str = ", ".join(topics) if topics else "allgemeine B1-Grammatik"
+    var_prompt = _build_prompt_variation_instructions(topics_str, exclude_scenarios, prior_topics)
 
     system_prompt = f"""Du bist ein offizieller Prüfer für das Goethe-Zertifikat B1.
 Erstelle eine Leseübung komplett und AUSSCHLIESSLICH auf Deutsch (kein Englisch, kein Telugu, kein Kannada).
@@ -178,6 +206,7 @@ Themen: {topics_str}.
 Niveau: Goethe-Zertifikat B1 (GER). Ausgabe als valides JSON."""
 
     user_prompt = f"""Erstelle eine fokussierte B1-Leseübung als JSON mit exakt dieser Struktur:
+{var_prompt}
 {{
   "paragraph1": {{
     "title": "Deutscher Titel des Lesetextes",
@@ -221,12 +250,19 @@ Generiere EXAKT 5 fill_in_blanks und EXAKT 5 mcq Aufgaben (10 Aufgaben insgesamt
         raise ValueError("Fehler beim Parsen der Leseübung.")
 
 
-def generate_writing_prompt(api_key: str, topics: List[str], lang: str = "de", force_refresh: bool = False) -> Dict[str, Any]:
+def generate_writing_prompt(
+    api_key: str,
+    topics: List[str],
+    lang: str = "de",
+    force_refresh: bool = False,
+    exclude_scenarios: Optional[List[str]] = None,
+    prior_topics: Optional[List[str]] = None
+) -> Dict[str, Any]:
     """
     Generates a Goethe B1 writing task prompt in 100% German.
     """
     if not force_refresh:
-        cached = get_cached_exercise("writing", topics)
+        cached = get_cached_exercise("writing", topics, exclude_titles=exclude_scenarios)
         if cached:
             return cached
 
@@ -237,6 +273,7 @@ def generate_writing_prompt(api_key: str, topics: List[str], lang: str = "de", f
 
     client = genai.Client(api_key=api_key)
     topics_str = ", ".join(topics) if topics else "allgemeine B1-Grammatik"
+    var_prompt = _build_prompt_variation_instructions(topics_str, exclude_scenarios, prior_topics)
 
     system_prompt = f"""Du bist Prüfer für das Goethe-Zertifikat B1 (Schreiben).
 Erstelle eine Schreibaufgabe AUSSCHLIESSLICH auf Deutsch.
@@ -244,6 +281,7 @@ Die Aufgabe erfordert die Anwendung folgender Themen: {topics_str}.
 Ausgabe als valides JSON."""
 
     user_prompt = f"""Erstelle eine B1-Schreibaufgabe als JSON:
+{var_prompt}
 {{
   "type": "E-Mail oder Forumsbeitrag oder Beschwerdebrief",
   "scenario_de": "Ausführliche Beschreibung der Situation auf Deutsch (Prüfungsformat B1)",
@@ -305,7 +343,14 @@ Erstelle eine professionelle Bewertung auf Deutsch:
     return response.text or "Bewertung fehlgeschlagen."
 
 
-def generate_listening_exercise(api_key: str, topics: List[str], lang: str = "de", force_refresh: bool = False) -> Dict[str, Any]:
+def generate_listening_exercise(
+    api_key: str,
+    topics: List[str],
+    lang: str = "de",
+    force_refresh: bool = False,
+    exclude_scenarios: Optional[List[str]] = None,
+    prior_topics: Optional[List[str]] = None
+) -> Dict[str, Any]:
     """
     Generates an EASY listening exercise (1 audio per question) in 100% German:
     - 5 German sentences
@@ -313,7 +358,7 @@ def generate_listening_exercise(api_key: str, topics: List[str], lang: str = "de
     Returns structured dict in under 5 seconds.
     """
     if not force_refresh:
-        cached = get_cached_exercise("listening_easy", topics)
+        cached = get_cached_exercise("listening_easy", topics, exclude_titles=exclude_scenarios)
         if cached:
             return cached
 
@@ -324,12 +369,14 @@ def generate_listening_exercise(api_key: str, topics: List[str], lang: str = "de
 
     client = genai.Client(api_key=api_key)
     topics_str = ", ".join(topics) if topics else "allgemeine B1-Grammatik"
+    var_prompt = _build_prompt_variation_instructions(topics_str, exclude_scenarios, prior_topics)
 
     system_prompt = f"""Du bist Prüfer für das Goethe-Zertifikat B1 (Hören).
 Erstelle eine Hörverstehensübung AUSSCHLIESSLICH auf Deutsch.
 Themen: {topics_str}. Ausgabe als valides JSON."""
 
     user_prompt = f"""Erstelle eine Hörverstehensübung mit 5 Einzelsätzen als JSON:
+{var_prompt}
 {{
   "items": [
     {{
@@ -360,7 +407,13 @@ Generiere EXAKT 5 Elemente. Alle Texte, Fragen und Erklärungen MÜSSEN zu 100% 
         raise ValueError("Fehler beim Erstellen der Hörverstehensübung.")
 
 
-def generate_real_listening_exam(api_key: str, topics: List[str], force_refresh: bool = False) -> Dict[str, Any]:
+def generate_real_listening_exam(
+    api_key: str,
+    topics: List[str],
+    force_refresh: bool = False,
+    exclude_scenarios: Optional[List[str]] = None,
+    prior_topics: Optional[List[str]] = None
+) -> Dict[str, Any]:
     """
     Generates a REAL Goethe-Zertifikat B1 listening exam:
     - 1 cohesive audio passage in German (120-150 words, A2/B1 level)
@@ -368,7 +421,7 @@ def generate_real_listening_exam(api_key: str, topics: List[str], force_refresh:
     Returns in 5-8 seconds (or 0.001s if cached).
     """
     if not force_refresh:
-        cached = get_cached_exercise("listening_real", topics)
+        cached = get_cached_exercise("listening_real", topics, exclude_titles=exclude_scenarios)
         if cached:
             return cached
 
@@ -379,6 +432,7 @@ def generate_real_listening_exam(api_key: str, topics: List[str], force_refresh:
 
     client = genai.Client(api_key=api_key)
     topics_str = ", ".join(topics) if topics else "allgemeine B1-Grammatik"
+    var_prompt = _build_prompt_variation_instructions(topics_str, exclude_scenarios, prior_topics)
 
     system_prompt = f"""Du bist Prüfer für das Goethe-Zertifikat (Hören).
 Erstelle einen realistischen Prüfungs-Hörtext (Goethe-Zertifikat B1 Teil 1) mit 5 Multiple-Choice-Fragen.
@@ -386,6 +440,7 @@ AUSSCHLIESSLICH auf Deutsch (kein Englisch, kein Telugu, kein Kannada).
 Themen: {topics_str}. Ausgabe als valides JSON."""
 
     user_prompt = f"""Erstelle einen zusammenhängenden Prüfungshörtext mit 5 Fragen als JSON:
+{var_prompt}
 {{
   "title": "Titel des Gesprächs oder der Durchsage",
   "full_audio_text": "Ein zusammenhängender deutscher Hörtext (120 bis 150 Wörter, Dialog zwischen zwei Personen oder eine Radiodurchsage). Sprachniveau A2 bis B1 mit den Grammatikthemen: {topics_str}.",
@@ -416,12 +471,18 @@ Generiere EXAKT 5 Fragen zum Hörtext (Goethe-Standard Teil 1). Alle Fragen und 
         raise ValueError("Fehler beim Erstellen der echten Hörprüfung.")
 
 
-def generate_speaking_cards(api_key: str, topics: List[str], force_refresh: bool = False) -> List[Dict[str, str]]:
+def generate_speaking_cards(
+    api_key: str,
+    topics: List[str],
+    force_refresh: bool = False,
+    exclude_scenarios: Optional[List[str]] = None,
+    prior_topics: Optional[List[str]] = None
+) -> List[Dict[str, str]]:
     """
     Generates 8 speaking topic cards in 100% German for the solitaire-style card flip.
     """
     if not force_refresh:
-        cached = get_cached_exercise("speaking", topics)
+        cached = get_cached_exercise("speaking", topics, exclude_titles=exclude_scenarios)
         if cached and isinstance(cached, list):
             return cached
 
@@ -432,11 +493,13 @@ def generate_speaking_cards(api_key: str, topics: List[str], force_refresh: bool
 
     client = genai.Client(api_key=api_key)
     topics_str = ", ".join(topics) if topics else "allgemeine B1-Themen"
+    var_prompt = _build_prompt_variation_instructions(topics_str, exclude_scenarios, prior_topics)
 
     system_prompt = """Du bist Prüfer für das Goethe-Zertifikat B1 (Sprechen).
 Erstelle 8 Themenkarten AUSSCHLIESSLICH auf Deutsch. Ausgabe als valides JSON."""
 
     user_prompt = f"""Erstelle 8 Sprechkarten als JSON:
+{var_prompt}
 {{
   "cards": [
     {{
