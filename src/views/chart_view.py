@@ -3,7 +3,6 @@ from src.components import render_grammar_chart
 
 
 def render_chart_view():
-    """Renders the full Goethe B1 Possessivartikel Master Chart."""
-    st.header("📖 Possessivartikel Master Chart (Goethe B1)")
-    st.caption("Color-coded reference for every case, gender, and personal pronoun.")
-    render_grammar_chart()
+    """Renders the comprehensive Goethe B1 Grammar Reference Center with interactive topic selector."""
+    default_topic = st.session_state.get("active_topic") or st.session_state.get("active_gender_topic") or "Possessivartikel"
+    render_grammar_chart(default_topic=default_topic)
