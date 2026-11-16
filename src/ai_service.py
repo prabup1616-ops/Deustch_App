@@ -17,15 +17,28 @@ except ImportError:
 # ==============================================================================
 # SHARED HELPER: Ultra-Fast Model fallback with GenerateContentConfig
 # ==============================================================================
-# gemini-4-hydrogen is Google's speed-optimized Gemini 4 model, with flash-lite fallback
-CANDIDATE_MODELS = ["gemini-4-hydrogen", "gemini-3.5-flash-lite", "gemini-3.8-flash"]
+# Robust multi-model cascade across Google Gemini Free Tier models.
+# Each model has independent capacity and rate limits. If one model experiences
+# 503 (high demand) or 429 (rate limit), it seamlessly fails over to the next.
+CANDIDATE_MODELS = [
+    "gemini-3.5-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite",
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-4-hydrogen",
+    "gemini-2.5-pro",
+]
 MAX_HISTORY_TURNS = 10  # Keep last N messages to reduce latency
 
 
 def _call_gemini(client, contents, system_instruction=None, json_mode=False):
     """
-    Calls Gemini with automatic model fallback and optional system_instruction + JSON mode.
-    Uses GenerateContentConfig so system_instruction is server-cached (faster).
+    Calls Gemini with automatic multi-model fallback and optional system_instruction + JSON mode.
+    If a model returns 503 (High Demand), 429 (Rate Limit), 500/502/504 (Server Error),
+    or 404 (Not Found), it instantly and automatically falls back to the next candidate model
+    so the user's practice flow is NEVER interrupted.
     """
     config_kwargs = {}
     if system_instruction:
@@ -43,17 +56,21 @@ def _call_gemini(client, contents, system_instruction=None, json_mode=False):
                 contents=contents,
                 config=config
             )
-            if response:
+            if response and response.text:
                 return response
         except Exception as err:
             last_err = err
             err_str = str(err).lower()
-            if "404" in err_str or "not found" in err_str or "no longer available" in err_str:
-                continue
-            raise
+            # If the API key is completely invalid or unauthorized, fail immediately
+            if "invalid api key" in err_str or "unauthenticated" in err_str or "api_key not valid" in err_str:
+                raise
+            # For 503 (high demand/unavailable), 429 (quota/rate limit), 404, 500/502/504,
+            # continue immediately to the next candidate model
+            continue
+
     if last_err:
         raise last_err
-    raise RuntimeError("All Gemini models failed to generate a response.")
+    raise RuntimeError("All Gemini candidate models failed to generate a response.")
 
 
 # ==============================================================================
