@@ -279,13 +279,14 @@ def get_daily_leaderboard(date_str: str, category: str = "pronoun") -> List[Dict
     return leaderboard
 
 
-def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
+def get_all_time_stats(category: str = "pronoun", include_all_players: bool = True) -> List[Dict[str, Any]]:
     """
     Computes all-time summary for each player for the specified category:
-    - Total attempts
+    - Best single score (High Score)
     - Total points earned
     - Overall average
-    - Days active
+    - Total attempts & days active
+    - If include_all_players=True, includes all registered players even if 0 attempts.
     """
     data = load_data()
     players = data.get("players", {})
@@ -299,7 +300,7 @@ def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
             and a.get("category", "pronoun") == category
         ]
         count = len(p_attempts)
-        if count == 0:
+        if count == 0 and not include_all_players:
             continue
         scores = [a.get("score", 0) for a in p_attempts]
         total_pts = sum(scores)

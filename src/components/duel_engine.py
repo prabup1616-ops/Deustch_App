@@ -340,24 +340,28 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
 def render_all_time_highs_sidebar(category: str = "pronoun"):
     """
     Renders the All-Time Highs leaderboard on the right-hand preview column:
+    - Displays all players up to top 5 players (or whoever is on top).
     - Ranked by highest single score (Best Score e.g. 5/5 ⭐), overall average, and total points.
-    - Medals for Top 3 (🥇, 🥈, 🥉).
+    - Medals for Top 5 (🥇, 🥈, 🥉, 4️⃣, 5️⃣).
     """
     theme_color = "#2563eb" if category == "pronoun" else "#059669"
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 8px; margin: 20px 0 10px 0;">
-        <span style="font-size: 1.4rem;">👑</span>
-        <h3 style="margin: 0; font-size: 1.25rem; color: #1e293b;">All-Time High Scores</h3>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin: 20px 0 6px 0;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.4rem;">👑</span>
+            <h3 style="margin: 0; font-size: 1.25rem; color: #1e293b;">All-Time High Scores (Top 5)</h3>
+        </div>
     </div>
     """, unsafe_allow_html=True)
-    st.caption("Hall of Fame ranked by All-Time Best Scores, Average Mastery, and Total Points.")
+    st.caption("Hall of Fame: Ranked by All-Time Best Scores, Normalized Average, and Total Points.")
 
-    all_time = storage.get_all_time_stats(category=category)
+    all_time = storage.get_all_time_stats(category=category, include_all_players=True)
+    top_5 = all_time[:5]
 
-    if all_time:
-        medals = ["🥇", "🥈", "🥉"]
-        for rank, p in enumerate(all_time[:5], start=1):
-            badge = medals[rank - 1] if rank <= 3 else f"#{rank}"
+    if top_5:
+        medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"]
+        for rank, p in enumerate(top_5, start=1):
+            badge = medals[rank - 1] if rank <= 5 else f"#{rank}"
             best_s = p.get("best_score", 0)
             avg_s = p.get("overall_average", 0.0)
             pts = p.get("total_points", 0)
@@ -366,15 +370,16 @@ def render_all_time_highs_sidebar(category: str = "pronoun"):
 
             is_perfect = (best_s == 5)
             star = " ⭐" if is_perfect else ""
+            status_tag = f"Best: {best_s}/5{star}" if attempts > 0 else "Ready to Duel"
 
             st.markdown(f"""
-            <div style="background: white; border: 1px solid #e2e8f0; border-left: 4px solid {theme_color}; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+            <div style="background: white; border: 1px solid #e2e8f0; border-left: 4px solid {theme_color if attempts > 0 else '#94a3b8'}; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-weight: 800; font-size: 0.98rem; color: #1e293b;">
                         {badge} {p['avatar']} {p['name']}
                     </div>
-                    <div style="background: {'#fef3c7' if is_perfect else '#f1f5f9'}; color: {'#b45309' if is_perfect else theme_color}; font-weight: 800; font-size: 0.88rem; padding: 2px 10px; border-radius: 999px;">
-                        Best: {best_s}/5{star}
+                    <div style="background: {'#fef3c7' if is_perfect else ('#eff6ff' if attempts > 0 else '#f1f5f9')}; color: {'#b45309' if is_perfect else (theme_color if attempts > 0 else '#64748b')}; font-weight: 800; font-size: 0.88rem; padding: 2px 10px; border-radius: 999px;">
+                        {status_tag}
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; margin-top: 6px;">
