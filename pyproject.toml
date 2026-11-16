@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "german-b1-duel"
+version = "2.0.0"
+description = "Competitive German Goethe B1 learning application with Telugu & Kannada translations, 50s per-question timer, and Gemini AI voice avatar"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Prabu", email = "prabup1616@gmail.com" }
+]
+keywords = [
+    "german",
+    "goethe-b1",
+    "telugu",
+    "kannada",
+    "language-learning",
+    "streamlit",
+    "gemini-ai"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Framework :: Streamlit",
+    "Topic :: Education",
+    "Intended Audience :: Education",
+]
+dependencies = [
+    "streamlit>=1.40.0",
+    "google-genai>=3.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0"
+]
+
+[project.scripts]
+german-duel = "app:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "static*"]
+namespaces = true

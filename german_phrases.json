@@ -1,0 +1,314 @@
+[
+  {
+    "id": 1,
+    "phrase_de": "von ganzem Herzen",
+    "meaning_en": "From the bottom of one's heart / with all one's heart (used to express deep gratitude, congratulations, or love)",
+    "example_de": "Ich danke Ihnen von ganzem Herzen für Ihre wertvolle Unterstützung."
+  },
+  {
+    "id": 2,
+    "phrase_de": "auf keinen Fall",
+    "meaning_en": "Under no circumstances / definitely not / by no means (used for strong refusal or prohibition)",
+    "example_de": "Das darfst du auf keinen Fall vergessen, wenn du zur Prüfung gehst."
+  },
+  {
+    "id": 3,
+    "phrase_de": "auf jeden Fall",
+    "meaning_en": "Definitely / in any case / by all means (used for firm confirmation or certainty)",
+    "example_de": "Wir müssen uns dieses Wochenende auf jeden Fall treffen."
+  },
+  {
+    "id": 4,
+    "phrase_de": "Schritt für Schritt",
+    "meaning_en": "Step by step / gradually (used to describe steady progress in learning or problem-solving)",
+    "example_de": "Beim Deutschlernen macht man Schritt für Schritt Fortschritte."
+  },
+  {
+    "id": 5,
+    "phrase_de": "eine Rolle spielen",
+    "meaning_en": "To play a role / to be of importance (extremely frequent in Goethe B1 discussion and opinions)",
+    "example_de": "Geld sollte bei einer solchen Entscheidung keine entscheidende Rolle spielen."
+  },
+  {
+    "id": 6,
+    "phrase_de": "zur Verfügung stehen",
+    "meaning_en": "To be available / at someone's disposal (standard formal & exam German)",
+    "example_de": "Für weitere Fragen stehe ich Ihnen jederzeit gerne zur Verfügung."
+  },
+  {
+    "id": 7,
+    "phrase_de": "in Betracht ziehen",
+    "meaning_en": "To take into consideration / to consider (used in Goethe B1/B2 essays & arguments)",
+    "example_de": "Wir sollten auch alternative Verkehrsmittel in Betracht ziehen."
+  },
+  {
+    "id": 8,
+    "phrase_de": "im Großen und Ganzen",
+    "meaning_en": "By and large / on the whole / overall (used to summarize a general impression)",
+    "example_de": "Im Großen und Ganzen war das Projekt ein voller Erfolg."
+  },
+  {
+    "id": 9,
+    "phrase_de": "Bescheid wissen / geben",
+    "meaning_en": "To know about something / to inform someone (daily essential for emails and coordination)",
+    "example_de": "Bitte gib mir bis morgen Bescheid, ob du zur Party kommen kannst."
+  },
+  {
+    "id": 10,
+    "phrase_de": "einen Fehler begehen",
+    "meaning_en": "To commit a mistake / blunder (formal B1 N-V-Verbindung)",
+    "example_de": "Jeder Mensch kann einmal im Leben einen schweren Fehler begehen."
+  },
+  {
+    "id": 11,
+    "phrase_de": "vor allem",
+    "meaning_en": "Above all / especially / primarily (used to highlight the most crucial factor)",
+    "example_de": "Pünktlichkeit ist in Deutschland vor allem im Berufsleben sehr wichtig."
+  },
+  {
+    "id": 12,
+    "phrase_de": "zu Ende bringen",
+    "meaning_en": "To finish / conclude / bring to an end",
+    "example_de": "Ich möchte meinen B1-Kurs vor den Sommerferien erfolgreich zu Ende bringen."
+  },
+  {
+    "id": 13,
+    "phrase_de": "in Frage kommen",
+    "meaning_en": "To be out of the question / or acceptable (often with 'nicht')",
+    "example_de": "Eine Verschiebung des Prüfungstermins kommt für mich nicht in Frage."
+  },
+  {
+    "id": 14,
+    "phrase_de": "unter vier Augen",
+    "meaning_en": "In private / face to face / strictly confidential (between two people)",
+    "example_de": "Ich möchte diese dringende Angelegenheit lieber unter vier Augen besprechen."
+  },
+  {
+    "id": 15,
+    "phrase_de": "nach wie vor",
+    "meaning_en": "Still / as ever / unchanged (used to describe an enduring state or opinion)",
+    "example_de": "Das Buch ist nach wie vor das beliebteste Geschenk zu Weihnachten."
+  },
+  {
+    "id": 16,
+    "phrase_de": "auf der Hand liegen",
+    "meaning_en": "To be obvious / self-evident",
+    "example_de": "Die Vorteile des öffentlichen Nahverkehrs liegen klar auf der Hand."
+  },
+  {
+    "id": 17,
+    "phrase_de": "im Laufe der Zeit",
+    "meaning_en": "Over the course of time / as time goes by",
+    "example_de": "Im Laufe der Zeit gewöhnt man sich an das kalte Wetter in Berlin."
+  },
+  {
+    "id": 18,
+    "phrase_de": "Auskunft geben",
+    "meaning_en": "To provide information (standard formal correspondence)",
+    "example_de": "Der Kundendienst konnte mir leider keine genaue Auskunft über den Zug geben."
+  },
+  {
+    "id": 19,
+    "phrase_de": "den Eindruck haben",
+    "meaning_en": "To have the impression / to feel that",
+    "example_de": "Ich habe den Eindruck, dass die Teilnehmer heute sehr motiviert sind."
+  },
+  {
+    "id": 20,
+    "phrase_de": "in der Lage sein",
+    "meaning_en": "To be able to / to be in a position to (formal alternative to 'können')",
+    "example_de": "Nach diesem Sprachkurs bin ich in der Lage, alltägliche Gespräche zu führen."
+  },
+  {
+    "id": 21,
+    "phrase_de": "mit Rat und Tat zur Seite stehen",
+    "meaning_en": "To assist with words and deeds / to give full active support",
+    "example_de": "Mein Deutschlehrer stand mir während der Prüfungsvorbereitung stets mit Rat und Tat zur Seite."
+  },
+  {
+    "id": 22,
+    "phrase_de": "Abstand nehmen von",
+    "meaning_en": "To refrain from / step back from an idea or plan",
+    "example_de": "Wegen der hohen Kosten mussten wir von dem ursprünglichen Plan Abstand nehmen."
+  },
+  {
+    "id": 23,
+    "phrase_de": "eine Entscheidung treffen",
+    "meaning_en": "To make a decision (essential Nomen-Verb-Verbindung)",
+    "example_de": "Es fällt mir schwer, in dieser wichtigen Frage eine schnelle Entscheidung zu treffen."
+  },
+  {
+    "id": 24,
+    "phrase_de": "um jeden Preis",
+    "meaning_en": "At all costs / no matter what",
+    "example_de": "Er wollte diese schwierige Prüfung um jeden Preis im ersten Versuch bestehen."
+  },
+  {
+    "id": 25,
+    "phrase_de": "einen Beitrag leisten zu",
+    "meaning_en": "To make a contribution to (frequent in Goethe writing & speaking)",
+    "example_de": "Jeder Bürger kann einen wertvollen Beitrag zum Umweltschutz leisten."
+  },
+  {
+    "id": 26,
+    "phrase_de": "in Anspruch nehmen",
+    "meaning_en": "To make use of / take advantage of a service or right",
+    "example_de": "Viele Auszubildende nehmen die kostenlose Beratung der Agentur für Arbeit in Anspruch."
+  },
+  {
+    "id": 27,
+    "phrase_de": "Rücksicht nehmen auf",
+    "meaning_en": "To be considerate of / show respect towards others",
+    "example_de": "In einer Wohngemeinschaft muss man stets Rücksicht auf die Mitbewohner nehmen."
+  },
+  {
+    "id": 28,
+    "phrase_de": "im Gegensatz zu",
+    "meaning_en": "In contrast to / contrary to (Goethe B1 comparison connector)",
+    "example_de": "Im Gegensatz zu früher arbeiten heute viele Menschen flexibel im Homeoffice."
+  },
+  {
+    "id": 29,
+    "phrase_de": "Kritik üben an",
+    "meaning_en": "To criticize / voice critique (formal Goethe B1)",
+    "example_de": "Die Journalisten übten deutliche Kritik an den neuen Verkehrsregeln."
+  },
+  {
+    "id": 30,
+    "phrase_de": "Auge in Auge",
+    "meaning_en": "Eye to eye / facing each other directly",
+    "example_de": "Sie standen sich am Verhandlungstisch Auge in Auge gegenüber."
+  },
+  {
+    "id": 31,
+    "phrase_de": "zur Folge haben",
+    "meaning_en": "To result in / have as a consequence",
+    "example_de": "Unaufmerksamkeit im Straßenverkehr kann schwere Unfälle zur Folge haben."
+  },
+  {
+    "id": 32,
+    "phrase_de": "zum Ausdruck bringen",
+    "meaning_en": "To express / articulate a thought or feeling",
+    "example_de": "Mit diesem Dankesbrief möchte ich meine tiefe Dankbarkeit zum Ausdruck bringen."
+  },
+  {
+    "id": 33,
+    "phrase_de": "aus diesem Grund",
+    "meaning_en": "For this reason / therefore",
+    "example_de": "Der Zug hatte Verspätung, aus diesem Grund kam ich zu spät zum Vorstellungsgespräch."
+  },
+  {
+    "id": 34,
+    "phrase_de": "an der Reihe sein",
+    "meaning_en": "To be one's turn (in an exam, queue, or game)",
+    "example_de": "Wer ist jetzt an der Reihe für die mündliche Präsentation?"
+  },
+  {
+    "id": 35,
+    "phrase_de": "sich Mühe geben",
+    "meaning_en": "To make an effort / try hard",
+    "example_de": "Ich gebe mir große Mühe, die deutsche Aussprache jeden Tag zu verbessern."
+  },
+  {
+    "id": 36,
+    "phrase_de": "außer Betrieb sein",
+    "meaning_en": "Out of order / not working (common in public transit notices)",
+    "example_de": "Der Fahrstuhl am Hauptbahnhof ist heute leider außer Betrieb."
+  },
+  {
+    "id": 37,
+    "phrase_de": "auf eigene Faust",
+    "meaning_en": "On one's own initiative / independently",
+    "example_de": "Er reiste auf eigene Faust durch ganz Deutschland, um die Sprache zu üben."
+  },
+  {
+    "id": 38,
+    "phrase_de": "in Schwierigkeiten geraten",
+    "meaning_en": "To get into trouble or financial/logistical difficulties",
+    "example_de": "Ohne ausreichende Sprachkenntnisse kann man im Ausland schnell in Schwierigkeiten geraten."
+  },
+  {
+    "id": 39,
+    "phrase_de": "zur Ruhe kommen",
+    "meaning_en": "To find peace / calm down / relax after stress",
+    "example_de": "Nach einem anstrengenden Arbeitstag muss man erst einmal zur Ruhe kommen."
+  },
+  {
+    "id": 40,
+    "phrase_de": "Hand in Hand gehen mit",
+    "meaning_en": "To go hand in hand with / to be closely connected",
+    "example_de": "Wirtschaftlicher Erfolg geht oft Hand in Hand mit hoher Disziplin."
+  },
+  {
+    "id": 41,
+    "phrase_de": "eine Rede halten",
+    "meaning_en": "To give a speech / presentation",
+    "example_de": "Die Bürgermeisterin hielt eine inspirierende Rede zur Eröffnung der Schule."
+  },
+  {
+    "id": 42,
+    "phrase_de": "außer Frage stehen",
+    "meaning_en": "To be beyond doubt / unquestionable",
+    "example_de": "Es steht außer Frage, dass Deutschlernen viele neue Karrierechancen eröffnet."
+  },
+  {
+    "id": 43,
+    "phrase_de": "Erfahrungen sammeln",
+    "meaning_en": "To gain experience (essential in B1 oral introductions)",
+    "example_de": "Während meines Praktikums in Hamburg konnte ich viele wertvolle Erfahrungen sammeln."
+  },
+  {
+    "id": 44,
+    "phrase_de": "im Vorfeld",
+    "meaning_en": "In advance / beforehand / during preliminary stages",
+    "example_de": "Wir sollten alle Details bereits im Vorfeld genau absprechen."
+  },
+  {
+    "id": 45,
+    "phrase_de": "im Widerspruch stehen zu",
+    "meaning_en": "To contradict / be inconsistent with",
+    "example_de": "Diese Aussage steht in klarem Widerspruch zu den offiziellen Prüfungsrichtlinien."
+  },
+  {
+    "id": 46,
+    "phrase_de": "von Bedeutung sein",
+    "meaning_en": "To be of importance / significance",
+    "example_de": "Grammatische Genauigkeit ist für das Goethe-Zertifikat B1 von großer Bedeutung."
+  },
+  {
+    "id": 47,
+    "phrase_de": "unter Druck stehen",
+    "meaning_en": "To be under pressure / stress",
+    "example_de": "Kurz vor der Abschlussprüfung stehen fast alle Teilnehmer unter großem Druck."
+  },
+  {
+    "id": 48,
+    "phrase_de": "in Verbindung treten mit",
+    "meaning_en": "To get in contact with / reach out to",
+    "example_de": "Bitte treten Sie so bald wie möglich mit unserem Sekretariat in Verbindung."
+  },
+  {
+    "id": 49,
+    "phrase_de": "ums Leben kommen",
+    "meaning_en": "To lose one's life / die in an accident (standard news German)",
+    "example_de": "Glücklicherweise kam bei dem schweren Unwetter niemand ums Leben."
+  },
+  {
+    "id": 50,
+    "phrase_de": "von Zeit zu Zeit",
+    "meaning_en": "From time to time / occasionally / now and then",
+    "example_de": "Man sollte von Zeit zu Zeit seine Vokabelhefte wiederholen."
+  },
+  {
+    "id": 51,
+    "phrase_de": "den Vorzug geben",
+    "meaning_en": "To give preference to / favor",
+    "example_de": "Im Urlaub gebe ich immer einer ruhigen Ferienwohnung den Vorzug."
+  },
+  {
+    "id": 52,
+    "phrase_de": "ein Thema anschneiden",
+    "meaning_en": "To touch upon a topic / bring up a subject in conversation",
+    "example_de": "In der gestrigen Besprechung schnitt der Chef das heikle Thema Gehaltserhöhung an."
+  }
+]

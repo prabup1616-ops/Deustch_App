@@ -1,0 +1,712 @@
+{
+  "players": {
+    "prabu": {
+      "id": "prabu",
+      "name": "Prabu",
+      "avatar": "🦁",
+      "email": "prabup1616@gmail.com"
+    },
+    "lord_bbk": {
+      "id": "lord_bbk",
+      "name": "Lord BBK",
+      "avatar": "🔥",
+      "email": ""
+    },
+    "nanditha": {
+      "id": "nanditha",
+      "name": "Nanditha",
+      "avatar": "🐼",
+      "email": ""
+    }
+  },
+  "settings": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "",
+    "smtp_pass": "",
+    "email_notifications_enabled": false,
+    "gemini_api_key": ""
+  },
+  "attempts": [
+    {
+      "player_id": "prabu",
+      "date": "2026-11-13",
+      "score": 2,
+      "total": 5,
+      "timestamp": "2026-11-13T17:36:12.196187",
+      "details": [
+        {
+          "question": {
+            "id": 94,
+            "topic": "Akkusativ Neutrum (das Dokument) (ich -> mein)",
+            "prompt_te": "నా పత్రాన్ని పరిశీలించి సంతకం చేశాను.",
+            "prompt_kn": "ನನ್ನ ದಾಖಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಸಹಿ ಮಾಡಿದೆನು.",
+            "target_de": "Bitte unterschreiben Sie mein Dokument hier unten.",
+            "options": [
+              "Bitte unterschreiben Sie meinem Dokument hier unten.",
+              "Bitte unterschreiben Sie meines Dokument hier unten.",
+              "Bitte unterschreiben Sie mein Dokument hier unten.",
+              "Bitte unterschreiben Sie meinen Dokument hier unten."
+            ],
+            "correct_index": 2,
+            "explanation": "'unterschreiben' requires AKKUSATIV. The noun 'Dokument' is Neutrum (das Dokument). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+            "case": "Akkusativ",
+            "gender": "Neutrum (das Dokument)",
+            "b1_verb": "unterschreiben"
+          },
+          "user_choice": "Bitte unterschreiben Sie meinen Dokument hier unten.",
+          "target_de": "Bitte unterschreiben Sie mein Dokument hier unten.",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 33.5
+        },
+        {
+          "question": {
+            "id": 107,
+            "topic": "Akkusativ Maskulin (der Pass) (du -> dein)",
+            "prompt_te": "నీ పాస్‌పోర్ట్‌ను పునరుద్ధరించుకోవాలి.",
+            "prompt_kn": "ನಿನ್ನ ಪಾಸ್‌ಪೋರ್ಟ್ ಅನ್ನು ನವೀಕರಿಸಬೇಕು.",
+            "target_de": "Deinen Pass muss ich nächsten Monat verlängern.",
+            "options": [
+              "Deine Pass muss ich nächsten Monat verlängern.",
+              "Deinen Pass muss ich nächsten Monat verlängern.",
+              "Deinem Pass muss ich nächsten Monat verlängern.",
+              "Deines Pass muss ich nächsten Monat verlängern."
+            ],
+            "correct_index": 1,
+            "explanation": "'verlängern' requires AKKUSATIV. The noun 'Pass' is Maskulin (der Pass). Therefore, the possessive 'dein' takes the ending -> 'Deinen'.",
+            "case": "Akkusativ",
+            "gender": "Maskulin (der Pass)",
+            "b1_verb": "verlängern"
+          },
+          "user_choice": "Deine Pass muss ich nächsten Monat verlängern.",
+          "target_de": "Deinen Pass muss ich nächsten Monat verlängern.",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 45.8
+        },
+        {
+          "question": {
+            "id": 120,
+            "topic": "Dativ Feminin (die Meinung) (du -> dein)",
+            "prompt_te": "నీ అభిప్రాయంతో నేను ఏకీభవిస్తున్నాను.",
+            "prompt_kn": "ನಿನ್ನ ಅಭಿಪ್ರಾಯದೊಂದಿಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
+            "target_de": "Ich stimme deiner Meinung in allen Punkten zu.",
+            "options": [
+              "Ich stimme deiner Meinung in allen Punkten zu.",
+              "Ich stimme deinen Meinung in allen Punkten zu.",
+              "Ich stimme deinem Meinung in allen Punkten zu.",
+              "Ich stimme deines Meinung in allen Punkten zu."
+            ],
+            "correct_index": 0,
+            "explanation": "'zustimmen' requires DATIV. The noun 'Meinung' is Feminin (die Meinung). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+            "case": "Dativ",
+            "gender": "Feminin (die Meinung)",
+            "b1_verb": "zustimmen"
+          },
+          "user_choice": "Ich stimme deiner Meinung in allen Punkten zu.",
+          "target_de": "Ich stimme deiner Meinung in allen Punkten zu.",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 30.1
+        },
+        {
+          "question": {
+            "id": 133,
+            "topic": "Genitiv Maskulin (der Chef) (du -> dein)",
+            "prompt_te": "నీ బాస్ సలహాను అందరూ ఆమోదించారు.",
+            "prompt_kn": "ನಿನ್ನ ಮುಖ್ಯಸ್ಥರ ಸಲಹೆಯನ್ನು ಎಲ್ಲರೂ ಒಪ್ಪಿಕೊಂಡರು.",
+            "target_de": "Wir folgen dem Ratschlag deines Chefs.",
+            "options": [
+              "Wir folgen dem Ratschlag deinen Chefs.",
+              "Wir folgen dem Ratschlag deinem Chefs.",
+              "Wir folgen dem Ratschlag deine Chefs.",
+              "Wir folgen dem Ratschlag deines Chefs."
+            ],
+            "correct_index": 3,
+            "explanation": "'Vorschlag' requires GENITIV. The noun 'Chef' is Maskulin (der Chef). Therefore, the possessive 'dein' takes the ending -> 'deines'.",
+            "case": "Genitiv",
+            "gender": "Maskulin (der Chef)",
+            "b1_verb": "Vorschlag"
+          },
+          "user_choice": "Wir folgen dem Ratschlag deinen Chefs.",
+          "target_de": "Wir folgen dem Ratschlag deines Chefs.",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 21.0
+        },
+        {
+          "question": {
+            "id": 146,
+            "topic": "Dativ Feminin (die Wohnung) (er -> sein)",
+            "prompt_te": "అతని ఫ్లాట్‌లో చాలా సౌకర్యంగా ఉంది.",
+            "prompt_kn": "ಅವನ ಫ್ಲಾಟ್‌ನಲ್ಲಿ ತುಂಬಾ ಆರಾಮದಾಯಕವಾಗಿದೆ.",
+            "target_de": "Wir fühlen uns in seiner Wohnung sehr wohl.",
+            "options": [
+              "Wir fühlen uns in seinem Wohnung sehr wohl.",
+              "Wir fühlen uns in seines Wohnung sehr wohl.",
+              "Wir fühlen uns in seiner Wohnung sehr wohl.",
+              "Wir fühlen uns in seinen Wohnung sehr wohl."
+            ],
+            "correct_index": 2,
+            "explanation": "'wohnen in' requires DATIV. The noun 'Wohnung' is Feminin (die Wohnung). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+            "case": "Dativ",
+            "gender": "Feminin (die Wohnung)",
+            "b1_verb": "wohnen in"
+          },
+          "user_choice": "Wir fühlen uns in seiner Wohnung sehr wohl.",
+          "target_de": "Wir fühlen uns in seiner Wohnung sehr wohl.",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 24.2
+        }
+      ]
+    },
+    {
+      "player_id": "prabu",
+      "date": "gender-pack-1",
+      "score": 4,
+      "total": 5,
+      "timestamp": "2026-11-14T15:11:31.182485",
+      "details": [
+        {
+          "question": {
+            "id": 1,
+            "noun": "Abenteuer",
+            "article": "das",
+            "plural": "die Abenteuer",
+            "meaning_en": "adventure",
+            "meaning_te": "సాహసం",
+            "meaning_kn": "ಸಾಹಸ",
+            "example_de": "Unser Urlaub war ein tolles Abenteuer.",
+            "topic": "Artikel Bestimmung: Abenteuer",
+            "hint": "Plural: die Abenteuer | Meaning: adventure"
+          },
+          "user_choice": "das",
+          "correct_article": "das",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 46.8
+        },
+        {
+          "question": {
+            "id": 2,
+            "noun": "Abfahrt",
+            "article": "die",
+            "plural": "die Abfahrten",
+            "meaning_en": "departure",
+            "meaning_te": "బయలుదేరడం",
+            "meaning_kn": "ನಿರ್ಗಮನ",
+            "example_de": "Es bleiben uns noch zwanzig Minuten bis zur Abfahrt.",
+            "topic": "Artikel Bestimmung: Abfahrt",
+            "hint": "Plural: die Abfahrten | Meaning: departure"
+          },
+          "user_choice": "die",
+          "correct_article": "die",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 18.6
+        },
+        {
+          "question": {
+            "id": 3,
+            "noun": "Abfall",
+            "article": "der",
+            "plural": "die Abfälle",
+            "meaning_en": "waste, rubbish",
+            "meaning_te": "వ్యర్థాలు",
+            "meaning_kn": "ತ್ಯಾಜ್ಯ",
+            "example_de": "Werfen Sie den Bioabfall bitte nicht zum normalen Müll.",
+            "topic": "Artikel Bestimmung: Abfall",
+            "hint": "Plural: die Abfälle | Meaning: waste, rubbish"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 22.4
+        },
+        {
+          "question": {
+            "id": 4,
+            "noun": "Abfalleimer",
+            "article": "der",
+            "plural": "die Abfalleimer",
+            "meaning_en": "rubbish bin",
+            "meaning_te": "చెత్త బుట్ట",
+            "meaning_kn": "ಕಸದ ಬುಟ್ಟಿ",
+            "example_de": "Wirf das bitte in den Abfalleimer!",
+            "topic": "Artikel Bestimmung: Abfalleimer",
+            "hint": "Plural: die Abfalleimer | Meaning: rubbish bin"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 9.0
+        },
+        {
+          "question": {
+            "id": 5,
+            "noun": "Abschluss",
+            "article": "der",
+            "plural": "die Abschlüsse",
+            "meaning_en": "graduation, degree",
+            "meaning_te": "విద్య పూర్తి / పట్టా",
+            "meaning_kn": "ಪದವಿ / ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ",
+            "example_de": "Ein guter Schulabschluss ist sehr wichtig.",
+            "topic": "Artikel Bestimmung: Abschluss",
+            "hint": "Plural: die Abschlüsse | Meaning: graduation, degree"
+          },
+          "user_choice": "die",
+          "correct_article": "der",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 6.4
+        }
+      ],
+      "category": "gender"
+    },
+    {
+      "player_id": "lord_bbk",
+      "date": "gender-2026-11-14",
+      "score": 3,
+      "total": 5,
+      "timestamp": "2026-11-14T15:50:21.270553",
+      "details": [
+        {
+          "question": {
+            "id": 156,
+            "noun": "Eintritt",
+            "article": "der",
+            "plural": "die Eintritte",
+            "meaning_en": "admission, entry fee",
+            "meaning_te": "ప్రవేశ రుసుము",
+            "meaning_kn": "ಪ್ರವೇಶ ಶುಲ್ಕ",
+            "example_de": "Für Kinder unter zehn Jahren ist der Eintritt frei.",
+            "topic": "Artikel Bestimmung: Eintritt",
+            "hint": "Plural: die Eintritte | Meaning: admission, entry fee"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 28.0
+        },
+        {
+          "question": {
+            "id": 173,
+            "noun": "Erinnerung",
+            "article": "die",
+            "plural": "die Erinnerungen",
+            "meaning_en": "memory, souvenir",
+            "meaning_te": "జ్ఞాపకం",
+            "meaning_kn": "ನೆನಪು",
+            "example_de": "An meine Studienzeit habe ich viele wunderschöne Erinnerungen.",
+            "topic": "Artikel Bestimmung: Erinnerung",
+            "hint": "Plural: die Erinnerungen | Meaning: memory, souvenir"
+          },
+          "user_choice": "der",
+          "correct_article": "die",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 2.8
+        },
+        {
+          "question": {
+            "id": 190,
+            "noun": "Feier",
+            "article": "die",
+            "plural": "die Feiern",
+            "meaning_en": "celebration, party",
+            "meaning_te": "వేడుక",
+            "meaning_kn": "ಆಚರಣೆ",
+            "example_de": "Wir haben gestern eine wunderbare Feier mit Freunden gehabt.",
+            "topic": "Artikel Bestimmung: Feier",
+            "hint": "Plural: die Feiern | Meaning: celebration, party"
+          },
+          "user_choice": "die",
+          "correct_article": "die",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 12.4
+        },
+        {
+          "question": {
+            "id": 207,
+            "noun": "Fleisch",
+            "article": "das",
+            "plural": "-",
+            "meaning_en": "meat",
+            "meaning_te": "మాంసం",
+            "meaning_kn": "ಮಾಂಸ",
+            "example_de": "Ich esse aus gesundheitlichen Gründen sehr selten Fleisch.",
+            "topic": "Artikel Bestimmung: Fleisch",
+            "hint": "Plural: - | Meaning: meat"
+          },
+          "user_choice": "der",
+          "correct_article": "das",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 21.0
+        },
+        {
+          "question": {
+            "id": 224,
+            "noun": "Fußball",
+            "article": "der",
+            "plural": "die Fußbälle",
+            "meaning_en": "football, soccer ball",
+            "meaning_te": "ఫుట్‌బాల్",
+            "meaning_kn": "ಫುಟ್ಬಾಲ್",
+            "example_de": "Mein kleiner Sohn wünscht sich zu Weihnachten einen neuen Fußball.",
+            "topic": "Artikel Bestimmung: Fußball",
+            "hint": "Plural: die Fußbälle | Meaning: football, soccer ball"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 7.7
+        }
+      ],
+      "category": "gender"
+    },
+    {
+      "player_id": "nanditha",
+      "date": "gender-2026-11-14",
+      "score": 2,
+      "total": 5,
+      "timestamp": "2026-11-14T17:06:47.473322",
+      "details": [
+        {
+          "question": {
+            "id": 156,
+            "noun": "Eintritt",
+            "article": "der",
+            "plural": "die Eintritte",
+            "meaning_en": "admission, entry fee",
+            "meaning_te": "ప్రవేశ రుసుము",
+            "meaning_kn": "ಪ್ರವೇಶ ಶುಲ್ಕ",
+            "example_de": "Für Kinder unter zehn Jahren ist der Eintritt frei.",
+            "topic": "Artikel Bestimmung: Eintritt",
+            "hint": "Plural: die Eintritte | Meaning: admission, entry fee"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 13.7
+        },
+        {
+          "question": {
+            "id": 173,
+            "noun": "Erinnerung",
+            "article": "die",
+            "plural": "die Erinnerungen",
+            "meaning_en": "memory, souvenir",
+            "meaning_te": "జ్ఞాపకం",
+            "meaning_kn": "ನೆನಪು",
+            "example_de": "An meine Studienzeit habe ich viele wunderschöne Erinnerungen.",
+            "topic": "Artikel Bestimmung: Erinnerung",
+            "hint": "Plural: die Erinnerungen | Meaning: memory, souvenir"
+          },
+          "user_choice": "der",
+          "correct_article": "die",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 10.7
+        },
+        {
+          "question": {
+            "id": 190,
+            "noun": "Feier",
+            "article": "die",
+            "plural": "die Feiern",
+            "meaning_en": "celebration, party",
+            "meaning_te": "వేడుక",
+            "meaning_kn": "ಆಚರಣೆ",
+            "example_de": "Wir haben gestern eine wunderbare Feier mit Freunden gehabt.",
+            "topic": "Artikel Bestimmung: Feier",
+            "hint": "Plural: die Feiern | Meaning: celebration, party"
+          },
+          "user_choice": "der",
+          "correct_article": "die",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 4.2
+        },
+        {
+          "question": {
+            "id": 207,
+            "noun": "Fleisch",
+            "article": "das",
+            "plural": "-",
+            "meaning_en": "meat",
+            "meaning_te": "మాంసం",
+            "meaning_kn": "ಮಾಂಸ",
+            "example_de": "Ich esse aus gesundheitlichen Gründen sehr selten Fleisch.",
+            "topic": "Artikel Bestimmung: Fleisch",
+            "hint": "Plural: - | Meaning: meat"
+          },
+          "user_choice": "das",
+          "correct_article": "das",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 5.3
+        },
+        {
+          "question": {
+            "id": 224,
+            "noun": "Fußball",
+            "article": "der",
+            "plural": "die Fußbälle",
+            "meaning_en": "football, soccer ball",
+            "meaning_te": "ఫుట్‌బాల్",
+            "meaning_kn": "ಫುಟ್ಬಾಲ್",
+            "example_de": "Mein kleiner Sohn wünscht sich zu Weihnachten einen neuen Fußball.",
+            "topic": "Artikel Bestimmung: Fußball",
+            "hint": "Plural: die Fußbälle | Meaning: football, soccer ball"
+          },
+          "user_choice": "das",
+          "correct_article": "der",
+          "is_correct": false,
+          "is_timeout": false,
+          "elapsed": 9.3
+        }
+      ],
+      "category": "gender"
+    },
+    {
+      "player_id": "nanditha",
+      "date": "gender-2026-11-14",
+      "score": 5,
+      "total": 5,
+      "timestamp": "2026-11-14T17:08:06.630935",
+      "details": [
+        {
+          "question": {
+            "id": 156,
+            "noun": "Eintritt",
+            "article": "der",
+            "plural": "die Eintritte",
+            "meaning_en": "admission, entry fee",
+            "meaning_te": "ప్రవేశ రుసుము",
+            "meaning_kn": "ಪ್ರವೇಶ ಶುಲ್ಕ",
+            "example_de": "Für Kinder unter zehn Jahren ist der Eintritt frei.",
+            "topic": "Artikel Bestimmung: Eintritt",
+            "hint": "Plural: die Eintritte | Meaning: admission, entry fee"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 3.7
+        },
+        {
+          "question": {
+            "id": 173,
+            "noun": "Erinnerung",
+            "article": "die",
+            "plural": "die Erinnerungen",
+            "meaning_en": "memory, souvenir",
+            "meaning_te": "జ్ఞాపకం",
+            "meaning_kn": "ನೆನಪು",
+            "example_de": "An meine Studienzeit habe ich viele wunderschöne Erinnerungen.",
+            "topic": "Artikel Bestimmung: Erinnerung",
+            "hint": "Plural: die Erinnerungen | Meaning: memory, souvenir"
+          },
+          "user_choice": "die",
+          "correct_article": "die",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 2.5
+        },
+        {
+          "question": {
+            "id": 190,
+            "noun": "Feier",
+            "article": "die",
+            "plural": "die Feiern",
+            "meaning_en": "celebration, party",
+            "meaning_te": "వేడుక",
+            "meaning_kn": "ಆಚರಣೆ",
+            "example_de": "Wir haben gestern eine wunderbare Feier mit Freunden gehabt.",
+            "topic": "Artikel Bestimmung: Feier",
+            "hint": "Plural: die Feiern | Meaning: celebration, party"
+          },
+          "user_choice": "die",
+          "correct_article": "die",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 5.0
+        },
+        {
+          "question": {
+            "id": 207,
+            "noun": "Fleisch",
+            "article": "das",
+            "plural": "-",
+            "meaning_en": "meat",
+            "meaning_te": "మాంసం",
+            "meaning_kn": "ಮಾಂಸ",
+            "example_de": "Ich esse aus gesundheitlichen Gründen sehr selten Fleisch.",
+            "topic": "Artikel Bestimmung: Fleisch",
+            "hint": "Plural: - | Meaning: meat"
+          },
+          "user_choice": "das",
+          "correct_article": "das",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 2.2
+        },
+        {
+          "question": {
+            "id": 224,
+            "noun": "Fußball",
+            "article": "der",
+            "plural": "die Fußbälle",
+            "meaning_en": "football, soccer ball",
+            "meaning_te": "ఫుట్‌బాల్",
+            "meaning_kn": "ಫುಟ್ಬಾಲ್",
+            "example_de": "Mein kleiner Sohn wünscht sich zu Weihnachten einen neuen Fußball.",
+            "topic": "Artikel Bestimmung: Fußball",
+            "hint": "Plural: die Fußbälle | Meaning: football, soccer ball"
+          },
+          "user_choice": "der",
+          "correct_article": "der",
+          "is_correct": true,
+          "is_timeout": false,
+          "elapsed": 2.1
+        }
+      ],
+      "category": "gender"
+    }
+  ],
+  "lsrw_store": {
+    "__lsrw_test_player__": {
+      "practiced_list": [
+        "Relativsatz"
+      ],
+      "explained_list": [
+        "Passiv",
+        "weil vs obwohl"
+      ],
+      "has_seen_kasus": true,
+      "current_topic": "Passiv",
+      "current_stage": "scenario_selection",
+      "chat_history": [
+        {
+          "role": "assistant",
+          "content": "Hallo"
+        }
+      ]
+    },
+    "prabu": {
+      "practiced_list": [],
+      "explained_list": [],
+      "has_seen_kasus": false,
+      "current_topic": "Verben mit Präpositionen",
+      "current_stage": "part1_hoeren",
+      "chat_history": [
+        {
+          "role": "assistant",
+          "content": "🇩🇪 **Goethe-Zertifikat B1 LSRW Master Hub**\n\nస్వాగతం! నేను మీ జర్మన్ భాషా గురువును. మేము గ్రామర్ అంశాలు మరియు LSRW (Hören, Sprechen, Lesen, Schreiben) మాడ్యూల్స్ నేర్చుకుందాం.\nಸ್ವಾಗತ! ನಾನು ನಿಮ್ಮ ಜರ್ಮನ್ ಭಾಷಾ ಬೋಧಕ. ನಾವು ವ್ಯಾಕರಣ ವಿಷಯಗಳು ಮತ್ತು LSRW (Hören, Sprechen, Lesen, Schreiben) ಮಾಡ್ಯೂಲ್ಗಳನ್ನು ಕಲಿಯೋಣ.\n\n---\n📋 **Menu / మెనూ / ಮೆನು:**\n- **TOPIC: &lt;topic&gt;** — Explain లేదా Practice ఎంచుకోండి / Explain ಅಥವಾ Practice ಆಯ್ಕೆಮಾಡಿ\n- **EXPLAIN** — అంశం వివరణ, వ్యాయామాలు లేకుండా / ವಿಷಯದ ವಿವರಣೆ, ವ್ಯಾಯಾಮಗಳಿಲ್ಲದೆ\n- **PRACTICE** — LSRW మాడ్యూల్ ప్రాక్టీస్ చేయండి (Hören > Sprechen > Lesen > Schreiben). నేను scenario లేదా \"random\" ఎంచుకుంటాను / LSRW ಮಾಡ್ಯೂಲ್ ಪ್ರಾಕ್ಟೀಸ್ ಮಾಡಿ (Hören > Sprechen > Lesen > Schreiben). ನಾನು scenario ಅಥವಾ \"random\" ಆಯ್ಕೆಮಾಡುತ್ತೇನೆ\n- **TOPIC LOG** — నా జాబితాలు చూపించు / ನನ್ನ ಪಟ್ಟಿಗಳನ್ನು ತೋರಿಸು\n- **ఏదైనా German వాక్యం / ಯಾವುದೇ German ವಾಕ್ಯ** — తప్పులు సరిదిద్ది, సరైనదాన్ని విశ్లేషిస్తాను / ತಪ್ಪುಗಳನ್ನು ಸರಿಪಡಿಸಿ, ಸರಿಯಾದದ್ದನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತೇನೆ\n\n💡 *క్రింద ఉన్న బటన్ల ద్వారా నేరుగా ఒక అంశాన్ని లేదా కమాండ్‌ను ఎంచుకోవచ్చు! / ಕೆಳಗಿನ ಬಟನ್‌ಗಳ ಮೂಲಕ ನೇರವಾಗಿ ಒಂದು ವಿಷಯ ಅಥವಾ ಆಜ್ಞೆಯನ್ನು ಆಯ್ಕೆಮಾಡಬಹುದು!*\n"
+        },
+        {
+          "role": "user",
+          "content": "verb with preposition"
+        },
+        {
+          "role": "assistant",
+          "content": "ఈ అంశం German వ్యాకరణంలో **Verben mit Präpositionen** (Preposition తో కలిపి ఉపయోగించే Verb - క్రియాపదం).\nಈ ವಿಷಯವು German ವ್ಯಾಕರಣದಲ್ಲಿ **Verben mit Präpositionen** (Preposition ಜೊತೆಗೆ ಬಳಸುವ Verb - ಕ್ರಿಯಾಪದ).\n\nExplain లేదా Practice?\nExplain ಅಥವಾ Practice?"
+        },
+        {
+          "role": "user",
+          "content": "practice"
+        },
+        {
+          "role": "assistant",
+          "content": "**Verben mit Präpositionen** ప్రాక్టీస్ కోసం దయచేసి క్రింది సందర్భాలలో (Scenarios) ఒకదాన్ని ఎంచుకోండి:\n**Verben mit Präpositionen** ಅಭ್ಯಾಸಕ್ಕಾಗಿ ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಸನ್ನಿವೇಶಗಳಲ್ಲಿ (Scenarios) ಒಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ:\n\n1. **Im Büro** (ఆఫీసులో పనులు, సహోద్యోగులతో ప్రాజెక్ట్ చర్చ)\n   **Im Büro** (ಕಚೇರಿಯಲ್ಲಿ ಕೆಲಸಗಳು, ಸಹೋದ್ಯೋಗಿಗಳೊಂದಿಗೆ ಪ್ರಾಜೆಕ್ಟ್ ಚರ್ಚೆ)\n2. **Reiseplanung** (సెలవుల ప్రయాణం, టికెట్లు, హోటల్ బుకింగ్)\n   **Reiseplanung** (ರಜಾದಿನಗಳ ಪ್ರಯಾಣ, ಟಿಕೆಟ್‌ಗಳು, ಹೋಟೆಲ್ ಬುಕಿಂಗ್)\n3. **Wohnungssuche** (కొత్త ఇల్లు వెతకడం, అద్దె నిబంధనలు)\n   **Wohnungssuche** (ಹೊಸ ಮನೆ ಹುಡುಕುವುದು, ಬಾಡಿಗೆ ನಿಯಮಗಳು)\n4. **Beim Arzt** (ఆరోగ్య సమస్యలు, అపాయింట్‌మెంట్ తీసుకోవడం)\n   **Beim Arzt** (ಆರೋಗ್ಯ ಸಮಸ್ಯೆಗಳು, ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ತೆಗೆದುಕೊಳ್ಳುವುದು)\n5. **Random** (Goethe A2/B1 అధికారిక పదజాలం నుండి ఏదైనా సాధారణ అంశం)\n   **Random** (Goethe A2/B1 ಅಧಿಕೃತ ಶಬ್ದಕೋಶದಿಂದ ಯಾವುದಾದರೂ ಸಾಮಾನ್ಯ ವಿಷಯ)\n\nదయచేసి మీ ఎంపికను టైప్ చేయండి (1-5 లేదా పేరు).\nದಯವಿಟ್ಟು ನಿಮ್ಮ ಆಯ್ಕೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ (1-5 ಅಥವಾ ಹೆಸರು)."
+        },
+        {
+          "role": "user",
+          "content": "Random"
+        },
+        {
+          "role": "assistant",
+          "content": "**పార్ట్ 1 - Hören (వినడం — Goethe B1 మోడల్)**\n**ಭಾಗ 1 - Hören (ಕೇಳುವುದು — Goethe B1 ಮಾದರಿ)**\n\nసందర్భం: వారాంతపు ప్రణాళికలు (Freizeit und Wochenende)\nಸನ್ನಿವೇಶ: ವಾರಾಂತ್ಯದ ಯೋಜನೆಗಳು (Freizeit und Wochenende)\n\nక్రింది సంభాషణను శ్రద్ధగా చదివి, ఇచ్చిన 3 ప్రశ్నలకు సమాధానాలు రాయండి:\nಕೆಳಗಿನ ಸಂಭಾಷಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಓದಿ, ಕೊಟ್ಟಿರುವ 3 ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಗಳನ್ನು ಬರೆಯಿರಿ:\n\n---\n\n### **Hörtext (Transkript)**\n*[Register: Gesprochen (Alltag)]*\n\n**Lukas:** Hallo Mia! Freust du dich auch schon auf das Wochenende?  \n**Mia:** Hallo Lukas! Ja, total! Aber ich ärgere mich ein bisschen über das Wetter. Es soll am Samstag viel regnen.  \n**Lukas:** Ach, wirklich? Schade! Ich habe so lange auf unsere Wanderung in den Bergen gewartet.  \n**Mia:** Das stimmt. Aber wir können uns trotzdem treffen. Denkst du bitte an meinen Regenschirm? Du hast ihn noch.  \n**Lukas:** Ja, klar. Wir können uns einfach in einem Café treffen und über unsere Urlaubspläne sprechen.  \n**Mia:** Das ist eine tolle Idee! Ich interessiere mich schon sehr für deine Reisepläne nach Italien.\n\n---\n\n### **Aufgaben (ప్రశ్నలు / ಪ್ರಶ್ನೆಗಳು)**\n\n**1. Mia freut sich über das Wetter am Wochenende.**  \n   a) Richtig  \n   b) Falsch  \n\n**2. Worauf hat Lukas lange gewartet?**  \n   a) Auf einen Besuch im Café  \n   b) Auf die Wanderung in den Bergen  \n   c) Auf seine Reise nach Italien  \n\n**3. Worüber möchten Mia und Lukas im Café sprechen?**  \n   a) Über das schlechte Wetter  \n   b) Über Lukas' Regenschirm  \n   c) Über ihre Urlaubspläne  \n\n---\n\nదయచేసి మీ సమాధానాలను టైప్ చేయండి (ఉదాహరణకు: 1a, 2b, 3c).\nದಯವಿಟ್ಟು ನಿಮ್ಮ ಉತ್ತರಗಳನ್ನು ಟೈಪ್ ಮಾಡಿ (ಉದಾಹರಣೆಗೆ: 1a, 2b, 3c)."
+        }
+      ]
+    },
+    "guest": {
+      "learned_topics": [
+        {
+          "topic": "Perfekt vs Präteritum",
+          "date": "2026-11-15"
+        }
+      ],
+      "module_scores": [
+        {
+          "module": "listening",
+          "score": 10,
+          "total": 10,
+          "topics": [
+            "Perfekt vs Präteritum"
+          ],
+          "date": "2026-11-15",
+          "timestamp": "2026-11-15T19:01:44.097723"
+        }
+      ]
+    },
+    "gast": {
+      "learned_topics": [
+        {
+          "topic": "Perfekt vs Präteritum",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "Konjunktiv II",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "Infinitiv mit zu",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "Präpositionen (Wechselpräpositionen)",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "Verben mit Akkusativ",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "Verben mit Dativ",
+          "date": "2026-11-15"
+        },
+        {
+          "topic": "German Prepositions grouped by prepositions itself",
+          "date": "2026-11-16"
+        },
+        {
+          "topic": "prepositions brouped by prepositions so that one preposition has 3 to 4 use scenarios",
+          "date": "2026-11-16"
+        }
+      ],
+      "module_scores": [
+        {
+          "module": "listening",
+          "score": 4,
+          "total": 5,
+          "topics": [
+            "Perfekt vs Präteritum",
+            "Konjunktiv II"
+          ],
+          "date": "2026-11-15",
+          "timestamp": "2026-11-15T19:49:22.338275"
+        }
+      ]
+    }
+  }
+}

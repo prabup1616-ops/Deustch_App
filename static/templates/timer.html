@@ -1,0 +1,143 @@
+<!-- Question {{curr_idx}} Timer Component -->
+<div id="timer_wrapper_{{curr_idx}}" style="
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <div id="timer_label_{{curr_idx}}" style="font-weight: 800; font-size: 1.15rem; color: #1e3a8a; display: flex; align-items: center; gap: 8px;">
+            ⏱️ Question {{curr_num}} Timer: 
+            <span id="timer_num_{{curr_idx}}" style="font-size: 1.35rem; color: #2563eb; min-width: 48px; font-variant-numeric: tabular-nums;">
+                {{remaining_int}}s
+            </span>
+        </div>
+        <div id="timer_warning_{{curr_idx}}" style="font-size: 0.88rem; font-weight: 800; color: #dc2626; display: none;">
+            ⚠️ 10s Remaining! Submit or Skipped (0 Marks)!
+        </div>
+    </div>
+    <div style="width: 100%; height: 12px; background: #e2e8f0; border-radius: 999px; overflow: hidden;">
+        <div id="timer_bar_{{curr_idx}}" style="
+            width: {{init_pct}}%;
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            transition: width 1s linear, background 0.3s ease;
+        "></div>
+    </div>
+</div>
+
+<script>
+(function() {
+    const qIdx = {{curr_idx}};
+    let left = {{remaining}};
+    const total = 50.0;
+
+    const numEl = document.getElementById('timer_num_' + qIdx);
+    const barEl = document.getElementById('timer_bar_' + qIdx);
+    const warnEl = document.getElementById('timer_warning_' + qIdx);
+
+    function updateDisplay() {
+        if (!numEl || !barEl) return;
+        const sec = Math.max(0, Math.ceil(left));
+        numEl.innerText = sec + "s";
+        const pct = Math.max(0, Math.min(100, (left / total) * 100));
+        barEl.style.width = pct + "%";
+
+        if (left <= 10) {
+            numEl.style.color = "#dc2626";
+            barEl.style.background = "#dc2626";
+            if (warnEl) warnEl.style.display = "inline";
+        } else if (left <= 20) {
+            numEl.style.color = "#b45309";
+            barEl.style.background = "#f59e0b";
+            if (warnEl) warnEl.style.display = "none";
+        } else {
+            numEl.style.color = "#2563eb";
+            barEl.style.background = "linear-gradient(90deg, #10b981, #3b82f6)";
+            if (warnEl) warnEl.style.display = "none";
+        }
+    }
+
+    function playBuzzer() {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) {
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, ctx.currentTime);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.45);
+            }
+        } catch(e) {}
+    }
+
+    function triggerAutoSkip() {
+        let attempts = 0;
+        const maxAttempts = 15;
+
+        function clickSubmit() {
+            attempts++;
+            try {
+                const pDoc = window.parent.document;
+                if (pDoc) {
+                    const allBtns = Array.from(pDoc.querySelectorAll('button'));
+                    const targetBtn = allBtns.find(b => {
+                        const t = (b.innerText || b.textContent || '').trim();
+                        return t.includes('Lock In Answer') || 
+                               t.includes('Submit Final Quiz') || 
+                               t.includes('Next Question');
+                    });
+
+                    if (targetBtn && !targetBtn.disabled) {
+                        targetBtn.click();
+                        return;
+                    }
+
+                    const fallbackBtn = pDoc.querySelector('button[data-testid="stBaseButton-primary"]') ||
+                                        pDoc.querySelector('button[data-testid="baseButton-primary"]') ||
+                                        pDoc.querySelector('button[kind="primary"]');
+                    if (fallbackBtn && !fallbackBtn.disabled) {
+                        fallbackBtn.click();
+                        return;
+                    }
+                }
+            } catch(err) {
+                console.error("Auto-skip error:", err);
+            }
+
+            if (attempts < maxAttempts) {
+                setTimeout(clickSubmit, 200);
+            }
+        }
+
+        setTimeout(clickSubmit, 200);
+    }
+
+    updateDisplay();
+
+    const timer = setInterval(() => {
+        left -= 1.0;
+        if (left <= 0) {
+            clearInterval(timer);
+            left = 0;
+            updateDisplay();
+            if (warnEl) {
+                warnEl.innerText = "⏰ 50s EXPIRED! SKIPPING QUESTION (0 MARKS)...";
+                warnEl.style.display = "inline";
+            }
+            playBuzzer();
+            triggerAutoSkip();
+        } else {
+            updateDisplay();
+        }
+    }, 1000);
+})();
+</script>

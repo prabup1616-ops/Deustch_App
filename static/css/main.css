@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Kannada:wght@400;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Outfit', 'Noto Sans Telugu', 'Noto Sans Kannada', sans-serif;
+}
+
+/* Animations */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+    70% { transform: translateY(-3px) scale(1.005); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
+}
+
+@keyframes avatarBreath {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-6px) scale(1.02); }
+}
+
+@keyframes soundWave {
+    0%, 100% { height: 8px; }
+    50% { height: 32px; }
+}
+
+/* ==============================================================================
+   LSRW Floating 30% Window & Catching Phrases Overlay
+   Background remains scrollable and visible with soft blur.
+============================================================================== */
+.lsrw-phrase-floating-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999999 !important;
+    background: rgba(15, 23, 42, 0.45) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    pointer-events: none !important; /* Lets user scroll the background page! */
+    box-sizing: border-box !important;
+}
+
+.lsrw-phrase-card-30 {
+    pointer-events: auto !important; /* Card itself is interactive */
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    border: 2px solid #3b82f6 !important;
+    border-radius: 18px !important;
+    padding: 22px 26px !important;
+    width: 32vw !important;
+    max-width: 490px !important;
+    min-width: 320px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(59, 130, 246, 0.3) !important;
+    color: white !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.lsrw-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.lsrw-pulse-dot {
+    width: 10px !important;
+    height: 10px !important;
+    background-color: #3b82f6 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 8px #60a5fa !important;
+    animation: modalPulse 1.5s infinite ease-in-out !important;
+}
+
+.lsrw-header-title {
+    font-weight: 800 !important;
+    font-size: 0.85rem !important;
+    color: #93c5fd !important;
+    letter-spacing: 0.5px !important;
+}
+
+.lsrw-cancel-btn {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid #ef4444 !important;
+    color: #fca5a5 !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    padding: 3px 10px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.lsrw-cancel-btn:hover {
+    background: #ef4444 !important;
+    color: white !important;
+    transform: scale(1.04) !important;
+}
+
+.lsrw-card-body {
+    min-height: 120px !important;
+}
+
+.lsrw-phrase-title {
+    font-size: 1.55rem !important;
+    font-weight: 900 !important;
+    color: #fde047 !important;
+    letter-spacing: 0.4px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.25 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.lsrw-phrase-scenario {
+    font-size: 0.88rem !important;
+    color: #94a3b8 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.4 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.lsrw-phrase-box {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-left: 3px solid #3b82f6 !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 12px !important;
+}
+
+.lsrw-box-label {
+    font-size: 0.72rem !important;
+    color: #60a5fa !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.lsrw-phrase-example {
+    font-size: 0.95rem !important;
+    color: #f8fafc !important;
+    font-style: italic !important;
+    margin-top: 2px !important;
+    line-height: 1.35 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.lsrw-progress-track {
+    width: 100% !important;
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    margin-top: 10px !important;
+}
+
+.lsrw-progress-bar {
+    height: 100% !important;
+    width: 0% !important;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa) !important;
+    border-radius: 2px !important;
+    animation: progressBar25s 25s linear infinite !important;
+}
+
+@keyframes progressBar25s {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.lsrw-card-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 12px !important;
+    font-size: 0.8rem !important;
+    color: #94a3b8 !important;
+}
+
+@keyframes modalPulse {
+    0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+@keyframes slideUpModal {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.nav-bar {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+/* Home Hero */
+.home-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #d97706 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease infinite;
+    padding: 36px 40px;
+    border-radius: 22px;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px -5px rgba(30, 58, 138, 0.35);
+}
+.home-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0;
+}
+.home-hero p {
+    font-size: 1.2rem;
+    color: #e2e8f0;
+    margin: 10px 0 0 0;
+}
+
+/* Module Cards */
+.module-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    height: 100%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.1);
+}
+.module-card.unlocked {
+    border-color: #3b82f6;
+}
+.module-card.locked {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    opacity: 0.85;
+}
+
+/* Language Prompts */
+.prompt-box-te {
+    font-family: 'Noto Sans Telugu', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #0f172a;
+    background: #eff6ff;
+    border-left: 6px solid #2563eb;
+    padding: 16px 22px;
+    border-radius: 12px;
+    margin: 16px 0 22px 0;
+    line-height: 1.6;
+}
+.prompt-box-kn {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #0f172a;
+    background: #fffbeb;
+    border-left: 6px solid #d97706;
+    padding: 16px 22px;
+    border-radius: 12px;
+    margin: 16px 0 22px 0;
+    line-height: 1.6;
+}
+
+/* Avatar Box */
+.avatar-stage {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    border: 2px solid #cbd5e1;
+    margin-bottom: 20px;
+}
+.avatar-icon {
+    font-size: 5rem;
+    display: inline-block;
+    animation: avatarBreath 3s ease-in-out infinite;
+}
+
+/* Question Card Animation */
+.question-card-anim {
+    animation: slideUpFade 0.35s ease-out;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+/* Results Scoreburst Card */
+.score-burst-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #065f46 100%);
+    border-radius: 22px;
+    padding: 36px 30px;
+    color: white;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 15px 35px rgba(30, 58, 138, 0.3);
+    animation: slideUpFade 0.5s ease-out;
+}
+.score-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+    margin: 12px 0;
+}
+
+/* Podium Card */
+.podium-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+.podium-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Audio Waves */
+.audio-wave {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+}
+.audio-wave span {
+    width: 5px;
+    height: 16px;
+    background: #2563eb;
+    border-radius: 3px;
+    animation: soundWave 1.2s ease-in-out infinite;
+}
+.audio-wave span:nth-child(1) { animation-delay: 0.1s; }
+.audio-wave span:nth-child(2) { animation-delay: 0.3s; }
+.audio-wave span:nth-child(3) { animation-delay: 0.5s; }
+.audio-wave span:nth-child(4) { animation-delay: 0.2s; }
+.audio-wave span:nth-child(5) { animation-delay: 0.4s; }

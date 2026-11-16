@@ -1,0 +1,2918 @@
+[
+  {
+    "id": 1,
+    "topic": "Dativ Maskulin (ich -> mein)",
+    "prompt_te": "నేను నా స్నేహితుడికి పుట్టినరోజు శుభాకాంక్షలు తెలుపుతున్నాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ಸ್ನೇಹಿತನಿಗೆ ಜನ್ಮದಿನದ ಶುಭಾಶಯ ತಿಳಿಸುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich gratuliere meinem Freund zum Geburtstag.",
+    "options": [
+      "Ich gratuliere meinen Freund zum Geburtstag.",
+      "Ich gratuliere mein Freund zum Geburtstag.",
+      "Ich gratuliere meines Freundes zum Geburtstag.",
+      "Ich gratuliere meinem Freund zum Geburtstag."
+    ],
+    "correct_index": 3,
+    "explanation": "'gratulieren' takes Dativ. 'der Freund' is masculine -> 'meinem Freund'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Freund)",
+    "b1_verb": "gratulieren"
+  },
+  {
+    "id": 2,
+    "topic": "Dativ Maskulin (du -> dein)",
+    "prompt_te": "నువ్వు నీ ఉపాధ్యాయుడికి కృతజ్ఞతలు చెప్పావా?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ಶಿಕ್ಷಕರಿಗೆ ಧನ್ಯವಾದಗಳನ್ನು ಹೇಳಿದೆಯಾ?",
+    "target_de": "Hast du deinem Lehrer für die Unterstützung gedankt?",
+    "options": [
+      "Hast du dein Lehrer für die Unterstützung gedankt?",
+      "Hast du deines Lehrers für die Unterstützung gedankt?",
+      "Hast du deinem Lehrer für die Unterstützung gedankt?",
+      "Hast du deinen Lehrer für die Unterstützung gedankt?"
+    ],
+    "correct_index": 2,
+    "explanation": "'danken' takes Dativ. 'der Lehrer' is masculine -> 'deinem Lehrer'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Lehrer)",
+    "b1_verb": "danken"
+  },
+  {
+    "id": 3,
+    "topic": "Dativ Maskulin (er -> sein)",
+    "prompt_te": "అతను తన సహోద్యోగితో ప్రాజెక్ట్ గురించి చర్చిస్తున్నాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಸಹೋದ್ಯೋಗಿಯೊಂದಿಗೆ ಯೋಜನೆಯ ಬಗ್ಗೆ ಚರ್ಚಿಸುತ್ತಿದ್ದಾನೆ.",
+    "target_de": "Er spricht mit seinem Kollegen über das neue Projekt.",
+    "options": [
+      "Er spricht mit seines Kollegen über das neue Projekt.",
+      "Er spricht mit seinem Kollegen über das neue Projekt.",
+      "Er spricht mit seinen Kollegen über das neue Projekt.",
+      "Er spricht mit sein Kollege über das neue Projekt."
+    ],
+    "correct_index": 1,
+    "explanation": "Preposition 'mit' requires Dativ. 'der Kollege' (weak noun) in Dativ -> 'seinem Kollegen'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Kollege)",
+    "b1_verb": "sprechen mit"
+  },
+  {
+    "id": 4,
+    "topic": "Dativ Maskulin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన వైద్యుడికి తన సమస్యల గురించి వివరంగా చెప్పింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ವೈದ್ಯರಿಗೆ ತನ್ನ ಸಮಸ್ಯೆಗಳ ಬಗ್ಗೆ ವಿವರವಾಗಿ ಹೇಳಿದಳು.",
+    "target_de": "Sie hat ihrem Arzt ihre Beschwerden ausführlich erklärt.",
+    "options": [
+      "Sie hat ihrem Arzt ihre Beschwerden ausführlich erklärt.",
+      "Sie hat ihren Arzt ihre Beschwerden ausführlich erklärt.",
+      "Sie hat ihr Arzt ihre Beschwerden ausführlich erklärt.",
+      "Sie hat ihres Arztes ihre Beschwerden ausführlich erklärt."
+    ],
+    "correct_index": 0,
+    "explanation": "'erklären' to someone takes Dativ. 'der Arzt' is masculine -> 'ihrem Arzt'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Arzt)",
+    "b1_verb": "erklären"
+  },
+  {
+    "id": 5,
+    "topic": "Dativ Maskulin (wir -> unser)",
+    "prompt_te": "మేము రేపు మా బాస్‌తో సమావేశం ఏర్పాటు చేసుకున్నాము.",
+    "prompt_kn": "ನಾವು ನಾಳೆ ನಮ್ಮ ಬಾಸ್ ಜೊತೆ ಸಭೆ ಏರ್ಪಡಿಸಿಕೊಂಡಿದ್ದೇವೆ.",
+    "target_de": "Wir haben morgen einen Termin mit unserem Chef.",
+    "options": [
+      "Wir haben morgen einen Termin mit unseren Chef.",
+      "Wir haben morgen einen Termin mit unser Chef.",
+      "Wir haben morgen einen Termin mit unseres Chefs.",
+      "Wir haben morgen einen Termin mit unserem Chef."
+    ],
+    "correct_index": 3,
+    "explanation": "'mit' requires Dativ. 'der Chef' is masculine -> 'unserem Chef'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Chef)",
+    "b1_verb": "haben / mit"
+  },
+  {
+    "id": 6,
+    "topic": "Dativ Maskulin (ihr -> euer)",
+    "prompt_te": "మీరు మీ పొరుగువారితో మాట్లాడారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ನೆರೆಹೊರೆಯವರೊಂದಿಗೆ ಮಾತನಾಡಿದ್ದೀರಾ?",
+    "target_de": "Habt ihr mit eurem Nachbarn über den Lärm gesprochen?",
+    "options": [
+      "Habt ihr mit euer Nachbar über den Lärm gesprochen?",
+      "Habt ihr mit eures Nachbarn über den Lärm gesprochen?",
+      "Habt ihr mit eurem Nachbarn über den Lärm gesprochen?",
+      "Habt ihr mit euren Nachbarn über den Lärm gesprochen?"
+    ],
+    "correct_index": 2,
+    "explanation": "'mit' takes Dativ. 'ihr' possessive is 'euer', in Dativ Maskulin -> 'eurem Nachbarn'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Nachbar)",
+    "b1_verb": "sprechen mit"
+  },
+  {
+    "id": 7,
+    "topic": "Dativ Maskulin (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ మేనేజర్‌కు సమాచారం ఇచ్చారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಮ್ಯಾನೇಜರ್‌ಗೆ ಮಾಹಿತಿ ನೀಡಿದ್ದೀರಾ?",
+    "target_de": "Haben Sie Ihrem Manager die Information gegeben?",
+    "options": [
+      "Haben Sie Ihres Managers die Information gegeben?",
+      "Haben Sie Ihrem Manager die Information gegeben?",
+      "Haben Sie Ihren Manager die Information gegeben?",
+      "Haben Sie Ihr Manager die Information gegeben?"
+    ],
+    "correct_index": 1,
+    "explanation": "'geben' to someone takes Dativ. Formal 'Sie' possessive in Dativ Maskulin -> 'Ihrem Manager'.",
+    "case": "Dativ",
+    "gender": "Maskulin (der Manager)",
+    "b1_verb": "geben"
+  },
+  {
+    "id": 8,
+    "topic": "Dativ Feminin (ich -> mein)",
+    "prompt_te": "నేను నా సోదరికి హోమ్‌వర్క్‌లో సహాయం చేస్తున్నాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ಸಹೋದರಿಗೆ ಮನೆಕೆಲಸದಲ್ಲಿ ಸಹಾಯ ಮಾಡುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich helfe meiner Schwester bei den Hausaufgaben.",
+    "options": [
+      "Ich helfe meiner Schwester bei den Hausaufgaben.",
+      "Ich helfe meine Schwester bei den Hausaufgaben.",
+      "Ich helfe meinem Schwester bei den Hausaufgaben.",
+      "Ich helfe meinen Schwester bei den Hausaufgaben."
+    ],
+    "correct_index": 0,
+    "explanation": "'helfen' takes Dativ. 'die Schwester' is feminine -> 'meiner Schwester'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Schwester)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 9,
+    "topic": "Dativ Feminin (du -> dein)",
+    "prompt_te": "నువ్వు నీ అమ్మగారికి బహుమతి ఇచ్చావా?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ತಾಯಿಗೆ ಉಡುಗೊರೆ ನೀಡಿದೆಯಾ?",
+    "target_de": "Hast du deiner Mutter ein Geschenk gekauft?",
+    "options": [
+      "Hast du deine Mutter ein Geschenk gekauft?",
+      "Hast du deinem Mutter ein Geschenk gekauft?",
+      "Hast du deinen Mutter ein Geschenk gekauft?",
+      "Hast du deiner Mutter ein Geschenk gekauft?"
+    ],
+    "correct_index": 3,
+    "explanation": "Indirect object (to whom) takes Dativ. 'die Mutter' is feminine -> 'deiner Mutter'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Mutter)",
+    "b1_verb": "kaufen / schenken"
+  },
+  {
+    "id": 10,
+    "topic": "Dativ Feminin (er -> sein)",
+    "prompt_te": "అతను తన సహోద్యోగినికి (స్త్రీ) మెయిల్ పంపించాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಸಹೋದ್ಯೋಗಿಗೆ (ಮಹಿಳೆ) ಇಮೇಲ್ ಕಳುಹಿಸಿದನು.",
+    "target_de": "Er antwortet seiner Kollegin immer sehr schnell.",
+    "options": [
+      "Er antwortet seinem Kollegin immer sehr schnell.",
+      "Er antwortet seinen Kollegin immer sehr schnell.",
+      "Er antwortet seiner Kollegin immer sehr schnell.",
+      "Er antwortet seine Kollegin immer sehr schnell."
+    ],
+    "correct_index": 2,
+    "explanation": "'antworten' takes Dativ. 'die Kollegin' is feminine -> 'seiner Kollegin'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Kollegin)",
+    "b1_verb": "antworten"
+  },
+  {
+    "id": 11,
+    "topic": "Dativ Feminin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన ఉపాధ్యాయురాలితో ప్రాజెక్ట్ చర్చించింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಶಿಕ್ಷಕಿಯೊಂದಿಗೆ ಯೋಜನೆಯನ್ನು ಚರ್ಚಿಸಿದಳು.",
+    "target_de": "Sie lernt gern bei ihrer Lehrerin.",
+    "options": [
+      "Sie lernt gern bei ihren Lehrerin.",
+      "Sie lernt gern bei ihrer Lehrerin.",
+      "Sie lernt gern bei ihre Lehrerin.",
+      "Sie lernt gern bei ihrem Lehrerin."
+    ],
+    "correct_index": 1,
+    "explanation": "'bei' requires Dativ. 'ihr' (her) in Dativ Feminin -> 'ihrer Lehrerin'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Lehrerin)",
+    "b1_verb": "lernen bei"
+  },
+  {
+    "id": 12,
+    "topic": "Dativ Feminin (wir -> unser)",
+    "prompt_te": "మేము మా అత్తగారికి సహాయం చేయాలనుకుంటున్నాము.",
+    "prompt_kn": "ನಾವು ನಮ್ಮ ಅತ್ತೆಗೆ ಸಹಾಯ ಮಾಡಲು ಬಯಸುತ್ತೇವೆ.",
+    "target_de": "Wir möchten unserer Tante beim Umzug helfen.",
+    "options": [
+      "Wir möchten unserer Tante beim Umzug helfen.",
+      "Wir möchten unsere Tante beim Umzug helfen.",
+      "Wir möchten unserem Tante beim Umzug helfen.",
+      "Wir möchten unseren Tante beim Umzug helfen."
+    ],
+    "correct_index": 0,
+    "explanation": "'helfen' takes Dativ. 'die Tante' is feminine -> 'unserer Tante'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Tante)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 13,
+    "topic": "Dativ Feminin (ihr -> euer)",
+    "prompt_te": "మీరు మీ అమ్మమ్మగారిని చూడటానికి వెళ్తున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಅಜ್ಜಿಯನ್ನು ನೋಡಲು ಹೋಗುತ್ತಿದ್ದೀರಾ?",
+    "target_de": "Fahrt ihr zu eurer Oma am Wochenende?",
+    "options": [
+      "Fahrt ihr zu eure Oma am Wochenende?",
+      "Fahrt ihr zu eurem Oma am Wochenende?",
+      "Fahrt ihr zu euren Oma am Wochenende?",
+      "Fahrt ihr zu eurer Oma am Wochenende?"
+    ],
+    "correct_index": 3,
+    "explanation": "'zu' takes Dativ. Pronoun 'ihr' possessive in Dativ Feminin -> 'eurer Oma'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Oma)",
+    "b1_verb": "fahren zu"
+  },
+  {
+    "id": 14,
+    "topic": "Dativ Feminin (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ కుమార్తెకు ఈ పుస్తకం కొన్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಮಗಳಿಗೆ ಈ ಪುಸ್ತಕವನ್ನು ಖರೀದಿಸಿದ್ದೀರಾ?",
+    "target_de": "Gefällt dieses Buch Ihrer Tochter?",
+    "options": [
+      "Gefällt dieses Buch Ihrem Tochter?",
+      "Gefällt dieses Buch Ihren Tochter?",
+      "Gefällt dieses Buch Ihrer Tochter?",
+      "Gefällt dieses Buch Ihre Tochter?"
+    ],
+    "correct_index": 2,
+    "explanation": "'gefallen' takes Dativ. Formal 'Sie' possessive in Dativ Feminin -> 'Ihrer Tochter'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Tochter)",
+    "b1_verb": "gefallen"
+  },
+  {
+    "id": 15,
+    "topic": "Dativ Neutrum (ich -> mein)",
+    "prompt_te": "నా పిల్లవాడికి ఈ ఔషధం బాగా పనిచేసింది.",
+    "prompt_kn": "ನನ್ನ ಮಗುವಿಗೆ ಈ ಔಷಧ ಚೆನ್ನಾಗಿ ಕೆಲಸ ಮಾಡಿದೆ.",
+    "target_de": "Das Medikament hilft meinem Kind sehr gut.",
+    "options": [
+      "Das Medikament hilft meines Kindes sehr gut.",
+      "Das Medikament hilft meinem Kind sehr gut.",
+      "Das Medikament hilft meinen Kind sehr gut.",
+      "Das Medikament hilft mein Kind sehr gut."
+    ],
+    "correct_index": 1,
+    "explanation": "'helfen' takes Dativ. 'das Kind' is neuter -> 'meinem Kind'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Kind)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 16,
+    "topic": "Dativ Neutrum (du -> dein)",
+    "prompt_te": "నీ గదిలో ఒక కొత్త టేబుల్ ఉందా?",
+    "prompt_kn": "ನಿನ್ನ ಕೋಣೆಯಲ್ಲಿ ಹೊಸ ಮೇಜು ಇದೆಯೇ?",
+    "target_de": "Steht in deinem Zimmer ein neuer Schreibtisch?",
+    "options": [
+      "Steht in deinem Zimmer ein neuer Schreibtisch?",
+      "Steht in deinen Zimmer ein neuer Schreibtisch?",
+      "Steht in dein Zimmer ein neuer Schreibtisch?",
+      "Steht in deines Zimmers ein neuer Schreibtisch?"
+    ],
+    "correct_index": 0,
+    "explanation": "'in' (location, Wo?) takes Dativ. 'das Zimmer' is neuter -> 'deinem Zimmer'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Zimmer)",
+    "b1_verb": "stehen in"
+  },
+  {
+    "id": 17,
+    "topic": "Dativ Neutrum (er -> sein)",
+    "prompt_te": "అతను తన కొత్త బైక్‌తో ఆఫీసుకు వెళ్తున్నాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಹೊಸ ಬೈಕ್‌ನೊಂದಿಗೆ ಕಚೇರಿಗೆ ಹೋಗುತ್ತಿದ್ದಾನೆ.",
+    "target_de": "Er fährt oft mit seinem Fahrrad zur Arbeit.",
+    "options": [
+      "Er fährt oft mit seinen Fahrrad zur Arbeit.",
+      "Er fährt oft mit sein Fahrrad zur Arbeit.",
+      "Er fährt oft mit seines Fahrrads zur Arbeit.",
+      "Er fährt oft mit seinem Fahrrad zur Arbeit."
+    ],
+    "correct_index": 3,
+    "explanation": "'mit' requires Dativ. 'das Fahrrad' is neuter -> 'seinem Fahrrad'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Fahrrad)",
+    "b1_verb": "fahren mit"
+  },
+  {
+    "id": 18,
+    "topic": "Dativ Neutrum (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన బేబీకి ఆహారం తినిపిస్తోంది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಮಗುವಿಗೆ ಆಹಾರವನ್ನು ನೀಡುತ್ತಿದ್ದಾಳೆ.",
+    "target_de": "Sie gibt ihrem Baby frisches Obst.",
+    "options": [
+      "Sie gibt ihr Baby frisches Obst.",
+      "Sie gibt ihres Babys frisches Obst.",
+      "Sie gibt ihrem Baby frisches Obst.",
+      "Sie gibt ihren Baby frisches Obst."
+    ],
+    "correct_index": 2,
+    "explanation": "'geben' (to whom) takes Dativ. 'das Baby' is neuter -> 'ihrem Baby'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Baby)",
+    "b1_verb": "geben"
+  },
+  {
+    "id": 19,
+    "topic": "Dativ Neutrum (wir -> unser)",
+    "prompt_te": "మా కొత్త ఇంటిలో చాలా గదులు ఉన్నాయి.",
+    "prompt_kn": "ನಮ್ಮ ಹೊಸ ಮನೆಯಲ್ಲಿ ಅನೇಕ ಕೋಣೆಗಳಿವೆ.",
+    "target_de": "In unserem Haus gibt es vier helle Zimmer.",
+    "options": [
+      "In unseres Hauses gibt es vier helle Zimmer.",
+      "In unserem Haus gibt es vier helle Zimmer.",
+      "In unseren Haus gibt es vier helle Zimmer.",
+      "In unser Haus gibt es vier helle Zimmer."
+    ],
+    "correct_index": 1,
+    "explanation": "'in' + location takes Dativ. 'das Haus' is neuter -> 'unserem Haus'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Haus)",
+    "b1_verb": "in (Dativ)"
+  },
+  {
+    "id": 20,
+    "topic": "Dativ Neutrum (ihr -> euer)",
+    "prompt_te": "మీరు మీ కొత్త అపార్ట్‌మెంట్‌లో సంతృప్తిగా ఉన్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಹೊಸ ಅಪಾರ್ಟ್ಮೆಂಟ್‌ನಲ್ಲಿ ತೃಪ್ತರಾಗಿದ್ದೀರಾ?",
+    "target_de": "Seid ihr mit eurem Apartment zufrieden?",
+    "options": [
+      "Seid ihr mit eurem Apartment zufrieden?",
+      "Seid ihr mit euren Apartment zufrieden?",
+      "Seid ihr mit euer Apartment zufrieden?",
+      "Seid ihr mit eures Apartments zufrieden?"
+    ],
+    "correct_index": 0,
+    "explanation": "'mit' requires Dativ. 'das Apartment' is neuter -> 'eurem Apartment'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Apartment)",
+    "b1_verb": "zufrieden mit"
+  },
+  {
+    "id": 21,
+    "topic": "Dativ Neutrum (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ ప్రాజెక్ట్‌తో చాలా బిజీగా ఉన్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಯೋಜನೆಯಲ್ಲಿ ತುಂಬಾ ಕಾರ್ಯನಿರತರಾಗಿದ್ದೀರಾ?",
+    "target_de": "Arbeiten Sie intensiv an Ihrem Projekt?",
+    "options": [
+      "Arbeiten Sie intensiv an Ihren Projekt?",
+      "Arbeiten Sie intensiv an Ihr Projekt?",
+      "Arbeiten Sie intensiv an Ihres Projekts?",
+      "Arbeiten Sie intensiv an Ihrem Projekt?"
+    ],
+    "correct_index": 3,
+    "explanation": "'an' + topic takes Dativ. 'das Projekt' is neuter -> 'Ihrem Projekt'.",
+    "case": "Dativ",
+    "gender": "Neutrum (das Projekt)",
+    "b1_verb": "arbeiten an"
+  },
+  {
+    "id": 22,
+    "topic": "Dativ Plural (ich -> mein)",
+    "prompt_te": "నేను నా స్నేహితులతో కలిసి విందు చేసుకుంటున్నాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ಸ್ನೇಹಿತರೊಂದಿಗೆ ಭೋಜನ ಮಾಡುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich esse heute Abend mit meinen Freunden.",
+    "options": [
+      "Ich esse heute Abend mit meine Freunden.",
+      "Ich esse heute Abend mit meiner Freunden.",
+      "Ich esse heute Abend mit meinen Freunden.",
+      "Ich esse heute Abend mit meinem Freunden."
+    ],
+    "correct_index": 2,
+    "explanation": "'mit' requires Dativ. In Dativ Plural, possessive takes -en, and noun takes -n -> 'meinen Freunden'.",
+    "case": "Dativ",
+    "gender": "Plural (die Freunde)",
+    "b1_verb": "essen mit"
+  },
+  {
+    "id": 23,
+    "topic": "Dativ Plural (du -> dein)",
+    "prompt_te": "నువ్వు నీ తల్లిదండ్రులకు క్రమం తప్పకుండా ఫోన్ చేస్తున్నావా?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ಪೋಷಕರಿಗೆ ನಿಯಮಿತವಾಗಿ ಕರೆ ಮಾಡುತ್ತಿದ್ದೀಯಾ?",
+    "target_de": "Telefonierst du regelmäßig mit deinen Eltern?",
+    "options": [
+      "Telefonierst du regelmäßig mit deiner Eltern?",
+      "Telefonierst du regelmäßig mit deinen Eltern?",
+      "Telefonierst du regelmäßig mit deinem Eltern?",
+      "Telefonierst du regelmäßig mit deine Eltern?"
+    ],
+    "correct_index": 1,
+    "explanation": "'mit' takes Dativ. In Dativ Plural -> 'deinen Eltern'.",
+    "case": "Dativ",
+    "gender": "Plural (die Eltern)",
+    "b1_verb": "telefonieren mit"
+  },
+  {
+    "id": 24,
+    "topic": "Dativ Plural (er -> sein)",
+    "prompt_te": "అతను తన పిల్లలకు ఒక అందమైన కథ చెప్పాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಮಕ್ಕಳಿಗೆ ಒಂದು ಸುಂದರವಾದ ಕಥೆಯನ್ನು ಹೇಳಿದನು.",
+    "target_de": "Er erzählt seinen Kindern eine schöne Geschichte.",
+    "options": [
+      "Er erzählt seinen Kindern eine schöne Geschichte.",
+      "Er erzählt seinem Kindern eine schöne Geschichte.",
+      "Er erzählt seine Kindern eine schöne Geschichte.",
+      "Er erzählt seiner Kindern eine schöne Geschichte."
+    ],
+    "correct_index": 0,
+    "explanation": "'erzählen' to someone takes Dativ. 'die Kinder' in Dativ Plural takes -n ('Kindern') -> 'seinen Kindern'.",
+    "case": "Dativ",
+    "gender": "Plural (die Kinder)",
+    "b1_verb": "erzählen"
+  },
+  {
+    "id": 25,
+    "topic": "Dativ Plural (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన అతిథులకు టీ మరియు కేక్ వడ్డించింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಅತಿಥಿಗಳಿಗೆ ಚಹಾ ಮತ್ತು ಕೇಕ್ ನೀಡಿದಳು.",
+    "target_de": "Sie bietet ihren Gästen Kaffee und Kuchen an.",
+    "options": [
+      "Sie bietet ihrem Gästen Kaffee und Kuchen an.",
+      "Sie bietet ihre Gästen Kaffee und Kuchen an.",
+      "Sie bietet ihrer Gästen Kaffee und Kuchen an.",
+      "Sie bietet ihren Gästen Kaffee und Kuchen an."
+    ],
+    "correct_index": 3,
+    "explanation": "'anbieten' to someone takes Dativ. 'die Gäste' in Dativ Plural takes -n ('Gästen') -> 'ihren Gästen'.",
+    "case": "Dativ",
+    "gender": "Plural (die Gäste)",
+    "b1_verb": "anbieten"
+  },
+  {
+    "id": 26,
+    "topic": "Dativ Plural (wir -> unser)",
+    "prompt_te": "మేము మా ఉపాధ్యాయులకు వీడ్కోలు చెప్పాము.",
+    "prompt_kn": "ನಾವು ನಮ್ಮ ಶಿಕ್ಷಕರಿಗೆ ಬೀಳ್ಕೊಡುಗೆ ಹೇಳಿದೆವು.",
+    "target_de": "Wir danken unseren Lehrern für die tolle Zeit.",
+    "options": [
+      "Wir danken unsere Lehrern für die tolle Zeit.",
+      "Wir danken unserer Lehrern für die tolle Zeit.",
+      "Wir danken unseren Lehrern für die tolle Zeit.",
+      "Wir danken unserem Lehrern für die tolle Zeit."
+    ],
+    "correct_index": 2,
+    "explanation": "'danken' takes Dativ. In Dativ Plural -> 'unseren Lehrern'.",
+    "case": "Dativ",
+    "gender": "Plural (die Lehrer)",
+    "b1_verb": "danken"
+  },
+  {
+    "id": 27,
+    "topic": "Dativ Plural (ihr -> euer)",
+    "prompt_te": "మీరు మీ స్నేహితులకు ఆహ్వానం పంపారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಸ್ನೇಹಿತರಿಗೆ ಆಹ್ವಾನವನ್ನು ಕಳುಹಿಸಿದ್ದೀರಾ?",
+    "target_de": "Habt ihr euren Freunden eine Einladung geschickt?",
+    "options": [
+      "Habt ihr eurer Freunden eine Einladung geschickt?",
+      "Habt ihr euren Freunden eine Einladung geschickt?",
+      "Habt ihr eurem Freunden eine Einladung geschickt?",
+      "Habt ihr eure Freunden eine Einladung geschickt?"
+    ],
+    "correct_index": 1,
+    "explanation": "'schicken' to someone takes Dativ. 'ihr' possessive in Dativ Plural -> 'euren Freunden'.",
+    "case": "Dativ",
+    "gender": "Plural (die Freunde)",
+    "b1_verb": "schicken"
+  },
+  {
+    "id": 28,
+    "topic": "Dativ Plural (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ ఉద్యోగులకు బోనస్ ఇచ్చారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಉದ್ಯೋಗಿಗಳಿಗೆ ಬೋನಸ್ ನೀಡಿದ್ದೀರಾ?",
+    "target_de": "Zahlen Sie Ihren Mitarbeitern einen Bonus?",
+    "options": [
+      "Zahlen Sie Ihren Mitarbeitern einen Bonus?",
+      "Zahlen Sie Ihrem Mitarbeitern einen Bonus?",
+      "Zahlen Sie Ihre Mitarbeitern einen Bonus?",
+      "Zahlen Sie Ihrer Mitarbeitern einen Bonus?"
+    ],
+    "correct_index": 0,
+    "explanation": "'zahlen' to someone takes Dativ. Formal 'Sie' possessive in Dativ Plural -> 'Ihren Mitarbeitern'.",
+    "case": "Dativ",
+    "gender": "Plural (die Mitarbeiter)",
+    "b1_verb": "zahlen"
+  },
+  {
+    "id": 29,
+    "topic": "Akkusativ Maskulin (ich -> mein)",
+    "prompt_te": "నేను ఈ సాయంత్రం నా సోదరుడిని స్టేషన్ నుండి పికప్ చేసుకుంటాను.",
+    "prompt_kn": "ನಾನು ಈ ಸಂಜೆ ನನ್ನ ಸಹೋದರನನ್ನು ನಿಲ್ದಾಣದಿಂದ ಕರೆತರಲಿದ್ದೇನೆ.",
+    "target_de": "Ich hole heute Abend meinen Bruder vom Bahnhof ab.",
+    "options": [
+      "Ich hole heute Abend meinem Bruder vom Bahnhof ab.",
+      "Ich hole heute Abend mein Bruder vom Bahnhof ab.",
+      "Ich hole heute Abend meines Bruders vom Bahnhof ab.",
+      "Ich hole heute Abend meinen Bruder vom Bahnhof ab."
+    ],
+    "correct_index": 3,
+    "explanation": "'abholen' takes direct object in Akkusativ. 'der Bruder' is masculine -> 'meinen Bruder'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Bruder)",
+    "b1_verb": "abholen"
+  },
+  {
+    "id": 30,
+    "topic": "Akkusativ Maskulin (du -> dein)",
+    "prompt_te": "నువ్వు రైల్వే స్టేషన్‌లో నీ పాస్‌పోర్ట్‌ను మర్చిపోయావా?",
+    "prompt_kn": "ನೀನು ರೈಲ್ವೆ ನಿಲ್ದಾಣದಲ್ಲಿ ನಿನ್ನ ಪಾಸ್‌ಪೋರ್ಟ್ ಅನ್ನು ಮರೆತುಬಿಟ್ಟೆಯಾ?",
+    "target_de": "Hast du deinen Pass am Bahnhof vergessen?",
+    "options": [
+      "Hast du dein Pass am Bahnhof vergessen?",
+      "Hast du deines Passes am Bahnhof vergessen?",
+      "Hast du deinen Pass am Bahnhof vergessen?",
+      "Hast du deinem Pass am Bahnhof vergessen?"
+    ],
+    "correct_index": 2,
+    "explanation": "'vergessen' takes Akkusativ. 'der Pass' is masculine -> 'deinen Pass'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Pass)",
+    "b1_verb": "vergessen"
+  },
+  {
+    "id": 31,
+    "topic": "Akkusativ Maskulin (er -> sein)",
+    "prompt_te": "అతను తన ఉపాధ్యాయుడిని చాలా గౌరవిస్తాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಶಿಕ್ಷಕರನ್ನು ತುಂಬಾ ಗೌರವಿಸುತ್ತಾನೆ.",
+    "target_de": "Er respektiert seinen Lehrer sehr.",
+    "options": [
+      "Er respektiert seines Lehrers sehr.",
+      "Er respektiert seinen Lehrer sehr.",
+      "Er respektiert seinem Lehrer sehr.",
+      "Er respektiert sein Lehrer sehr."
+    ],
+    "correct_index": 1,
+    "explanation": "'respektieren' takes Akkusativ. 'der Lehrer' is masculine -> 'seinen Lehrer'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Lehrer)",
+    "b1_verb": "respektieren"
+  },
+  {
+    "id": 32,
+    "topic": "Akkusativ Maskulin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన బాస్‌ను ఒక ముఖ్యమైన ప్రశ్న అడిగింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಮುಖ್ಯಸ್ಥರನ್ನು ಒಂದು ಮುಖ್ಯವಾದ ಪ್ರಶ್ನೆ ಕೇಳಿದಳು.",
+    "target_de": "Sie hat ihren Chef um Rat gefragt.",
+    "options": [
+      "Sie hat ihren Chef um Rat gefragt.",
+      "Sie hat ihrem Chef um Rat gefragt.",
+      "Sie hat ihr Chef um Rat gefragt.",
+      "Sie hat ihres Chefs um Rat gefragt."
+    ],
+    "correct_index": 0,
+    "explanation": "'fragen' takes Akkusativ for the person asked. 'der Chef' is masculine -> 'ihren Chef'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Chef)",
+    "b1_verb": "fragen um"
+  },
+  {
+    "id": 33,
+    "topic": "Akkusativ Maskulin (wir -> unser)",
+    "prompt_te": "మేము మా పాత కారును మంచి ధరకు అమ్మేశాము.",
+    "prompt_kn": "ನಾವು ನಮ್ಮ ಹಳೆಯ ಕಾರನ್ನು ಉತ್ತಮ ಬೆಲೆಗೆ ಮಾರಾಟ ಮಾಡಿದೆವು.",
+    "target_de": "Wir haben unseren alten Wagen gestern verkauft.",
+    "options": [
+      "Wir haben unserem alten Wagen gestern verkauft.",
+      "Wir haben unser alten Wagen gestern verkauft.",
+      "Wir haben unseres alten Wagens gestern verkauft.",
+      "Wir haben unseren alten Wagen gestern verkauft."
+    ],
+    "correct_index": 3,
+    "explanation": "'verkaufen' takes Akkusativ. 'der Wagen' is masculine -> 'unseren alten Wagen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Wagen)",
+    "b1_verb": "verkaufen"
+  },
+  {
+    "id": 34,
+    "topic": "Akkusativ Maskulin (ihr -> euer)",
+    "prompt_te": "మీరు మీ సూట్‌కేస్‌ను సిద్ధం చేసుకున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಸೂಟ್‌ಕೇಸ್ ಅನ್ನು ಸಿದ್ಧಪಡಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
+    "target_de": "Habt ihr euren Koffer schon gepackt?",
+    "options": [
+      "Habt ihr euer Koffer schon gepackt?",
+      "Habt ihr eures Koffers schon gepackt?",
+      "Habt ihr euren Koffer schon gepackt?",
+      "Habt ihr eurem Koffer schon gepackt?"
+    ],
+    "correct_index": 2,
+    "explanation": "'packen' takes Akkusativ. 'ihr' possessive in Akkusativ Maskulin -> 'euren Koffer'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Koffer)",
+    "b1_verb": "packen"
+  },
+  {
+    "id": 35,
+    "topic": "Akkusativ Maskulin (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ కాంట్రాక్ట్‌ను రద్దు చేయాలనుకుంటున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಒಪ್ಪಂದವನ್ನು ರದ್ದುಗೊಳಿಸಲು ಬಯಸುತ್ತೀರಾ?",
+    "target_de": "Möchten Sie Ihren Vertrag kündigen?",
+    "options": [
+      "Möchten Sie Ihres Vertrages kündigen?",
+      "Möchten Sie Ihren Vertrag kündigen?",
+      "Möchten Sie Ihrem Vertrag kündigen?",
+      "Möchten Sie Ihr Vertrag kündigen?"
+    ],
+    "correct_index": 1,
+    "explanation": "'kündigen' takes Akkusativ. Formal 'Sie' possessive in Akkusativ Maskulin -> 'Ihren Vertrag'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Vertrag)",
+    "b1_verb": "kündigen"
+  },
+  {
+    "id": 36,
+    "topic": "Akkusativ Feminin (ich -> mein)",
+    "prompt_te": "నేను నా దరఖాస్తును రేపు పోస్ట్ ద్వారా పంపుతాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ಅರ್ಜಿಯನ್ನು ನಾಳೆ ಅಂಚೆ ಮೂಲಕ ಕಳುಹಿಸುತ್ತೇನೆ.",
+    "target_de": "Ich schicke meine Bewerbung morgen per Post.",
+    "options": [
+      "Ich schicke meine Bewerbung morgen per Post.",
+      "Ich schicke meiner Bewerbung morgen per Post.",
+      "Ich schicke meinem Bewerbung morgen per Post.",
+      "Ich schicke meinen Bewerbung morgen per Post."
+    ],
+    "correct_index": 0,
+    "explanation": "'schicken' takes Akkusativ. 'die Bewerbung' is feminine -> 'meine Bewerbung'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Bewerbung)",
+    "b1_verb": "schicken"
+  },
+  {
+    "id": 37,
+    "topic": "Akkusativ Feminin (du -> dein)",
+    "prompt_te": "నువ్వు నీ బ్యాగ్‌ను ఎక్కడ పోగొట్టుకున్నావు?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ಬ್ಯಾಗ್ ಅನ್ನು ಎಲ್ಲಿ ಕಳೆದುಕೊಂಡೆ?",
+    "target_de": "Wo hast du deine Tasche verloren?",
+    "options": [
+      "Wo hast du deiner Tasche verloren?",
+      "Wo hast du deinem Tasche verloren?",
+      "Wo hast du deinen Tasche verloren?",
+      "Wo hast du deine Tasche verloren?"
+    ],
+    "correct_index": 3,
+    "explanation": "'verlieren' takes Akkusativ. 'die Tasche' is feminine -> 'deine Tasche'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Tasche)",
+    "b1_verb": "verlieren"
+  },
+  {
+    "id": 38,
+    "topic": "Akkusativ Feminin (er -> sein)",
+    "prompt_te": "అతను తన పాత అపార్ట్‌మెంట్‌ను ఖాళీ చేశాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಹಳೆಯ ಅಪಾರ್ಟ್ಮೆಂಟ್ ಅನ್ನು ಖಾಲಿ ಮಾಡಿದನು.",
+    "target_de": "Er hat seine Wohnung rechtzeitig gekündigt.",
+    "options": [
+      "Er hat seinem Wohnung rechtzeitig gekündigt.",
+      "Er hat seinen Wohnung rechtzeitig gekündigt.",
+      "Er hat seine Wohnung rechtzeitig gekündigt.",
+      "Er hat seiner Wohnung rechtzeitig gekündigt."
+    ],
+    "correct_index": 2,
+    "explanation": "'kündigen' takes Akkusativ. 'die Wohnung' is feminine -> 'seine Wohnung'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Wohnung)",
+    "b1_verb": "kündigen"
+  },
+  {
+    "id": 39,
+    "topic": "Akkusativ Feminin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన పరీక్షను విజయవంతంగా పూర్తి చేసింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಪರೀಕ್ಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿದಳು.",
+    "target_de": "Sie hat ihre Prüfung erfolgreich bestanden.",
+    "options": [
+      "Sie hat ihren Prüfung erfolgreich bestanden.",
+      "Sie hat ihre Prüfung erfolgreich bestanden.",
+      "Sie hat ihrer Prüfung erfolgreich bestanden.",
+      "Sie hat ihrem Prüfung erfolgreich bestanden."
+    ],
+    "correct_index": 1,
+    "explanation": "'bestehen' takes Akkusativ. 'die Prüfung' is feminine -> 'ihre Prüfung'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Prüfung)",
+    "b1_verb": "bestehen"
+  },
+  {
+    "id": 40,
+    "topic": "Akkusativ Feminin (wir -> unser)",
+    "prompt_te": "మేము మా ప్రెజెంటేషన్‌ను బాగా సిద్ధం చేసుకున్నాము.",
+    "prompt_kn": "ನಾವು ನಮ್ಮ ಪ್ರಸ್ತುತಿಯನ್ನು ಚೆನ್ನಾಗಿ ಸಿದ್ಧಪಡಿಸಿಕೊಂಡಿದ್ದೇವೆ.",
+    "target_de": "Wir haben unsere Präsentation gut vorbereitet.",
+    "options": [
+      "Wir haben unsere Präsentation gut vorbereitet.",
+      "Wir haben unserer Präsentation gut vorbereitet.",
+      "Wir haben unserem Präsentation gut vorbereitet.",
+      "Wir haben unseren Präsentation gut vorbereitet."
+    ],
+    "correct_index": 0,
+    "explanation": "'vorbereiten' takes Akkusativ. 'die Präsentation' is feminine -> 'unsere Präsentation'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Präsentation)",
+    "b1_verb": "vorbereiten"
+  },
+  {
+    "id": 41,
+    "topic": "Akkusativ Feminin (ihr -> euer)",
+    "prompt_te": "మీరు మీ ప్రయాణాన్ని ఎప్పుడు ప్రారంభిస్తారు?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಪ್ರಯಾಣವನ್ನು ಯಾವಾಗ ಪ್ರಾರಂಭಿಸುತ್ತೀರಿ?",
+    "target_de": "Wann beginnt ihr eure Reise nach München?",
+    "options": [
+      "Wann beginnt ihr eurer Reise nach München?",
+      "Wann beginnt ihr eurem Reise nach München?",
+      "Wann beginnt ihr euren Reise nach München?",
+      "Wann beginnt ihr eure Reise nach München?"
+    ],
+    "correct_index": 3,
+    "explanation": "'beginnen' takes Akkusativ. 'ihr' possessive in Akkusativ Feminin -> 'eure Reise'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Reise)",
+    "b1_verb": "beginnen"
+  },
+  {
+    "id": 42,
+    "topic": "Akkusativ Feminin (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ సంతకాన్ని ఇక్కడ చేయగలరా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಸಹಿಯನ್ನು ಇಲ್ಲಿ ಮಾಡಬಹುದೇ?",
+    "target_de": "Können Sie bitte Ihre Unterschrift hier setzen?",
+    "options": [
+      "Können Sie bitte Ihrem Unterschrift hier setzen?",
+      "Können Sie bitte Ihren Unterschrift hier setzen?",
+      "Können Sie bitte Ihre Unterschrift hier setzen?",
+      "Können Sie bitte Ihrer Unterschrift hier setzen?"
+    ],
+    "correct_index": 2,
+    "explanation": "'setzen' takes Akkusativ. Formal 'Sie' possessive in Akkusativ Feminin -> 'Ihre Unterschrift'.",
+    "case": "Akkusativ",
+    "gender": "Feminin (die Unterschrift)",
+    "b1_verb": "setzen"
+  },
+  {
+    "id": 43,
+    "topic": "Akkusativ Neutrum (ich -> mein)",
+    "prompt_te": "నేను నా బైక్‌ను సర్వీస్ సెంటర్‌కు తీసుకెళ్తున్నాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ಬೈಕ್ ಅನ್ನು ಸರ್ವಿಸ್ ಸೆಂಟರ್‌ಗೆ ಕೊಂಡೊಯ್ಯುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich bringe mein Fahrrad zur Reparatur.",
+    "options": [
+      "Ich bringe meines Fahrrads zur Reparatur.",
+      "Ich bringe mein Fahrrad zur Reparatur.",
+      "Ich bringe meinen Fahrrad zur Reparatur.",
+      "Ich bringe meinem Fahrrad zur Reparatur."
+    ],
+    "correct_index": 1,
+    "explanation": "'bringen' takes Akkusativ. 'das Fahrrad' is neuter -> 'mein Fahrrad'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Fahrrad)",
+    "b1_verb": "bringen"
+  },
+  {
+    "id": 44,
+    "topic": "Akkusativ Neutrum (du -> dein)",
+    "prompt_te": "నువ్వు నీ ధృవీకరణ పత్రాన్ని అందుకున్నావా?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸಿದೆಯಾ?",
+    "target_de": "Hast du dein Zertifikat schon erhalten?",
+    "options": [
+      "Hast du dein Zertifikat schon erhalten?",
+      "Hast du deinen Zertifikat schon erhalten?",
+      "Hast du deinem Zertifikat schon erhalten?",
+      "Hast du deines Zertifikats schon erhalten?"
+    ],
+    "correct_index": 0,
+    "explanation": "'erhalten' takes Akkusativ. 'das Zertifikat' is neuter -> 'dein Zertifikat'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Zertifikat)",
+    "b1_verb": "erhalten"
+  },
+  {
+    "id": 45,
+    "topic": "Akkusativ Neutrum (er -> sein)",
+    "prompt_te": "అతను తన పాత కారును అమ్మాలనుకుంటున్నాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಹಳೆಯ ಕಾರನ್ನು ಮಾರಾಟ ಮಾಡಲು ಬಯಸುತ್ತಾನೆ.",
+    "target_de": "Er möchte sein Auto verkaufen.",
+    "options": [
+      "Er möchte seinen Auto verkaufen.",
+      "Er möchte seinem Auto verkaufen.",
+      "Er möchte seines Autos verkaufen.",
+      "Er möchte sein Auto verkaufen."
+    ],
+    "correct_index": 3,
+    "explanation": "'verkaufen' takes Akkusativ. 'das Auto' is neuter -> 'sein Auto'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Auto)",
+    "b1_verb": "verkaufen"
+  },
+  {
+    "id": 46,
+    "topic": "Akkusativ Neutrum (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన బిడ్డను కిండర్‌గార్టెన్ నుండి తీసుకువస్తుంది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಮಗುವನ್ನು ಕಿಂಡರ್‌ಗಾರ್ಟನ್‌ನಿಂದ ಕರೆತರುತ್ತಾಳೆ.",
+    "target_de": "Sie holt ihr Kind vom Kindergarten ab.",
+    "options": [
+      "Sie holt ihrem Kind vom Kindergarten ab.",
+      "Sie holt ihres Kindes vom Kindergarten ab.",
+      "Sie holt ihr Kind vom Kindergarten ab.",
+      "Sie holt ihren Kind vom Kindergarten ab."
+    ],
+    "correct_index": 2,
+    "explanation": "'abholen' takes Akkusativ. 'das Kind' is neuter -> 'ihr Kind'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Kind)",
+    "b1_verb": "abholen"
+  },
+  {
+    "id": 47,
+    "topic": "Akkusativ Neutrum (wir -> unser)",
+    "prompt_te": "మేము ఈ రాత్రికి మా గదిని బుక్ చేయాలి.",
+    "prompt_kn": "ನಾವು ಈ ರಾತ್ರಿಗೆ ನಮ್ಮ ಕೊಠಡಿಯನ್ನು ಕಾಯ್ದಿರಿಸಬೇಕು.",
+    "target_de": "Wir müssen unser Zimmer rechtzeitig buchen.",
+    "options": [
+      "Wir müssen unseres Zimmers rechtzeitig buchen.",
+      "Wir müssen unser Zimmer rechtzeitig buchen.",
+      "Wir müssen unseren Zimmer rechtzeitig buchen.",
+      "Wir müssen unserem Zimmer rechtzeitig buchen."
+    ],
+    "correct_index": 1,
+    "explanation": "'buchen' takes Akkusativ. 'das Zimmer' is neuter -> 'unser Zimmer'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Zimmer)",
+    "b1_verb": "buchen"
+  },
+  {
+    "id": 48,
+    "topic": "Akkusativ Neutrum (ihr -> euer)",
+    "prompt_te": "మీరు మీ సమస్యను పరిష్కరించుకున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಸಮಸ್ಯೆಯನ್ನು ಪರಿಹರಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
+    "target_de": "Habt ihr euer Problem schon gelöst?",
+    "options": [
+      "Habt ihr euer Problem schon gelöst?",
+      "Habt ihr euren Problem schon gelöst?",
+      "Habt ihr eurem Problem schon gelöst?",
+      "Habt ihr eures Problems schon gelöst?"
+    ],
+    "correct_index": 0,
+    "explanation": "'lösen' takes Akkusativ. 'das Problem' is neuter -> 'euer Problem'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Problem)",
+    "b1_verb": "lösen"
+  },
+  {
+    "id": 49,
+    "topic": "Akkusativ Neutrum (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ ఫారమ్‌ను పూరించారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿದ್ದೀರಾ?",
+    "target_de": "Haben Sie Ihr Formular vollständig ausgefüllt?",
+    "options": [
+      "Haben Sie Ihren Formular vollständig ausgefüllt?",
+      "Haben Sie Ihrem Formular vollständig ausgefüllt?",
+      "Haben Sie Ihres Formulars vollständig ausgefüllt?",
+      "Haben Sie Ihr Formular vollständig ausgefüllt?"
+    ],
+    "correct_index": 3,
+    "explanation": "'ausfüllen' takes Akkusativ. Formal 'Sie' possessive in Akkusativ Neutrum -> 'Ihr Formular'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Formular)",
+    "b1_verb": "ausfüllen"
+  },
+  {
+    "id": 50,
+    "topic": "Akkusativ Plural (ich -> mein)",
+    "prompt_te": "నేను నా పత్రాలను ఆఫీసులో సమర్పించాను.",
+    "prompt_kn": "ನಾನು ನನ್ನ ದಾಖಲೆಗಳನ್ನು ಕಚೇರಿಯಲ್ಲಿ ಸಲ್ಲಿಸಿದೆನು.",
+    "target_de": "Ich habe meine Dokumente im Büro abgegeben.",
+    "options": [
+      "Ich habe meinem Dokumente im Büro abgegeben.",
+      "Ich habe meiner Dokumente im Büro abgegeben.",
+      "Ich habe meine Dokumente im Büro abgegeben.",
+      "Ich habe meinen Dokumente im Büro abgegeben."
+    ],
+    "correct_index": 2,
+    "explanation": "'abgeben' takes Akkusativ. Plural possessive takes -e -> 'meine Dokumente'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Dokumente)",
+    "b1_verb": "abgeben"
+  },
+  {
+    "id": 51,
+    "topic": "Akkusativ Plural (du -> dein)",
+    "prompt_te": "నువ్వు నీ బట్టలను ఉతికించావా?",
+    "prompt_kn": "ನೀನು ನಿನ್ನ ಬಟ್ಟೆಗಳನ್ನು ಒಗೆದೆಯಾ?",
+    "target_de": "Hast du deine Kleider schon gewaschen?",
+    "options": [
+      "Hast du deiner Kleider schon gewaschen?",
+      "Hast du deine Kleider schon gewaschen?",
+      "Hast du deinen Kleider schon gewaschen?",
+      "Hast du deinem Kleider schon gewaschen?"
+    ],
+    "correct_index": 1,
+    "explanation": "'waschen' takes Akkusativ. Plural possessive takes -e -> 'deine Kleider'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Kleider)",
+    "b1_verb": "waschen"
+  },
+  {
+    "id": 52,
+    "topic": "Akkusativ Plural (er -> sein)",
+    "prompt_te": "అతను తన స్నేహితులను పార్టీకి ఆహ్వానించాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಸ್ನೇಹಿತರನ್ನು ಪಾರ್ಟಿಗೆ ಆಹ್ವಾನಿಸಿದನು.",
+    "target_de": "Er hat seine Freunde zur Feier eingeladen.",
+    "options": [
+      "Er hat seine Freunde zur Feier eingeladen.",
+      "Er hat seinen Freunde zur Feier eingeladen.",
+      "Er hat seinem Freunde zur Feier eingeladen.",
+      "Er hat seiner Freunde zur Feier eingeladen."
+    ],
+    "correct_index": 0,
+    "explanation": "'einladen' takes Akkusativ. Plural possessive takes -e -> 'seine Freunde'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Freunde)",
+    "b1_verb": "einladen"
+  },
+  {
+    "id": 53,
+    "topic": "Akkusativ Plural (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన కీలను బ్యాగ్‌లో ఉంచింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಕೀಲಿಗಳನ್ನು ಬ್ಯಾಗ್‌ನಲ್ಲಿ ಇಟ್ಟಳು.",
+    "target_de": "Sie sucht ihre Schlüssel überall in der Wohnung.",
+    "options": [
+      "Sie sucht ihren Schlüssel überall in der Wohnung.",
+      "Sie sucht ihrem Schlüssel überall in der Wohnung.",
+      "Sie sucht ihrer Schlüssel überall in der Wohnung.",
+      "Sie sucht ihre Schlüssel überall in der Wohnung."
+    ],
+    "correct_index": 3,
+    "explanation": "'suchen' takes Akkusativ. 'die Schlüssel' (plural) possessive -> 'ihre Schlüssel'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Schlüssel)",
+    "b1_verb": "suchen"
+  },
+  {
+    "id": 54,
+    "topic": "Akkusativ Plural (wir -> unser)",
+    "prompt_te": "మేము మా సందేహాలను ఉపాధ్యాయుడిని అడిగాము.",
+    "prompt_kn": "ನಾವು ನಮ್ಮ ಅನುಮಾನಗಳನ್ನು ಶಿಕ್ಷಕರನ್ನು ಕೇಳಿದೆವು.",
+    "target_de": "Wir haben unsere Fragen im Kurs gestellt.",
+    "options": [
+      "Wir haben unserem Fragen im Kurs gestellt.",
+      "Wir haben unserer Fragen im Kurs gestellt.",
+      "Wir haben unsere Fragen im Kurs gestellt.",
+      "Wir haben unseren Fragen im Kurs gestellt."
+    ],
+    "correct_index": 2,
+    "explanation": "'stellen' takes Akkusativ. Plural possessive takes -e -> 'unsere Fragen'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Fragen)",
+    "b1_verb": "stellen"
+  },
+  {
+    "id": 55,
+    "topic": "Akkusativ Plural (ihr -> euer)",
+    "prompt_te": "మీరు మీ తప్పులను సరిదిద్దుకున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ತಪ್ಪುಗಳನ್ನು ಸರಿಪಡಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
+    "target_de": "Habt ihr eure Fehler korrigiert?",
+    "options": [
+      "Habt ihr eurer Fehler korrigiert?",
+      "Habt ihr eure Fehler korrigiert?",
+      "Habt ihr euren Fehler korrigiert?",
+      "Habt ihr eurem Fehler korrigiert?"
+    ],
+    "correct_index": 1,
+    "explanation": "'korrigieren' takes Akkusativ. Plural possessive takes -e -> 'eure Fehler'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Fehler)",
+    "b1_verb": "korrigieren"
+  },
+  {
+    "id": 56,
+    "topic": "Akkusativ Plural (Sie -> Ihr)",
+    "prompt_te": "మీరు మీ టిక్కెట్లను ప్రింట్ చేసుకున్నారా?",
+    "prompt_kn": "ನೀವು ನಿಮ್ಮ ಟಿಕೆಟ್‌ಗಳನ್ನು ಮುದ್ರಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
+    "target_de": "Haben Sie Ihre Tickets schon ausgedruckt?",
+    "options": [
+      "Haben Sie Ihre Tickets schon ausgedruckt?",
+      "Haben Sie Ihren Tickets schon ausgedruckt?",
+      "Haben Sie Ihrem Tickets schon ausgedruckt?",
+      "Haben Sie Ihrer Tickets schon ausgedruckt?"
+    ],
+    "correct_index": 0,
+    "explanation": "'ausdrucken' takes Akkusativ. Formal 'Sie' possessive in Akkusativ Plural -> 'Ihre Tickets'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Tickets)",
+    "b1_verb": "ausdrucken"
+  },
+  {
+    "id": 57,
+    "topic": "Genitiv Maskulin (ich -> mein)",
+    "prompt_te": "నా స్నేహితుడి రాక కారణంగా మేము ఒక విందు ఏర్పాటు చేశాము.",
+    "prompt_kn": "ನನ್ನ ಸ್ನೇಹಿತನ ಆಗಮನದ ಕಾರಣ ನಾವು ಭೋಜನವನ್ನು ಏರ್ಪಡಿಸಿದ್ದೇವೆ.",
+    "target_de": "Wegen der Ankunft meines Freundes feiern wir heute.",
+    "options": [
+      "Wegen der Ankunft meinem Freund feiern wir heute.",
+      "Wegen der Ankunft meinen Freund feiern wir heute.",
+      "Wegen der Ankunft mein Freund feiern wir heute.",
+      "Wegen der Ankunft meines Freundes feiern wir heute."
+    ],
+    "correct_index": 3,
+    "explanation": "Genitive attribute ('Ankunft [wessen?] meines Freundes'). 'der Freund' is masculine -> 'meines Freundes'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Freund)",
+    "b1_verb": "feiern / wegen"
+  },
+  {
+    "id": 58,
+    "topic": "Genitiv Maskulin (du -> dein)",
+    "prompt_te": "నీ ఉపాధ్యాయుడి సలహా వల్ల నువ్వు విజయం సాధించావు.",
+    "prompt_kn": "ನಿನ್ನ ಶಿಕ್ಷಕರ ಸಲಹೆಯ ಕಾರಣ ನೀನು ಯಶಸ್ಸನ್ನು ಸಾಧಿಸಿದೆ.",
+    "target_de": "Dank des Rates deines Lehrers hast du Erfolg gehabt.",
+    "options": [
+      "Dank des Rates deinen Lehrer hast du Erfolg gehabt.",
+      "Dank des Rates dein Lehrer hast du Erfolg gehabt.",
+      "Dank des Rates deines Lehrers hast du Erfolg gehabt.",
+      "Dank des Rates deinem Lehrer hast du Erfolg gehabt."
+    ],
+    "correct_index": 2,
+    "explanation": "Genitive relation ('des Rates deines Lehrers'). 'der Lehrer' is masculine -> 'deines Lehrers'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Lehrer)",
+    "b1_verb": "haben / dank"
+  },
+  {
+    "id": 59,
+    "topic": "Genitiv Maskulin (er -> sein)",
+    "prompt_te": "అతను తన కారు మరమ్మతు కోసం చాలా ఖర్చు చేశాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಕಾರಿನ ದುರಸ್ತಿಗಾಗಿ ತುಂಬಾ ಹಣ ಖರ್ಚು ಮಾಡಿದನು.",
+    "target_de": "Er zahlt viel für die Reparatur seines Autos.",
+    "options": [
+      "Er zahlt viel für die Reparatur sein Auto.",
+      "Er zahlt viel für die Reparatur seines Autos.",
+      "Er zahlt viel für die Reparatur seinem Auto.",
+      "Er zahlt viel für die Reparatur seinen Auto."
+    ],
+    "correct_index": 1,
+    "explanation": "Genitive relation ('Reparatur seines Autos'). 'das Auto' in Genitiv -> 'seines Autos'.",
+    "case": "Genitiv",
+    "gender": "Maskulin/Neutrum (das Auto / der Wagen)",
+    "b1_verb": "zahlen"
+  },
+  {
+    "id": 60,
+    "topic": "Genitiv Maskulin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన కొడుకు విజయాన్ని చూసి గర్వపడుతోంది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಮಗನ ಯಶಸ್ಸನ್ನು ಕಂಡು ಹೆಮ್ಮೆಪಡುತ್ತಾಳೆ.",
+    "target_de": "Sie freut sich über den Erfolg ihres Sohnes.",
+    "options": [
+      "Sie freut sich über den Erfolg ihres Sohnes.",
+      "Sie freut sich über den Erfolg ihrem Sohn.",
+      "Sie freut sich über den Erfolg ihren Sohn.",
+      "Sie freut sich über den Erfolg ihr Sohn."
+    ],
+    "correct_index": 0,
+    "explanation": "Genitive attribute ('Erfolg [wessen?] ihres Sohnes'). 'der Sohn' is masculine -> 'ihres Sohnes'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Sohn)",
+    "b1_verb": "sich freuen"
+  },
+  {
+    "id": 61,
+    "topic": "Genitiv Maskulin (wir -> unser)",
+    "prompt_te": "మా కొత్త బాస్ నిర్ణయం వల్ల పని వేగవంతమైంది.",
+    "prompt_kn": "ನಮ್ಮ ಹೊಸ ಮುಖ್ಯಸ್ಥರ ನಿರ್ಧಾರದಿಂದ ಕೆಲಸವು ವೇಗವಾಯಿತು.",
+    "target_de": "Wegen der Entscheidung unseres Chefs arbeiten wir schneller.",
+    "options": [
+      "Wegen der Entscheidung unserem Chef arbeiten wir schneller.",
+      "Wegen der Entscheidung unseren Chef arbeiten wir schneller.",
+      "Wegen der Entscheidung unser Chef arbeiten wir schneller.",
+      "Wegen der Entscheidung unseres Chefs arbeiten wir schneller."
+    ],
+    "correct_index": 3,
+    "explanation": "'wegen' governs Genitiv -> 'unseres Chefs'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Chef)",
+    "b1_verb": "arbeiten / wegen"
+  },
+  {
+    "id": 62,
+    "topic": "Genitiv Feminin (ich -> mein)",
+    "prompt_te": "నా తల్లి ఆరోగ్యం కోసం నేను ప్రార్థిస్తున్నాను.",
+    "prompt_kn": "ನನ್ನ ತಾಯಿಯ ಆರೋಗ್ಯಕ್ಕಾಗಿ ನಾನು ಪ್ರಾರ್ಥಿಸುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich sorge mich wegen der Gesundheit meiner Mutter.",
+    "options": [
+      "Ich sorge mich wegen der Gesundheit meinem Mutter.",
+      "Ich sorge mich wegen der Gesundheit meinen Mutter.",
+      "Ich sorge mich wegen der Gesundheit meiner Mutter.",
+      "Ich sorge mich wegen der Gesundheit meine Mutter."
+    ],
+    "correct_index": 2,
+    "explanation": "'wegen' requires Genitiv. 'die Mutter' is feminine -> 'meiner Mutter'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Mutter)",
+    "b1_verb": "sorgen / wegen"
+  },
+  {
+    "id": 63,
+    "topic": "Genitiv Feminin (du -> dein)",
+    "prompt_te": "నీ చెల్లి పెళ్లి ఎప్పుడు జరుగుతుంది?",
+    "prompt_kn": "ನಿನ್ನ ಸಹೋದರಿಯ ಮದುವೆ ಯಾವಾಗ ನಡೆಯುತ್ತದೆ?",
+    "target_de": "Wann ist die Hochzeit deiner Schwester?",
+    "options": [
+      "Wann ist die Hochzeit deinen Schwester?",
+      "Wann ist die Hochzeit deiner Schwester?",
+      "Wann ist die Hochzeit deine Schwester?",
+      "Wann ist die Hochzeit deinem Schwester?"
+    ],
+    "correct_index": 1,
+    "explanation": "Genitive attribute ('Hochzeit [wessen?] deiner Schwester') -> 'deiner Schwester'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Schwester)",
+    "b1_verb": "sein"
+  },
+  {
+    "id": 64,
+    "topic": "Genitiv Feminin (er -> sein)",
+    "prompt_te": "అతను తన భార్య పుట్టినరోజును ఘనంగా జరుపుకున్నాడు.",
+    "prompt_kn": "ಅವನು ತನ್ನ ಹೆಂಡತಿಯ ಜನ್ಮದಿನವನ್ನು ಅದ್ಧೂರಿಯಾಗಿ ಆಚರಿಸಿದನು.",
+    "target_de": "Er plant das Fest zum Geburtstag seiner Ehefrau.",
+    "options": [
+      "Er plant das Fest zum Geburtstag seiner Ehefrau.",
+      "Er plant das Fest zum Geburtstag seine Ehefrau.",
+      "Er plant das Fest zum Geburtstag seinem Ehefrau.",
+      "Er plant das Fest zum Geburtstag seinen Ehefrau."
+    ],
+    "correct_index": 0,
+    "explanation": "Genitive attribute ('Geburtstag seiner Ehefrau') -> 'seiner Ehefrau'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Ehefrau)",
+    "b1_verb": "planen"
+  },
+  {
+    "id": 65,
+    "topic": "Genitiv Feminin (sie [she] -> ihr)",
+    "prompt_te": "ఆమె తన అనారోగ్యం ఉన్నప్పటికీ ఆఫీసుకు వచ్చింది.",
+    "prompt_kn": "ಅವಳು ತನ್ನ ಅನಾರೋಗ್ಯದ ಹೊರತಾಗಿಯೂ ಕಚೇರಿಗೆ ಬಂದಳು.",
+    "target_de": "Trotz ihrer Krankheit geht sie heute ins Büro.",
+    "options": [
+      "Trotz ihre Krankheit geht sie heute ins Büro.",
+      "Trotz ihrem Krankheit geht sie heute ins Büro.",
+      "Trotz ihren Krankheit geht sie heute ins Büro.",
+      "Trotz ihrer Krankheit geht sie heute ins Büro."
+    ],
+    "correct_index": 3,
+    "explanation": "'trotz' requires Genitiv. 'die Krankheit' is feminine -> 'ihrer Krankheit'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Krankheit)",
+    "b1_verb": "gehen / trotz"
+  },
+  {
+    "id": 66,
+    "topic": "Genitiv Feminin (wir -> unser)",
+    "prompt_te": "మా ప్రయాణం సమయంలో మేము ఎన్నో ఆసక్తికరమైన విషయాలు చూశాము.",
+    "prompt_kn": "ನಮ್ಮ ಪ್ರಯಾಣದ ಸಮಯದಲ್ಲಿ ನಾವು ಅನೇಕ ಆಸಕ್ತಿದಾಯಕ ವಿಷಯಗಳನ್ನು ನೋಡಿದೆವು.",
+    "target_de": "Während unserer Reise haben wir viel erlebt.",
+    "options": [
+      "Während unserem Reise haben wir viel erlebt.",
+      "Während unseren Reise haben wir viel erlebt.",
+      "Während unserer Reise haben wir viel erlebt.",
+      "Während unsere Reise haben wir viel erlebt."
+    ],
+    "correct_index": 2,
+    "explanation": "'während' demands Genitiv. 'die Reise' is feminine -> 'unserer Reise'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Reise)",
+    "b1_verb": "erleben / während"
+  },
+  {
+    "id": 67,
+    "topic": "Genitiv Neutrum (ich -> mein)",
+    "prompt_te": "నా పిల్లవాడి పురోగతిని చూసి నేను సంతోషిస్తున్నాను.",
+    "prompt_kn": "ನನ್ನ ಮಗುವಿನ ಪ್ರಗತಿಯನ್ನು ನೋಡಿ ನಾನು ಸಂತೋಷಪಡುತ್ತೇನೆ.",
+    "target_de": "Ich freue mich über die Entwicklung meines Kindes.",
+    "options": [
+      "Ich freue mich über die Entwicklung mein Kind.",
+      "Ich freue mich über die Entwicklung meines Kindes.",
+      "Ich freue mich über die Entwicklung meinem Kind.",
+      "Ich freue mich über die Entwicklung meinen Kind."
+    ],
+    "correct_index": 1,
+    "explanation": "Genitive attribute ('Entwicklung meines Kindes'). 'das Kind' is neuter -> 'meines Kindes'.",
+    "case": "Genitiv",
+    "gender": "Neutrum (das Kind)",
+    "b1_verb": "sich freuen"
+  },
+  {
+    "id": 68,
+    "topic": "Genitiv Neutrum (wir -> unser)",
+    "prompt_te": "మా కొత్త ఇంటి స్థానం చాలా ప్రశాంతంగా ఉంది.",
+    "prompt_kn": "ನಮ್ಮ ಹೊಸ ಮನೆಯ ಸ್ಥಳವು ತುಂಬಾ ಶಾಂತವಾಗಿದೆ.",
+    "target_de": "Die Lage unseres Hauses ist sehr ruhig.",
+    "options": [
+      "Die Lage unseres Hauses ist sehr ruhig.",
+      "Die Lage unserem Haus ist sehr ruhig.",
+      "Die Lage unseren Haus ist sehr ruhig.",
+      "Die Lage unser Haus ist sehr ruhig."
+    ],
+    "correct_index": 0,
+    "explanation": "Genitive attribute ('Lage unseres Hauses'). 'das Haus' is neuter -> 'unseres Hauses'.",
+    "case": "Genitiv",
+    "gender": "Neutrum (das Haus)",
+    "b1_verb": "sein"
+  },
+  {
+    "id": 69,
+    "topic": "Genitiv Plural (wir -> unser)",
+    "prompt_te": "మా సెలవుల సమయంలో మేము ప్రతిరోజూ జర్మన్ నేర్చుకున్నాము.",
+    "prompt_kn": "ನಮ್ಮ ರಜಾದಿನಗಳ ಸಮಯದಲ್ಲಿ ನಾವು ಪ್ರತಿದಿನ ಜರ್ಮನ್ ಕಲಿತೆವು.",
+    "target_de": "Während unserer Ferien haben wir fleißig Deutsch gelernt.",
+    "options": [
+      "Während unserem Ferien haben wir fleißig Deutsch gelernt.",
+      "Während unseren Ferien haben wir fleißig Deutsch gelernt.",
+      "Während unsere Ferien haben wir fleißig Deutsch gelernt.",
+      "Während unserer Ferien haben wir fleißig Deutsch gelernt."
+    ],
+    "correct_index": 3,
+    "explanation": "'während' requires Genitiv. Plural possessive takes -er -> 'unserer Ferien'.",
+    "case": "Genitiv",
+    "gender": "Plural (die Ferien)",
+    "b1_verb": "lernen / während"
+  },
+  {
+    "id": 70,
+    "topic": "Genitiv Plural (sie [they] -> ihr)",
+    "prompt_te": "తమ తల్లిదండ్రుల మద్దతుతో వారు పరీక్ష రాశారు.",
+    "prompt_kn": "ತಮ್ಮ ಪೋಷಕರ ಬೆಂಬಲದೊಂದಿಗೆ ಅವರು ಪರೀಕ್ಷೆಯನ್ನು ಬರೆದರು.",
+    "target_de": "Dank der Hilfe ihrer Eltern haben sie die Prüfung geschafft.",
+    "options": [
+      "Dank der Hilfe ihren Eltern haben sie die Prüfung geschafft.",
+      "Dank der Hilfe ihre Eltern haben sie die Prüfung geschafft.",
+      "Dank der Hilfe ihrer Eltern haben sie die Prüfung geschafft.",
+      "Dank der Hilfe ihrem Eltern haben sie die Prüfung geschafft."
+    ],
+    "correct_index": 2,
+    "explanation": "Genitive attribute ('Hilfe ihrer Eltern'). Plural possessive takes -er -> 'ihrer Eltern'.",
+    "case": "Genitiv",
+    "gender": "Plural (die Eltern)",
+    "b1_verb": "schaffen / dank"
+  },
+  {
+    "id": 71,
+    "topic": "Nominativ Maskulin (ich -> mein)",
+    "prompt_te": "నా సోదరుడు బెర్లిన్‌లో ఇంజనీరింగ్ చదువుతున్నాడు.",
+    "prompt_kn": "ನನ್ನ ಸಹೋದರ ಬರ್ಲಿನ್‌ನಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್ ಓದುತ್ತಿದ್ದಾನೆ.",
+    "target_de": "Mein Bruder studiert Ingenieurwesen in Berlin.",
+    "options": [
+      "Meines Bruders studiert Ingenieurwesen in Berlin.",
+      "Mein Bruder studiert Ingenieurwesen in Berlin.",
+      "Meinen Bruder studiert Ingenieurwesen in Berlin.",
+      "Meinem Bruder studiert Ingenieurwesen in Berlin."
+    ],
+    "correct_index": 1,
+    "explanation": "Subject is in Nominativ. 'der Bruder' is masculine -> 'Mein Bruder'.",
+    "case": "Nominativ",
+    "gender": "Maskulin (der Bruder)",
+    "b1_verb": "studieren"
+  },
+  {
+    "id": 72,
+    "topic": "Nominativ Maskulin (du -> dein)",
+    "prompt_te": "నీ తండ్రి ఇంకా ఆ ఆసుపత్రిలో పనిచేస్తున్నారా?",
+    "prompt_kn": "ನಿನ್ನ ತಂದೆ ಇನ್ನೂ ಆ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದಾರಾ?",
+    "target_de": "Arbeitet dein Vater noch in diesem Krankenhaus?",
+    "options": [
+      "Arbeitet dein Vater noch in diesem Krankenhaus?",
+      "Arbeitet deinen Vater noch in diesem Krankenhaus?",
+      "Arbeitet deinem Vater noch in diesem Krankenhaus?",
+      "Arbeitet deines Vaters noch in diesem Krankenhaus?"
+    ],
+    "correct_index": 0,
+    "explanation": "Subject is in Nominativ. 'der Vater' is masculine -> 'dein Vater'.",
+    "case": "Nominativ",
+    "gender": "Maskulin (der Vater)",
+    "b1_verb": "arbeiten"
+  },
+  {
+    "id": 73,
+    "topic": "Nominativ Feminin (wir -> unser)",
+    "prompt_te": "మా కొత్త ఉపాధ్యాయురాలు చాలా స్నేహపూర్వకంగా ఉంది.",
+    "prompt_kn": "ನಮ್ಮ ಹೊಸ ಶಿಕ್ಷಕಿ ತುಂಬಾ ಸ್ನೇಹಪರರಾಗಿದ್ದಾರೆ.",
+    "target_de": "Unsere neue Lehrerin ist sehr freundlich und geduldig.",
+    "options": [
+      "Unser neue Lehrerin ist sehr freundlich und geduldig.",
+      "Unserer neue Lehrerin ist sehr freundlich und geduldig.",
+      "Unseren neue Lehrerin ist sehr freundlich und geduldig.",
+      "Unsere neue Lehrerin ist sehr freundlich und geduldig."
+    ],
+    "correct_index": 3,
+    "explanation": "Subject is in Nominativ. 'die Lehrerin' is feminine -> 'Unsere neue Lehrerin'.",
+    "case": "Nominativ",
+    "gender": "Feminin (die Lehrerin)",
+    "b1_verb": "sein"
+  },
+  {
+    "id": 74,
+    "topic": "Nominativ Neutrum (ihr -> euer)",
+    "prompt_te": "మీ అపార్ట్‌మెంట్ చాలా పెద్దగా మరియు ఆధునికంగా ఉందా?",
+    "prompt_kn": "ನಿಮ್ಮ ಅಪಾರ್ಟ್ಮೆಂಟ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ ಮತ್ತು ಆಧುನಿಕವಾಗಿದೆಯೇ?",
+    "target_de": "Ist euer Apartment wirklich so modern und hell?",
+    "options": [
+      "Ist eurem Apartment wirklich so modern und hell?",
+      "Ist euren Apartment wirklich so modern und hell?",
+      "Ist euer Apartment wirklich so modern und hell?",
+      "Ist eurer Apartment wirklich so modern und hell?"
+    ],
+    "correct_index": 2,
+    "explanation": "Subject is in Nominativ. 'das Apartment' is neuter -> 'euer Apartment'.",
+    "case": "Nominativ",
+    "gender": "Neutrum (das Apartment)",
+    "b1_verb": "sein"
+  },
+  {
+    "id": 75,
+    "topic": "Nominativ Plural (du -> dein)",
+    "prompt_te": "నీ సహోద్యోగులు కూడా ఈ సమావేశానికి వస్తున్నారా?",
+    "prompt_kn": "ನಿನ್ನ ಸಹೋದ್ಯೋಗಿಗಳು ಸಹ ಈ ಸಭೆಗೆ ಬರುತ್ತಿದ್ದಾರಾ?",
+    "target_de": "Kommen deine Kollegen auch zu dieser Besprechung?",
+    "options": [
+      "Kommen deiner Kollegen auch zu dieser Besprechung?",
+      "Kommen deine Kollegen auch zu dieser Besprechung?",
+      "Kommen dein Kollegen auch zu dieser Besprechung?",
+      "Kommen deinen Kollegen auch zu dieser Besprechung?"
+    ],
+    "correct_index": 1,
+    "explanation": "Subject is in Nominativ. 'die Kollegen' is plural -> 'deine Kollegen'.",
+    "case": "Nominativ",
+    "gender": "Plural (die Kollegen)",
+    "b1_verb": "kommen"
+  },
+  {
+    "id": 76,
+    "topic": "Akkusativ Maskulin (der Pass) (ich -> mein)",
+    "prompt_te": "నా పాస్‌పోర్ట్‌ను పునరుద్ధరించుకోవాలి.",
+    "prompt_kn": "ನನ್ನ ಪಾಸ್‌ಪೋರ್ಟ್ ಅನ್ನು ನವೀಕರಿಸಬೇಕು.",
+    "target_de": "Meinen Pass muss ich nächsten Monat verlängern.",
+    "options": [
+      "Meinen Pass muss ich nächsten Monat verlängern.",
+      "Meinem Pass muss ich nächsten Monat verlängern.",
+      "Meines Pass muss ich nächsten Monat verlängern.",
+      "Meine Pass muss ich nächsten Monat verlängern."
+    ],
+    "correct_index": 0,
+    "explanation": "'verlängern' requires AKKUSATIV. The noun 'Pass' is Maskulin (der Pass). Therefore, the possessive 'mein' takes the ending -> 'Meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Pass)",
+    "b1_verb": "verlängern"
+  },
+  {
+    "id": 77,
+    "topic": "Akkusativ Maskulin (der Ausweis) (ich -> mein)",
+    "prompt_te": "నా గుర్తింపు కార్డును సరిహద్దు వద్ద చూపించాలి.",
+    "prompt_kn": "ನನ್ನ ಗುರುತಿನ ಚೀಟಿಯನ್ನು ಗಡಿಯಲ್ಲಿ ತೋರಿಸಬೇಕು.",
+    "target_de": "Sie müssen meinen Ausweis an der Grenze vorzeigen.",
+    "options": [
+      "Sie müssen meinem Ausweis an der Grenze vorzeigen.",
+      "Sie müssen meines Ausweis an der Grenze vorzeigen.",
+      "Sie müssen meine Ausweis an der Grenze vorzeigen.",
+      "Sie müssen meinen Ausweis an der Grenze vorzeigen."
+    ],
+    "correct_index": 3,
+    "explanation": "'zeigen' requires AKKUSATIV. The noun 'Ausweis' is Maskulin (der Ausweis). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Ausweis)",
+    "b1_verb": "zeigen"
+  },
+  {
+    "id": 78,
+    "topic": "Akkusativ Maskulin (der Koffer) (ich -> mein)",
+    "prompt_te": "నా సూట్‌కేస్‌ను మోయలేకపోతున్నాను.",
+    "prompt_kn": "ನನ್ನ ಸೂಟ್‌ಕೇಸ್ ಅನ್ನು ಹೊರಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Ich kann meinen Koffer nicht allein tragen.",
+    "options": [
+      "Ich kann meines Koffer nicht allein tragen.",
+      "Ich kann meine Koffer nicht allein tragen.",
+      "Ich kann meinen Koffer nicht allein tragen.",
+      "Ich kann meinem Koffer nicht allein tragen."
+    ],
+    "correct_index": 2,
+    "explanation": "'tragen' requires AKKUSATIV. The noun 'Koffer' is Maskulin (der Koffer). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Koffer)",
+    "b1_verb": "tragen"
+  },
+  {
+    "id": 79,
+    "topic": "Akkusativ Maskulin (der Bericht) (ich -> mein)",
+    "prompt_te": "నా నివేదికను ఈరోజు పూర్తి చేయాలి.",
+    "prompt_kn": "ನನ್ನ ವರದಿಯನ್ನು ಇಂದು ಪೂರ್ಣಗೊಳಿಸಬೇಕು.",
+    "target_de": "Er muss meinen Bericht bis 17 Uhr abgeben.",
+    "options": [
+      "Er muss meine Bericht bis 17 Uhr abgeben.",
+      "Er muss meinen Bericht bis 17 Uhr abgeben.",
+      "Er muss meinem Bericht bis 17 Uhr abgeben.",
+      "Er muss meines Bericht bis 17 Uhr abgeben."
+    ],
+    "correct_index": 1,
+    "explanation": "'schreiben' requires AKKUSATIV. The noun 'Bericht' is Maskulin (der Bericht). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Bericht)",
+    "b1_verb": "schreiben"
+  },
+  {
+    "id": 80,
+    "topic": "Akkusativ Maskulin (der Schlüssel) (ich -> mein)",
+    "prompt_te": "నా కీని ఎంత వెతికినా కనిపించలేదు.",
+    "prompt_kn": "ನನ್ನ ಕೀಲಿಯನ್ನು ಹುಡುಕುತ್ತಿದ್ದರೂ ಸಿಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Wo hast du meinen Schlüssel hingelegt?",
+    "options": [
+      "Wo hast du meinen Schlüssel hingelegt?",
+      "Wo hast du meinem Schlüssel hingelegt?",
+      "Wo hast du meines Schlüssel hingelegt?",
+      "Wo hast du meine Schlüssel hingelegt?"
+    ],
+    "correct_index": 0,
+    "explanation": "'suchen' requires AKKUSATIV. The noun 'Schlüssel' is Maskulin (der Schlüssel). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Schlüssel)",
+    "b1_verb": "suchen"
+  },
+  {
+    "id": 81,
+    "topic": "Akkusativ Maskulin (der Brief) (ich -> mein)",
+    "prompt_te": "నా లేఖకు వెంటనే సమాధానం ఇవ్వాలి.",
+    "prompt_kn": "ನನ್ನ ಪತ್ರಕ್ಕೆ ತಕ್ಷಣ ಉತ್ತರಿಸಬೇಕು.",
+    "target_de": "Wir müssen meinen Brief heute noch beantworten.",
+    "options": [
+      "Wir müssen meinem Brief heute noch beantworten.",
+      "Wir müssen meines Brief heute noch beantworten.",
+      "Wir müssen meine Brief heute noch beantworten.",
+      "Wir müssen meinen Brief heute noch beantworten."
+    ],
+    "correct_index": 3,
+    "explanation": "'beantworten' requires AKKUSATIV. The noun 'Brief' is Maskulin (der Brief). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Brief)",
+    "b1_verb": "beantworten"
+  },
+  {
+    "id": 82,
+    "topic": "Akkusativ Maskulin (der Antrag) (ich -> mein)",
+    "prompt_te": "నా దరఖాస్తు ఫారమ్‌ను పూరించాను.",
+    "prompt_kn": "ನನ್ನ ಅರ್ಜಿ ನಮೂನೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿದೆನು.",
+    "target_de": "Hast du meinen Antrag auf Kindergeld ausgefüllt?",
+    "options": [
+      "Hast du meines Antrag auf Kindergeld ausgefüllt?",
+      "Hast du meine Antrag auf Kindergeld ausgefüllt?",
+      "Hast du meinen Antrag auf Kindergeld ausgefüllt?",
+      "Hast du meinem Antrag auf Kindergeld ausgefüllt?"
+    ],
+    "correct_index": 2,
+    "explanation": "'ausfüllen' requires AKKUSATIV. The noun 'Antrag' is Maskulin (der Antrag). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Antrag)",
+    "b1_verb": "ausfüllen"
+  },
+  {
+    "id": 83,
+    "topic": "Akkusativ Maskulin (der Arbeitsplatz) (ich -> mein)",
+    "prompt_te": "నా ఉద్యోగాన్ని పోగొట్టుకోకూడదు.",
+    "prompt_kn": "ನನ್ನ ಕೆಲಸವನ್ನು ಕಳೆದುಕೊಳ್ಳಬಾರದು.",
+    "target_de": "Er hat Angst, meinen Arbeitsplatz zu verlieren.",
+    "options": [
+      "Er hat Angst, meine Arbeitsplatz zu verlieren.",
+      "Er hat Angst, meinen Arbeitsplatz zu verlieren.",
+      "Er hat Angst, meinem Arbeitsplatz zu verlieren.",
+      "Er hat Angst, meines Arbeitsplatz zu verlieren."
+    ],
+    "correct_index": 1,
+    "explanation": "'verlieren' requires AKKUSATIV. The noun 'Arbeitsplatz' is Maskulin (der Arbeitsplatz). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Arbeitsplatz)",
+    "b1_verb": "verlieren"
+  },
+  {
+    "id": 84,
+    "topic": "Dativ Feminin (die Wohnung) (ich -> mein)",
+    "prompt_te": "నా ఫ్లాట్‌లో చాలా సౌకర్యంగా ఉంది.",
+    "prompt_kn": "ನನ್ನ ಫ್ಲಾಟ್‌ನಲ್ಲಿ ತುಂಬಾ ಆರಾಮದಾಯಕವಾಗಿದೆ.",
+    "target_de": "Wir fühlen uns in meiner Wohnung sehr wohl.",
+    "options": [
+      "Wir fühlen uns in meiner Wohnung sehr wohl.",
+      "Wir fühlen uns in meinen Wohnung sehr wohl.",
+      "Wir fühlen uns in meinem Wohnung sehr wohl.",
+      "Wir fühlen uns in meines Wohnung sehr wohl."
+    ],
+    "correct_index": 0,
+    "explanation": "'wohnen in' requires DATIV. The noun 'Wohnung' is Feminin (die Wohnung). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Wohnung)",
+    "b1_verb": "wohnen in"
+  },
+  {
+    "id": 85,
+    "topic": "Dativ Feminin (die Arbeit) (ich -> mein)",
+    "prompt_te": "నా పనితో ఎంతో సంతృప్తిగా ఉన్నాను.",
+    "prompt_kn": "ನನ್ನ ಕೆಲಸದಲ್ಲಿ ತುಂಬಾ ಸಂತೃಪ್ತನಾಗಿದ್ದೇನೆ.",
+    "target_de": "Ich bin mit meiner Arbeit sehr zufrieden.",
+    "options": [
+      "Ich bin mit meinen Arbeit sehr zufrieden.",
+      "Ich bin mit meinem Arbeit sehr zufrieden.",
+      "Ich bin mit meines Arbeit sehr zufrieden.",
+      "Ich bin mit meiner Arbeit sehr zufrieden."
+    ],
+    "correct_index": 3,
+    "explanation": "'zufrieden mit' requires DATIV. The noun 'Arbeit' is Feminin (die Arbeit). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Arbeit)",
+    "b1_verb": "zufrieden mit"
+  },
+  {
+    "id": 86,
+    "topic": "Dativ Feminin (die Prüfung) (ich -> mein)",
+    "prompt_te": "నా పరీక్షలో ఉత్తీర్ణత సాధించినందుకు అభినందనలు.",
+    "prompt_kn": "ನನ್ನ ಪರೀಕ್ಷೆಯಲ್ಲಿ ತೇರ್ಗಡೆಯಾಗಿದ್ದಕ್ಕಾಗಿ ಅಭಿನಂದನೆಗಳು.",
+    "target_de": "Wir gratulieren dir zu meiner bestandenen Prüfung.",
+    "options": [
+      "Wir gratulieren dir zu meinem bestandenen Prüfung.",
+      "Wir gratulieren dir zu meines bestandenen Prüfung.",
+      "Wir gratulieren dir zu meiner bestandenen Prüfung.",
+      "Wir gratulieren dir zu meinen bestandenen Prüfung."
+    ],
+    "correct_index": 2,
+    "explanation": "'gratulieren zu' requires DATIV. The noun 'Prüfung' is Feminin (die Prüfung). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Prüfung)",
+    "b1_verb": "gratulieren zu"
+  },
+  {
+    "id": 87,
+    "topic": "Dativ Feminin (die Kollegin) (ich -> mein)",
+    "prompt_te": "నా సహోద్యోగినికి పనిలో సహాయం చేస్తున్నాను.",
+    "prompt_kn": "ನನ್ನ ಸಹೋದ್ಯೋಗಿಗೆ ಕೆಲಸದಲ್ಲಿ ನೆರವಾಗುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich helfe meiner Kollegin bei der Recherche.",
+    "options": [
+      "Ich helfe meines Kollegin bei der Recherche.",
+      "Ich helfe meiner Kollegin bei der Recherche.",
+      "Ich helfe meinen Kollegin bei der Recherche.",
+      "Ich helfe meinem Kollegin bei der Recherche."
+    ],
+    "correct_index": 1,
+    "explanation": "'helfen' requires DATIV. The noun 'Kollegin' is Feminin (die Kollegin). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Kollegin)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 88,
+    "topic": "Dativ Feminin (die Ausbildung) (ich -> mein)",
+    "prompt_te": "నా శిక్షణ పూర్తయ్యాక ఉద్యోగం వచ్చింది.",
+    "prompt_kn": "ನನ್ನ ತರಬೇತಿ ಮುಗಿದ ನಂತರ ಉದ್ಯೋಗ ಸಿಕ್ಕಿತು.",
+    "target_de": "Nach meiner Ausbildung fand sie sofort eine Stelle.",
+    "options": [
+      "Nach meiner Ausbildung fand sie sofort eine Stelle.",
+      "Nach meinen Ausbildung fand sie sofort eine Stelle.",
+      "Nach meinem Ausbildung fand sie sofort eine Stelle.",
+      "Nach meines Ausbildung fand sie sofort eine Stelle."
+    ],
+    "correct_index": 0,
+    "explanation": "'nach' requires DATIV. The noun 'Ausbildung' is Feminin (die Ausbildung). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Ausbildung)",
+    "b1_verb": "nach"
+  },
+  {
+    "id": 89,
+    "topic": "Dativ Feminin (die Meinung) (ich -> mein)",
+    "prompt_te": "నా అభిప్రాయంతో నేను ఏకీభవిస్తున్నాను.",
+    "prompt_kn": "ನನ್ನ ಅಭಿಪ್ರಾಯದೊಂದಿಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
+    "target_de": "Ich stimme meiner Meinung in allen Punkten zu.",
+    "options": [
+      "Ich stimme meinen Meinung in allen Punkten zu.",
+      "Ich stimme meinem Meinung in allen Punkten zu.",
+      "Ich stimme meines Meinung in allen Punkten zu.",
+      "Ich stimme meiner Meinung in allen Punkten zu."
+    ],
+    "correct_index": 3,
+    "explanation": "'zustimmen' requires DATIV. The noun 'Meinung' is Feminin (die Meinung). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Meinung)",
+    "b1_verb": "zustimmen"
+  },
+  {
+    "id": 90,
+    "topic": "Dativ Feminin (die Familie) (ich -> mein)",
+    "prompt_te": "నా కుటుంబంలో అందరూ కలిసి భోజనం చేస్తారు.",
+    "prompt_kn": "ನನ್ನ ಕುಟುಂಬದೊಂದಿಗೆ ಎಲ್ಲರೂ ಜೊತೆಯಾಗಿ ಊಟ ಮಾಡುತ್ತಾರೆ.",
+    "target_de": "Er verbringt das Fest mit meiner Familie.",
+    "options": [
+      "Er verbringt das Fest mit meinem Familie.",
+      "Er verbringt das Fest mit meines Familie.",
+      "Er verbringt das Fest mit meiner Familie.",
+      "Er verbringt das Fest mit meinen Familie."
+    ],
+    "correct_index": 2,
+    "explanation": "'gehören zu' requires DATIV. The noun 'Familie' is Feminin (die Familie). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Familie)",
+    "b1_verb": "gehören zu"
+  },
+  {
+    "id": 91,
+    "topic": "Akkusativ Neutrum (das Zimmer) (ich -> mein)",
+    "prompt_te": "నా గదిని ప్రతిరోజూ శుభ్రం చేసుకోవాలి.",
+    "prompt_kn": "ನನ್ನ ಕೋಣೆಯನ್ನು ಪ್ರತಿದಿನ ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕು.",
+    "target_de": "Du musst mein Zimmer noch gründlich aufräumen.",
+    "options": [
+      "Du musst meines Zimmer noch gründlich aufräumen.",
+      "Du musst mein Zimmer noch gründlich aufräumen.",
+      "Du musst meinen Zimmer noch gründlich aufräumen.",
+      "Du musst meinem Zimmer noch gründlich aufräumen."
+    ],
+    "correct_index": 1,
+    "explanation": "'aufräumen' requires AKKUSATIV. The noun 'Zimmer' is Neutrum (das Zimmer). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Zimmer)",
+    "b1_verb": "aufräumen"
+  },
+  {
+    "id": 92,
+    "topic": "Akkusativ Neutrum (das Auto) (ich -> mein)",
+    "prompt_te": "నా కారును వర్క్‌షాప్‌లో రిపేర్ చేయించారు.",
+    "prompt_kn": "ನನ್ನ ಕಾರನ್ನು ವರ್ಕ್‌ಶಾಪ್‌ನಲ್ಲಿ ರಿಪೇರಿ ಮಾಡಿಸಿದರು.",
+    "target_de": "Sie lassen mein Auto in der Werkstatt reparieren.",
+    "options": [
+      "Sie lassen mein Auto in der Werkstatt reparieren.",
+      "Sie lassen meinen Auto in der Werkstatt reparieren.",
+      "Sie lassen meinem Auto in der Werkstatt reparieren.",
+      "Sie lassen meines Auto in der Werkstatt reparieren."
+    ],
+    "correct_index": 0,
+    "explanation": "'reparieren' requires AKKUSATIV. The noun 'Auto' is Neutrum (das Auto). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Auto)",
+    "b1_verb": "reparieren"
+  },
+  {
+    "id": 93,
+    "topic": "Akkusativ Neutrum (das Gehalt) (ich -> mein)",
+    "prompt_te": "నా జీతాన్ని కంపెనీ పెంచింది.",
+    "prompt_kn": "ನನ್ನ ವೇತನವನ್ನು ಕಂಪನಿಯು ಹೆಚ್ಚಿಸಿತು.",
+    "target_de": "Die Firma hat mein Gehalt um fünf Prozent erhöht.",
+    "options": [
+      "Die Firma hat meinen Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat meinem Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat meines Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat mein Gehalt um fünf Prozent erhöht."
+    ],
+    "correct_index": 3,
+    "explanation": "'erhöhen' requires AKKUSATIV. The noun 'Gehalt' is Neutrum (das Gehalt). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Gehalt)",
+    "b1_verb": "erhöhen"
+  },
+  {
+    "id": 94,
+    "topic": "Akkusativ Neutrum (das Dokument) (ich -> mein)",
+    "prompt_te": "నా పత్రాన్ని పరిశీలించి సంతకం చేశాను.",
+    "prompt_kn": "ನನ್ನ ದಾಖಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಸಹಿ ಮಾಡಿದೆನು.",
+    "target_de": "Bitte unterschreiben Sie mein Dokument hier unten.",
+    "options": [
+      "Bitte unterschreiben Sie meinem Dokument hier unten.",
+      "Bitte unterschreiben Sie meines Dokument hier unten.",
+      "Bitte unterschreiben Sie mein Dokument hier unten.",
+      "Bitte unterschreiben Sie meinen Dokument hier unten."
+    ],
+    "correct_index": 2,
+    "explanation": "'unterschreiben' requires AKKUSATIV. The noun 'Dokument' is Neutrum (das Dokument). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Dokument)",
+    "b1_verb": "unterschreiben"
+  },
+  {
+    "id": 95,
+    "topic": "Akkusativ Neutrum (das Ergebnis) (ich -> mein)",
+    "prompt_te": "నా ఫలితాన్ని ఫోన్ ద్వారా తెలియజేశారు.",
+    "prompt_kn": "ನನ್ನ ಫಲಿತಾಂಶವನ್ನು ಫೋನ್ ಮೂಲಕ ತಿಳಿಸಿದರು.",
+    "target_de": "Der Arzt hat mein Ergebnis telefonisch mitgeteilt.",
+    "options": [
+      "Der Arzt hat meines Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat mein Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat meinen Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat meinem Ergebnis telefonisch mitgeteilt."
+    ],
+    "correct_index": 1,
+    "explanation": "'mitteilen' requires AKKUSATIV. The noun 'Ergebnis' is Neutrum (das Ergebnis). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Ergebnis)",
+    "b1_verb": "mitteilen"
+  },
+  {
+    "id": 96,
+    "topic": "Akkusativ Neutrum (das Problem) (ich -> mein)",
+    "prompt_te": "నా సమస్యను సమావేశంలో చర్చించాలి.",
+    "prompt_kn": "ನನ್ನ ಸಮಸ್ಯೆಯನ್ನು ಸಭೆಯಲ್ಲಿ ಚರ್ಚಿಸಬೇಕು.",
+    "target_de": "Wir müssen mein Problem gemeinsam besprechen.",
+    "options": [
+      "Wir müssen mein Problem gemeinsam besprechen.",
+      "Wir müssen meinen Problem gemeinsam besprechen.",
+      "Wir müssen meinem Problem gemeinsam besprechen.",
+      "Wir müssen meines Problem gemeinsam besprechen."
+    ],
+    "correct_index": 0,
+    "explanation": "'besprechen' requires AKKUSATIV. The noun 'Problem' is Neutrum (das Problem). Therefore, the possessive 'mein' takes the ending -> 'mein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Problem)",
+    "b1_verb": "besprechen"
+  },
+  {
+    "id": 97,
+    "topic": "Genitiv Feminin (die Reise) (ich -> mein)",
+    "prompt_te": "నా ప్రయాణం సమయంలో ఫోటోలు తీశారు.",
+    "prompt_kn": "ನನ್ನ ಪ್ರಯಾಣದ ಸಮಯದಲ್ಲಿ ಫೋಟೋಗಳನ್ನು ತೆಗೆದರು.",
+    "target_de": "Während meiner Reise hat er viele Fotos gemacht.",
+    "options": [
+      "Während meinen Reise hat er viele Fotos gemacht.",
+      "Während meinem Reise hat er viele Fotos gemacht.",
+      "Während meines Reise hat er viele Fotos gemacht.",
+      "Während meiner Reise hat er viele Fotos gemacht."
+    ],
+    "correct_index": 3,
+    "explanation": "'während' requires GENITIV. The noun 'Reise' is Feminin (die Reise). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Reise)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 98,
+    "topic": "Genitiv Feminin (die Krankheit) (ich -> mein)",
+    "prompt_te": "నా అనారోగ్యం కారణంగా విశ్రాంతి తీసుకుంటున్నారు.",
+    "prompt_kn": "ನನ್ನ ಅನಾರೋಗ್ಯದ ಕಾರಣ ವಿಶ್ರಾಂತಿ ಪಡೆಯುತ್ತಿದ್ದಾರೆ.",
+    "target_de": "Wegen meiner Krankheit muss sie im Bett bleiben.",
+    "options": [
+      "Wegen meinem Krankheit muss sie im Bett bleiben.",
+      "Wegen meines Krankheit muss sie im Bett bleiben.",
+      "Wegen meiner Krankheit muss sie im Bett bleiben.",
+      "Wegen meinen Krankheit muss sie im Bett bleiben."
+    ],
+    "correct_index": 2,
+    "explanation": "'wegen' requires GENITIV. The noun 'Krankheit' is Feminin (die Krankheit). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Krankheit)",
+    "b1_verb": "wegen"
+  },
+  {
+    "id": 99,
+    "topic": "Genitiv Feminin (die Feier) (ich -> mein)",
+    "prompt_te": "నా వేడుక సమయంలో పాటలు పాడారు.",
+    "prompt_kn": "ನನ್ನ ಸಮಾರಂಭದ ಸಮಯದಲ್ಲಿ ಹಾಡುಗಳನ್ನು ಹಾಡಿದರು.",
+    "target_de": "Während meiner Feier haben alle Gäste getanzt.",
+    "options": [
+      "Während meines Feier haben alle Gäste getanzt.",
+      "Während meiner Feier haben alle Gäste getanzt.",
+      "Während meinen Feier haben alle Gäste getanzt.",
+      "Während meinem Feier haben alle Gäste getanzt."
+    ],
+    "correct_index": 1,
+    "explanation": "'während' requires GENITIV. The noun 'Feier' is Feminin (die Feier). Therefore, the possessive 'mein' takes the ending -> 'meiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Feier)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 100,
+    "topic": "Genitiv Maskulin (der Bruder) (ich -> mein)",
+    "prompt_te": "నా సోదరుడి విజయం ఎంతో ఆనందాన్ని ఇచ్చింది.",
+    "prompt_kn": "ನನ್ನ ಸಹೋದರನ ಗೆಲುವು ಅಪಾರ ಸಂತಸ ತಂದಿತು.",
+    "target_de": "Wir freuen uns über den Erfolg meines Bruders.",
+    "options": [
+      "Wir freuen uns über den Erfolg meines Bruders.",
+      "Wir freuen uns über den Erfolg meinen Bruders.",
+      "Wir freuen uns über den Erfolg meinem Bruders.",
+      "Wir freuen uns über den Erfolg meine Bruders."
+    ],
+    "correct_index": 0,
+    "explanation": "'Erfolg' requires GENITIV. The noun 'Bruder' is Maskulin (der Bruder). Therefore, the possessive 'mein' takes the ending -> 'meines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Bruder)",
+    "b1_verb": "Erfolg"
+  },
+  {
+    "id": 101,
+    "topic": "Genitiv Maskulin (der Sohn) (ich -> mein)",
+    "prompt_te": "నా కుమారుడి పుట్టినరోజుకు బహుమతి కొన్నారు.",
+    "prompt_kn": "ನನ್ನ ಮಗನ ಜನ್ಮದಿನಕ್ಕೆ ಉಡುಗೊರೆ ಖರೀದಿಸಿದರು.",
+    "target_de": "Sie feiern den Geburtstag meines Sohnes im Restaurant.",
+    "options": [
+      "Sie feiern den Geburtstag meinen Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag meinem Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag meine Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag meines Sohnes im Restaurant."
+    ],
+    "correct_index": 3,
+    "explanation": "'Geburtstag' requires GENITIV. The noun 'Sohn' is Maskulin (der Sohn). Therefore, the possessive 'mein' takes the ending -> 'meines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Sohn)",
+    "b1_verb": "Geburtstag"
+  },
+  {
+    "id": 102,
+    "topic": "Genitiv Maskulin (der Chef) (ich -> mein)",
+    "prompt_te": "నా బాస్ సలహాను అందరూ ఆమోదించారు.",
+    "prompt_kn": "ನನ್ನ ಮುಖ್ಯಸ್ಥರ ಸಲಹೆಯನ್ನು ಎಲ್ಲರೂ ಒಪ್ಪಿಕೊಂಡರು.",
+    "target_de": "Wir folgen dem Ratschlag meines Chefs.",
+    "options": [
+      "Wir folgen dem Ratschlag meinem Chefs.",
+      "Wir folgen dem Ratschlag meine Chefs.",
+      "Wir folgen dem Ratschlag meines Chefs.",
+      "Wir folgen dem Ratschlag meinen Chefs."
+    ],
+    "correct_index": 2,
+    "explanation": "'Vorschlag' requires GENITIV. The noun 'Chef' is Maskulin (der Chef). Therefore, the possessive 'mein' takes the ending -> 'meines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Chef)",
+    "b1_verb": "Vorschlag"
+  },
+  {
+    "id": 103,
+    "topic": "Dativ Plural (die Kinder) (ich -> mein)",
+    "prompt_te": "నా పిల్లలకు చదువులో సహాయం చేస్తున్నారు.",
+    "prompt_kn": "ನನ್ನ ಮಕ್ಕಳಿಗೆ ಓದಿನಲ್ಲಿ ನೆರವಾಗುತ್ತಿದ್ದಾರೆ.",
+    "target_de": "Die Eltern helfen meinen Kindern bei den Aufgaben.",
+    "options": [
+      "Die Eltern helfen meine Kindern bei den Aufgaben.",
+      "Die Eltern helfen meinen Kindern bei den Aufgaben.",
+      "Die Eltern helfen meinem Kindern bei den Aufgaben.",
+      "Die Eltern helfen meines Kindern bei den Aufgaben."
+    ],
+    "correct_index": 1,
+    "explanation": "'helfen' requires DATIV. The noun 'Kinder' is Plural (die Kinder). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Dativ",
+    "gender": "Plural (die Kinder)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 104,
+    "topic": "Dativ Plural (die Eltern) (ich -> mein)",
+    "prompt_te": "నా తల్లిదండ్రులకు హృదయపూర్వక ధన్యవాదాలు.",
+    "prompt_kn": "ನನ್ನ ಪೋಷಕರಿಗೆ ಹೃತ್ಪೂರ್ವಕ ಧನ್ಯವಾದಗಳು.",
+    "target_de": "Ich danke meinen Eltern für die große Unterstützung.",
+    "options": [
+      "Ich danke meinen Eltern für die große Unterstützung.",
+      "Ich danke meinem Eltern für die große Unterstützung.",
+      "Ich danke meines Eltern für die große Unterstützung.",
+      "Ich danke meine Eltern für die große Unterstützung."
+    ],
+    "correct_index": 0,
+    "explanation": "'danken' requires DATIV. The noun 'Eltern' is Plural (die Eltern). Therefore, the possessive 'mein' takes the ending -> 'meinen'.",
+    "case": "Dativ",
+    "gender": "Plural (die Eltern)",
+    "b1_verb": "danken"
+  },
+  {
+    "id": 105,
+    "topic": "Akkusativ Plural (die Freunde) (ich -> mein)",
+    "prompt_te": "నా స్నేహితులను శనివారం కలుసుకుంటాను.",
+    "prompt_kn": "ನನ್ನ ಸ್ನೇಹಿತರನ್ನು ಶನಿವಾರ ಭೇಟಿಯಾಗುತ್ತೇನೆ.",
+    "target_de": "Ich treffe meine Freunde jeden Samstag im Park.",
+    "options": [
+      "Ich treffe meinen Freunde jeden Samstag im Park.",
+      "Ich treffe meinem Freunde jeden Samstag im Park.",
+      "Ich treffe meines Freunde jeden Samstag im Park.",
+      "Ich treffe meine Freunde jeden Samstag im Park."
+    ],
+    "correct_index": 3,
+    "explanation": "'treffen' requires AKKUSATIV. The noun 'Freunde' is Plural (die Freunde). Therefore, the possessive 'mein' takes the ending -> 'meine'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Freunde)",
+    "b1_verb": "treffen"
+  },
+  {
+    "id": 106,
+    "topic": "Akkusativ Plural (die Kollegen) (ich -> mein)",
+    "prompt_te": "నా సహోద్యోగులకు శుభాకాంక్షలు తెలిపారు.",
+    "prompt_kn": "ನನ್ನ ಸಹೋದ್ಯೋಗಿಗಳಿಗೆ ಶುಭಾಶಯ ತಿಳಿಸಿದರು.",
+    "target_de": "Bitte grüßen Sie meine Kollegen herzlich von mir.",
+    "options": [
+      "Bitte grüßen Sie meinem Kollegen herzlich von mir.",
+      "Bitte grüßen Sie meines Kollegen herzlich von mir.",
+      "Bitte grüßen Sie meine Kollegen herzlich von mir.",
+      "Bitte grüßen Sie meinen Kollegen herzlich von mir."
+    ],
+    "correct_index": 2,
+    "explanation": "'grüßen' requires AKKUSATIV. The noun 'Kollegen' is Plural (die Kollegen). Therefore, the possessive 'mein' takes the ending -> 'meine'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Kollegen)",
+    "b1_verb": "grüßen"
+  },
+  {
+    "id": 107,
+    "topic": "Akkusativ Maskulin (der Pass) (du -> dein)",
+    "prompt_te": "నీ పాస్‌పోర్ట్‌ను పునరుద్ధరించుకోవాలి.",
+    "prompt_kn": "ನಿನ್ನ ಪಾಸ್‌ಪೋರ್ಟ್ ಅನ್ನು ನವೀಕರಿಸಬೇಕು.",
+    "target_de": "Deinen Pass muss ich nächsten Monat verlängern.",
+    "options": [
+      "Deine Pass muss ich nächsten Monat verlängern.",
+      "Deinen Pass muss ich nächsten Monat verlängern.",
+      "Deinem Pass muss ich nächsten Monat verlängern.",
+      "Deines Pass muss ich nächsten Monat verlängern."
+    ],
+    "correct_index": 1,
+    "explanation": "'verlängern' requires AKKUSATIV. The noun 'Pass' is Maskulin (der Pass). Therefore, the possessive 'dein' takes the ending -> 'Deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Pass)",
+    "b1_verb": "verlängern"
+  },
+  {
+    "id": 108,
+    "topic": "Akkusativ Maskulin (der Ausweis) (du -> dein)",
+    "prompt_te": "నీ గుర్తింపు కార్డును సరిహద్దు వద్ద చూపించాలి.",
+    "prompt_kn": "ನಿನ್ನ ಗುರುತಿನ ಚೀಟಿಯನ್ನು ಗಡಿಯಲ್ಲಿ ತೋರಿಸಬೇಕು.",
+    "target_de": "Sie müssen deinen Ausweis an der Grenze vorzeigen.",
+    "options": [
+      "Sie müssen deinen Ausweis an der Grenze vorzeigen.",
+      "Sie müssen deinem Ausweis an der Grenze vorzeigen.",
+      "Sie müssen deines Ausweis an der Grenze vorzeigen.",
+      "Sie müssen deine Ausweis an der Grenze vorzeigen."
+    ],
+    "correct_index": 0,
+    "explanation": "'zeigen' requires AKKUSATIV. The noun 'Ausweis' is Maskulin (der Ausweis). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Ausweis)",
+    "b1_verb": "zeigen"
+  },
+  {
+    "id": 109,
+    "topic": "Akkusativ Maskulin (der Koffer) (du -> dein)",
+    "prompt_te": "నీ సూట్‌కేస్‌ను మోయలేకపోతున్నాను.",
+    "prompt_kn": "ನಿನ್ನ ಸೂಟ್‌ಕೇಸ್ ಅನ್ನು ಹೊರಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Ich kann deinen Koffer nicht allein tragen.",
+    "options": [
+      "Ich kann deinem Koffer nicht allein tragen.",
+      "Ich kann deines Koffer nicht allein tragen.",
+      "Ich kann deine Koffer nicht allein tragen.",
+      "Ich kann deinen Koffer nicht allein tragen."
+    ],
+    "correct_index": 3,
+    "explanation": "'tragen' requires AKKUSATIV. The noun 'Koffer' is Maskulin (der Koffer). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Koffer)",
+    "b1_verb": "tragen"
+  },
+  {
+    "id": 110,
+    "topic": "Akkusativ Maskulin (der Bericht) (du -> dein)",
+    "prompt_te": "నీ నివేదికను ఈరోజు పూర్తి చేయాలి.",
+    "prompt_kn": "ನಿನ್ನ ವರದಿಯನ್ನು ಇಂದು ಪೂರ್ಣಗೊಳಿಸಬೇಕು.",
+    "target_de": "Er muss deinen Bericht bis 17 Uhr abgeben.",
+    "options": [
+      "Er muss deines Bericht bis 17 Uhr abgeben.",
+      "Er muss deine Bericht bis 17 Uhr abgeben.",
+      "Er muss deinen Bericht bis 17 Uhr abgeben.",
+      "Er muss deinem Bericht bis 17 Uhr abgeben."
+    ],
+    "correct_index": 2,
+    "explanation": "'schreiben' requires AKKUSATIV. The noun 'Bericht' is Maskulin (der Bericht). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Bericht)",
+    "b1_verb": "schreiben"
+  },
+  {
+    "id": 111,
+    "topic": "Akkusativ Maskulin (der Schlüssel) (du -> dein)",
+    "prompt_te": "నీ కీని ఎంత వెతికినా కనిపించలేదు.",
+    "prompt_kn": "ನಿನ್ನ ಕೀಲಿಯನ್ನು ಹುಡುಕುತ್ತಿದ್ದರೂ ಸಿಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Wo hast du deinen Schlüssel hingelegt?",
+    "options": [
+      "Wo hast du deine Schlüssel hingelegt?",
+      "Wo hast du deinen Schlüssel hingelegt?",
+      "Wo hast du deinem Schlüssel hingelegt?",
+      "Wo hast du deines Schlüssel hingelegt?"
+    ],
+    "correct_index": 1,
+    "explanation": "'suchen' requires AKKUSATIV. The noun 'Schlüssel' is Maskulin (der Schlüssel). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Schlüssel)",
+    "b1_verb": "suchen"
+  },
+  {
+    "id": 112,
+    "topic": "Akkusativ Maskulin (der Brief) (du -> dein)",
+    "prompt_te": "నీ లేఖకు వెంటనే సమాధానం ఇవ్వాలి.",
+    "prompt_kn": "ನಿನ್ನ ಪತ್ರಕ್ಕೆ ತಕ್ಷಣ ಉತ್ತರಿಸಬೇಕು.",
+    "target_de": "Wir müssen deinen Brief heute noch beantworten.",
+    "options": [
+      "Wir müssen deinen Brief heute noch beantworten.",
+      "Wir müssen deinem Brief heute noch beantworten.",
+      "Wir müssen deines Brief heute noch beantworten.",
+      "Wir müssen deine Brief heute noch beantworten."
+    ],
+    "correct_index": 0,
+    "explanation": "'beantworten' requires AKKUSATIV. The noun 'Brief' is Maskulin (der Brief). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Brief)",
+    "b1_verb": "beantworten"
+  },
+  {
+    "id": 113,
+    "topic": "Akkusativ Maskulin (der Antrag) (du -> dein)",
+    "prompt_te": "నీ దరఖాస్తు ఫారమ్‌ను పూరించాను.",
+    "prompt_kn": "ನಿನ್ನ ಅರ್ಜಿ ನಮೂನೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿದೆನು.",
+    "target_de": "Hast du deinen Antrag auf Kindergeld ausgefüllt?",
+    "options": [
+      "Hast du deinem Antrag auf Kindergeld ausgefüllt?",
+      "Hast du deines Antrag auf Kindergeld ausgefüllt?",
+      "Hast du deine Antrag auf Kindergeld ausgefüllt?",
+      "Hast du deinen Antrag auf Kindergeld ausgefüllt?"
+    ],
+    "correct_index": 3,
+    "explanation": "'ausfüllen' requires AKKUSATIV. The noun 'Antrag' is Maskulin (der Antrag). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Antrag)",
+    "b1_verb": "ausfüllen"
+  },
+  {
+    "id": 114,
+    "topic": "Akkusativ Maskulin (der Arbeitsplatz) (du -> dein)",
+    "prompt_te": "నీ ఉద్యోగాన్ని పోగొట్టుకోకూడదు.",
+    "prompt_kn": "ನಿನ್ನ ಕೆಲಸವನ್ನು ಕಳೆದುಕೊಳ್ಳಬಾರದು.",
+    "target_de": "Er hat Angst, deinen Arbeitsplatz zu verlieren.",
+    "options": [
+      "Er hat Angst, deines Arbeitsplatz zu verlieren.",
+      "Er hat Angst, deine Arbeitsplatz zu verlieren.",
+      "Er hat Angst, deinen Arbeitsplatz zu verlieren.",
+      "Er hat Angst, deinem Arbeitsplatz zu verlieren."
+    ],
+    "correct_index": 2,
+    "explanation": "'verlieren' requires AKKUSATIV. The noun 'Arbeitsplatz' is Maskulin (der Arbeitsplatz). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Arbeitsplatz)",
+    "b1_verb": "verlieren"
+  },
+  {
+    "id": 115,
+    "topic": "Dativ Feminin (die Wohnung) (du -> dein)",
+    "prompt_te": "నీ ఫ్లాట్‌లో చాలా సౌకర్యంగా ఉంది.",
+    "prompt_kn": "ನಿನ್ನ ಫ್ಲಾಟ್‌ನಲ್ಲಿ ತುಂಬಾ ಆರಾಮದಾಯಕವಾಗಿದೆ.",
+    "target_de": "Wir fühlen uns in deiner Wohnung sehr wohl.",
+    "options": [
+      "Wir fühlen uns in deines Wohnung sehr wohl.",
+      "Wir fühlen uns in deiner Wohnung sehr wohl.",
+      "Wir fühlen uns in deinen Wohnung sehr wohl.",
+      "Wir fühlen uns in deinem Wohnung sehr wohl."
+    ],
+    "correct_index": 1,
+    "explanation": "'wohnen in' requires DATIV. The noun 'Wohnung' is Feminin (die Wohnung). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Wohnung)",
+    "b1_verb": "wohnen in"
+  },
+  {
+    "id": 116,
+    "topic": "Dativ Feminin (die Arbeit) (du -> dein)",
+    "prompt_te": "నీ పనితో ఎంతో సంతృప్తిగా ఉన్నాను.",
+    "prompt_kn": "ನಿನ್ನ ಕೆಲಸದಲ್ಲಿ ತುಂಬಾ ಸಂತೃಪ್ತನಾಗಿದ್ದೇನೆ.",
+    "target_de": "Ich bin mit deiner Arbeit sehr zufrieden.",
+    "options": [
+      "Ich bin mit deiner Arbeit sehr zufrieden.",
+      "Ich bin mit deinen Arbeit sehr zufrieden.",
+      "Ich bin mit deinem Arbeit sehr zufrieden.",
+      "Ich bin mit deines Arbeit sehr zufrieden."
+    ],
+    "correct_index": 0,
+    "explanation": "'zufrieden mit' requires DATIV. The noun 'Arbeit' is Feminin (die Arbeit). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Arbeit)",
+    "b1_verb": "zufrieden mit"
+  },
+  {
+    "id": 117,
+    "topic": "Dativ Feminin (die Prüfung) (du -> dein)",
+    "prompt_te": "నీ పరీక్షలో ఉత్తీర్ణత సాధించినందుకు అభినందనలు.",
+    "prompt_kn": "ನಿನ್ನ ಪರೀಕ್ಷೆಯಲ್ಲಿ ತೇರ್ಗಡೆಯಾಗಿದ್ದಕ್ಕಾಗಿ ಅಭಿನಂದನೆಗಳು.",
+    "target_de": "Wir gratulieren dir zu deiner bestandenen Prüfung.",
+    "options": [
+      "Wir gratulieren dir zu deinen bestandenen Prüfung.",
+      "Wir gratulieren dir zu deinem bestandenen Prüfung.",
+      "Wir gratulieren dir zu deines bestandenen Prüfung.",
+      "Wir gratulieren dir zu deiner bestandenen Prüfung."
+    ],
+    "correct_index": 3,
+    "explanation": "'gratulieren zu' requires DATIV. The noun 'Prüfung' is Feminin (die Prüfung). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Prüfung)",
+    "b1_verb": "gratulieren zu"
+  },
+  {
+    "id": 118,
+    "topic": "Dativ Feminin (die Kollegin) (du -> dein)",
+    "prompt_te": "నీ సహోద్యోగినికి పనిలో సహాయం చేస్తున్నాను.",
+    "prompt_kn": "ನಿನ್ನ ಸಹೋದ್ಯೋಗಿಗೆ ಕೆಲಸದಲ್ಲಿ ನೆರವಾಗುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich helfe deiner Kollegin bei der Recherche.",
+    "options": [
+      "Ich helfe deinem Kollegin bei der Recherche.",
+      "Ich helfe deines Kollegin bei der Recherche.",
+      "Ich helfe deiner Kollegin bei der Recherche.",
+      "Ich helfe deinen Kollegin bei der Recherche."
+    ],
+    "correct_index": 2,
+    "explanation": "'helfen' requires DATIV. The noun 'Kollegin' is Feminin (die Kollegin). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Kollegin)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 119,
+    "topic": "Dativ Feminin (die Ausbildung) (du -> dein)",
+    "prompt_te": "నీ శిక్షణ పూర్తయ్యాక ఉద్యోగం వచ్చింది.",
+    "prompt_kn": "ನಿನ್ನ ತರಬೇತಿ ಮುಗಿದ ನಂತರ ಉದ್ಯೋಗ ಸಿಕ್ಕಿತು.",
+    "target_de": "Nach deiner Ausbildung fand sie sofort eine Stelle.",
+    "options": [
+      "Nach deines Ausbildung fand sie sofort eine Stelle.",
+      "Nach deiner Ausbildung fand sie sofort eine Stelle.",
+      "Nach deinen Ausbildung fand sie sofort eine Stelle.",
+      "Nach deinem Ausbildung fand sie sofort eine Stelle."
+    ],
+    "correct_index": 1,
+    "explanation": "'nach' requires DATIV. The noun 'Ausbildung' is Feminin (die Ausbildung). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Ausbildung)",
+    "b1_verb": "nach"
+  },
+  {
+    "id": 120,
+    "topic": "Dativ Feminin (die Meinung) (du -> dein)",
+    "prompt_te": "నీ అభిప్రాయంతో నేను ఏకీభవిస్తున్నాను.",
+    "prompt_kn": "ನಿನ್ನ ಅಭಿಪ್ರಾಯದೊಂದಿಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
+    "target_de": "Ich stimme deiner Meinung in allen Punkten zu.",
+    "options": [
+      "Ich stimme deiner Meinung in allen Punkten zu.",
+      "Ich stimme deinen Meinung in allen Punkten zu.",
+      "Ich stimme deinem Meinung in allen Punkten zu.",
+      "Ich stimme deines Meinung in allen Punkten zu."
+    ],
+    "correct_index": 0,
+    "explanation": "'zustimmen' requires DATIV. The noun 'Meinung' is Feminin (die Meinung). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Meinung)",
+    "b1_verb": "zustimmen"
+  },
+  {
+    "id": 121,
+    "topic": "Dativ Feminin (die Familie) (du -> dein)",
+    "prompt_te": "నీ కుటుంబంలో అందరూ కలిసి భోజనం చేస్తారు.",
+    "prompt_kn": "ನಿನ್ನ ಕುಟುಂಬದೊಂದಿಗೆ ಎಲ್ಲರೂ ಜೊತೆಯಾಗಿ ಊಟ ಮಾಡುತ್ತಾರೆ.",
+    "target_de": "Er verbringt das Fest mit deiner Familie.",
+    "options": [
+      "Er verbringt das Fest mit deinen Familie.",
+      "Er verbringt das Fest mit deinem Familie.",
+      "Er verbringt das Fest mit deines Familie.",
+      "Er verbringt das Fest mit deiner Familie."
+    ],
+    "correct_index": 3,
+    "explanation": "'gehören zu' requires DATIV. The noun 'Familie' is Feminin (die Familie). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Familie)",
+    "b1_verb": "gehören zu"
+  },
+  {
+    "id": 122,
+    "topic": "Akkusativ Neutrum (das Zimmer) (du -> dein)",
+    "prompt_te": "నీ గదిని ప్రతిరోజూ శుభ్రం చేసుకోవాలి.",
+    "prompt_kn": "ನಿನ್ನ ಕೋಣೆಯನ್ನು ಪ್ರತಿದಿನ ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕು.",
+    "target_de": "Du musst dein Zimmer noch gründlich aufräumen.",
+    "options": [
+      "Du musst deinem Zimmer noch gründlich aufräumen.",
+      "Du musst deines Zimmer noch gründlich aufräumen.",
+      "Du musst dein Zimmer noch gründlich aufräumen.",
+      "Du musst deinen Zimmer noch gründlich aufräumen."
+    ],
+    "correct_index": 2,
+    "explanation": "'aufräumen' requires AKKUSATIV. The noun 'Zimmer' is Neutrum (das Zimmer). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Zimmer)",
+    "b1_verb": "aufräumen"
+  },
+  {
+    "id": 123,
+    "topic": "Akkusativ Neutrum (das Auto) (du -> dein)",
+    "prompt_te": "నీ కారును వర్క్‌షాప్‌లో రిపేర్ చేయించారు.",
+    "prompt_kn": "ನಿನ್ನ ಕಾರನ್ನು ವರ್ಕ್‌ಶಾಪ್‌ನಲ್ಲಿ ರಿಪೇರಿ ಮಾಡಿಸಿದರು.",
+    "target_de": "Sie lassen dein Auto in der Werkstatt reparieren.",
+    "options": [
+      "Sie lassen deines Auto in der Werkstatt reparieren.",
+      "Sie lassen dein Auto in der Werkstatt reparieren.",
+      "Sie lassen deinen Auto in der Werkstatt reparieren.",
+      "Sie lassen deinem Auto in der Werkstatt reparieren."
+    ],
+    "correct_index": 1,
+    "explanation": "'reparieren' requires AKKUSATIV. The noun 'Auto' is Neutrum (das Auto). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Auto)",
+    "b1_verb": "reparieren"
+  },
+  {
+    "id": 124,
+    "topic": "Akkusativ Neutrum (das Gehalt) (du -> dein)",
+    "prompt_te": "నీ జీతాన్ని కంపెనీ పెంచింది.",
+    "prompt_kn": "ನಿನ್ನ ವೇತನವನ್ನು ಕಂಪನಿಯು ಹೆಚ್ಚಿಸಿತು.",
+    "target_de": "Die Firma hat dein Gehalt um fünf Prozent erhöht.",
+    "options": [
+      "Die Firma hat dein Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat deinen Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat deinem Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat deines Gehalt um fünf Prozent erhöht."
+    ],
+    "correct_index": 0,
+    "explanation": "'erhöhen' requires AKKUSATIV. The noun 'Gehalt' is Neutrum (das Gehalt). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Gehalt)",
+    "b1_verb": "erhöhen"
+  },
+  {
+    "id": 125,
+    "topic": "Akkusativ Neutrum (das Dokument) (du -> dein)",
+    "prompt_te": "నీ పత్రాన్ని పరిశీలించి సంతకం చేశాను.",
+    "prompt_kn": "ನಿನ್ನ ದಾಖಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಸಹಿ ಮಾಡಿದೆನು.",
+    "target_de": "Bitte unterschreiben Sie dein Dokument hier unten.",
+    "options": [
+      "Bitte unterschreiben Sie deinen Dokument hier unten.",
+      "Bitte unterschreiben Sie deinem Dokument hier unten.",
+      "Bitte unterschreiben Sie deines Dokument hier unten.",
+      "Bitte unterschreiben Sie dein Dokument hier unten."
+    ],
+    "correct_index": 3,
+    "explanation": "'unterschreiben' requires AKKUSATIV. The noun 'Dokument' is Neutrum (das Dokument). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Dokument)",
+    "b1_verb": "unterschreiben"
+  },
+  {
+    "id": 126,
+    "topic": "Akkusativ Neutrum (das Ergebnis) (du -> dein)",
+    "prompt_te": "నీ ఫలితాన్ని ఫోన్ ద్వారా తెలియజేశారు.",
+    "prompt_kn": "ನಿನ್ನ ಫಲಿತಾಂಶವನ್ನು ಫೋನ್ ಮೂಲಕ ತಿಳಿಸಿದರು.",
+    "target_de": "Der Arzt hat dein Ergebnis telefonisch mitgeteilt.",
+    "options": [
+      "Der Arzt hat deinem Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat deines Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat dein Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat deinen Ergebnis telefonisch mitgeteilt."
+    ],
+    "correct_index": 2,
+    "explanation": "'mitteilen' requires AKKUSATIV. The noun 'Ergebnis' is Neutrum (das Ergebnis). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Ergebnis)",
+    "b1_verb": "mitteilen"
+  },
+  {
+    "id": 127,
+    "topic": "Akkusativ Neutrum (das Problem) (du -> dein)",
+    "prompt_te": "నీ సమస్యను సమావేశంలో చర్చించాలి.",
+    "prompt_kn": "ನಿನ್ನ ಸಮಸ್ಯೆಯನ್ನು ಸಭೆಯಲ್ಲಿ ಚರ್ಚಿಸಬೇಕು.",
+    "target_de": "Wir müssen dein Problem gemeinsam besprechen.",
+    "options": [
+      "Wir müssen deines Problem gemeinsam besprechen.",
+      "Wir müssen dein Problem gemeinsam besprechen.",
+      "Wir müssen deinen Problem gemeinsam besprechen.",
+      "Wir müssen deinem Problem gemeinsam besprechen."
+    ],
+    "correct_index": 1,
+    "explanation": "'besprechen' requires AKKUSATIV. The noun 'Problem' is Neutrum (das Problem). Therefore, the possessive 'dein' takes the ending -> 'dein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Problem)",
+    "b1_verb": "besprechen"
+  },
+  {
+    "id": 128,
+    "topic": "Genitiv Feminin (die Reise) (du -> dein)",
+    "prompt_te": "నీ ప్రయాణం సమయంలో ఫోటోలు తీశారు.",
+    "prompt_kn": "ನಿನ್ನ ಪ್ರಯಾಣದ ಸಮಯದಲ್ಲಿ ಫೋಟೋಗಳನ್ನು ತೆಗೆದರು.",
+    "target_de": "Während deiner Reise hat er viele Fotos gemacht.",
+    "options": [
+      "Während deiner Reise hat er viele Fotos gemacht.",
+      "Während deinen Reise hat er viele Fotos gemacht.",
+      "Während deinem Reise hat er viele Fotos gemacht.",
+      "Während deines Reise hat er viele Fotos gemacht."
+    ],
+    "correct_index": 0,
+    "explanation": "'während' requires GENITIV. The noun 'Reise' is Feminin (die Reise). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Reise)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 129,
+    "topic": "Genitiv Feminin (die Krankheit) (du -> dein)",
+    "prompt_te": "నీ అనారోగ్యం కారణంగా విశ్రాంతి తీసుకుంటున్నారు.",
+    "prompt_kn": "ನಿನ್ನ ಅನಾರೋಗ್ಯದ ಕಾರಣ ವಿಶ್ರಾಂತಿ ಪಡೆಯುತ್ತಿದ್ದಾರೆ.",
+    "target_de": "Wegen deiner Krankheit muss sie im Bett bleiben.",
+    "options": [
+      "Wegen deinen Krankheit muss sie im Bett bleiben.",
+      "Wegen deinem Krankheit muss sie im Bett bleiben.",
+      "Wegen deines Krankheit muss sie im Bett bleiben.",
+      "Wegen deiner Krankheit muss sie im Bett bleiben."
+    ],
+    "correct_index": 3,
+    "explanation": "'wegen' requires GENITIV. The noun 'Krankheit' is Feminin (die Krankheit). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Krankheit)",
+    "b1_verb": "wegen"
+  },
+  {
+    "id": 130,
+    "topic": "Genitiv Feminin (die Feier) (du -> dein)",
+    "prompt_te": "నీ వేడుక సమయంలో పాటలు పాడారు.",
+    "prompt_kn": "ನಿನ್ನ ಸಮಾರಂಭದ ಸಮಯದಲ್ಲಿ ಹಾಡುಗಳನ್ನು ಹಾಡಿದರು.",
+    "target_de": "Während deiner Feier haben alle Gäste getanzt.",
+    "options": [
+      "Während deinem Feier haben alle Gäste getanzt.",
+      "Während deines Feier haben alle Gäste getanzt.",
+      "Während deiner Feier haben alle Gäste getanzt.",
+      "Während deinen Feier haben alle Gäste getanzt."
+    ],
+    "correct_index": 2,
+    "explanation": "'während' requires GENITIV. The noun 'Feier' is Feminin (die Feier). Therefore, the possessive 'dein' takes the ending -> 'deiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Feier)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 131,
+    "topic": "Genitiv Maskulin (der Bruder) (du -> dein)",
+    "prompt_te": "నీ సోదరుడి విజయం ఎంతో ఆనందాన్ని ఇచ్చింది.",
+    "prompt_kn": "ನಿನ್ನ ಸಹೋದರನ ಗೆಲುವು ಅಪಾರ ಸಂತಸ ತಂದಿತು.",
+    "target_de": "Wir freuen uns über den Erfolg deines Bruders.",
+    "options": [
+      "Wir freuen uns über den Erfolg deine Bruders.",
+      "Wir freuen uns über den Erfolg deines Bruders.",
+      "Wir freuen uns über den Erfolg deinen Bruders.",
+      "Wir freuen uns über den Erfolg deinem Bruders."
+    ],
+    "correct_index": 1,
+    "explanation": "'Erfolg' requires GENITIV. The noun 'Bruder' is Maskulin (der Bruder). Therefore, the possessive 'dein' takes the ending -> 'deines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Bruder)",
+    "b1_verb": "Erfolg"
+  },
+  {
+    "id": 132,
+    "topic": "Genitiv Maskulin (der Sohn) (du -> dein)",
+    "prompt_te": "నీ కుమారుడి పుట్టినరోజుకు బహుమతి కొన్నారు.",
+    "prompt_kn": "ನಿನ್ನ ಮಗನ ಜನ್ಮದಿನಕ್ಕೆ ಉಡುಗೊರೆ ಖರೀದಿಸಿದರು.",
+    "target_de": "Sie feiern den Geburtstag deines Sohnes im Restaurant.",
+    "options": [
+      "Sie feiern den Geburtstag deines Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag deinen Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag deinem Sohnes im Restaurant.",
+      "Sie feiern den Geburtstag deine Sohnes im Restaurant."
+    ],
+    "correct_index": 0,
+    "explanation": "'Geburtstag' requires GENITIV. The noun 'Sohn' is Maskulin (der Sohn). Therefore, the possessive 'dein' takes the ending -> 'deines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Sohn)",
+    "b1_verb": "Geburtstag"
+  },
+  {
+    "id": 133,
+    "topic": "Genitiv Maskulin (der Chef) (du -> dein)",
+    "prompt_te": "నీ బాస్ సలహాను అందరూ ఆమోదించారు.",
+    "prompt_kn": "ನಿನ್ನ ಮುಖ್ಯಸ್ಥರ ಸಲಹೆಯನ್ನು ಎಲ್ಲರೂ ಒಪ್ಪಿಕೊಂಡರು.",
+    "target_de": "Wir folgen dem Ratschlag deines Chefs.",
+    "options": [
+      "Wir folgen dem Ratschlag deinen Chefs.",
+      "Wir folgen dem Ratschlag deinem Chefs.",
+      "Wir folgen dem Ratschlag deine Chefs.",
+      "Wir folgen dem Ratschlag deines Chefs."
+    ],
+    "correct_index": 3,
+    "explanation": "'Vorschlag' requires GENITIV. The noun 'Chef' is Maskulin (der Chef). Therefore, the possessive 'dein' takes the ending -> 'deines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Chef)",
+    "b1_verb": "Vorschlag"
+  },
+  {
+    "id": 134,
+    "topic": "Dativ Plural (die Kinder) (du -> dein)",
+    "prompt_te": "నీ పిల్లలకు చదువులో సహాయం చేస్తున్నారు.",
+    "prompt_kn": "ನಿನ್ನ ಮಕ್ಕಳಿಗೆ ಓದಿನಲ್ಲಿ ನೆರವಾಗುತ್ತಿದ್ದಾರೆ.",
+    "target_de": "Die Eltern helfen deinen Kindern bei den Aufgaben.",
+    "options": [
+      "Die Eltern helfen deines Kindern bei den Aufgaben.",
+      "Die Eltern helfen deine Kindern bei den Aufgaben.",
+      "Die Eltern helfen deinen Kindern bei den Aufgaben.",
+      "Die Eltern helfen deinem Kindern bei den Aufgaben."
+    ],
+    "correct_index": 2,
+    "explanation": "'helfen' requires DATIV. The noun 'Kinder' is Plural (die Kinder). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Dativ",
+    "gender": "Plural (die Kinder)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 135,
+    "topic": "Dativ Plural (die Eltern) (du -> dein)",
+    "prompt_te": "నీ తల్లిదండ్రులకు హృదయపూర్వక ధన్యవాదాలు.",
+    "prompt_kn": "ನಿನ್ನ ಪೋಷಕರಿಗೆ ಹೃತ್ಪೂರ್ವಕ ಧನ್ಯವಾದಗಳು.",
+    "target_de": "Ich danke deinen Eltern für die große Unterstützung.",
+    "options": [
+      "Ich danke deine Eltern für die große Unterstützung.",
+      "Ich danke deinen Eltern für die große Unterstützung.",
+      "Ich danke deinem Eltern für die große Unterstützung.",
+      "Ich danke deines Eltern für die große Unterstützung."
+    ],
+    "correct_index": 1,
+    "explanation": "'danken' requires DATIV. The noun 'Eltern' is Plural (die Eltern). Therefore, the possessive 'dein' takes the ending -> 'deinen'.",
+    "case": "Dativ",
+    "gender": "Plural (die Eltern)",
+    "b1_verb": "danken"
+  },
+  {
+    "id": 136,
+    "topic": "Akkusativ Plural (die Freunde) (du -> dein)",
+    "prompt_te": "నీ స్నేహితులను శనివారం కలుసుకుంటాను.",
+    "prompt_kn": "ನಿನ್ನ ಸ್ನೇಹಿತರನ್ನು ಶನಿವಾರ ಭೇಟಿಯಾಗುತ್ತೇನೆ.",
+    "target_de": "Ich treffe deine Freunde jeden Samstag im Park.",
+    "options": [
+      "Ich treffe deine Freunde jeden Samstag im Park.",
+      "Ich treffe deinen Freunde jeden Samstag im Park.",
+      "Ich treffe deinem Freunde jeden Samstag im Park.",
+      "Ich treffe deines Freunde jeden Samstag im Park."
+    ],
+    "correct_index": 0,
+    "explanation": "'treffen' requires AKKUSATIV. The noun 'Freunde' is Plural (die Freunde). Therefore, the possessive 'dein' takes the ending -> 'deine'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Freunde)",
+    "b1_verb": "treffen"
+  },
+  {
+    "id": 137,
+    "topic": "Akkusativ Plural (die Kollegen) (du -> dein)",
+    "prompt_te": "నీ సహోద్యోగులకు శుభాకాంక్షలు తెలిపారు.",
+    "prompt_kn": "ನಿನ್ನ ಸಹೋದ್ಯೋಗಿಗಳಿಗೆ ಶುಭಾಶಯ ತಿಳಿಸಿದರು.",
+    "target_de": "Bitte grüßen Sie deine Kollegen herzlich von mir.",
+    "options": [
+      "Bitte grüßen Sie deinen Kollegen herzlich von mir.",
+      "Bitte grüßen Sie deinem Kollegen herzlich von mir.",
+      "Bitte grüßen Sie deines Kollegen herzlich von mir.",
+      "Bitte grüßen Sie deine Kollegen herzlich von mir."
+    ],
+    "correct_index": 3,
+    "explanation": "'grüßen' requires AKKUSATIV. The noun 'Kollegen' is Plural (die Kollegen). Therefore, the possessive 'dein' takes the ending -> 'deine'.",
+    "case": "Akkusativ",
+    "gender": "Plural (die Kollegen)",
+    "b1_verb": "grüßen"
+  },
+  {
+    "id": 138,
+    "topic": "Akkusativ Maskulin (der Pass) (er -> sein)",
+    "prompt_te": "అతని పాస్‌పోర్ట్‌ను పునరుద్ధరించుకోవాలి.",
+    "prompt_kn": "ಅವನ ಪಾಸ್‌ಪೋರ್ಟ್ ಅನ್ನು ನವೀಕರಿಸಬೇಕು.",
+    "target_de": "Seinen Pass muss ich nächsten Monat verlängern.",
+    "options": [
+      "Seines Pass muss ich nächsten Monat verlängern.",
+      "Seine Pass muss ich nächsten Monat verlängern.",
+      "Seinen Pass muss ich nächsten Monat verlängern.",
+      "Seinem Pass muss ich nächsten Monat verlängern."
+    ],
+    "correct_index": 2,
+    "explanation": "'verlängern' requires AKKUSATIV. The noun 'Pass' is Maskulin (der Pass). Therefore, the possessive 'sein' takes the ending -> 'Seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Pass)",
+    "b1_verb": "verlängern"
+  },
+  {
+    "id": 139,
+    "topic": "Akkusativ Maskulin (der Ausweis) (er -> sein)",
+    "prompt_te": "అతని గుర్తింపు కార్డును సరిహద్దు వద్ద చూపించాలి.",
+    "prompt_kn": "ಅವನ ಗುರುತಿನ ಚೀಟಿಯನ್ನು ಗಡಿಯಲ್ಲಿ ತೋರಿಸಬೇಕು.",
+    "target_de": "Sie müssen seinen Ausweis an der Grenze vorzeigen.",
+    "options": [
+      "Sie müssen seine Ausweis an der Grenze vorzeigen.",
+      "Sie müssen seinen Ausweis an der Grenze vorzeigen.",
+      "Sie müssen seinem Ausweis an der Grenze vorzeigen.",
+      "Sie müssen seines Ausweis an der Grenze vorzeigen."
+    ],
+    "correct_index": 1,
+    "explanation": "'zeigen' requires AKKUSATIV. The noun 'Ausweis' is Maskulin (der Ausweis). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Ausweis)",
+    "b1_verb": "zeigen"
+  },
+  {
+    "id": 140,
+    "topic": "Akkusativ Maskulin (der Koffer) (er -> sein)",
+    "prompt_te": "అతని సూట్‌కేస్‌ను మోయలేకపోతున్నాను.",
+    "prompt_kn": "ಅವನ ಸೂಟ್‌ಕೇಸ್ ಅನ್ನು ಹೊರಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Ich kann seinen Koffer nicht allein tragen.",
+    "options": [
+      "Ich kann seinen Koffer nicht allein tragen.",
+      "Ich kann seinem Koffer nicht allein tragen.",
+      "Ich kann seines Koffer nicht allein tragen.",
+      "Ich kann seine Koffer nicht allein tragen."
+    ],
+    "correct_index": 0,
+    "explanation": "'tragen' requires AKKUSATIV. The noun 'Koffer' is Maskulin (der Koffer). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Koffer)",
+    "b1_verb": "tragen"
+  },
+  {
+    "id": 141,
+    "topic": "Akkusativ Maskulin (der Bericht) (er -> sein)",
+    "prompt_te": "అతని నివేదికను ఈరోజు పూర్తి చేయాలి.",
+    "prompt_kn": "ಅವನ ವರದಿಯನ್ನು ಇಂದು ಪೂರ್ಣಗೊಳಿಸಬೇಕು.",
+    "target_de": "Er muss seinen Bericht bis 17 Uhr abgeben.",
+    "options": [
+      "Er muss seinem Bericht bis 17 Uhr abgeben.",
+      "Er muss seines Bericht bis 17 Uhr abgeben.",
+      "Er muss seine Bericht bis 17 Uhr abgeben.",
+      "Er muss seinen Bericht bis 17 Uhr abgeben."
+    ],
+    "correct_index": 3,
+    "explanation": "'schreiben' requires AKKUSATIV. The noun 'Bericht' is Maskulin (der Bericht). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Bericht)",
+    "b1_verb": "schreiben"
+  },
+  {
+    "id": 142,
+    "topic": "Akkusativ Maskulin (der Schlüssel) (er -> sein)",
+    "prompt_te": "అతని కీని ఎంత వెతికినా కనిపించలేదు.",
+    "prompt_kn": "ಅವನ ಕೀಲಿಯನ್ನು ಹುಡುಕುತ್ತಿದ್ದರೂ ಸಿಗುತ್ತಿಲ್ಲ.",
+    "target_de": "Wo hast du seinen Schlüssel hingelegt?",
+    "options": [
+      "Wo hast du seines Schlüssel hingelegt?",
+      "Wo hast du seine Schlüssel hingelegt?",
+      "Wo hast du seinen Schlüssel hingelegt?",
+      "Wo hast du seinem Schlüssel hingelegt?"
+    ],
+    "correct_index": 2,
+    "explanation": "'suchen' requires AKKUSATIV. The noun 'Schlüssel' is Maskulin (der Schlüssel). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Schlüssel)",
+    "b1_verb": "suchen"
+  },
+  {
+    "id": 143,
+    "topic": "Akkusativ Maskulin (der Brief) (er -> sein)",
+    "prompt_te": "అతని లేఖకు వెంటనే సమాధానం ఇవ్వాలి.",
+    "prompt_kn": "ಅವನ ಪತ್ರಕ್ಕೆ ತಕ್ಷಣ ಉತ್ತರಿಸಬೇಕು.",
+    "target_de": "Wir müssen seinen Brief heute noch beantworten.",
+    "options": [
+      "Wir müssen seine Brief heute noch beantworten.",
+      "Wir müssen seinen Brief heute noch beantworten.",
+      "Wir müssen seinem Brief heute noch beantworten.",
+      "Wir müssen seines Brief heute noch beantworten."
+    ],
+    "correct_index": 1,
+    "explanation": "'beantworten' requires AKKUSATIV. The noun 'Brief' is Maskulin (der Brief). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Brief)",
+    "b1_verb": "beantworten"
+  },
+  {
+    "id": 144,
+    "topic": "Akkusativ Maskulin (der Antrag) (er -> sein)",
+    "prompt_te": "అతని దరఖాస్తు ఫారమ్‌ను పూరించాను.",
+    "prompt_kn": "ಅವನ ಅರ್ಜಿ ನಮೂನೆಯನ್ನು ಭರ್ತಿ ಮಾಡಿದೆನು.",
+    "target_de": "Hast du seinen Antrag auf Kindergeld ausgefüllt?",
+    "options": [
+      "Hast du seinen Antrag auf Kindergeld ausgefüllt?",
+      "Hast du seinem Antrag auf Kindergeld ausgefüllt?",
+      "Hast du seines Antrag auf Kindergeld ausgefüllt?",
+      "Hast du seine Antrag auf Kindergeld ausgefüllt?"
+    ],
+    "correct_index": 0,
+    "explanation": "'ausfüllen' requires AKKUSATIV. The noun 'Antrag' is Maskulin (der Antrag). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Antrag)",
+    "b1_verb": "ausfüllen"
+  },
+  {
+    "id": 145,
+    "topic": "Akkusativ Maskulin (der Arbeitsplatz) (er -> sein)",
+    "prompt_te": "అతని ఉద్యోగాన్ని పోగొట్టుకోకూడదు.",
+    "prompt_kn": "ಅವನ ಕೆಲಸವನ್ನು ಕಳೆದುಕೊಳ್ಳಬಾರದು.",
+    "target_de": "Er hat Angst, seinen Arbeitsplatz zu verlieren.",
+    "options": [
+      "Er hat Angst, seinem Arbeitsplatz zu verlieren.",
+      "Er hat Angst, seines Arbeitsplatz zu verlieren.",
+      "Er hat Angst, seine Arbeitsplatz zu verlieren.",
+      "Er hat Angst, seinen Arbeitsplatz zu verlieren."
+    ],
+    "correct_index": 3,
+    "explanation": "'verlieren' requires AKKUSATIV. The noun 'Arbeitsplatz' is Maskulin (der Arbeitsplatz). Therefore, the possessive 'sein' takes the ending -> 'seinen'.",
+    "case": "Akkusativ",
+    "gender": "Maskulin (der Arbeitsplatz)",
+    "b1_verb": "verlieren"
+  },
+  {
+    "id": 146,
+    "topic": "Dativ Feminin (die Wohnung) (er -> sein)",
+    "prompt_te": "అతని ఫ్లాట్‌లో చాలా సౌకర్యంగా ఉంది.",
+    "prompt_kn": "ಅವನ ಫ್ಲಾಟ್‌ನಲ್ಲಿ ತುಂಬಾ ಆರಾಮದಾಯಕವಾಗಿದೆ.",
+    "target_de": "Wir fühlen uns in seiner Wohnung sehr wohl.",
+    "options": [
+      "Wir fühlen uns in seinem Wohnung sehr wohl.",
+      "Wir fühlen uns in seines Wohnung sehr wohl.",
+      "Wir fühlen uns in seiner Wohnung sehr wohl.",
+      "Wir fühlen uns in seinen Wohnung sehr wohl."
+    ],
+    "correct_index": 2,
+    "explanation": "'wohnen in' requires DATIV. The noun 'Wohnung' is Feminin (die Wohnung). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Wohnung)",
+    "b1_verb": "wohnen in"
+  },
+  {
+    "id": 147,
+    "topic": "Dativ Feminin (die Arbeit) (er -> sein)",
+    "prompt_te": "అతని పనితో ఎంతో సంతృప్తిగా ఉన్నాను.",
+    "prompt_kn": "ಅವನ ಕೆಲಸದಲ್ಲಿ ತುಂಬಾ ಸಂತೃಪ್ತನಾಗಿದ್ದೇನೆ.",
+    "target_de": "Ich bin mit seiner Arbeit sehr zufrieden.",
+    "options": [
+      "Ich bin mit seines Arbeit sehr zufrieden.",
+      "Ich bin mit seiner Arbeit sehr zufrieden.",
+      "Ich bin mit seinen Arbeit sehr zufrieden.",
+      "Ich bin mit seinem Arbeit sehr zufrieden."
+    ],
+    "correct_index": 1,
+    "explanation": "'zufrieden mit' requires DATIV. The noun 'Arbeit' is Feminin (die Arbeit). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Arbeit)",
+    "b1_verb": "zufrieden mit"
+  },
+  {
+    "id": 148,
+    "topic": "Dativ Feminin (die Prüfung) (er -> sein)",
+    "prompt_te": "అతని పరీక్షలో ఉత్తీర్ణత సాధించినందుకు అభినందనలు.",
+    "prompt_kn": "ಅವನ ಪರೀಕ್ಷೆಯಲ್ಲಿ ತೇರ್ಗಡೆಯಾಗಿದ್ದಕ್ಕಾಗಿ ಅಭಿನಂದನೆಗಳು.",
+    "target_de": "Wir gratulieren dir zu seiner bestandenen Prüfung.",
+    "options": [
+      "Wir gratulieren dir zu seiner bestandenen Prüfung.",
+      "Wir gratulieren dir zu seinen bestandenen Prüfung.",
+      "Wir gratulieren dir zu seinem bestandenen Prüfung.",
+      "Wir gratulieren dir zu seines bestandenen Prüfung."
+    ],
+    "correct_index": 0,
+    "explanation": "'gratulieren zu' requires DATIV. The noun 'Prüfung' is Feminin (die Prüfung). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Prüfung)",
+    "b1_verb": "gratulieren zu"
+  },
+  {
+    "id": 149,
+    "topic": "Dativ Feminin (die Kollegin) (er -> sein)",
+    "prompt_te": "అతని సహోద్యోగినికి పనిలో సహాయం చేస్తున్నాను.",
+    "prompt_kn": "ಅವನ ಸಹೋದ್ಯೋಗಿಗೆ ಕೆಲಸದಲ್ಲಿ ನೆರವಾಗುತ್ತಿದ್ದೇನೆ.",
+    "target_de": "Ich helfe seiner Kollegin bei der Recherche.",
+    "options": [
+      "Ich helfe seinen Kollegin bei der Recherche.",
+      "Ich helfe seinem Kollegin bei der Recherche.",
+      "Ich helfe seines Kollegin bei der Recherche.",
+      "Ich helfe seiner Kollegin bei der Recherche."
+    ],
+    "correct_index": 3,
+    "explanation": "'helfen' requires DATIV. The noun 'Kollegin' is Feminin (die Kollegin). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Kollegin)",
+    "b1_verb": "helfen"
+  },
+  {
+    "id": 150,
+    "topic": "Dativ Feminin (die Ausbildung) (er -> sein)",
+    "prompt_te": "అతని శిక్షణ పూర్తయ్యాక ఉద్యోగం వచ్చింది.",
+    "prompt_kn": "ಅವನ ತರಬೇತಿ ಮುಗಿದ ನಂತರ ಉದ್ಯೋಗ ಸಿಕ್ಕಿತು.",
+    "target_de": "Nach seiner Ausbildung fand sie sofort eine Stelle.",
+    "options": [
+      "Nach seinem Ausbildung fand sie sofort eine Stelle.",
+      "Nach seines Ausbildung fand sie sofort eine Stelle.",
+      "Nach seiner Ausbildung fand sie sofort eine Stelle.",
+      "Nach seinen Ausbildung fand sie sofort eine Stelle."
+    ],
+    "correct_index": 2,
+    "explanation": "'nach' requires DATIV. The noun 'Ausbildung' is Feminin (die Ausbildung). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Ausbildung)",
+    "b1_verb": "nach"
+  },
+  {
+    "id": 151,
+    "topic": "Dativ Feminin (die Meinung) (er -> sein)",
+    "prompt_te": "అతని అభిప్రాయంతో నేను ఏకీభవిస్తున్నాను.",
+    "prompt_kn": "ಅವನ ಅಭಿಪ್ರಾಯದೊಂದಿಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ.",
+    "target_de": "Ich stimme seiner Meinung in allen Punkten zu.",
+    "options": [
+      "Ich stimme seines Meinung in allen Punkten zu.",
+      "Ich stimme seiner Meinung in allen Punkten zu.",
+      "Ich stimme seinen Meinung in allen Punkten zu.",
+      "Ich stimme seinem Meinung in allen Punkten zu."
+    ],
+    "correct_index": 1,
+    "explanation": "'zustimmen' requires DATIV. The noun 'Meinung' is Feminin (die Meinung). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Meinung)",
+    "b1_verb": "zustimmen"
+  },
+  {
+    "id": 152,
+    "topic": "Dativ Feminin (die Familie) (er -> sein)",
+    "prompt_te": "అతని కుటుంబంలో అందరూ కలిసి భోజనం చేస్తారు.",
+    "prompt_kn": "ಅವನ ಕುಟುಂಬದೊಂದಿಗೆ ಎಲ್ಲರೂ ಜೊತೆಯಾಗಿ ಊಟ ಮಾಡುತ್ತಾರೆ.",
+    "target_de": "Er verbringt das Fest mit seiner Familie.",
+    "options": [
+      "Er verbringt das Fest mit seiner Familie.",
+      "Er verbringt das Fest mit seinen Familie.",
+      "Er verbringt das Fest mit seinem Familie.",
+      "Er verbringt das Fest mit seines Familie."
+    ],
+    "correct_index": 0,
+    "explanation": "'gehören zu' requires DATIV. The noun 'Familie' is Feminin (die Familie). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Dativ",
+    "gender": "Feminin (die Familie)",
+    "b1_verb": "gehören zu"
+  },
+  {
+    "id": 153,
+    "topic": "Akkusativ Neutrum (das Zimmer) (er -> sein)",
+    "prompt_te": "అతని గదిని ప్రతిరోజూ శుభ్రం చేసుకోవాలి.",
+    "prompt_kn": "ಅವನ ಕೋಣೆಯನ್ನು ಪ್ರತಿದಿನ ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕು.",
+    "target_de": "Du musst sein Zimmer noch gründlich aufräumen.",
+    "options": [
+      "Du musst seinen Zimmer noch gründlich aufräumen.",
+      "Du musst seinem Zimmer noch gründlich aufräumen.",
+      "Du musst seines Zimmer noch gründlich aufräumen.",
+      "Du musst sein Zimmer noch gründlich aufräumen."
+    ],
+    "correct_index": 3,
+    "explanation": "'aufräumen' requires AKKUSATIV. The noun 'Zimmer' is Neutrum (das Zimmer). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Zimmer)",
+    "b1_verb": "aufräumen"
+  },
+  {
+    "id": 154,
+    "topic": "Akkusativ Neutrum (das Auto) (er -> sein)",
+    "prompt_te": "అతని కారును వర్క్‌షాప్‌లో రిపేర్ చేయించారు.",
+    "prompt_kn": "ಅವನ ಕಾರನ್ನು ವರ್ಕ್‌ಶಾಪ್‌ನಲ್ಲಿ ರಿಪೇರಿ ಮಾಡಿಸಿದರು.",
+    "target_de": "Sie lassen sein Auto in der Werkstatt reparieren.",
+    "options": [
+      "Sie lassen seinem Auto in der Werkstatt reparieren.",
+      "Sie lassen seines Auto in der Werkstatt reparieren.",
+      "Sie lassen sein Auto in der Werkstatt reparieren.",
+      "Sie lassen seinen Auto in der Werkstatt reparieren."
+    ],
+    "correct_index": 2,
+    "explanation": "'reparieren' requires AKKUSATIV. The noun 'Auto' is Neutrum (das Auto). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Auto)",
+    "b1_verb": "reparieren"
+  },
+  {
+    "id": 155,
+    "topic": "Akkusativ Neutrum (das Gehalt) (er -> sein)",
+    "prompt_te": "అతని జీతాన్ని కంపెనీ పెంచింది.",
+    "prompt_kn": "ಅವನ ವೇತನವನ್ನು ಕಂಪನಿಯು ಹೆಚ್ಚಿಸಿತು.",
+    "target_de": "Die Firma hat sein Gehalt um fünf Prozent erhöht.",
+    "options": [
+      "Die Firma hat seines Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat sein Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat seinen Gehalt um fünf Prozent erhöht.",
+      "Die Firma hat seinem Gehalt um fünf Prozent erhöht."
+    ],
+    "correct_index": 1,
+    "explanation": "'erhöhen' requires AKKUSATIV. The noun 'Gehalt' is Neutrum (das Gehalt). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Gehalt)",
+    "b1_verb": "erhöhen"
+  },
+  {
+    "id": 156,
+    "topic": "Akkusativ Neutrum (das Dokument) (er -> sein)",
+    "prompt_te": "అతని పత్రాన్ని పరిశీలించి సంతకం చేశాను.",
+    "prompt_kn": "ಅವನ ದಾಖಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಸಹಿ ಮಾಡಿದೆನು.",
+    "target_de": "Bitte unterschreiben Sie sein Dokument hier unten.",
+    "options": [
+      "Bitte unterschreiben Sie sein Dokument hier unten.",
+      "Bitte unterschreiben Sie seinen Dokument hier unten.",
+      "Bitte unterschreiben Sie seinem Dokument hier unten.",
+      "Bitte unterschreiben Sie seines Dokument hier unten."
+    ],
+    "correct_index": 0,
+    "explanation": "'unterschreiben' requires AKKUSATIV. The noun 'Dokument' is Neutrum (das Dokument). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Dokument)",
+    "b1_verb": "unterschreiben"
+  },
+  {
+    "id": 157,
+    "topic": "Akkusativ Neutrum (das Ergebnis) (er -> sein)",
+    "prompt_te": "అతని ఫలితాన్ని ఫోన్ ద్వారా తెలియజేశారు.",
+    "prompt_kn": "ಅವನ ಫಲಿತಾಂಶವನ್ನು ಫೋನ್ ಮೂಲಕ ತಿಳಿಸಿದರು.",
+    "target_de": "Der Arzt hat sein Ergebnis telefonisch mitgeteilt.",
+    "options": [
+      "Der Arzt hat seinen Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat seinem Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat seines Ergebnis telefonisch mitgeteilt.",
+      "Der Arzt hat sein Ergebnis telefonisch mitgeteilt."
+    ],
+    "correct_index": 3,
+    "explanation": "'mitteilen' requires AKKUSATIV. The noun 'Ergebnis' is Neutrum (das Ergebnis). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Ergebnis)",
+    "b1_verb": "mitteilen"
+  },
+  {
+    "id": 158,
+    "topic": "Akkusativ Neutrum (das Problem) (er -> sein)",
+    "prompt_te": "అతని సమస్యను సమావేశంలో చర్చించాలి.",
+    "prompt_kn": "ಅವನ ಸಮಸ್ಯೆಯನ್ನು ಸಭೆಯಲ್ಲಿ ಚರ್ಚಿಸಬೇಕು.",
+    "target_de": "Wir müssen sein Problem gemeinsam besprechen.",
+    "options": [
+      "Wir müssen seinem Problem gemeinsam besprechen.",
+      "Wir müssen seines Problem gemeinsam besprechen.",
+      "Wir müssen sein Problem gemeinsam besprechen.",
+      "Wir müssen seinen Problem gemeinsam besprechen."
+    ],
+    "correct_index": 2,
+    "explanation": "'besprechen' requires AKKUSATIV. The noun 'Problem' is Neutrum (das Problem). Therefore, the possessive 'sein' takes the ending -> 'sein'.",
+    "case": "Akkusativ",
+    "gender": "Neutrum (das Problem)",
+    "b1_verb": "besprechen"
+  },
+  {
+    "id": 159,
+    "topic": "Genitiv Feminin (die Reise) (er -> sein)",
+    "prompt_te": "అతని ప్రయాణం సమయంలో ఫోటోలు తీశారు.",
+    "prompt_kn": "ಅವನ ಪ್ರಯಾಣದ ಸಮಯದಲ್ಲಿ ಫೋಟೋಗಳನ್ನು ತೆಗೆದರು.",
+    "target_de": "Während seiner Reise hat er viele Fotos gemacht.",
+    "options": [
+      "Während seines Reise hat er viele Fotos gemacht.",
+      "Während seiner Reise hat er viele Fotos gemacht.",
+      "Während seinen Reise hat er viele Fotos gemacht.",
+      "Während seinem Reise hat er viele Fotos gemacht."
+    ],
+    "correct_index": 1,
+    "explanation": "'während' requires GENITIV. The noun 'Reise' is Feminin (die Reise). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Reise)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 160,
+    "topic": "Genitiv Feminin (die Krankheit) (er -> sein)",
+    "prompt_te": "అతని అనారోగ్యం కారణంగా విశ్రాంతి తీసుకుంటున్నారు.",
+    "prompt_kn": "ಅವನ ಅನಾರೋಗ್ಯದ ಕಾರಣ ವಿಶ್ರಾಂತಿ ಪಡೆಯುತ್ತಿದ್ದಾರೆ.",
+    "target_de": "Wegen seiner Krankheit muss sie im Bett bleiben.",
+    "options": [
+      "Wegen seiner Krankheit muss sie im Bett bleiben.",
+      "Wegen seinen Krankheit muss sie im Bett bleiben.",
+      "Wegen seinem Krankheit muss sie im Bett bleiben.",
+      "Wegen seines Krankheit muss sie im Bett bleiben."
+    ],
+    "correct_index": 0,
+    "explanation": "'wegen' requires GENITIV. The noun 'Krankheit' is Feminin (die Krankheit). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Krankheit)",
+    "b1_verb": "wegen"
+  },
+  {
+    "id": 161,
+    "topic": "Genitiv Feminin (die Feier) (er -> sein)",
+    "prompt_te": "అతని వేడుక సమయంలో పాటలు పాడారు.",
+    "prompt_kn": "ಅವನ ಸಮಾರಂಭದ ಸಮಯದಲ್ಲಿ ಹಾಡುಗಳನ್ನು ಹಾಡಿದರು.",
+    "target_de": "Während seiner Feier haben alle Gäste getanzt.",
+    "options": [
+      "Während seinen Feier haben alle Gäste getanzt.",
+      "Während seinem Feier haben alle Gäste getanzt.",
+      "Während seines Feier haben alle Gäste getanzt.",
+      "Während seiner Feier haben alle Gäste getanzt."
+    ],
+    "correct_index": 3,
+    "explanation": "'während' requires GENITIV. The noun 'Feier' is Feminin (die Feier). Therefore, the possessive 'sein' takes the ending -> 'seiner'.",
+    "case": "Genitiv",
+    "gender": "Feminin (die Feier)",
+    "b1_verb": "während"
+  },
+  {
+    "id": 162,
+    "topic": "Genitiv Maskulin (der Bruder) (er -> sein)",
+    "prompt_te": "అతని సోదరుడి విజయం ఎంతో ఆనందాన్ని ఇచ్చింది.",
+    "prompt_kn": "ಅವನ ಸಹೋದರನ ಗೆಲುವು ಅಪಾರ ಸಂತಸ ತಂದಿತು.",
+    "target_de": "Wir freuen uns über den Erfolg seines Bruders.",
+    "options": [
+      "Wir freuen uns über den Erfolg seinem Bruders.",
+      "Wir freuen uns über den Erfolg seine Bruders.",
+      "Wir freuen uns über den Erfolg seines Bruders.",
+      "Wir freuen uns über den Erfolg seinen Bruders."
+    ],
+    "correct_index": 2,
+    "explanation": "'Erfolg' requires GENITIV. The noun 'Bruder' is Maskulin (der Bruder). Therefore, the possessive 'sein' takes the ending -> 'seines'.",
+    "case": "Genitiv",
+    "gender": "Maskulin (der Bruder)",
+    "b1_verb": "Erfolg"
+  }
+]

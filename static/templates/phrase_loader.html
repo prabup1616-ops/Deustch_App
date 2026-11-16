@@ -1,0 +1,142 @@
+<div id="phrase_loader_container" style="
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #3b82f6;
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    margin: 14px 0 20px 0;
+">
+    <!-- Header with Pulse Indicator -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="
+                width: 12px;
+                height: 12px;
+                background-color: #3b82f6;
+                border-radius: 50%;
+                box-shadow: 0 0 10px #60a5fa;
+                animation: pulse 1.4s infinite ease-in-out;
+            "></div>
+            <span style="font-weight: 800; font-size: 0.95rem; color: #93c5fd; letter-spacing: 0.5px;">
+                💡 DEUTSCHE REDEWENDUNGEN & FIXE WORTVERBINDUNGEN
+            </span>
+        </div>
+        <span id="phrase_counter" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 3px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;">
+            1 / 52
+        </span>
+    </div>
+
+    <!-- Phrase Card Display -->
+    <div style="min-height: 130px; display: flex; flex-direction: column; justify-content: center;">
+        <div id="phrase_title" style="
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fef08a;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            transition: opacity 0.4s ease;
+        ">
+            von ganzem Herzen
+        </div>
+
+        <div id="phrase_scenario" style="
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            transition: opacity 0.4s ease;
+        ">
+            🇬🇧 <em>From the bottom of one's heart (used to express deep gratitude, congratulations, or love)</em>
+        </div>
+
+        <div style="
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #3b82f6;
+            padding: 8px 14px;
+            border-radius: 6px;
+        ">
+            <span style="font-size: 0.78rem; color: #60a5fa; font-weight: 700; text-transform: uppercase;">🇩🇪 Beispielsatz:</span>
+            <div id="phrase_example" style="font-size: 1.02rem; color: #f8fafc; font-style: italic; margin-top: 2px; transition: opacity 0.4s ease;">
+                "Ich danke Ihnen von ganzem Herzen für Ihre wertvolle Unterstützung."
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress ticker bar -->
+    <div style="
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        margin-top: 16px;
+        overflow: hidden;
+    ">
+        <div id="phrase_timer_bar" style="
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 2px;
+        "></div>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+</style>
+
+<script>
+(function() {
+    const phrases = {{phrases_json}};
+    if (!phrases || phrases.length === 0) return;
+
+    // Random start index to see fresh phrases every time
+    let currentIndex = Math.floor(Math.random() * phrases.length);
+    const DURATION_MS = 4000; // 4 seconds per phrase
+
+    const titleEl = document.getElementById('phrase_title');
+    const scenarioEl = document.getElementById('phrase_scenario');
+    const exampleEl = document.getElementById('phrase_example');
+    const counterEl = document.getElementById('phrase_counter');
+    const barEl = document.getElementById('phrase_timer_bar');
+
+    function updatePhrase() {
+        const item = phrases[currentIndex];
+        
+        // Fade out slightly
+        titleEl.style.opacity = 0;
+        scenarioEl.style.opacity = 0;
+        exampleEl.style.opacity = 0;
+
+        setTimeout(() => {
+            titleEl.innerText = item.phrase_de;
+            scenarioEl.innerHTML = '🇬🇧 <em>' + item.meaning_en + '</em>';
+            exampleEl.innerText = '"' + item.example_de + '"';
+            counterEl.innerText = (currentIndex + 1) + ' / ' + phrases.length;
+
+            titleEl.style.opacity = 1;
+            scenarioEl.style.opacity = 1;
+            exampleEl.style.opacity = 1;
+        }, 300);
+
+        // Animate timer bar
+        barEl.style.transition = 'none';
+        barEl.style.width = '0%';
+        setTimeout(() => {
+            barEl.style.transition = 'width ' + (DURATION_MS - 200) + 'ms linear';
+            barEl.style.width = '100%';
+        }, 50);
+
+        currentIndex = (currentIndex + 1) % phrases.length;
+    }
+
+    // Initial run
+    updatePhrase();
+    setInterval(updatePhrase, DURATION_MS);
+})();
+</script>

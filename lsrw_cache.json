@@ -1,0 +1,1503 @@
+{
+  "reading": {
+    "7022dfaeedc2a44334b0fa6beb5ee34c": [
+      {
+        "paragraph1": {
+          "title": "Der Umzug in die neue Wohnung",
+          "text": "Gestern war ein sehr anstrengender Tag für mich. Endlich bin ich in meine neue Wohnung umgezogen. Am Morgen schinte die Sonne, als der Umzugswagen pünktlich vor dem Haus hielt. Meine Freunde halfen mir beim Tragen der schweren Kisten. Ich hatte vorher alle Kartons sorgfältig im Flur gestapelt. Wir schleppten die Möbel nach oben und stellten das große Sofa direkt unter das Fenster im Wohnzimmer. Die Lampen hängten wir an die Decke. Nach der harten Arbeit waren wir alle müde, aber glücklich. Am Abend bestellten wir eine große Pizza und tranken kaltes Wasser. Ich habe lange von diesem Moment geträumt, und jetzt ist alles perfekt."
+        },
+        "fill_in_blanks": [
+          {
+            "id": 1,
+            "sentence": "Am Morgen ___ die Sonne, als der Umzugswagen hielt.",
+            "options": [
+              "schien",
+              "hat geschienen",
+              "schreibt",
+              "hat geschrieben"
+            ],
+            "answer": "schien",
+            "topic_tested": "Präteritum",
+            "explanation_de": "Für Handlungen in der Vergangenheit, besonders bei Wettererscheinungen in Erzählungen, nutzt man oft das Präteritum."
+          },
+          {
+            "id": 2,
+            "sentence": "Wir stellten das Sofa direkt ___ das Fenster im Wohnzimmer.",
+            "options": [
+              "unter",
+              "unter dem",
+              "unter das",
+              "neben"
+            ],
+            "answer": "unter das",
+            "topic_tested": "Wechselpräpositionen (Akkusativ)",
+            "explanation_de": "Nach der Frage 'Wohin?' (Richtung/Ziel) folgt die Wechselpräposition 'unter' mit dem Akkusativ (das Fenster -> das)."
+          },
+          {
+            "id": 3,
+            "sentence": "Ich ___ vorher alle Kartons sorgfältig im Flur gestapelt.",
+            "options": [
+              "habe",
+              "hatte",
+              "bin",
+              "war"
+            ],
+            "answer": "hatte",
+            "topic_tested": "Plusquamperfekt",
+            "explanation_de": "Das Stapeln der Kartons passierte vor dem Umzugstag, deshalb verwendet man hier das Plusquamperfekt mit 'hatte'."
+          },
+          {
+            "id": 4,
+            "sentence": "Die Lampen hängten wir an ___ Decke.",
+            "options": [
+              "die",
+              "der",
+              "dem",
+              "das"
+            ],
+            "answer": "die",
+            "topic_tested": "Wechselpräpositionen (Akkusativ)",
+            "explanation_de": "Die Lampe wird aufgehängt (Bewegung dorthin), daher steht die Präposition 'an' mit dem Akkusativ (die Decke)."
+          },
+          {
+            "id": 5,
+            "sentence": "Ich ___ lange von diesem Moment geträumt.",
+            "options": [
+              "habe",
+              "hatte",
+              "bin",
+              "war"
+            ],
+            "answer": "habe",
+            "topic_tested": "Perfekt",
+            "explanation_de": "Das Perfekt wird aus 'haben' und dem Partizip II ('geträumt') gebildet und drückt hier eine vollendete Handlung mit Bezug zur Gegenwart aus."
+          }
+        ],
+        "mcq": [
+          {
+            "id": 1,
+            "question": "Wann fand der Umzug statt?",
+            "options": [
+              "Gestern",
+              "Morgen",
+              "Letzte Woche",
+              "Vor einem Monat"
+            ],
+            "answer": "Gestern",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im Text steht direkt im ersten Satz: 'Gestern war ein sehr anstrengender Tag für mich.'"
+          },
+          {
+            "id": 2,
+            "question": "Wer hat dem Autor beim Umzug geholfen?",
+            "options": [
+              "Seine Eltern",
+              "Seine Kollegen",
+              "Seine Freunde",
+              "Niemand"
+            ],
+            "answer": "Seine Freunde",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Der Text erwähnt: 'Meine Freunde halfen mir beim Tragen der schweren Kisten.'"
+          },
+          {
+            "id": 3,
+            "question": "Welches gramatikalische Tempus wird in dem Satz 'Gestern war ein sehr anstrengender Tag' verwendet?",
+            "options": [
+              "Präsens",
+              "Präteritum",
+              "Perfekt",
+              "Futur I"
+            ],
+            "answer": "Präteritum",
+            "topic_tested": "Grammatik (Tempus)",
+            "explanation_de": "'War' ist die Präteritum-Form des Verbs 'sein'."
+          },
+          {
+            "id": 4,
+            "question": "Wo stand das Sofa nach dem Transport?",
+            "options": [
+              "Im Flur",
+              "Unter dem Fenster",
+              "An der Decke",
+              "Auf dem Balkon"
+            ],
+            "answer": "Unter dem Fenster",
+            "topic_tested": "Leseverständnis & Präpositionen",
+            "explanation_de": "Im Text steht: 'stellten das große Sofa direkt unter das Fenster im Wohnzimmer.'"
+          },
+          {
+            "id": 5,
+            "question": "Was haben die Personen am Abend gegessen?",
+            "options": [
+              "Suppe",
+              "Salat",
+              "Pizza",
+              "Burger"
+            ],
+            "answer": "Pizza",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Am Ende des Textes steht: 'Am Abend bestellten wir eine große Pizza...'"
+          }
+        ]
+      }
+    ],
+    "869640549b695ff41c822146db6356b4": [
+      {
+        "paragraph1": {
+          "title": "Ein überraschender Besuch in Berlin",
+          "text": "Letztes Wochenende bin ich früh aufgestanden, weil mein alter Schulfreund David mich in Berlin besuchte. Er kam pünktlich um zehn Uhr am Hauptbahnhof an. Das Wetter war herrlich, also machten wir sofort einen langen Spaziergang durch den Tiergarten. Unterwegs erzählte David mir viele Neuigkeiten aus seiner Heimatstadt. Am Nachmittag gingen wir in ein gemütliches Café am Prenzlauer Berg. Wir haben zwei große Stücke Apfelkuchen bestellt und viel über alte Zeiten gelacht. Erst spät am Abend fuhr er wieder nach Hause zurück. Es war wirklich ein unvergesslicher Tag."
+        },
+        "fill_in_blanks": [
+          {
+            "id": 1,
+            "sentence": "Letztes Wochenende ___ ich früh aufgestanden.",
+            "options": [
+              "habe",
+              "bin",
+              "war",
+              "hatte"
+            ],
+            "answer": "bin",
+            "topic_tested": "Perfekt mit sein",
+            "explanation_de": "Verben der Orts- oder Zustandsveränderung wie aufstehen bilden das Perfekt mit sein."
+          },
+          {
+            "id": 2,
+            "sentence": "Er ___ pünktlich um zehn Uhr am Hauptbahnhof an.",
+            "options": [
+              "kommt",
+              "kam",
+              "ist gekommen",
+              "war gekommen"
+            ],
+            "answer": "kam",
+            "topic_tested": "Präteritum von kommen",
+            "explanation_de": "In schriftlichen Erzählungen nutzt man bevorzugt das Präteritum kam."
+          },
+          {
+            "id": 3,
+            "sentence": "Das Wetter ___ herrlich.",
+            "options": [
+              "war",
+              "ist gewesen",
+              "hatte",
+              "wäre"
+            ],
+            "answer": "war",
+            "topic_tested": "Präteritum von sein",
+            "explanation_de": "Für sein wird fast immer das Präteritum war verwendet."
+          },
+          {
+            "id": 4,
+            "sentence": "Wir ___ zwei große Stücke Apfelkuchen bestellt.",
+            "options": [
+              "haben",
+              "sind",
+              "hatten",
+              "waren"
+            ],
+            "answer": "haben",
+            "topic_tested": "Perfekt mit haben",
+            "explanation_de": "Das transitive Verb bestellen bildet das Perfekt mit haben."
+          },
+          {
+            "id": 5,
+            "sentence": "Erst spät am Abend ___ er wieder nach Hause zurück.",
+            "options": [
+              "fuhr",
+              "ist gefahren",
+              "fährt",
+              "hat gefahren"
+            ],
+            "answer": "fuhr",
+            "topic_tested": "Präteritum von fahren",
+            "explanation_de": "In Erzählungen wird bei starken Verben das Präteritum fuhr bevorzugt."
+          }
+        ],
+        "mcq": [
+          {
+            "id": 1,
+            "question": "Wer besuchte die erzählende Person in Berlin?",
+            "options": [
+              "Ihr Vater",
+              "Ihr Arbeitskollege",
+              "Ihr alter Schulfreund David",
+              "Ihr Lehrer"
+            ],
+            "answer": "Ihr alter Schulfreund David",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im ersten Satz steht: ...weil mein alter Schulfreund David mich in Berlin besuchte."
+          },
+          {
+            "id": 2,
+            "question": "Wie war das Wetter am Wochenende?",
+            "options": [
+              "Es hat stark geregnet",
+              "Das Wetter war herrlich",
+              "Es war stürmisch",
+              "Es hat geschneit"
+            ],
+            "answer": "Das Wetter war herrlich",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im Text heißt es ausdrücklich: Das Wetter war herrlich."
+          },
+          {
+            "id": 3,
+            "question": "Wohin gingen sie am Nachmittag?",
+            "options": [
+              "In ein Museum",
+              "In ein Café am Prenzlauer Berg",
+              "Ins Kino",
+              "In die Bibliothek"
+            ],
+            "answer": "In ein Café am Prenzlauer Berg",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im Text: Am Nachmittag gingen wir in ein gemütliches Café am Prenzlauer Berg."
+          },
+          {
+            "id": 4,
+            "question": "Was aßen sie im Café?",
+            "options": [
+              "Schokoladeneis",
+              "Apfelkuchen",
+              "Käsebrot",
+              "Pancakes"
+            ],
+            "answer": "Apfelkuchen",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im Text: Wir haben zwei große Stücke Apfelkuchen bestellt."
+          },
+          {
+            "id": 5,
+            "question": "Wann fuhr David wieder zurück?",
+            "options": [
+              "Sofort nach dem Mittagessen",
+              "Erst spät am Abend",
+              "Am nächsten Montag",
+              "Um zehn Uhr morgens"
+            ],
+            "answer": "Erst spät am Abend",
+            "topic_tested": "Leseverständnis",
+            "explanation_de": "Im Text: Erst spät am Abend fuhr er wieder nach Hause zurück."
+          }
+        ]
+      }
+    ]
+  },
+  "writing": {
+    "7ad8635c0cff1dc9d078d2be28cf8bea": [
+      {
+        "type": "E-Mail",
+        "scenario_de": "Du bist am Wochenende umgezogen. Du hast deinem Freund/deiner Freundin (Max/Anna) versprochen, ihm/ihr davon zu erzählen und zu beschreiben, wie du die Möbel in dein neues Zimmer gestellt hast.",
+        "instructions_de": "Schreibe eine E-Mail an deinen Freund oder deine Freundin. Berichte von deinem Umzug und erzähle, wo du die Möbel platziert hast.",
+        "leitpunkte": [
+          "Berichte, wie der Umzug am Wochenende gelaufen ist (Verwende das Präteritum und das Perfekt).",
+          "Beschreibe, wohin du die Möbel in deinem neuen Zimmer gestellt hast (Verwende Wechselpräpositionen mit Akkusativ).",
+          "Erzähle, wo die Möbel jetzt stehen (Verwende Wechselpräpositionen mit Dativ)."
+        ],
+        "word_count": 80,
+        "topics_focus": [
+          "Perfekt vs Präteritum",
+          "Präpositionen (Wechselpräpositionen)"
+        ],
+        "example_greeting": "Liebe Anna,",
+        "register": "informell"
+      }
+    ],
+    "79d6c9887b722d1c725517d7bb4041a4": [
+      {
+        "task_type": "E-Mail an einen Freund (Goethe B1 Teil 1)",
+        "register": "Gesprochen / Familiär (Du-Form)",
+        "scenario_de": "Ihr Freund Lukas hat Sie gefragt, wie Ihr letztes Wochenende war. Sie haben einen Ausflug in eine andere Stadt gemacht.",
+        "instructions_de": "Schreiben Sie eine E-Mail von ca. 80 Wörtern. Verwenden Sie Perfekt für das Erzählen von Erlebnissen und Präteritum für Hilfsverben (war, hatte) oder Modalverben.",
+        "leitpunkte": [
+          "Wohin sind Sie gefahren und wie war das Wetter?",
+          "Was haben Sie dort besichtigt oder unternommen?",
+          "Laden Sie Lukas für das nächste Wochenende zu einem Treffen ein."
+        ],
+        "word_count": 80
+      }
+    ],
+    "e277387bf1fc4b7623d3190383c96549": [
+      {
+        "type": "E-Mail",
+        "scenario_de": "Du bist letzte Woche in eine neue Wohnung umgezogen. Dein Freund Thomas hat dir beim Umzug geholfen. Leider ist dabei ein teures Glasregal kaputtgegangen. Außerdem möchtest du Thomas zu einer Einweihungsparty in deiner neuen Wohnung einladen.",
+        "instructions_de": "Schreibe eine E-Mail an deinen Freund Thomas. Antworte auf seine Nachricht von gestern. Behandle in deinem Text alle drei Leitpunkte.",
+        "leitpunkte": [
+          "Berichte kurz, was du gestern gemacht hast und was mit dem Regal passiert ist.",
+          "Entschuldige dich für den Schaden und frage, ob du ihm einen Ersatz kaufen könntest.",
+          "Lade ihn für das nächste Wochenende in deine neue Wohnung ein und sage ihm, wo genau der Schlüssel liegt."
+        ],
+        "word_count": 80,
+        "topics_focus": [
+          "Perfekt vs Präteritum",
+          "Konjunktiv II",
+          "Infinitiv mit zu",
+          "Präpositionen (Wechselpräpositionen)",
+          "Verben mit Akkusativ"
+        ],
+        "example_greeting": "Lieber Thomas,",
+        "register": "informell"
+      }
+    ],
+    "338e9f84bf2b59412ea3415dc244a0dc": [
+      {
+        "type": "E-Mail",
+        "scenario_de": "Du hast letztes Wochenende eine Geburtstagsparty in deiner Wohnung gefeiert. Leider gab es ein Problem mit den Nachbarn, weil es zu laut war. Außerdem hast du vergessen, deinen Freund Lukas rechtzeitig einzuladen. Du möchtest ihm jetzt schreiben, dich entschuldigen und ihn fragen, ob er am nächsten Wochenende Zeit hat.",
+        "instructions_de": "Schreibe eine E-Mail an deinen Freund Lukas. Behandle dabei die drei Leitpunkte. Achte auf eine passende Anrede und einen passenden Schluss.",
+        "leitpunkte": [
+          "Erkläre, warum du ihm nicht rechtzeitig Bescheid geben konntest.",
+          "Berichte von der Party am letzten Wochenende (was ist passiert?).",
+          "Schlage ein Treffen für das nächste Wochenende vor."
+        ],
+        "word_count": 80,
+        "topics_focus": [
+          "Perfekt vs Präteritum",
+          "Konjunktiv II",
+          "Infinitiv mit zu",
+          "Präpositionen (Wechselpräpositionen)",
+          "Verben mit Akkusativ",
+          "Verben mit Dativ"
+        ],
+        "example_greeting": "Lieber Lukas,",
+        "register": "informell"
+      }
+    ],
+    "c0da940231800c5d664ae763e8440a3a": [
+      {
+        "type": "E-Mail",
+        "scenario_de": "Du bist letzte Woche in eine neue Wohnung umgezogen. Dein bester Freund / deine beste Freundin hat dir beim Umzug geholfen. Leider ist dabei ein teures Glasregal kaputtgegangen. Außerdem möchtest du dich bei deinem Freund / deiner Freundin für die großartige Hilfe bedanken und ihn/sie zu einer Einzugsparty einladen.",
+        "instructions_de": "Schreibe eine E-Mail an deinen Freund / deine Freundin. Beantworte in deiner E-Mail die drei Leitpunkte. Achte auf eine korrekte Grammatik (Verwende Perfekt und Präteritum, Konjunktiv II, den Infinitiv mit zu, Wechselpräpositionen sowie Verben mit Akkusativ und Dativ).",
+        "leitpunkte": [
+          "Berichte kurz, was beim Umzug passiert ist und erwähne das kaputte Glasregal.",
+          "Bedanke dich für die Hilfe und erkläre, was du ihm/ihr stattdessen schenken oder kochen möchtest.",
+          "Lade ihn/sie für das nächste Wochenende in die neue Wohnung ein und schlage vor, etwas Schönes zu unternehmen."
+        ],
+        "word_count": 80,
+        "topics_focus": [
+          "Perfekt vs Präteritum",
+          "Konjunktiv II",
+          "Infinitiv mit zu",
+          "Präpositionen (Wechselpräpositionen)",
+          "Verben mit Akkusativ",
+          "Verben mit Dativ",
+          "German Prepositions grouped by prepositions itself"
+        ],
+        "example_greeting": "Liebe Anna, / Lieber Thomas,",
+        "register": "informell"
+      }
+    ]
+  },
+  "listening_easy": {
+    "a37477fe690208311799e0a7e3602d0a": [
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Gestern habe ich den ganzen Nachmittag im Büro gearbeitet, aber mein Kollege ging schon um zwölf Uhr nach Hause.",
+            "question_de": "Was hat der Kollege gestern gemacht?",
+            "options": [
+              "Er hat den ganzen Nachmittag gearbeitet.",
+              "Er ging bereits um die Mittagszeit nach Hause.",
+              "Er ist gar nicht ins Büro gekommen.",
+              "Er hat um zwölf Uhr mit der Arbeit begonnen."
+            ],
+            "answer": "Er ging bereits um die Mittagszeit nach Hause.",
+            "topic_tested": "Präteritum von 'gehen' vs. Perfekt von 'arbeiten'",
+            "explanation_de": "Im Satz wird das Präteritum 'ging' verwendet, um auszudrücken, dass der Kollege um zwölf Uhr (Mittagszeit) nach Hause gegangen ist, während der Sprecher im Perfekt von seiner eigenen Arbeit berichtet."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Als wir letztes Jahr in Berlin wohnten, haben wir fast jedes Wochenende ein neues Museum oder eine Ausstellung besucht.",
+            "question_de": "Was passierte während der Zeit in Berlin?",
+            "options": [
+              "Sie haben selten ihre Wohnung verlassen.",
+              "Sie besuchten regelmäßig Museen oder Ausstellungen.",
+              "Sie zogen jedes Wochenende in ein anderes Museum um.",
+              "Sie wohnten nur an den Wochenenden in Berlin."
+            ],
+            "answer": "Sie besuchten regelmäßig Museen oder Ausstellungen.",
+            "topic_tested": "Präteritum als Zustandsbeschreibung vs. Perfekt als Handlungsbeschreibung",
+            "explanation_de": "Das Präteritum 'wohnten' beschreibt die damalige Lebenssituation, während das Perfekt 'haben besucht' die wiederholten Aktivitäten am Wochenende beschreibt."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Früher war Herr Müller sehr sportlich, doch in den letzten Monaten hat er leider überhaupt keine Zeit für Fitness gehabt.",
+            "question_de": "Wie ist die aktuelle Situation von Herrn Müller?",
+            "options": [
+              "Er treibt mehr Sport als früher.",
+              "Er war noch nie an Fitness interessiert.",
+              "Er hat in letzter Zeit keinen Sport mehr gemacht.",
+              "Er geht jeden Tag nach der Arbeit ins Fitnessstudio."
+            ],
+            "answer": "Er hat in letzter Zeit keinen Sport mehr gemacht.",
+            "topic_tested": "Präteritum von 'sein' vs. Perfekt von 'haben' mit Gegenwartsbezug",
+            "explanation_de": "'Früher war' beschreibt einen früheren Zustand im Präteritum, während das Perfekt 'hat Zeit gehabt' mit der Verneinung zeigt, dass er bis vor kurzem keine Zeit für Sport hatte."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Wir wollten eigentlich mit dem Zug nach München fahren, aber schließlich sind wir doch mit dem Auto gefahren.",
+            "question_de": "Wie sind die Personen nach München gereist?",
+            "options": [
+              "Mit dem Zug, wie geplant.",
+              "Sie sind überhaupt nicht gereist.",
+              "Sie sind mit dem Auto gefahren.",
+              "Mit einer Kombination aus Bus und Bahn."
+            ],
+            "answer": "Sie sind mit dem Auto gefahren.",
+            "topic_tested": "Modalverb im Präteritum ('wollten') vs. Perfekt der Bewegung ('sind gefahren')",
+            "explanation_de": "Das Präteritum 'wollten' drückt nur die ursprüngliche Absicht aus, während das Perfekt mit sein ('sind gefahren') das tatsächliche Reiseereignis darstellt."
+          },
+          {
+            "id": 5,
+            "sentence_de": "Plötzlich fing es stark an zu regnen, deshalb haben die Kinder schnell ihre Spielsachen ins Haus gebracht.",
+            "question_de": "Warum brachten die Kinder ihre Spielsachen hinein?",
+            "options": [
+              "Weil es dunkel geworden ist.",
+              "Weil es unerwartet stark zu regnen begann.",
+              "Weil die Eltern sie zum Abendessen gerufen hatten.",
+              "Weil sie draußen fertig gespielt hatten."
+            ],
+            "answer": "Weil es unerwartet stark zu regnen begann.",
+            "topic_tested": "Präteritum ('fing an') als einsetzendes Ereignis vs. Perfekt ('haben gebracht') als Folge",
+            "explanation_de": "Das Präteritum 'fing an' beschreibt den plötzlichen Wetterumschwung, der die darauffolgende Handlung im Perfekt ('haben gebracht') ausgelöst hat."
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Letzten Sommer reiste ich nach Spanien, weil ich dort meine Sprachkenntnisse verbessern wollte.",
+            "question_de": "Wie verbrachte die Person ihren Urlaub im letzten Sommer?",
+            "options": [
+              "Sie ist nach Spanien gereist, um Spanisch zu lernen.",
+              "Sie hat in Deutschland gearbeitet und gelernt.",
+              "Sie reiste nach Italien, um Urlaub zu machen.",
+              "Sie wollte im Sommer nicht verreisen."
+            ],
+            "answer": "Sie ist nach Spanien gereist, um Spanisch zu lernen.",
+            "topic_tested": "Präteritum von 'reisen'",
+            "explanation_de": "Im Satz wird das Präteritum 'reiste' verwendet, um eine abgeschlossene Handlung in der Vergangenheit auszudrücken. Die Option spiegelt den Sinn des Satzes korrekt wider."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Gestern Abend habe ich einen sehr spannenden Krimi im Fernsehen gesehen.",
+            "question_de": "Was hat die Person gestern Abend gemacht?",
+            "options": [
+              "Sie hat ein Buch gelesen.",
+              "Sie sah einen Film im Kino.",
+              "Sie hat einen Krimi im Fernsehen angeschaut.",
+              "Sie hat ferngesehen, aber keinen Krimi."
+            ],
+            "answer": "Sie hat einen Krimi im Fernsehen angeschaut.",
+            "topic_tested": "Perfekt mit 'haben' und Partizip II ('gesehen')",
+            "explanation_de": "Das Perfekt 'habe gesehen' beschreibt eine Handlung, die gestern Abend stattgefunden hat. Die richtige Option fasst diese Information präzise zusammen."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Als ich ein Kind war, wohnte wir in einem kleinen Haus am Stadtrand.",
+            "question_de": "Wo hat die Person in ihrer Kindheit gewohnt?",
+            "options": [
+              "In einer großen Wohnung in der Stadtmitte.",
+              "In einem kleinen Haus am Rande der Stadt.",
+              "In einem großen Haus auf dem Land.",
+              "In einem modernen Hochhaus."
+            ],
+            "answer": "In einem kleinen Haus am Rande der Stadt.",
+            "topic_tested": "Präteritum für Zustände in der Vergangenheit ('wohnte')",
+            "explanation_de": "Das Verb 'wohnte' steht im Präteritum und beschreibt einen früheren Zustand. 'Am Stadtrand' entspricht 'am Rande der Stadt'."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Mein Bruder hat gestern seine Prüfung erfolgreich bestanden und wir feierten das bis spät in die Nacht.",
+            "question_de": "Was passierte gestern nach der bestandenen Prüfung?",
+            "options": [
+              "Sie gingen früh schlafen.",
+              "Sie feierten bis tief in die Nacht.",
+              "Der Bruder ist durch die Prüfung gefallen.",
+              "Sie haben überhaupt nicht gefeiert."
+            ],
+            "answer": "Sie feierten bis tief in die Nacht.",
+            "topic_tested": "Mischung aus Perfekt ('hat bestanden') und Präteritum ('feierten')",
+            "explanation_de": "Der erste Teil nutzt das Perfekt für das Hauptereignis, während der zweite Teil das Präteritum ('feierten') verwendet, um die anschließende Feier zu beschreiben."
+          },
+          {
+            "id": 5,
+            "sentence_de": "Früher kochte mein Vater jeden Sonntag ein großes Mittagessen für die ganze Familie.",
+            "question_de": "Was machte der Vater früher jeden Sonntag?",
+            "options": [
+              "Er ging mit der Familie in ein Restaurant.",
+              "Er kochte ein großes Essen für alle.",
+              "Er hat niemals gekocht.",
+              "Er bestellte Pizza für die Familie."
+            ],
+            "answer": "Er kochte ein großes Essen für alle.",
+            "topic_tested": "Präteritum für regelmäßige Handlungen in der Vergangenheit ('kochte')",
+            "explanation_de": "Das Präteritum 'kochte' wird hier in Kombination mit 'früher' und 'jeden Sonntag' für eine gewohnheitsmäßige Handlung in der Vergangenheit genutzt."
+          }
+        ]
+      }
+    ],
+    "76f9c98aa6953b336495de87287e074a": [
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Gestern bin ich den ganzen Tag zu Hause geblieben, weil das Wetter so schlecht war.",
+            "question_de": "Was hat die Person gestern gemacht?",
+            "options": [
+              "Sie ist den ganzen Tag spazieren gegangen.",
+              "Sie ist den ganzen Tag zu Hause geblieben.",
+              "Sie hat im Garten gearbeitet.",
+              "Sie ist ins Kino gegangen."
+            ],
+            "answer": "Sie ist den ganzen Tag zu Hause geblieben.",
+            "topic_tested": "Perfekt",
+            "explanation_de": "Der Satz verwendet das Perfekt 'bin ... geblieben', um eine abgeschlossene Handlung in der Vergangenheit auszudrücken."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Als ich ein Kind war, wohnte ich in einem kleinen Dorf in den Bergen.",
+            "question_de": "Wo hat die Person in ihrer Kindheit gewohnt?",
+            "options": [
+              "In einer großen Stadt",
+              "An der Nordsee",
+              "In einem kleinen Dorf in den Bergen",
+              "In der Hauptstadt"
+            ],
+            "answer": "In einem kleinen Dorf in den Bergen",
+            "topic_tested": "Präteritum",
+            "explanation_de": "Das Präteritum 'wohnte' wird hier für eine Zustandsbeschreibung in der Vergangenheit verwendet, typischerweise in Erzählungen."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Wenn ich mehr Zeit hätte, würde ich jeden Tag für meine Familie kochen.",
+            "question_de": "Warum kocht die Person nicht jeden Tag für ihre Familie?",
+            "options": [
+              "Weil sie keine Lust hat.",
+              "Weil sie nicht kochen kann.",
+              "Weil sie keine Zeit hat.",
+              "Weil das Essen zu teuer ist."
+            ],
+            "answer": "Weil sie keine Zeit hat.",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Der Konjunktiv II 'hätte' und 'würde ... kochen' drückt eine irreale Bedingung und einen Wunsch in der Gegenwart aus ('hätte ich nur Zeit')."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Letztes Jahr reisten wir im Sommer durch ganz Italien und besichtigten viele alte Kirchen.",
+            "question_de": "Was hat die Gruppe letztes Jahr im Sommer gemacht?",
+            "options": [
+              "Sie sind durch ganz Italien gereist.",
+              "Sie haben in Deutschland Urlaub gemacht.",
+              "Sie sind nach Spanien geflogen.",
+              "Sie sind zu Hause geblieben."
+            ],
+            "answer": "Sie sind durch ganz Italien gereist.",
+            "topic_tested": "Präteritum",
+            "explanation_de": "Die Verben 'reisten' und 'besichtigten' stehen im Präteritum und beschreiben Handlungen in einer erzählten Geschichte der Vergangenheit."
+          },
+          {
+            "id": 5,
+            "sentence_de": "An deiner Stelle hätte ich den neuen Job sofort angenommen, weil das Gehalt wirklich sehr gut ist.",
+            "question_de": "Was empfiehlt die sprechende Person?",
+            "options": [
+              "Den alten Job zu behalten",
+              "Den neuen Job anzunehmen",
+              "Nach einem anderen Job zu suchen",
+              "Erst einmal Urlaub zu machen"
+            ],
+            "answer": "Den neuen Job anzunehmen",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Mit der Struktur 'An deiner Stelle hätte ich ... angenommen' gibt die Person einen Ratschlag für eine Situation in der Vergangenheit (Vergangenheitsform des Konjunktivs II)."
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Gestern bin ich den ganzen Tag zu Hause geblieben, weil das Wetter so schlecht war.",
+            "question_de": "Was hat die Person gestern gemacht?",
+            "options": [
+              "Sie ist den ganzen Tag spazieren gegangen.",
+              "Sie ist den ganzen Tag zu Hause geblieben.",
+              "Sie hat im Garten gearbeitet.",
+              "Sie ist ins Kino gegangen."
+            ],
+            "answer": "Sie ist den ganzen Tag zu Hause geblieben.",
+            "topic_tested": "Perfekt",
+            "explanation_de": "Der Satz verwendet das Perfekt 'bin geblieben', um eine abgeschlossene Handlung in der Vergangenheit auszudrücken."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Als ich noch ein Kind war, wohnte ich in einem kleinen Dorf am Wald.",
+            "question_de": "Wo hat die Person in ihrer Kindheit gewohnt?",
+            "options": [
+              "In einer großen Stadt",
+              "In einem kleinen Dorf am Wald",
+              "An der Nordsee",
+              "In den Bergen"
+            ],
+            "answer": "In einem kleinen Dorf am Wald",
+            "topic_tested": "Präteritum",
+            "explanation_de": "Hier wird das Präteritum 'wohnte' verwendet, um einen Zustand in der Vergangenheit zu beschreiben."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Wenn ich im Lotto gewinnen würde, dann würde ich sofort ein großes Haus kaufen.",
+            "question_de": "Was würde die Person bei einem Lottogewinn tun?",
+            "options": [
+              "Ein kleines Auto mieten",
+              "Ein großes Haus kaufen",
+              "Eine Weltreise machen",
+              "Das Geld sparen"
+            ],
+            "answer": "Ein großes Haus kaufen",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Der Satz drückt mit 'würde gewinnen' und 'würde kaufen' eine hypothetische Situation in der Gegenwart oder Zukunft aus."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Anfang der neunziger Jahre reiste meine Familie jeden Sommer nach Italien in den Urlaub.",
+            "question_de": "Wohin fuhr die Familie in den neunziger Jahren im Sommer?",
+            "options": [
+              "Nach Spanien",
+              "Nach Frankreich",
+              "Nach Italien",
+              "Nach Griechenland"
+            ],
+            "answer": "Nach Italien",
+            "topic_tested": "Präteritum",
+            "explanation_de": "Das Präteritum 'reiste' wird hier für eine regelmäßige Handlung in der Vergangenheit (Erzählstil) genutzt."
+          },
+          {
+            "id": 5,
+            "sentence_de": "An deiner Stelle hätte ich den Chef sofort nach einer Gehaltserhöhung gefragt.",
+            "question_de": "Was empfiehlt die Person im Nachhinein?",
+            "options": [
+              "Nach einer Gehaltserhöhung zu fragen",
+              "Die Arbeitsstelle zu wechseln",
+              "Mit dem Kollegen zu sprechen",
+              "Mehr Überstunden zu machen"
+            ],
+            "answer": "Nach einer Gehaltserhöhung zu fragen",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Der Konjunktiv II der Vergangenheit ('hätte gefragt') drückt hier einen Ratschlag oder eine nicht realisierte Möglichkeit in der Vergangenheit aus."
+          }
+        ]
+      }
+    ],
+    "bbabd1b9da0d860686f44d8b3a720f56": [
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Ich warte schon seit fast einer halben Stunde am kalten Bahnhof auf den verspäteten Bus nach Köln.",
+            "question_de": "Worauf wartet die Person am Bahnhof?",
+            "options": [
+              "Auf einen Kollegen",
+              "Auf den verspäteten Bus",
+              "Auf ein Taxi",
+              "Auf ihren Zug"
+            ],
+            "answer": "Auf den verspäteten Bus",
+            "explanation_de": "Das Verb warten verlangt die feste Präposition auf + Akkusativ: warten auf den Bus."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Denkst du bitte rechtzeitig an deinen großen Regenschirm, weil es heute Nachmittag gewittern soll?",
+            "question_de": "Woran soll gedacht werden?",
+            "options": [
+              "An die Fahrkarte",
+              "An den großen Regenschirm",
+              "An das Geld",
+              "An die Jacke"
+            ],
+            "answer": "An den großen Regenschirm",
+            "explanation_de": "Das Verb denken verbindet sich mit an + Akkusativ: denken an den Regenschirm."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Meine ganze Familie freut sich schon riesig auf den gemeinsamen Sommerurlaub an der Ostsee.",
+            "question_de": "Worauf freut sich die Familie?",
+            "options": [
+              "Auf ein neues Auto",
+              "Auf den gemeinsamen Sommerurlaub",
+              "Auf das Wochenende",
+              "Auf eine Feier"
+            ],
+            "answer": "Auf den gemeinsamen Sommerurlaub",
+            "explanation_de": "sich freuen auf + Akkusativ bezieht sich auf ein zukünftiges Ereignis (den Urlaub)."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Im gemütlichen Café sprachen die beiden Freundinnen sehr ausführlich über ihre beruflichen Zukunftspläne.",
+            "question_de": "Worüber sprachen die beiden Freundinnen?",
+            "options": [
+              "Über das schlechte Wetter",
+              "Über das Mittagessen",
+              "Über ihre beruflichen Zukunftspläne",
+              "Über einen Film"
+            ],
+            "answer": "Über ihre beruflichen Zukunftspläne",
+            "explanation_de": "Das Verb sprechen verlangt über + Akkusativ, wenn es um ein Gesprächsthema geht."
+          },
+          {
+            "id": 5,
+            "sentence_de": "Mein älterer Bruder interessiert sich seit vielen Jahren leidenschaftlich für moderne Architektur und Kunst.",
+            "question_de": "Wofür interessiert sich der ältere Bruder?",
+            "options": [
+              "Für Musik und Theater",
+              "Für moderne Architektur und Kunst",
+              "Für Politik",
+              "Für Fußball"
+            ],
+            "answer": "Für moderne Architektur und Kunst",
+            "explanation_de": "sich interessieren für verlangt immer die Präposition für + Akkusativ."
+          }
+        ]
+      }
+    ],
+    "d080adf573ddbdce3437ea863727466b": [
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Gestern habe ich meine beste Freundin im Café getroffen und wir haben stundenlang über unsere Zukunft gesprochen.",
+            "question_de": "Was hat die Person gestern gemacht?",
+            "options": [
+              "Sie hat im Café gearbeitet.",
+              "Sie hat sich mit einer Freundin getroffen und geredet.",
+              "Sie hat eine neue Freundin im Café kennengelernt.",
+              "Sie hat zu Hause auf ihre Freundin gewartet."
+            ],
+            "answer": "Sie hat sich mit einer Freundin getroffen und geredet.",
+            "topic_tested": "Perfekt vs Präteritum",
+            "explanation_de": "Der Satz verwendet das Perfekt ('habe... getroffen' und 'haben... gesprochen'), um eine abgeschlossene Handlung in der Vergangenheit zu beschreiben."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Wenn ich im Lotto gewinnen würde, würde ich sofort ein großes Haus am Meer kaufen.",
+            "question_de": "Was würde die Person bei einem Lottogewinn tun?",
+            "options": [
+              "Sie kauft ein kleines Auto in der Stadt.",
+              "Sie hat bereits ein großes Haus am Meer gekauft.",
+              "Sie würde ein großes Haus am Meer kaufen.",
+              "Sie muss unbedingt im Lotto gewinnen."
+            ],
+            "answer": "Sie würde ein großes Haus am Meer kaufen.",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Hier drückt der Konjunktiv II ('würde gewinnen', 'würde kaufen') eine irreale Bedingung und einen Wunsch in der Gegenwart aus."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Es ist wirklich wichtig, vor dem Schlafen noch einmal frische Luft zu schnappen.",
+            "question_de": "Wann sollte man frische Luft schnappen?",
+            "options": [
+              "Nach dem Aufstehen am Morgen.",
+              "Während der Arbeit im Büro.",
+              "Bevor man schlafen geht.",
+              "Direkt nach dem Essen."
+            ],
+            "answer": "Bevor man schlafen geht.",
+            "topic_tested": "Infinitiv mit zu",
+            "explanation_de": "Die Konstruktion 'vor dem Schlafen... zu schnappen' zeigt die Verwendung des Infinitivs mit 'zu' nach einer Präpositionalphrase."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Als ich noch ein Kind war, spielte ich jeden Nachmittag draußen mit meinen Geschwistern.",
+            "question_de": "Was machte die Person in ihrer Kindheit?",
+            "options": [
+              "Sie spielte jeden Nachmittag draußen.",
+              "Sie spielt heute noch jeden Nachmittag draußen.",
+              "Sie hat gestern mit Geschwistern gespielt.",
+              "Sie wollte immer alleine zu Hause bleiben."
+            ],
+            "answer": "Sie spielte jeden Nachmittag draußen.",
+            "topic_tested": "Perfekt vs Präteritum",
+            "explanation_de": "Das Präteritum ('spielte') wird hier verwendet, um eine regelmäßige Handlung in der Vergangenheit (während der Kindheit) zu erzählen."
+          },
+          {
+            "id": 5,
+            "sentence_de": "An deiner Stelle hätte ich den neuen Job in Berlin sofort angenommen.",
+            "question_de": "Welchen Rat gibt die Person bezüglich des Jobs?",
+            "options": [
+              "Man sollte den Job auf keinen Fall annehmen.",
+              "Es wäre besser gewesen, den Job anzunehmen.",
+              "Der Job in Berlin ist leider viel zu teuer.",
+              "Man muss den Arbeitsvertrag erst genau lesen."
+            ],
+            "answer": "Es wäre besser gewesen, den Job anzunehmen.",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Die Form 'hätte... angenommen' ist der Konjunktiv II der Vergangenheit (Perfekt) und drückt einen Ratschlag oder Bedauern über eine verpasste Chance aus."
+          }
+        ]
+      }
+    ],
+    "e50761daa2111386a9491ae0bb905112": [
+      {
+        "items": [
+          {
+            "id": 1,
+            "sentence_de": "Gestern habe ich den ganzen Nachmittag aufgeräumt, weil meine Wohnung völlig unordentlich war.",
+            "question_de": "Welche Zeitform wird hier für die abgeschlossene Handlung am Vortag verwendet?",
+            "options": [
+              "Präsens",
+              "Perfekt",
+              "Präteritum",
+              "Futur I"
+            ],
+            "answer": "Perfekt",
+            "topic_tested": "Perfekt vs Präteritum",
+            "explanation_de": "Die Handlung in der Vergangenheit (aufräumen) wird hier in der gesprochenen Sprache typischerweise mit dem Perfekt (habe ... aufgeräumt) ausgedrückt."
+          },
+          {
+            "id": 2,
+            "sentence_de": "Wenn ich im Lotto gewinnen würde, kaufte ich mir sofort ein großes Haus am Meer.",
+            "question_de": "Welches grammatikalische Mittel wird in diesem Satz für einen unwahrscheinlichen Wunsch verwendet?",
+            "options": [
+              "Imperativ",
+              "Konjunktiv II",
+              "Indikativ Präsens",
+              "Passiv"
+            ],
+            "answer": "Konjunktiv II",
+            "topic_tested": "Konjunktiv II",
+            "explanation_de": "Formen wie 'würde gewinnen' und 'kaufte' (bzw. würde kaufen) drücken hier eine irreale Bedingung und einen Wunsch im Konjunktiv II aus."
+          },
+          {
+            "id": 3,
+            "sentence_de": "Es macht großen Spaß, am Wochenende neue Städte mit dem Zug zu entdecken.",
+            "question_de": "Wie ist der Infinitiv am Satzende korrekt strukturiert?",
+            "options": [
+              "mit zu",
+              "ohne zu",
+              "als Infinitiv Perfekt",
+              "als Partizip II"
+            ],
+            "answer": "mit zu",
+            "topic_tested": "Infinitiv mit zu",
+            "explanation_de": "Nach dem Ausdruck 'es macht Spaß' folgt ein Nebensatz im Infinitiv, der mit der Präposition 'zu' angeschlossen wird ('zu entdecken')."
+          },
+          {
+            "id": 4,
+            "sentence_de": "Ich hänge das Bild heute Abend an die Wand über dem Sofa.",
+            "question_de": "Welcher Kasus steht nach der Wechselpräposition 'an' in diesem Satz (Richtung/Wohin)?",
+            "options": [
+              "Nominativ",
+              "Genitiv",
+              "Dativ",
+              "Akkusativ"
+            ],
+            "answer": "Akkusativ",
+            "topic_tested": "Präpositionen (Wechselpräpositionen)",
+            "explanation_de": "Die Wechselpräposition 'an' verlangt hier den Akkusativ ('an die Wand'), da es sich um eine Bewegung beziehungsweise Richtung (Wohin?) handelt."
+          },
+          {
+            "id": 5,
+            "sentence_de": "Der freundliche Lehrer hilft den neuen Schülerinnen geduldig bei den schweren Hausaufgaben.",
+            "question_de": "Welchen Kasus verlangt das Verb 'helfen' zwingend im Objekt?",
+            "options": [
+              "Nominativ",
+              "Akkusativ",
+              "Dativ",
+              "Genitiv"
+            ],
+            "answer": "Dativ",
+            "topic_tested": "Verben mit Dativ",
+            "explanation_de": "Das Verb 'helfen' verlangt im Deutschen immer den Dativ (wem helfen? -> den neuen Schülerinnen)."
+          }
+        ]
+      }
+    ]
+  },
+  "listening_real": {
+    "85562588562b5652da34a0e78c3e909b": [
+      {
+        "title": "Ein Streit am Wochenende",
+        "full_audio_text": "Anna: Hallo Ben! Was hast du eigentlich gestern gemacht? Ich rief dich an, aber du gingst nicht ans Telefon.\nBen: Oh, es tut mir leid, Anna. Gestern war ein anstrengender Tag. Am Morgen reparierte ich mein Fahrrad, weil die Kette riss. Das dauerte fast zwei Stunden. Und am Nachmittag putzte ich die ganze Wohnung.\nAnna: Achso! Hast du denn am Abend wenigstens entspannt?\nBen: Nicht wirklich. Ich habe noch schnell einkauft und dann kochte ich etwas für meine Eltern, die spontan zu Besuch kamen. Wir saßen zusammen und sie erzählten mir viel aus ihrer Jugend. Später schlief ich sofort ein, als sie weg waren.\nAnna: Das klingt wirklich stressig. Ich habe gestern nur ein Buch gelesen und blieb auf dem Sofa.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Warum rief Anna Ben an?",
+            "options": [
+              "Weil sie sein Fahrrad reparieren wollte.",
+              "Weil sie wissen wollte, was er gemacht hat.",
+              "Weil seine Eltern zu Besuch kamen.",
+              "Weil sie zusammen einkaufen wollten."
+            ],
+            "answer": "Weil sie wissen wollte, was er gemacht hat.",
+            "explanation_de": "Anna fragt direkt zu Beginn: 'Was hast du eigentlich gestern gemacht? Ich rief dich an...'"
+          },
+          {
+            "id": 2,
+            "question_de": "Was passierte am Morgen mit Bens Fahrrad?",
+            "options": [
+              "Er kaufte ein neues Fahrrad.",
+              "Er lieh es Anna.",
+              "Die Kette riss.",
+              "Es wurde gestohlen."
+            ],
+            "answer": "Die Kette riss.",
+            "explanation_de": "Ben sagt im Präteritum: '...weil die Kette riss.'"
+          },
+          {
+            "id": 3,
+            "question_de": "Wie lange dauerte die Reparatur des Fahrrads?",
+            "options": [
+              "Ungefähr eine Stunde",
+              "Fast zwei Stunden",
+              "Den ganzen Nachmittag",
+              "Nur ein paar Minuten"
+            ],
+            "answer": "Fast zwei Stunden",
+            "explanation_de": "Ben erwähnt im Präteritum: 'Das dauerte fast zwei Stunden.'"
+          },
+          {
+            "id": 4,
+            "question_de": "Wer kam am Nachmittag überraschend zu Besuch?",
+            "options": [
+              "Anna",
+              "Bens Freunde",
+              "Bens Eltern",
+              "Niemand"
+            ],
+            "answer": "Bens Eltern",
+            "explanation_de": "Ben erzählt im Präteritum: '...für meine Eltern, die spontan zu Besuch kamen.'"
+          },
+          {
+            "id": 5,
+            "question_de": "Was hat Anna den ganzen Abend gemacht?",
+            "options": [
+              "Sie hat gekocht und geputzt.",
+              "Sie hat ein Buch gelesen und blieb auf dem Sofa.",
+              "Sie hat Ben bei der Reparatur geholfen.",
+              "Sie hat geschlafen."
+            ],
+            "answer": "Sie hat ein Buch gelesen und blieb auf dem Sofa.",
+            "explanation_de": "Anna antwortet am Ende: 'Ich habe gestern nur ein Buch gelesen und blieb auf dem Sofa.'"
+          }
+        ]
+      },
+      {
+        "title": "Das Wochenende und die Grammatik",
+        "full_audio_text": "Anna: Hallo Ben! Was hast du am Wochenende gemacht? Ich habe dich am Samstag im Café gesucht, aber du warst nicht da.\nBen: Hallo Anna! Tut mir leid. Ich war am Samstag den ganzen Tag zu Hause, weil ich mein Zimmer renoviert habe. Ich strich die Wände und kaufte neue Möbel. Und was machtest du?\nAnna: Oh, ich bin am Samstag ins Kino gegangen. Ich habe mir den neuen Actionfilm angesehen. Danach traf ich noch Freunde in einer Bar. Wir haben bis spät in die Nacht geredet.\nBen: Das klingt toll. Und gestern? Was war gestern?\nAnna: Gestern blieb ich den ganzen Tag im Bett. Ich las ein langes Buch und schlief viel. Und du?\nBen: Ich arbeitete gestern an meinem Projekt für die Universität. Ich schrieb einen langen Text, korrigierte die Fehler und schickte ihn am Abend ab. Ich war am Abend total müde und schlief sofort ein.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Warum war Ben am Samstag nicht im Café?",
+            "options": [
+              "Weil er im Kino war",
+              "Weil er sein Zimmer renovierte",
+              "Weil er für die Universität arbeitete",
+              "Weil er im Bett blieb"
+            ],
+            "answer": "Weil er sein Zimmer renovierte",
+            "explanation_de": "Ben sagt im Text: 'Ich war am Samstag den ganzen Tag zu Hause, weil ich mein Zimmer renoviert habe.'"
+          },
+          {
+            "id": 2,
+            "question_de": "Welche grammatikalische Form benutzt Ben meistens für seine Handlungen am Samstag?",
+            "options": [
+              "Nur das Perfekt",
+              "Nur das Präteritum",
+              "Das Futur",
+              "Den Konjunktiv"
+            ],
+            "answer": "Nur das Präteritum",
+            "explanation_de": "Ben verwendet Verben wie 'strich' und 'kaufte', was typisch für das Präteritum in Erzählungen ist."
+          },
+          {
+            "id": 3,
+            "question_de": "Was hat Anna am Samstag gemacht?",
+            "options": [
+              "Sie hat ein Buch gelesen",
+              "Sie hat an der Universität gearbeitet",
+              "Sie ist ins Kino gegangen",
+              "Sie hat ihr Zimmer gestrichen"
+            ],
+            "answer": "Sie ist ins Kino gegangen",
+            "explanation_de": "Anna erzählt: 'ich bin am Samstag ins Kino gegangen. Ich habe mir den neuen Actionfilm angesehen.'"
+          },
+          {
+            "id": 4,
+            "question_de": "Welche Zeitform nutzt Anna überwiegend, als sie von ihrem Samstagabend erzählt?",
+            "options": [
+              "Das Perfekt",
+              "Das Präteritum",
+              "Das Plusquamperfekt",
+              "Das Präsens"
+            ],
+            "answer": "Das Perfekt",
+            "explanation_de": "Anna nutzt zusammengesetzte Zeiten wie 'traf ich' (Präteritum) kombiniert mit Perfekt ('habe... gesehen', 'haben... geredet')."
+          },
+          {
+            "id": 5,
+            "question_de": "Was machte Anna am Sonntag (gestern)?",
+            "options": [
+              "Sie arbeitete an einem Projekt",
+              "Sie ging in eine Bar",
+              "Sie blieb im Bett und las ein Buch",
+              "Sie kaufte neue Möbel"
+            ],
+            "answer": "Sie blieb im Bett und las ein Buch",
+            "explanation_de": "Anna antwortet auf die Frage nach gestern: 'Gestern blieb ich den ganzen Tag im Bett. Ich las ein langes Buch und schlief viel.'"
+          }
+        ]
+      },
+      {
+        "title": "Gespräch über das Wochenende",
+        "full_audio_text": "Anna: Hallo Ben! Wie war dein Wochenende? Du hast doch am Samstag einen Ausflug gemacht, oder? Ben: Hallo Anna! Ja, das stimmt. Ich bin am Samstag früh um sieben Uhr aufgestanden und nach Heidelberg gefahren. Das Wetter war fantastisch, deshalb bin ich direkt zum Schloss gelaufen. Anna: Oh, Heidelberg ist wunderschön! Ich war dort vor zwei Jahren auch einmal. Hast du dort auch Fotos gemacht? Ben: Natürlich! Ich habe meine Kamera mitgenommen und viele Bilder geschossen. Später am Nachmittag traf ich einen alten Freund aus der Schulzeit. Wir gingen zusammen in ein kleines Café am Marktplatz und tranken Kaffee. Anna: Das klingt wirklich nach einem perfekten Tag. Und was hast du gestern gemacht? Ben: Gestern blieb ich einfach zu Hause. Ich las ein spannendes Buch und kochte ein leckeres Abendessen.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Wann ist Ben am Samstag aufgestanden?",
+            "options": [
+              "Um sechs Uhr",
+              "Um sieben Uhr",
+              "Um acht Uhr",
+              "Um neun Uhr"
+            ],
+            "answer": "Um sieben Uhr",
+            "explanation_de": "Ben sagt im Text: 'Ich bin am Samstag früh um sieben Uhr aufgestanden...'"
+          },
+          {
+            "id": 2,
+            "question_de": "Wo war Anna vor zwei Jahren?",
+            "options": [
+              "In München",
+              "In Frankfurt",
+              "In Heidelberg",
+              "In Berlin"
+            ],
+            "answer": "In Heidelberg",
+            "explanation_de": "Anna erwähnt im Gespräch: 'Ich war dort vor zwei Jahren auch einmal.'"
+          },
+          {
+            "id": 3,
+            "question_de": "Wen hat Ben am Nachmittag getroffen?",
+            "options": [
+              "Einen alten Freund",
+              "Seine Schwester",
+              "Einen Arbeitskollegen",
+              "Anna"
+            ],
+            "answer": "Einen alten Freund",
+            "explanation_de": "Ben erzählt: 'Später am Nachmittag traf ich einen alten Freund aus der Schulzeit.'"
+          },
+          {
+            "id": 4,
+            "question_de": "Was hat Ben gestern gemacht?",
+            "options": [
+              "Er ging ins Kino",
+              "Er blieb zu Hause",
+              "Er besuchte das Schloss",
+              "Er arbeitete im Garten"
+            ],
+            "answer": "Er blieb zu Hause",
+            "explanation_de": "Auf Annas Frage antwortet Ben: 'Gestern blieb ich einfach zu Hause.'"
+          },
+          {
+            "id": 5,
+            "question_de": "Welche Grammatikformen nutzt Ben hauptsächlich, um von seinen Aktivitäten gestern zu erzählen?",
+            "options": [
+              "Nur das Perfekt",
+              "Nur das Futur",
+              "Das Präteritum",
+              "Den Imperativ"
+            ],
+            "answer": "Das Präteritum",
+            "explanation_de": "Für den gestrigen Tag verwendet Ben Präteritum-Formen wie 'blieb', 'las' und 'kochte'."
+          }
+        ]
+      }
+    ],
+    "f7a3b33f2cb12e3a2748fc85125c3bd0": [
+      {
+        "title": "Das neue Wohnzimmer",
+        "full_audio_text": "Anna: Hallo Tom! Du siehst so müde aus. Was hast du gestern den ganzen Tag gemacht?\nTom: Ach Anna, ich habe mein Wohnzimmer komplett renoviert. Zuerst strich ich die Wände in einem hellen Blau, und danach kaufte ich ein neues Sofa. Es war wirklich anstrengend.\nAnna: Oh, das klingt gut! Wo steht das Sofa jetzt?\nTom: Es steht direkt an der Wand, genau unter dem großen Fenster. Und den schweren Teppich habe ich auf den Boden gelegt, mitten in den Raum.\nAnna: Hast du auch die Lampe aufgehängt?\nTom: Ja, gestern Abend hing sie schon über dem Tisch. Aber heute Morgen ist sie leider heruntergefallen, weil ich den Nagel falsch in die Wand gesteckt hatte.\nAnna: Das tut mir leid. Aber du hast gestern wirklich viel gearbeitet!\nTom: Ja, und heute ruhe ich mich auf dem neuen Sofa aus.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Was hat Tom gestern gemacht?",
+            "options": [
+              "Er hat das Wohnzimmer renoviert.",
+              "Er hat den ganzen Tag geschlafen.",
+              "Er hat ein neues Auto gekauft.",
+              "Er hat seiner Freundin geholfen."
+            ],
+            "answer": "Er hat das Wohnzimmer renoviert.",
+            "explanation_de": "Tom sagt im Text: 'Ich habe mein Wohnzimmer komplett renoviert.'"
+          },
+          {
+            "id": 2,
+            "question_de": "Wo steht das neue Sofa jetzt?",
+            "options": [
+              "Neben der Tür im Flur.",
+              "An der Wand unter dem Fenster.",
+              "Mitten im Raum auf dem Teppich.",
+              "Auf dem großen Balkon."
+            ],
+            "answer": "An der Wand unter dem Fenster.",
+            "explanation_de": "Tom antwortet auf Annas Frage: 'Es steht direkt an der Wand, genau unter dem großen Fenster.'"
+          },
+          {
+            "id": 3,
+            "question_de": "Wohin hat Tom den Teppich gelegt?",
+            "options": [
+              "Unter das Sofa.",
+              "In den Keller.",
+              "Auf den Boden in die Mitte des Raumes.",
+              "An die Wand neben das Fenster."
+            ],
+            "answer": "Auf den Boden in die Mitte des Raumes.",
+            "explanation_de": "Tom erklärt: 'Und den schweren Teppich habe ich auf den Boden gelegt, mitten in den Raum.'"
+          },
+          {
+            "id": 4,
+            "question_de": "Was ist mit der Lampe passiert?",
+            "options": [
+              "Sie wurde gestohlen.",
+              "Sie ist heute Morgen heruntergefallen.",
+              "Sie ist viel zu teuer gewesen.",
+              "Sie leuchtet nicht mehr."
+            ],
+            "answer": "Sie ist heute Morgen heruntergefallen.",
+            "explanation_de": "Tom erzählt: 'Aber heute Morgen ist sie leider heruntergefallen, weil ich den Nagel falsch in die Wand gesteckt hatte.'"
+          },
+          {
+            "id": 5,
+            "question_de": "Was macht Tom heute?",
+            "options": [
+              "Er arbeitet im Büro.",
+              "Er streicht die Wände neu.",
+              "Er ruht sich auf dem Sofa aus.",
+              "Er geht einkaufen."
+            ],
+            "answer": "Er ruht sich auf dem Sofa aus.",
+            "explanation_de": "Tom sagt am Ende des Gesprächs: 'Und heute ruhe ich mich auf dem neuen Sofa aus.'"
+          }
+        ]
+      }
+    ],
+    "bbd4781f5a260c0a5b071581be4efcd3": [
+      {
+        "title": "Das verlorene Portemonnaie",
+        "full_audio_text": "Anna: Hallo Tom! Gestern ist mir etwas Schreckliches passiert. Ich habe mein Portemonnaie verloren, als ich einkaufen war. Tom: Ach, du liebe Zeit! Hast du es denn schon gesucht? Anna: Ja, ich bin direkt in den Supermarkt zurückgegangen, aber ich fand es dort nicht mehr. Die Kassiererin sagte, niemand habe etwas abgegeben. Wenn ich meine Tasche besser zugemacht hätte, wäre das sicher nicht passiert! Tom: Da hast du recht. Wo warst du denn noch überall? Anna: Nach dem Einkaufen ging ich zur Post. Dort stand ich in einer langen Schlange. Plötzlich rief mich eine Mitarbeiterin an und fragte, ob ich Anna heißt. Sie hat mein Portemonnaie gefunden! Tom: Mensch, das ist ja fantastisch! An deiner Stelle würde ich der Frau unbedingt einen Blumenstrauß schenken. Anna: Das habe ich mir auch schon überlegt. Wenn ich heute Zeit hätte, würde ich gleich welche kaufen.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Was ist Anna gestern passiert?",
+            "options": [
+              "Sie hat ihre Tasche im Supermarkt vergessen.",
+              "Sie hat ihr Portemonnaie verloren.",
+              "Ihr wurde das Portemonnaie gestohlen.",
+              "Sie hat Geld auf der Post verloren."
+            ],
+            "answer": "Sie hat ihr Portemonnaie verloren.",
+            "explanation_de": "Anna erzählt direkt zu Beginn: 'Gestern ist mir etwas Schreckliches passiert. Ich habe mein Portemonnaie verloren...'"
+          },
+          {
+            "id": 2,
+            "question_de": "Was hat die Kassiererin im Supermarkt gesagt?",
+            "options": [
+              "Sie hat das Portemonnaie gefunden.",
+              "Ein Kunde hat das Portemonnaie abgegeben.",
+              "Niemand hat etwas abgegeben.",
+              "Anna soll später noch einmal kommen."
+            ],
+            "answer": "Niemand hat etwas abgegeben.",
+            "explanation_de": "Anna sagt, dass die Kassiererin meinte, niemand habe etwas abgegeben."
+          },
+          {
+            "id": 3,
+            "question_de": "Was bedauert Anna im Konjunktiv II?",
+            "options": [
+              "Dass sie nicht früher in den Supermarkt gegangen ist.",
+              "Dass sie ihre Tasche nicht besser zugemacht hat.",
+              "Dass sie keine Blumen gekauft hat.",
+              "Dass sie zur Post gegangen ist."
+            ],
+            "answer": "Dass sie ihre Tasche nicht besser zugemacht hat.",
+            "explanation_de": "Anna sagt: 'Wenn ich meine Tasche besser zugemacht hätte, wäre das sicher nicht passiert!'"
+          },
+          {
+            "id": 4,
+            "question_de": "Wer hat das Portemonnaie schließlich gefunden?",
+            "options": [
+              "Eine Kassiererin im Supermarkt",
+              "Ein Mann in der Schlange",
+              "Eine Mitarbeiterin bei der Post",
+              "Tom"
+            ],
+            "answer": "Eine Mitarbeiterin bei der Post",
+            "explanation_de": "Anna erklärt, dass sie bei der Post war und eine Mitarbeiterin sie angerufen und gesagt hat, dass sie das Portemonnaie gefunden hat."
+          },
+          {
+            "id": 5,
+            "question_de": "Was schlägt Tom Anna vor?",
+            "options": [
+              "Der Postmitarbeiterin Blumen zu schenken",
+              "Sich bei der Polizei zu melden",
+              "Die Tasche sofort wegzuwerfen",
+              "Nie wieder im Supermarkt einzukaufen"
+            ],
+            "answer": "Der Postmitarbeiterin Blumen zu schenken",
+            "explanation_de": "Tom sagt: 'An deiner Stelle würde ich der Frau unbedingt einen Blumenstrauß schenken.'"
+          }
+        ]
+      }
+    ],
+    "efa0e5797b20e5b7d160f3e087c28029": [
+      {
+        "title": "Interview im Radio: Pläne für das neue Kulturzentrum",
+        "full_audio_text": "Herzlich willkommen zu unserem Kulturmagazin. Heute sprechen wir mit Frau Jansen über das geplante Bürgerzentrum in unserer Stadt. Frau Jansen, viele Bürger interessieren sich sehr für dieses neue Projekt. Einige Bürger ärgern sich jedoch über die hohen Kosten. Wir haben gestern lange mit dem Bürgermeister über die Finanzierung diskutiert. Wir hoffen jetzt auf Unterstützung vom Land. Viele Familien freuen sich schon auf die vielen neuen Freizeitangebote und Sportkurse. Wir denken auch an die älteren Menschen und bieten barrierefreie Räume an. Nehmen auch Sie an unserer Bürgerumfrage teil und stimmen Sie über die Nutzung ab.",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Worüber spricht der Moderator mit Frau Jansen?",
+            "options": [
+              "Über ein geplantes Bürgerzentrum",
+              "Über einen neuen Park",
+              "Über eine Musikschule",
+              "Über das Rathaus"
+            ],
+            "answer": "Über ein geplantes Bürgerzentrum",
+            "explanation_de": "Der Moderator sagt: Heute sprechen wir mit Frau Jansen über das geplante Bürgerzentrum."
+          },
+          {
+            "id": 2,
+            "question": "Worüber ärgern sich einige Bürger laut Interview?",
+            "options": [
+              "Über die laute Musik",
+              "Über die hohen Kosten",
+              "Über den späten Beginn",
+              "Über die Baustelle"
+            ],
+            "answer": "Über die hohen Kosten",
+            "explanation_de": "Im Text: Einige Bürger ärgern sich jedoch über die hohen Kosten."
+          },
+          {
+            "id": 3,
+            "question": "Worauf hofft Frau Jansen für die Finanzierung?",
+            "options": [
+              "Auf private Spenden",
+              "Auf Unterstützung vom Land",
+              "Auf einen Bankkredit",
+              "Auf einen Lottogewinn"
+            ],
+            "answer": "Auf Unterstützung vom Land",
+            "explanation_de": "Im Text heißt es wörtlich: Wir hoffen jetzt auf Unterstützung vom Land."
+          },
+          {
+            "id": 4,
+            "question": "Worauf freuen sich viele Familien in der Stadt?",
+            "options": [
+              "Auf günstige Wohnungen",
+              "Auf kostenloses Essen",
+              "Auf neue Freizeitangebote und Sportkurse",
+              "Auf neue Parkplätze"
+            ],
+            "answer": "Auf neue Freizeitangebote und Sportkurse",
+            "explanation_de": "Im Text: Viele Familien freuen sich schon auf die vielen neuen Freizeitangebote und Sportkurse."
+          },
+          {
+            "id": 5,
+            "question": "Woran haben die Planer für ältere Menschen gedacht?",
+            "options": [
+              "An freie Mahlzeiten",
+              "An barrierefreie Räume",
+              "An kostenlose Zeitungen",
+              "An einen Fahrdienst"
+            ],
+            "answer": "An barrierefreie Räume",
+            "explanation_de": "Im Text: Wir denken auch an die älteren Menschen und bieten barrierefreie Räume an."
+          }
+        ]
+      }
+    ],
+    "3848610ad7d94921a3226157a74fa71c": [
+      {
+        "title": "Renovierung im Rathaus",
+        "full_audio_text": "Guten Tag liebe Bürgerinnen und Bürger. Wir informieren Sie heute über wichtige Veränderungen in unserem Rathaus. Im letzten Monat wurde das gesamte Gebäude renoviert, um den Service für Sie zu verbessern. Im Erdgeschoss wurde ein neues Kundenzentrum eingerichtet, in dem ab nächste Woche alle Anträge bearbeitet werden. Außerdem wird darauf hingewiesen, dass die alten Schalter im ersten Stock geschlossen bleiben. Dort werden bald moderne Computerterminals installiert, damit die Wartezeiten verkürzt werden. Wir bitten um Ihr Verständnis, wenn bei einigen Formularen noch gedruckt werden muss, während die digitalen Systeme vorbereitet werden. Bei Fragen können Sie sich jederzeit an unsere Mitarbeiter wenden.",
+        "questions": [
+          {
+            "id": 1,
+            "question_de": "Was wurde im letzten Monat im Rathaus gemacht?",
+            "options": [
+              "Das Gebäude wurde renoviert.",
+              "Ein neues Rathaus wurde gebaut.",
+              "Alle Büros wurden geschlossen.",
+              "Das Erdgeschoss wurde verkauft."
+            ],
+            "answer": "Das Gebäude wurde renoviert.",
+            "explanation_de": "Im Text wird gesagt: 'Im letzten Monat wurde das gesamte Gebäude renoviert'."
+          },
+          {
+            "id": 2,
+            "question_de": "Was wurde im Erdgeschoss eingerichtet?",
+            "options": [
+              "Ein Café für Besucher",
+              "Ein neues Kundenzentrum",
+              "Ein großer Kinosaal",
+              "Ein Parkplatz für Autos"
+            ],
+            "answer": "Ein neues Kundenzentrum",
+            "explanation_de": "Der Hörtext besagt: 'Im Erdgeschoss wurde ein neues Kundenzentrum eingerichtet'."
+          },
+          {
+            "id": 3,
+            "question_de": "Was passiert mit den alten Schaltern im ersten Stock?",
+            "options": [
+              "Sie werden renoviert.",
+              "Sie bleiben geöffnet.",
+              "Sie bleiben geschlossen.",
+              "Sie werden versetzt."
+            ],
+            "answer": "Sie bleiben geschlossen.",
+            "explanation_de": "Es wird im Text erklärt, dass 'die alten Schalter im ersten Stock geschlossen bleiben'."
+          },
+          {
+            "id": 4,
+            "question_de": "Was wird dort bald installiert?",
+            "options": [
+              "Moderne Computerterminals",
+              "Neue Kaffeemaschinen",
+              "Bequeme Sofas",
+              "Große Fernseher"
+            ],
+            "answer": "Moderne Computerterminals",
+            "explanation_de": "Im Hörtext heißt es: 'Dort werden bald moderne Computerterminals installiert'."
+          },
+          {
+            "id": 5,
+            "question_de": "Warum müssen einige Formulare noch gedruckt werden?",
+            "options": [
+              "Weil die Drucker kaputt sind.",
+              "Weil die Bürger das so wollen.",
+              "Weil die digitalen Systeme noch vorbereitet werden.",
+              "Weil es keine Computer gibt."
+            ],
+            "answer": "Weil die digitalen Systeme noch vorbereitet werden.",
+            "explanation_de": "Der Sprecher erklärt, dass gedruckt werden muss, 'während die digitalen Systeme vorbereitet werden'."
+          }
+        ]
+      }
+    ]
+  },
+  "speaking": {
+    "73396b91663cd73cffe5af15a06fa616": [
+      {
+        "cards": [
+          {
+            "title": "Mein letzter Urlaub",
+            "impulse": "Wohin bist du gereist? Was hast du dort gemacht? Erzähle im Perfekt und Präteritum."
+          },
+          {
+            "title": "Ein besonderes Erlebnis",
+            "impulse": "Was war dein schönster Tag im letzten Monat? Wer war dabei?"
+          },
+          {
+            "title": "Gestern Abend",
+            "impulse": "Was hast du gestern nach der Arbeit oder Schule gemacht? Hast du gekocht oder gelesen?"
+          },
+          {
+            "title": "Schulzeit früher",
+            "impulse": "Wie war deine Schulzeit früher? Welche Fächer mochtest du am liebsten?"
+          },
+          {
+            "title": "Ein tolles Wochenende",
+            "impulse": "Erzähle von einem Ausflug mit deinen Freunden. Was passierte unterwegs?"
+          }
+        ]
+      }
+    ],
+    "56c584e18aab851dd965bbd58a73982f": [
+      [
+        {
+          "id": 1,
+          "topic_de": "Reisen",
+          "hint_de": "Erzählen Sie von Ihrem letzten Urlaub. Wo waren Sie und wie sind Sie dorthin gereist? Was haben Sie dort gemacht und wie hat es Ihnen gefallen?",
+          "grammar_focus": "Perfekt vs Präteritum"
+        },
+        {
+          "id": 2,
+          "topic_de": "Wohnen",
+          "hint_de": "Beschreiben Sie Ihre aktuelle Wohnung oder Ihr Haus. Wie würden Sie gerne in der Zukunft wohnen, wenn Sie viel Geld hätten? Beschreiben Sie Ihre Traumwohnung.",
+          "grammar_focus": "Konjunktiv II"
+        },
+        {
+          "id": 3,
+          "topic_de": "Gesundheit",
+          "hint_de": "Was machen Sie persönlich für Ihre Gesundheit? Warum ist es wichtig, sich gesund zu ernähren und Sport zu treiben? Geben Sie Ratschläge für ein gesundes Leben.",
+          "grammar_focus": "Infinitiv mit zu"
+        },
+        {
+          "id": 4,
+          "topic_de": "Umweltschutz",
+          "hint_de": "Was tun Sie im Alltag für die Umwelt? Warum trennen die Menschen Müll und benutzen oft öffentliche Verkehrsmittel? Diskutieren Sie die Bedeutung des Umweltschutzes.",
+          "grammar_focus": "Perfekt vs Präteritum"
+        },
+        {
+          "id": 5,
+          "topic_de": "Arbeit",
+          "hint_de": "Was ist Ihr Traumjob und warum möchten Sie diesen Beruf ausüben? Was ist Ihnen bei der Arbeit besonders wichtig, zum Beispiel ein gutes Gehalt oder nette Kollegen?",
+          "grammar_focus": "Konjunktiv II"
+        },
+        {
+          "id": 6,
+          "topic_de": "Spielen",
+          "hint_de": "Haben Sie als Kind gerne gespielt? Welche Spiele machen Ihnen heute noch Spaß? Es ist wichtig, in der Freizeit regelmäßig zu spielen und abzuschalten.",
+          "grammar_focus": "Infinitiv mit zu"
+        },
+        {
+          "id": 7,
+          "topic_de": "Einkaufen",
+          "hint_de": "Wo kaufen Sie am liebsten ein: im Supermarkt oder im Internet? Erzählen Sie von einem Mal, als Sie online etwas bestellt haben und es Probleme gab.",
+          "grammar_focus": "Perfekt vs Präteritum"
+        },
+        {
+          "id": 8,
+          "topic_de": "Feste und Feiern",
+          "hint_de": "Wie feiern Sie normalerweise Ihren Geburtstag? Wenn Sie eine große Party planen könnten, wie würde diese Feier aussehen und wen würden Sie einladen?",
+          "grammar_focus": "Konjunktiv II"
+        }
+      ]
+    ]
+  },
+  "explanation": {
+    "c3e2a4b924e3c2b77bdd449143d80089": [
+      {
+        "text": "### Section 0: Verben mit Präpositionen (B1 Level)\nజర్మన్ భాషలో కొన్ని క్రియాపదాలు (Verben) నిర్దిష్టమైన విభక్తులతో (Präpositionen) మరియు Kasus (Akkusativ లేదా Dativ) తో కలిసి మాత్రమే వస్తాయి.\nಜರ್ಮನ್ ಭಾಷೆಯಲ್ಲಿ ಕೆಲವು ಕ್ರಿಯಾಪದಗಳು (Verben) ನಿರ್ದಿಷ್ಟವಾದ ಪೂರ್ವಪ್ರತ್ಯಯಗಳು (Präpositionen) ಮತ್ತು Kasus (Akkusativ ಅಥವಾ Dativ) ಜೊತೆಗೆ ಮಾತ್ರ ಬರುತ್ತವೆ.\n\n---\n\n### Kasus Reference\n- **Nominativ** = ఎవరు / ಯಾರು (Subjekt)\n- **Akkusativ** = ఎవరిని / ಯಾರನ್ನು\n- **Dativ** = ఎవరికి / ಯಾರಿಗೆ\n- **Genitiv** = ఎవరి / ಯಾರ\n\n---\n\n### 1. ముఖ్యమైన నియమం / ಮುಖ್ಯ ನಿಯಮ\nGerman లో ప్రతి Verb కు స్థిరమైన Präposition ఉంటుంది. ఆ Präposition తర్వాత వచ్చే Nomen తప్పనిసరిగా Akkusativ లేదా Dativ లో ఉండాలి.\nGerman ನಲ್ಲಿ ಪ್ರತಿಯೊಂದು Verb ಗೂ ನಿಶ್ಚಿತವಾದ Präposition ಇರುತ್ತದೆ. ಆ Präposition ನಂತರ ಬರುವ Nomen ಕಡ್ಡಾಯವಾಗಿ Akkusativ ಅಥವಾ Dativ ನಲ್ಲಿ ಇರಬೇಕು.\n\n---\n\n### 2. ప్రాక్టీస్ ఉదాహరణలు / ಅಭ್ಯಾಸದ ಉದಾಹರಣೆಗಳು\n\n**1. warten auf + Akkusativ (ఎదురుచూడటం / ಕಾಯುವುದು)**\n*[Neutral]*\nIch warte an der Haltestelle auf den Bus.\nనేను బస్ స్టాప్ వద్ద ఆ బస్సు కోసం ఎదురుచూస్తున్నాను.\nನಾನು ಬಸ್ ನಿಲ್ದಾಣದಲ್ಲಿ ಆ ಬಸ್ಸಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದೇನೆ.\n\n**2. sich freuen auf + Akkusativ (భవిష్యత్ ఆనందం / ಭವಿಷ್ಯದ ಸಂತೋಷ)**\n*[Schriftlich (Prüfung)]*\nWir freuen uns sehr auf die gemeinsame Konferenz in Berlin.\nమేము బెర్లిన్‌లో జరిగే ఆ సంయుక్త సమావేశం కోసం ఎంతో సంతోషంగా ఎదురుచూస్తున్నాము.\nನಾವು ಬರ್ಲಿನ್‌ನಲ್ಲಿ ನಡೆಯಲಿರುವ ಆ ಜಂಟಿ ಸಮ್ಮೇಳನಕ್ಕಾಗಿ ಬಹಳ ಸಂತೋಷದಿಂದ ಕಾಯುತ್ತಿದ್ದೇವೆ.\n\n**3. sprechen über + Akkusativ (మాట్లాడటం / ಮಾತನಾಡುವುದು)**\n*[Gesprochen (Alltag)]*\nLukas und Mia sprechen oft über ihre Urlaubspläne.\nలుకాస్ మరియు మియా తరచుగా తమ సెలవుల ప్రణాళికల గురించి మాట్లాడుకుంటారు.\nಲುಕಾಸ್ ಮತ್ತು ಮಿಯಾ ಆಗಾಗ್ಗೆ ತಮ್ಮ ರಜಾದಿನಗಳ ಯೋಜನೆಗಳ ಬಗ್ಗೆ ಮಾತನಾಡುತ್ತಾರೆ.\n\n---\n\n### 3. Goethe B1 పరీక్ష చిట్కా / Goethe B1 ಪರೀಕ್ಷಾ ಸಲಹೆ\nప్రశ్న వేసేటప్పుడు మనుషులకైతే 'auf wen / mit wem', వస్తువులకైతే 'worauf / womit' ఉపయోగించండి.\nಪ್ರಶ್ನೆ ಕೇಳುವಾಗ ವ್ಯಕ್ತಿಗಳಿಗಾದರೆ 'auf wen / mit wem', ವಸ್ತುಗಳಿಗಾದರೆ 'worauf / womit' ಬಳಸಿ."
+      }
+    ],
+    "fb03b0edd38120c5dfafefd19b1ec29f": [
+      {
+        "text": "### Section 0: Verben mit Präpositionen (B1 Level - In-Detail)\nజర్మన్ భాషలో Verben mit Präpositionen వాక్య నిర్మాణంలో అత్యంత కీలకమైన అంశం.\nಜರ್ಮನ್ ಭಾಷೆಯಲ್ಲಿ Verben mit Präpositionen ವಾಕ್ಯ ರಚನೆಯಲ್ಲಿ ಅತ್ಯಂತ ಪ್ರಮುಖವಾದ ವಿಷಯ.\n\n---\n\n### Kasus Reference\n- **Nominativ** = ఎవరు / ಯಾರು (Subjekt)\n- **Akkusativ** = ఎవరిని / ಯಾರನ್ನು\n- **Dativ** = ఎవరికి / ಯಾರಿಗೆ\n- **Genitiv** = ఎవరి / ಯಾರ\n\n---\n\n### 1. వివరణాత్మక నియమాలు / ವಿವರವಾದ ನಿಯಮಗಳು\n1. **Verb + Präposition + Akkusativ:** ఉదాహరణకు *warten auf*, *denken an*, *sich interessieren für*, *sich freuen auf*.\n   **Verb + Präposition + Akkusativ:** ಉದಾಹರಣೆಗೆ *warten auf*, *denken an*, *sich interessieren für*, *sich freuen auf*.\n2. **Verb + Präposition + Dativ:** ఉదాహరణకు *teilnehmen an*, *sprechen mit*, *träumen von*, *gehören zu*.\n   **Verb + Präposition + Dativ:** ಉದಾಹರಣೆಗೆ *teilnehmen an*, *sprechen mit*, *träumen von*, *gehören zu*.\n\n---\n\n### 2. Wortstellung (వాక్య క్రమం / ವಾಕ್ಯ ಕ್ರಮ)\nHauptsatz లో Verb రెండవ స్థానంలో ఉంటుంది, Präposition దాని తర్వాత ఆబ్జెక్ట్‌తో వస్తుంది. Nebensatz లో Verb చివరకు వెళుతుంది.\nHauptsatz ನಲ್ಲಿ Verb ಎರಡನೇ ಸ್ಥಾನದಲ್ಲಿರುತ್ತದೆ, Präposition ಅದರ ನಂತರ ಆಬ್ಜೆಕ್ಟ್ ಜೊತೆಗೆ ಬರುತ್ತದೆ. Nebensatz ನಲ್ಲಿ Verb ಕೊನೆಗೆ ಹೋಗುತ್ತದೆ.\n\n---\n\n### 3. ప్రామాణిక ఉదాహరణలు (Registers) / ಅಧಿಕೃತ ಉದಾಹರಣೆಗಳು\n\n**1. denken an + Akkusativ**\n*[Neutral]*\nDenkst du bitte an deinen Regenschirm?\nదయచేసి నీ ఆ గొడుగును గుర్తుంచుకుంటావా?\nದಯವಿಟ್ಟು ನಿನ್ನ ಆ ಛತ್ರಿಯನ್ನು ನೆನಪಿಸಿಕೊಳ್ಳುತ್ತೀಯಾ?\n\n**2. teilnehmen an + Dativ**\n*[Schriftlich (Prüfung)]*\nFrau Müller nimmt an dem Fortbildungskurs teil.\nఫ్రావ్ ముల్లర్ ఆ ఉన్నత విద్యా కోర్సులో పాల్గొంటున్నారు.\nಫ್ರಾವ್ ಮುಲ್ಲರ್ ಆ ಮುಂದುವರಿದ ತರಬೇತಿ ಕೋರ್ಸ್‌ನಲ್ಲಿ ಭಾಗವಹಿಸುತ್ತಿದ್ದಾರೆ.\n\n**3. sich ärgern über + Akkusativ**\n*[Gesprochen (Alltag)]*\nIch ärgere mich total über die ständige Verspätung der Züge.\nరైళ్లు నిరంతరం ఆలస్యం కావడంపై నాకు చాలా చిరాగ్గా ఉంది.\nರೈಲುಗಳು ನಿರಂತರವಾಗಿ ತಡವಾಗುವುದರ ಬಗ್ಗೆ ನನಗೆ ತುಂಬಾ ಸಿಟ್ಟು ಬರುತ್ತಿದೆ.\n\n**4. träumen von + Dativ**\n*[Neutral]*\nEr träumt schon lange von einer Reise nach Japan.\nఅతను జపాన్ యాత్ర గురించి చాలా కాలంగా కలలు కంటున్నాడు.\nಅವನು ಜಪಾನ್ ಪ್ರವಾಸದ ಬಗ್ಗೆ ಬಹಳ ದಿನಗಳಿಂದ ಕನಸು ಕಾಣುತ್ತಿದ್ದಾನೆ.\n\n---\n\n### 4. తప్పులు నివారించండి (Goethe B1 Traps) / ತಪ್ಪುಗಳನ್ನು ತಪ್ಪಿಸಿ\n*warten für* అని ఎప్పుడూ అనకండి; ఎల్లప్పుడూ *warten auf* మాత్రమే సరైనది. అలాగే *interessieren für* తర్వాత Dativ వాడకూడదు, Akkusativ మాత్రమే వాడాలి.\n*warten für* ಎಂದು ಎಂದಿಗೂ ಹೇಳಬೇಡಿ; ಯಾವಾಗಲೂ *warten auf* ಮಾತ್ರ ಸರಿಯಾದದ್ದು. ಹಾಗೆಯೇ *interessieren für* ನಂತರ Dativ ಬಳಸಬಾರದು, Akkusativ ಮಾತ್ರ ಬಳಸಬೇಕು."
+      }
+    ],
+    "641a3efdfa746ea37076ac914c787c4f": [
+      {
+        "text": "### Section 0: Perfekt vs Präteritum (B1 Level)\nజర్మన్ భూతకాలంలో Perfekt మరియు Präteritum ల మధ్య తేడాలు మరియు ఉపయోగం.\nಜರ್ಮನ್ ಭೂತಕಾಲದಲ್ಲಿ Perfekt ಮತ್ತು Präteritum ಗಳ ನಡುವಿನ ವ್ಯತ್ಯಾಸಗಳು ಮತ್ತು ಬಳಕೆ.\n\n---\n\n### Kasus Reference\n- **Nominativ** = ఎవరు / ಯಾರು (Subjekt)\n- **Akkusativ** = ఎవరిని / ಯಾರನ್ನು\n- **Dativ** = ఎవరికి / ಯಾರಿಗೆ\n- **Genitiv** = ఎవరి / ಯಾರ\n\n---\n\n### 1. ప్రాథమిక తేడా / ಮೂಲಭೂತ ವ್ಯತ್ಯಾಸ\nరోజువారీ సంభాషణలలో (Gesprochen) Perfekt ఎక్కువగా ఉపయోగిస్తారు. పత్రికలు, నవలలు మరియు అధికారిక రాతలలో (Schriftlich) Präteritum ఉపయోగిస్తారు.\nದೈನಂದಿನ ಸಂಭಾಷಣೆಗಳಲ್ಲಿ (Gesprochen) Perfekt ಹೆಚ್ಚಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ. ಪತ್ರಿಕೆಗಳು, ಕಾದಂಬರಿಗಳು ಮತ್ತು ಅಧಿಕೃತ ಬರವಣಿಗೆಯಲ್ಲಿ (Schriftlich) Präteritum ಬಳಸಲಾಗುತ್ತದೆ.\n\n---\n\n### 2. ఉదాహరణలు / ಉದಾಹರಣೆಗಳು\n\n**1. haben / sein తో Perfekt (సంభాషణ / ಸಂಭಾಷಣೆ)**\n*[Gesprochen (Alltag)]*\nGestern habe ich meine Freunde im Café getroffen.\nనిన్న నేను ఒక కేఫ్‌లో నా స్నేహితులను కలిశాను.\nನಿನ್ನೆ ನಾನು ಒಂದು ಕೆಫೆಯಲ್ಲಿ ನನ್ನ ಸ್ನೇಹಿತರನ್ನು ಭೇಟಿಯಾದೆನು.\n\n**2. Präteritum (రాతపూర్వక నివేదిక / ಲಿಖಿತ ವರದಿ)**\n*[Schriftlich (Prüfung)]*\nDer Zug kam pünktlich um zehn Uhr am Bahnhof an.\nఆ రైలు సరిగ్గా పది గంటలకు స్టేషన్‌కు చేరుకుంది.\nಆ ರೈಲು ಸರಿಯಾಗಿ ಹತ್ತು ಗಂಟೆಗೆ ನಿಲ್ದಾಣಕ್ಕೆ ತಲುಪಿತು.\n\n**3. sein / haben యొక్క Präteritum (Neutral)**\n*[Neutral]*\nWir hatten gestern keine Zeit, weil wir sehr müde waren.\nమేము చాలా అలసిపోయినందున నిన్న మాకు సమయం లేదు.\nನಾವು ತುಂಬಾ ದಣಿದಿದ್ದರಿಂದ ನಿನ್ನೆ ನಮಗೆ ಸಮಯವಿರಲಿಲ್ಲ."
+      }
+    ],
+    "f904a683d185baa9eaf548c8590bc017": [
+      {
+        "text": "Topic: German Prepositions grouped by prepositions itself, Level: B1.\nవివిధ రకాల German Präpositionen గురించి తెలుసుకుందాం.\nವಿವಿಧ ರೀತಿಯ German Präpositionen ಬಗ್ಗೆ ತಿಳಿದುಕೊಳ್ಳೋಣ.\n\nKASUS REFERENCE:\nNominativ = ఎవరు / ಯಾರು (Subjekt)\nAkkusativ = ఎవరిని / ಯಾರನ್ನು\nDativ = ఎవరికి / ಯಾರಿಗೆ\nGenitiv = ఎవరి / ಯಾರ\n\nప్రతి Präposition ఒక నిర్దిష్ట Kasus తో వస్తుంది (Akkusativ, Dativ, Genitiv, లేదా Wechselpräpositionen).\nಪ್ರತಿ Präposition ಒಂದು ನಿರ್ದಿಷ್ಟ Kasus ನೊಂದಿಗೆ ಬರುತ್ತದೆ (Akkusativ, Dativ, Genitiv, ಅಥವಾ Wechselpräpositionen).\n\n1. Akkusativ Präpositionen (durch, für, gegen, ohne, um):\nAkkusativ Präpositionen (durch, för, gegen, ohne, um):\n\n2. Dativ Präpositionen (aus, außer, bei, mit, nach, seit, von, zu):\nDativ Präpositionen (aus, außer, bei, mit, nach, seit, von, zu):\n\n3. Genitiv Präpositionen (trotz, während, wegen, außerhalb, innerhalb):\nGenitiv Präpositionen (trotz, während, wegen, außerhalb, innerhalb):\n\n4. Wechselpräpositionen (an, auf, hinter, in, neben, über, unter, vor, zwischen) - Dativ (Wo? - ఎక్కడ / ಎಲ್ಲಿದೆ) లేదా Akkusativ (Wohin? - ఎక్కడికి / ಎಲ್ಲಿಗೆ) తీసుకుంటాయి.\nWechselpräpositionen (an, auf, hinter, in, neben, über, unter, vor, zwischen) - Dativ (Wo? - ఎక్కడ / ಎಲ್ಲಿದೆ) ಅಥವಾ Akkusativ (Wohin? - ಎక్కడికి / ಎಲ್ಲಿಗೆ) ತೆಗೆದುಕೊಳ್ಳುತ್ತವೆ.\n\n[Neutral]\nIch gehe ohne dich durch den Park.\nనేను నీవు లేకుండా ఆ పార్క్ గుండా వెళుతున్నాను.\nನಾನು ನೀವಿಲ್ಲದೆ ಆ ಪಾರ್ಕ್ ಮೂಲಕ ಹೋಗುತ್ತಿದ್ದೇನೆ.\n\n[Gesprochen (Alltag)]\nWir fahren am Wochenende zu meiner Oma.\nమేము వారాంతంలో ఆ అమ్మమ్మ వద్దకు వెళుతున్నాము.\nನಾವು ವಾರಾಂತ್ಯದಲ್ಲಿ ಆ ಅಜ್ಜಿಯ ಬಳಿಗೆ ಹೋಗುತ್ತಿದ್ದೇವೆ.\n\n[Schriftlich (Prüfung)]\nTrotz des schlechten Wetters machen wir einen Ausflug.\nఆ చెడ్డ వాతావరణం ఉన్నప్పటికీ మేము ఒక యాత్ర చేస్తున్నాము.\nಆ ಕೆಟ್ಟ ಹವಾಮಾನವಿದ್ದರೂ ನಾವು ಒಂದು ಪ್ರವಾಸ ಮಾಡುತ್ತಿದ್ದೇವೆ.\n\nGoethe B1 పరీక్షలో Wechselpräpositionen (Wo? vs Wohin?) చాలా ముఖ్యం, కాబట్టి Dativ మరియు Akkusativ తేడాను బాగా ప్రాక్టీస్ చేయండి.\nGoethe B1 ಪರೀಕ್ಷೆಯಲ್ಲಿ Wechselpräpositionen (Wo? vs Wohin?) ಬಹಳ ಮುಖ್ಯ, ಆದ್ದರಿಂದ Dativ ಮತ್ತು Akkusativ ವ್ಯತ್ಯಾಸವನ್ನು ಚೆನ್ನಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ."
+      }
+    ],
+    "423fd1be66f768592215734ec842857d": [
+      {
+        "text": "### Section 0\nTopic: Prepositions with Multiple Use Scenarios (Goethe-Zertifikat B1)\nLevel: B1\nఈ పాఠం ఒకే Präposition వివిధ సందర్భాలలో ఎలా మారుతుందో వివరిస్తుంది.\nಈ ಪಾಠವು ಒಂದೇ Präposition ವಿವಿಧ ಸಂದರ್ಭಗಳಲ್ಲಿ ಹೇಗೆ ಬದಲಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ವಿವರಿಸುತ್ತದೆ.\n\n---\n\n### Kasus Reference\nNominativ = ఎవరు / ಯಾರು (Subjekt)\nAkkusativ = ఎవరిని / ಯಾರನ್ನು\nDativ = ఎవరికి / ಯಾರಿಗೆ\nGenitiv = ఎవరి / ಯಾರ\n\n---\n\n### In-Detail Explanation (వివరణాత్మక వివరణ / ವಿವರವಾದ ವಿವರಣೆ)\n\nగోథె B1 పరీక్షలో ఒకే Präposition (ఉపసర్గ) కింద 3 నుండి 4 విభిన్న వాడకాలను (use scenarios) నేర్చుకోవడం చాలా ముఖ్యం. కొన్ని Präposition పదాలు కేవలం స్థలాన్ని (Lokale Präpositionen) మాత్రమే కాకుండా, సమయాన్ని (Temporale Präpositionen), రీతిని (Modale Präpositionen) లేదా కారణాన్ని (Kusale Präpositionen) కూడా సూచిస్తాయి.\n\nಗೋಥೆ B1 ಪರೀಕ್ಷೆಯಲ್ಲಿ ಒಂದೇ Präposition (ಉಪಸರ್ಗ) ಅಡಿಯಲ್ಲಿ 3 ರಿಂದ 4 ವಿವಿಧ ಬಳಿಕೆಗಳನ್ನು (use scenarios) ಕಲಿಯುವುದು ತುಂಬಾ ಮುಖ್ಯ. ಕೆಲವು Präposition ಪದಗಳು ಕೇವಲ ಸ್ಥಳವನ್ನು (Lokale Präpositionen) ಮಾತ್ರವಲ್ಲದೆ, ಸಮಯವನ್ನು (Temporale Präpositionen), ರೀತಿಯನ್ನು (Modale Präpositionen) ಅಥವಾ ಕಾರಣವನ್ನು (Kusale Präpositionen) ಕೂಡ ಸೂಚಿಸುತ್ತವೆ.\n\nఈ అంశంలో మనం **in**, **auf**, మరియు **für** అనే మూడు ముఖ్యమైన Präposition పదాలను తీసుకొని, ఒక్కొక్కదానికీ 3-4 వాడకాలను Dativ మరియు Akkusativ కాసులతో పరిశీలిస్తాము.\n\nಈ ವಿಷಯದಲ್ಲಿ ನಾವು **in**, **auf**, మరియు **für** ಎಂಬ ಮೂರು ಪ್ರಮುಖ Präposition ಪದಗಳನ್ನು ತೆಗೆದುಕೊಂಡು, ಪ್ರತಿಯೊಂದಕ್ಕೂ 3-4 ಬಳಕೆಗಳನ್ನು Dativ ಮತ್ತು Akkusativ ಕೇಸ್‌ಗಳೊಂದಿಗೆ ಪರಿಶೀಲಿಸುತ್ತೇವೆ.\n\n---\n\n### 1. Präposition: in (Kasus: Dativ లేదా Akkusativ)\n\n#### Scenario 1: లోపల ఉండుట (Lokaler Ort - Dativ)\n[Neutral]\nIch bin in dem Zimmer.\nనేను ఆ గదిలో ఉన్నాను.\nನಾನು ಆ ಕೋಣೆಯಲ್ಲಿದ್ದೇನೆ.\n\n#### Scenario 2: లోపలికి వెళ్లుట (Lokale Richtung - Akkusativ)\n[Gesprochen (Alltag)]\nIch gehe in das Zimmer.\nనేను ఆ గదిలోకి వెళుతున్నాను.\nನಾನು ಆ ಕೋಣೆಯೊಳಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ.\n\n#### Scenario 3: సమయంలో / ఎప్పుడూ (Temporaler Zeitpunkt - Dativ)\n[Schriftlich (Prüfung)]\nIm Sommer reist er nach Deutschland.\nవేసవి కాలంలో అతను జర్మనీకి ప్రయాణిస్తాడు.\nಬೇಸಿಗೆ ಕಾಲದಲ್ಲಿ ಅವನು ಜರ್ಮನೆಗೆ ಪ್ರಯಾಣಿಸುತ್ತಾನೆ.\n\n#### Scenario 4: కాల వ్యవధి (Temporale Dauer - Akkusativ)\n[Neutral]\nIch lese das Buch in einer Stunde.\nనేను ఆ పుస్తకాన్ని గంటలో చదువుతాను.\nನಾನು ಆ ಪುಸ್ತಕವನ್ನು ಒಂದು ಗಂಟೆಯಲ್ಲಿ ಓದುತ್ತೇನೆ.\n\n---\n\n### 2. Präposition: auf (Kasus: Dativ లేదా Akkusativ)\n\n#### Scenario 1: పైన ఉండుట (Lokale Position - Dativ)\n[Neutral]\nDas Buch liegt auf dem Tisch.\nఆ పుస్తకం ఆ బల్లపైన ఉంది.\nಆ ಪುಸ್ತಕವು ಆ ಮೇಜಿನ ಮೇಲಿದೆ.\n\n#### Scenario 2: పైకి పెట్టుట / వెళ్లుట (Lokale Richtung - Akkusativ)\n[Gesprochen (Alltag)]\nLeg das Buch auf den Tisch.\nఆ పుస్తకాన్ని ఆ బల్లపైన పెట్టు.\nಆ ಪುಸ್ತಕವನ್ನು ಆ ಮೇಜಿನ ಮೇಲೆ ಇಡು.\n\n#### Scenario 3: భాషను ఉపయోగించుట (Modale Verwendung - Akkusativ/Dativ context)\n[Schriftlich (Prüfung)]\nWir sprechen auf Deutsch.\nమము జర్మన్ భాషలో మాట్లాడుతున్నాము.\nನಾವು ಜರ್ಮನ್ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡುತ್ತಿದ್ದೇವೆ.\n\n#### Scenario 4: ఉత్సవం / కార్యక్రమం కోసం (Temporaler Anlass - Akkusativ)\n[Neutral]\nAuf das Wochenende freue ich mich.\nనేను వారాంతం కోసం ఎదురుచూస్తున్నాను.\nನಾನು ವಾರಾಂತ್ಯಕ್ಕಾಗಿ ಕಾಯುತ್ತಿದ್ದೇನೆ.\n\n---\n\n### 3. Präposition: für (Kasus: ఎల్లప్పుడూ Akkusativ)\n\n#### Scenario 1: ఎవరికోసం / దేనికోసం (Objekt / Zweck - Akkusativ)\n[Neutral]\nIch kaufe ein Geschenk für meine Mutter.\nనేను నా తల్లి కోసం ఒక బహుమతి కొంటున్నాను.\nನಾನು ನನ್ನ ತಾಯಿಗಾಗಿ ಒಂದು ಉಡುಗೊರೆಯನ್ನು ಖರೀದಿಸುತ್ತಿದ್ದೇನೆ.\n\n#### Scenario 2: కాల వ్యవధి (Temporale Dauer - Akkusativ)\n[Schriftlich (Prüfung)]\nIch bleibe für zwei Tage in Berlin.\nనేను రెండు రోజులు బెర్లిన్‌లో ఉంటాను.\nನಾನು ಎರಡು ದಿನಗಳು ಬರ್ಲಿನ್‌ನಲ್ಲಿ ಇರುತ್ತೇನೆ.\n\n#### Scenario 3: అభిప్రాయం / అనుకూలంగా (Meinung / Tausch - Akkusativ)\n[Gesprochen (Alltag)]\nFür mich ist das zu teuer.\nనాకు ఇది చాలా ఖరీదైనది.\nನನಗೆ ಇದು ತುಂಬಾ ದುಬಾರಿಯಾಗಿದೆ.\n\n#### Scenario 4: ధర కోసం (Preis - Akkusativ)\n[Neutral]\nIch habe das Auto für fünf हजार ইউরෝ కొన్నాను (జర్మన్: für 5000 Euro gekauft).\nనేను ఆ కారును 5000 యూరోలకు కొన్నాను.\nನಾನು ಆ ಕಾರನ್ನು 5000 ಯುರೋಗಳಿಗೆ ಖರೀದಿಸಿದೆ.\n\n---\n\n### Common Goethe B1 Exam Traps and Mistakes (పరీక్షలో చేసే సాధారణ పొరపాట్లు / ಪರೀಕ್ಷೆಯಲ್ಲಿ ಮಾಡುವ ಸಾಮಾನ್ಯ ತಪ್ಪುಗಳು)\n\nస్థలం మారినప్పుడు Dativ మరియు Akkusativ మార్చడాన్ని విద్యార్థులు తరచుగా మరుస్తారు. \"Wo?\" (ఎక్కడ?) వస్తే Dativ, \"Wohin?\" (ఎక్కడికి?) వస్తే Akkusativ వాడాలి.\n\nಸ್ಥಳ ಬದಲಾದಾಗ Dativ ಮತ್ತು Akkusativ ಬದಲಾಯಿಸುವುದನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಮರೆಯುತ್ತಾರೆ. \"Wo?\" (ಎಲ್ಲಿ?) ಬಂದರೆ Dativ, \"Wohin?\" (ಎಲ್ಲಿಗೆ?) ಬಂದರೆ Akkusativ ಬಳಸಬೇಕು.\n\n[Schriftlich (Prüfung)]\nFalsch: Ich gehe in dem Supermarkt. (தప్పు)\nತಪ್ಪು: ನಾನು ಸೂಪರ್ ಮಾರ್ಕೆಟ್‌ಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ.\nRichtig: Ich gehe in den Supermarkt. (ఒప్పు)\nಸರಿ: ನಾನು ಸೂಪರ್ ಮಾರ್ಕೆಟ್‌ಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ."
+      }
+    ],
+    "bf3ca3682c86a5b8a7fa9f21c2818d01": [
+      {
+        "text": "Section 0:\nTopic: Deutsche Präpositionen mit mehreren Verwendungen (B1)\nఈ అంశం ద్వారా ఒకే Präposition వివిధ సందర్భాలలో ఎలా వాడబడుతుందో మనం నేర్చుకుంటాము.\nಈ ವಿಷಯದ ಮೂಲಕ ಒಂದು Präposition ಅನ್ನು ವಿವಿಧ ಸಂದರ್ಭಗಳಲ್ಲಿ ಹೇಗೆ ಬಳಸುವುದು ಎಂದು ನಾವು ಕಲಿಯುತ್ತೇವೆ.\n\n---\n\nKASUS REFERENCE:\nNominativ = ఎవరు / ಯಾರು (Subjekt)\nAkkusativ = ఎవరిని / ಯಾರನ್ನು\nDativ = ఎవరికి / ಯಾರಿಗೆ\nGenitiv = ఎవరి / ಯಾರ\n\n---\n\n### Präposition: **in** (Dativ లేదా Akkusativ)\n\nఇక్కడ ఒకే Präposition అయిన **in** యొక్క నాలుగు ముఖ్యమైన ఉపయోగాలు చూడండి.\nಇಲ್ಲಿ ಒಂದೇ Präposition ಆದ **in** ನ ನಾಲ್ಕು ಪ್ರಮುಖ ಉಪಯೋಗಗಳನ್ನು ನೋಡಿ.\n\n1. **Räumlich (లోపల - స్థలం):**\nస్థిరమైన ప్రదేశం లేదా గది లోపల ఉన్నప్పుడు Dativ వస్తుంది.\nಸ್ಥಿರವಾದ ಸ್ಥಳ ಅಥವಾ ಕೋಣೆಯ ಒಳಗಿರುವಾಗ Dativ ಬರುತ್ತದೆ.\n\n[Neutral]\nIch wohne **in** der Stadt.\nనేను ఆ పట్టణంలో నివసిస్తున్నాను.\nನಾನು ಆ ქალაქದಲ್ಲಿ ವಾಸಿಸುತ್ತಿದ್ದೇನೆ.\n\n2. **Räumlich (వెళ్తుండటం - దిశ):**\nఒక ప్రదేశంలోనికి ప్రవేశిస్తున్నప్పుడు Akkusativ వస్తుంది.\nಒಂದು ಸ್ಥಳದೊಳಗೆ ಪ್ರವೇಶಿಸುತ್ತಿರುವಾಗ Akkusativ ಬರುತ್ತದೆ.\n\n[Schriftlich (Prüfung)]\nIch gehe **in** das Zimmer.\nనేను ఆ గదిలోనికి వెళుతున్నాను.\nನಾನು ಆ ಕೋಣೆಯೊಳಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ.\n\n3. **Temporal (సమయం - నెలలు/ఋతువులు):**\nనెలలు మరియు ఋతువుల ముందు **in** + dem (im) వాడాలి.\nತಿಂಗಳುಗಳು ಮತ್ತು ಋತುಗಳ ಮುಂಚೆ **in** + dem (im) ಬಳಸಬೇಕು.\n\n[Neutral]\n**Im** Sommer reise ich nach Deutschland.\nవేసవి కాలంలో నేను జర్మనీకి ప్రయాణిస్తాను.\nಬೇಸಿಗೆಯಲ್ಲಿ ನಾನು ಜರ್ಮನಿಯ ça ಪ್ರಯಾಣಿಸುತ್ತೇನೆ.\n\n4. **Temporal (కాల వ్యవధి):**\nభవిష్యత్తులో ఒక పని ఎంత కాలంలో జరుగుతుందో చెప్పడానికి ఇది వాడతారు.\nಭವಿಷ್ಯದಲ್ಲಿ ಒಂದು ಕೆಲಸ ಎಷ್ಟು ಸಮಯದಲ್ಲಿ ನಡೆಯುತ್ತದೆ ಎಂದು ಹೇಳಲು ಇದನ್ನು ಬಳಸುತ್ತಾರೆ.\n\n[Gesprochen (Alltag)]\nIch komme **in** einer Stunde.\nనేను ఒక గంటలో వస్తాను.\nನಾನು ಒಂದು ಗಂಟೆಯಲ್ಲಿ ಬರುತ್ತೇನೆ.\n\n---\n\n### Goethe B1 Exam Tip (గోథే పరీక్షా చిట్కా / ಗೋಥೇ ಪರೀಕ್ಷಾ ಸಲಹೆ)\n\nగోథే-జర్మన్ B1 పరీక్షలో Schreibteil మరియు Sprechen లో ఒకే Präposition వివిధ సందర్భాలలో (స్థలం, సమయం) సరిగ్గా వ్రాస్తున్నారా లేదా అని పరీక్షకులు పరిశీలిస్తారు. కాబట్టి Präposition ఏ Kasus తీసుకుంటుందో గుర్తుంచుకోవడం ముఖ్యం.\nಗೋಥೇ-ಜರ್ಮನ್ B1 ಪರೀಕ್ಷೆಯಲ್ಲಿ Schreibteil ಮತ್ತು Sprechen ನಲ್ಲಿ ಒಂದೇ Präposition ಅನ್ನು ವಿವಿಧ ಸಂದರ್ಭಗಳಲ್ಲಿ (ಸ್ಥಳ, ಸಮಯ) ಸರಿಯಾಗಿ ಬರೆಯುತ್ತಿದ್ದೀರಾ ಅಥವಾ ಇಲ್ಲವೇ ಎಂದು ಪರೀಕ್ಷಕರು ಪರಿಶೀಲಿಸುತ್ತಾರೆ. ಆದ್ದರಿಂದ Präposition ಯಾವ Kasus ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೆನಪಿಡುವುದು ಮುಖ್ಯ."
+      }
+    ]
+  }
+}
