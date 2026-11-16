@@ -219,46 +219,46 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
     is_returning = ("Existing Player" in player_type)
 
     # --------------------------------------------------------------------------
-    # FLOW A: EXISTING RETURNING PLAYER (DYNAMIC SEARCH & SUGGESTIONS)
+    # FLOW A: EXISTING RETURNING PLAYER (INSTANT GOOGLE-STYLE AUTOCOMPLETE)
     # --------------------------------------------------------------------------
     if is_returning:
-        search_raw = st.text_input(
-            "Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
-            value=st.session_state.get(f"{key_prefix}_search_query_val", ""),
-            placeholder="Type to search (e.g. P, Prabu, Prakash, Preethi)...",
-            key=f"{key_prefix}_search_name_input",
-            help="Start typing any letter of your name to view dynamic matching profiles from the database."
-        )
+        # Search callback executed on every keystroke (real-time Google-style suggestions)
+        def _search_saved_players(query: str):
+            if not query or not query.strip():
+                return []
+            q = query.strip().lower()
+            matches = [p for p in all_saved if q in p.get("name", "").lower()]
+            # Returns (Label, Value) tuples for the live dropdown menu
+            return [(f"{p.get('avatar', '👤')}  {p['name']} (ID: {p['id']})", p["id"]) for p in matches]
 
-        clean_search = search_raw.strip()
+        selected_player_id = None
 
-        if not clean_search:
-            st.info("👆 Please type your name in the search box above to load your saved profile.")
-            return {
-                "selected_player_id": None,
-                "player_name": "",
-                "avatar": "🦁",
-                "email": "",
-                "is_ready": False,
-                "is_new": False
-            }
+        try:
+            from streamlit_searchbox import st_searchbox
 
-        # Filter matches dynamically as user types
-        matches = [p for p in all_saved if clean_search.lower() in p.get("name", "").lower()]
-
-        if matches:
-            st.markdown(f"**🔍 Suggestions matching '{clean_search}':**")
-            match_options = [f"{p.get('avatar', '👤')} {p['name']} (ID: {p['id']})" for p in matches]
-
-            selected_match_str = st.radio(
-                "Select your profile / మీ ప్రొఫైల్ ఎంచుకోండి:",
-                options=match_options,
-                index=0,
-                key=f"{key_prefix}_matched_profile_radio"
+            selected_player_id = st_searchbox(
+                _search_saved_players,
+                placeholder="🔍 Type to search your name (e.g. type 'P', 'Prabu', 'Prakash')...",
+                label="Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
+                default=None,
+                debounce=100,
+                key=f"{key_prefix}_instant_player_searchbox",
             )
+        except Exception:
+            # Fallback to searchable selectbox if custom component not loaded
+            player_options = {f"{p.get('avatar', '👤')} {p['name']} (ID: {p['id']})": p["id"] for p in all_saved}
+            choice = st.selectbox(
+                "Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
+                options=list(player_options.keys()),
+                index=None,
+                placeholder="🔍 Type to search your name (e.g. Prabu, Prakash)...",
+                key=f"{key_prefix}_fallback_player_selectbox",
+            )
+            selected_player_id = player_options.get(choice) if choice else None
 
-            matched_id = selected_match_str.split("ID: ")[1].split(")")[0].strip()
-            chosen_player = next((p for p in matches if p["id"] == matched_id), matches[0])
+        chosen_player = next((p for p in all_saved if p["id"] == selected_player_id), None) if selected_player_id else None
+
+        if chosen_player:
             p_name = chosen_player["name"]
             p_avatar = chosen_player.get("avatar", "🦁")
             p_email = chosen_player.get("email", "")
@@ -278,6 +278,13 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
             </div>
             """, unsafe_allow_html=True)
 
+            col_btn, _ = st.columns([1, 2])
+            with col_btn:
+                if st.button("🔄 Clear / Search Different Player", key=f"{key_prefix}_clear_search_btn"):
+                    if f"{key_prefix}_instant_player_searchbox" in st.session_state:
+                        del st.session_state[f"{key_prefix}_instant_player_searchbox"]
+                    st.rerun()
+
             with st.expander("✏️ Customize Avatar / Email (Optional)"):
                 col_a, col_e = st.columns([1, 2])
                 with col_a:
@@ -295,7 +302,8 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
                 "is_new": False
             }
         else:
-            st.warning(f"⚠️ No registered player found matching '{clean_search}'. If this is your first time, please change 'Player Type' above to '➕ New Player (Register)'!")
+            st.info("👆 Start typing your name in the search box above (e.g. type 'P') to see live Google-style suggestions, then click to select.")
+            st.caption("💡 Don't see your name? Change **Player Type** above to **➕ New Player (Register)** to create your profile!")
             return {
                 "selected_player_id": None,
                 "player_name": "",
