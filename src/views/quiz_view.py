@@ -6,6 +6,11 @@ import email_service
 from questions import get_daily_questions, get_day_pack_questions, QUESTIONS_DATA
 from src.config import AVATAR_CHOICES
 from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_button
+from src.components.duel_engine import (
+    get_day_curriculum_questions,
+    build_retake_question_set,
+    render_player_progress_dashboard
+)
 
 
 def get_app_saved_players():
@@ -94,6 +99,14 @@ def render_quiz_view():
 
                 active_player_name = selected_choice
 
+            clean_pid = active_player_name.strip().lower().replace(" ", "_") if active_player_name else "guest"
+            player_hist = storage.get_player_continuous_history(clean_pid, category="pronoun")
+            cur_day = player_hist["current_day_number"]
+            is_today_done = player_hist["is_played_today"]
+
+            # Continuous Journey Progress Tracker for Selected Player
+            render_player_progress_dashboard(clean_pid, active_player_name or "Player", category="pronoun", title_prefix="🎯 Translation Duel")
+
             st.markdown("---")
             st.markdown("### 2. 🌐 Choose Prompt Language")
             st.caption("STRICT ISOLATION: Selecting Telugu shows ONLY Telugu sentences. Selecting Kannada shows ONLY Kannada sentences.")
@@ -106,20 +119,27 @@ def render_quiz_view():
 
             st.markdown("---")
             st.markdown("### 3. 🎯 Choose Quiz Set")
+            
+            if is_today_done:
+                cont_opt_label = f"🗓️ Continuous Journey: Day - {cur_day} (Played Today — Retake to improve score average)"
+            else:
+                cont_opt_label = f"🗓️ Continuous Journey: Day - {cur_day} Challenge (Next in Sequence)"
+
             mode_input = st.radio(
                 "Which set do you want to play?",
-                options=["📅 Today's Challenge (5 Daily Questions)", "📦 Practice Packs (Day 1 - 33 from 162 Bank)"],
+                options=[cont_opt_label, "📦 Practice Packs (Day 1 - 33 from 162 Bank)"],
                 index=0
             )
 
-            if "Today's Challenge" in mode_input:
-                selected_date = date.today().isoformat()
-                pack_tag = selected_date
-                pack_title = f"Today's Challenge ({date.today().strftime('%B %d, %Y')})"
+            if "Continuous Journey" in mode_input:
+                pack_tag = date.today().isoformat()
+                pack_title = f"Day - {cur_day} Challenge ({date.today().strftime('%B %d, %Y')})"
+                chosen_is_continuous = True
             else:
                 pack_num = st.slider("Select Pack Number (1 to 33):", min_value=1, max_value=33, value=1)
                 pack_tag = f"pack-{pack_num}"
                 pack_title = f"Pack #{pack_num} (Questions {(pack_num-1)*5 + 1} to {min(pack_num*5, len(QUESTIONS_DATA))})"
+                chosen_is_continuous = False
 
             st.markdown("<br>", unsafe_allow_html=True)
 
@@ -138,6 +158,15 @@ def render_quiz_view():
                     st.session_state.lang_choice = "te" if "Telugu" in lang_input else "kn"
                     st.session_state.pack_choice = pack_tag
                     st.session_state.pack_title = pack_title
+                    st.session_state.retake_notice = None
+
+                    if chosen_is_continuous:
+                        initial_questions = get_day_curriculum_questions("pronoun", cur_day, count=5)
+                    else:
+                        initial_questions = get_day_pack_questions(pack_num, count=5)
+
+                    st.session_state.active_questions = initial_questions
+                    st.session_state.quiz_seen_q_ids = [q["id"] for q in initial_questions]
 
                     st.session_state.current_q_idx = 0
                     st.session_state.per_q_results = []
@@ -179,13 +208,15 @@ def render_quiz_view():
         pack_title = st.session_state.pack_title
         curr_idx = st.session_state.current_q_idx
 
-        if pack_tag.startswith("pack-"):
-            pack_idx = int(pack_tag.split("-")[1])
-            all_pack_questions = get_day_pack_questions(pack_idx, count=5)
-        else:
-            all_pack_questions = get_daily_questions(pack_tag, count=5)
+        if "active_questions" not in st.session_state or not st.session_state.active_questions:
+            if pack_tag.startswith("pack-"):
+                pack_idx = int(pack_tag.split("-")[1])
+                st.session_state.active_questions = get_day_pack_questions(pack_idx, count=5)
+            else:
+                st.session_state.active_questions = get_daily_questions(pack_tag, count=5)
+            st.session_state.quiz_seen_q_ids = [q["id"] for q in st.session_state.active_questions]
 
-        current_q = all_pack_questions[curr_idx]
+        current_q = st.session_state.active_questions[curr_idx]
 
         st.markdown(f"""
         <div style="background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); padding: 14px 20px; border-radius: 14px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
@@ -197,6 +228,9 @@ def render_quiz_view():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+        if st.session_state.get("retake_notice"):
+            st.info(st.session_state.retake_notice)
 
         st.progress((curr_idx + 1) / 5.0, text=f"Question {curr_idx + 1} of 5")
 
@@ -336,11 +370,22 @@ def render_quiz_view():
         col_b1, col_b2, col_b3 = st.columns(3)
         with col_b1:
             if st.button("🔄 Retake Quiz (Improve Average)", type="primary", use_container_width=True):
+                prev_results = res.get("details", [])
+                seen_ids = set(st.session_state.get("quiz_seen_q_ids", []))
+                retake_questions, updated_seen, wrong_cnt = build_retake_question_set(
+                    prev_results,
+                    QUESTIONS_DATA,
+                    seen_ids,
+                    target_count=5
+                )
+                st.session_state.active_questions = retake_questions
+                st.session_state.quiz_seen_q_ids = updated_seen
                 st.session_state.current_q_idx = 0
                 st.session_state.per_q_results = []
                 st.session_state.q_start_time = time.time()
                 st.session_state.quiz_result = None
                 st.session_state.quiz_stage = "arena"
+                st.session_state.retake_notice = f"🔄 Smart Retake Active: {wrong_cnt} incorrect question(s) reappeared for a second chance + {5 - wrong_cnt} fresh new question(s) added!"
                 st.rerun()
         with col_b2:
             if st.button("👤 Switch Player / New Game", use_container_width=True):
@@ -350,6 +395,12 @@ def render_quiz_view():
             if st.button("🏠 Back to Portal Home", use_container_width=True):
                 st.session_state.app_view = "home"
                 st.rerun()
+
+        st.caption("💡 **Smart Retake Engine**: Questions answered correctly disappear; your incorrect questions reappear for a second chance, plus fresh new questions are added to make 5!")
+
+        # Continuous Journey Progress Dashboard in Results
+        player_id = p_name.lower().replace(" ", "_")
+        render_player_progress_dashboard(player_id, p_name, category="pronoun", title_prefix="🎯 Translation Duel")
 
         # Scoreboard Reveal
         st.markdown("---")

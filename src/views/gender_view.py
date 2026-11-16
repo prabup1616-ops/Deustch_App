@@ -11,6 +11,11 @@ from src.gender_questions import (
 )
 from src.config import AVATAR_CHOICES
 from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_button
+from src.components.duel_engine import (
+    get_day_curriculum_questions,
+    build_retake_question_set,
+    render_player_progress_dashboard
+)
 
 
 def get_app_saved_players():
@@ -124,6 +129,14 @@ def render_gender_view():
 
                 active_player_name = selected_choice
 
+            clean_pid = active_player_name.strip().lower().replace(" ", "_") if active_player_name else "guest"
+            player_hist = storage.get_player_continuous_history(clean_pid, category="gender")
+            cur_day = player_hist["current_day_number"]
+            is_today_done = player_hist["is_played_today"]
+
+            # Continuous Journey Progress Tracker for Selected Player (Gender)
+            render_player_progress_dashboard(clean_pid, active_player_name or "Player", category="gender", title_prefix="🏷️ Gender Duel (Der • Die • Das)")
+
             st.markdown("---")
             st.markdown("### 2. 🌐 Meaning Annotations Language")
             st.caption("Each question displays the German noun, its plural form, and English translation. Choose your preferred regional language annotation:")
@@ -138,24 +151,31 @@ def render_gender_view():
             st.markdown("---")
             st.markdown("### 3. 🎯 Choose Gender Quiz Set")
             total_packs = get_total_gender_packs(count=5)
+
+            if is_today_done:
+                cont_opt_label = f"🗓️ Continuous Journey: Day - {cur_day} (Played Today — Retake to improve score average)"
+            else:
+                cont_opt_label = f"🗓️ Continuous Journey: Day - {cur_day} Challenge (Next in Sequence)"
+
             mode_input = st.radio(
                 "Which question set do you want to play?",
                 options=[
-                    "📅 Today's Gender Challenge (5 Daily Nouns)",
+                    cont_opt_label,
                     f"📦 Practice Packs (Pack 1 to {total_packs} from 522 Goethe B1 Nouns)"
                 ],
                 index=0,
                 key="gender_mode_choice"
             )
 
-            if "Today's Gender Challenge" in mode_input:
-                selected_date = date.today().isoformat()
-                pack_tag = f"gender-{selected_date}"
-                pack_title = f"Today's Gender Challenge ({date.today().strftime('%B %d, %Y')})"
+            if "Continuous Journey" in mode_input:
+                pack_tag = f"gender-{date.today().isoformat()}"
+                pack_title = f"Gender Day - {cur_day} Challenge ({date.today().strftime('%B %d, %Y')})"
+                chosen_is_continuous = True
             else:
                 pack_num = st.slider(f"Select Pack Number (1 to {total_packs}):", min_value=1, max_value=total_packs, value=1, key="gender_pack_slider")
                 pack_tag = f"gender-pack-{pack_num}"
                 pack_title = f"Gender Pack #{pack_num} (Nouns {(pack_num-1)*5 + 1} to {min(pack_num*5, len(GENDER_QUESTIONS_DATA))})"
+                chosen_is_continuous = False
 
             st.markdown("<br>", unsafe_allow_html=True)
 
@@ -181,6 +201,15 @@ def render_gender_view():
 
                     st.session_state.gender_pack_choice = pack_tag
                     st.session_state.gender_pack_title = pack_title
+                    st.session_state.gender_retake_notice = None
+
+                    if chosen_is_continuous:
+                        initial_questions = get_day_curriculum_questions("gender", cur_day, count=5)
+                    else:
+                        initial_questions = get_gender_pack_questions(pack_num, count=5)
+
+                    st.session_state.gender_active_questions = initial_questions
+                    st.session_state.gender_seen_q_ids = [q["id"] for q in initial_questions]
 
                     st.session_state.gender_q_idx = 0
                     st.session_state.gender_per_q_results = []
@@ -237,14 +266,16 @@ def render_gender_view():
         pack_title = st.session_state.gender_pack_title
         curr_idx = st.session_state.gender_q_idx
 
-        if "gender-pack-" in pack_tag:
-            pack_idx = int(pack_tag.split("gender-pack-")[1])
-            all_questions = get_gender_pack_questions(pack_idx, count=5)
-        else:
-            clean_date = pack_tag.replace("gender-", "")
-            all_questions = get_daily_gender_questions(clean_date, count=5)
+        if "gender_active_questions" not in st.session_state or not st.session_state.gender_active_questions:
+            if "gender-pack-" in pack_tag:
+                pack_idx = int(pack_tag.split("gender-pack-")[1])
+                st.session_state.gender_active_questions = get_gender_pack_questions(pack_idx, count=5)
+            else:
+                clean_date = pack_tag.replace("gender-", "")
+                st.session_state.gender_active_questions = get_daily_gender_questions(clean_date, count=5)
+            st.session_state.gender_seen_q_ids = [q["id"] for q in st.session_state.gender_active_questions]
 
-        current_q = all_questions[curr_idx]
+        current_q = st.session_state.gender_active_questions[curr_idx]
 
         # Top Bar
         st.markdown(f"""
@@ -257,6 +288,9 @@ def render_gender_view():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+        if st.session_state.get("gender_retake_notice"):
+            st.info(st.session_state.gender_retake_notice)
 
         st.progress((curr_idx + 1) / 5.0, text=f"Question {curr_idx + 1} of 5")
 
@@ -445,10 +479,22 @@ Type the correct German Gender (der / die / das):
         col_b1, col_b2, col_b3 = st.columns(3)
         with col_b1:
             if st.button("🔄 Retake Gender Quiz (Improve Average)", type="primary", use_container_width=True, key="gender_retake_btn"):
+                prev_results = res.get("details", [])
+                seen_ids = set(st.session_state.get("gender_seen_q_ids", []))
+                retake_questions, updated_seen, wrong_cnt = build_retake_question_set(
+                    prev_results,
+                    GENDER_QUESTIONS_DATA,
+                    seen_ids,
+                    target_count=5
+                )
+                st.session_state.gender_active_questions = retake_questions
+                st.session_state.gender_seen_q_ids = updated_seen
                 st.session_state.gender_q_idx = 0
                 st.session_state.gender_per_q_results = []
                 st.session_state.gender_q_start_time = time.time()
+                st.session_state.gender_result = None
                 st.session_state.gender_stage = "arena"
+                st.session_state.gender_retake_notice = f"🔄 Smart Retake Active: {wrong_cnt} incorrect noun(s) reappeared for a second chance + {5 - wrong_cnt} fresh new noun(s) added!"
                 st.rerun()
         with col_b2:
             if st.button("📦 Choose Another Gender Pack", use_container_width=True, key="gender_pack_btn"):
@@ -459,6 +505,12 @@ Type the correct German Gender (der / die / das):
                 st.session_state.app_view = "home"
                 st.session_state.gender_stage = "lobby"
                 st.rerun()
+
+        st.caption("💡 **Smart Retake Engine**: Nouns answered correctly disappear; your incorrect nouns reappear for a second chance, plus fresh new nouns are added to make 5!")
+
+        # Continuous Journey Progress Dashboard in Results
+        player_id = p_name.lower().replace(" ", "_")
+        render_player_progress_dashboard(player_id, p_name, category="gender", title_prefix="🏷️ Gender Duel (Der • Die • Das)")
 
         # Detailed Question Review
         st.markdown("---")

@@ -274,6 +274,119 @@ def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
     return summary
 
 
+def get_player_continuous_history(player_id: str, category: str = "pronoun") -> Dict[str, Any]:
+    """
+    Computes a player's continuous daily journey across all their sessions:
+    - Automatically segments attempts into chronological distinct days (Day 1, Day 2, Day 3...)
+    - Tracks whether today has already been played
+    - Computes current day number for the player
+    - Calculates daily averages, score logs, and improvement trends
+    """
+    from collections import OrderedDict
+    from datetime import date
+
+    data = load_data()
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    p_attempts = [
+        a for a in data.get("attempts", [])
+        if str(a.get("player_id", "")).strip().lower().replace(" ", "_") == clean_pid
+        and a.get("category", "pronoun") == category
+    ]
+
+    p_attempts.sort(key=lambda a: a.get("timestamp", ""))
+
+    days_map = OrderedDict()
+    for a in p_attempts:
+        d = a.get("date", "")
+        cal_date = a.get("timestamp", "")[:10] or d
+        key = cal_date if cal_date and not d.startswith("pack-") else d
+        if not key:
+            key = "day-1"
+        if key not in days_map:
+            days_map[key] = []
+        days_map[key].append(a)
+
+    today_iso = date.today().isoformat()
+    history = []
+    prev_avg = None
+
+    for idx, (day_key, att_list) in enumerate(days_map.items(), start=1):
+        scores = [a.get("score", 0) for a in att_list]
+        avg = round(sum(scores) / len(scores), 2)
+        best = max(scores)
+        pct = round((avg / 5.0) * 100, 1)
+
+        if prev_avg is None:
+            trend = "🚀 Initial Baseline"
+            trend_delta = 0.0
+        else:
+            diff = round(avg - prev_avg, 2)
+            trend_delta = diff
+            if diff > 0:
+                trend = f"📈 +{diff:.2f} (+{round(diff/5.0*100, 1)}%) Improving!"
+            elif diff < 0:
+                trend = f"📉 {diff:.2f} Needs Review"
+            else:
+                trend = "🎯 Steady Performance"
+        prev_avg = avg
+
+        is_today = (day_key == today_iso)
+        history.append({
+            "day_number": idx,
+            "date": day_key,
+            "label": f"Day {idx} ({day_key})",
+            "attempts_count": len(scores),
+            "scores": scores,
+            "average_score": avg,
+            "best_score": best,
+            "pct": pct,
+            "trend": trend,
+            "trend_delta": trend_delta,
+            "is_today": is_today
+        })
+
+    is_played_today = any(h["is_today"] for h in history)
+    if is_played_today:
+        today_record = next(h for h in history if h["is_today"])
+        current_day_number = today_record["day_number"]
+        today_stats = today_record
+    else:
+        current_day_number = len(history) + 1
+        today_stats = None
+
+    all_scores = [a.get("score", 0) for a in p_attempts]
+    overall_avg = round(sum(all_scores) / len(all_scores), 2) if all_scores else 0.0
+    overall_pct = round((overall_avg / 5.0) * 100, 1) if all_scores else 0.0
+
+    if len(history) >= 2:
+        first_avg = history[0]["average_score"]
+        last_avg = history[-1]["average_score"]
+        total_diff = round(last_avg - first_avg, 2)
+        if total_diff > 0:
+            improvement_summary = f"📈 Excellent! Overall score improved by +{total_diff:.2f} marks (+{round(total_diff/5.0*100, 1)}%) since Day 1!"
+        elif total_diff == 0:
+            improvement_summary = f"🎯 Solid consistency! Maintaining {overall_avg:.2f}/5.0 average across {len(history)} days."
+        else:
+            improvement_summary = f"💪 Practicing consistently. Keep retaking to boost your score to the next tier!"
+    elif len(history) == 1:
+        improvement_summary = f"🌟 Great start! Completed Day 1 with an average of {history[0]['average_score']:.2f}/5.0. Come back tomorrow for Day 2!"
+    else:
+        improvement_summary = "👋 Welcome! Start Day 1 today to begin your continuous Goethe B1 journey!"
+
+    return {
+        "player_id": clean_pid,
+        "history": history,
+        "current_day_number": current_day_number,
+        "is_played_today": is_played_today,
+        "today_stats": today_stats,
+        "total_days_completed": len(history),
+        "total_attempts": len(p_attempts),
+        "overall_average": overall_avg,
+        "overall_pct": overall_pct,
+        "improvement_summary": improvement_summary
+    }
+
+
 def get_shared_creator_key() -> str:
     """Returns stored Gemini API key from Streamlit secrets, environment, or settings."""
     try:
