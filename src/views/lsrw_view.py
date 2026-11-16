@@ -382,20 +382,76 @@ def _render_hub():
 
 
 # ==============================================================================
-# LERNSCHLEIFE CONTROLLER (LSRW LOOP BANNER)
+# LERNSCHLEIFE CONTROLLER & MODULE SWITCHER
 # ==============================================================================
+
+def _switch_to_module(target_mod: str, topic: str = None):
+    """
+    Seamlessly transitions between LSRW modules while carrying over the active topic.
+    Clears obsolete state so the target module immediately initializes with the grammar topic.
+    """
+    st.session_state.lsrw_module = target_mod
+    st.query_params["mod"] = target_mod
+    if topic:
+        clean_topic = topic
+        if "Alle" in str(topic) and "aktiven" in str(topic):
+            pid = _get_active_player_id()
+            learned = storage.get_learned_topics(pid)
+            clean_topic = learned[-1]["topic"] if learned else "Präpositionen (Wechselpräpositionen)"
+        st.session_state.lsrw_loop_topic = clean_topic
+        if target_mod == "reading":
+            st.session_state.lsrw_current_reading_topic = clean_topic
+            st.session_state.pop("lsrw_reading_data", None)
+            st.session_state.pop("lsrw_reading_submitted", None)
+        elif target_mod == "writing":
+            st.session_state.lsrw_current_writing_topic = clean_topic
+            st.session_state.pop("lsrw_writing_data", None)
+            st.session_state.pop("lsrw_writing_evaluated", None)
+            st.session_state.pop("lsrw_writing_feedback", None)
+        elif target_mod == "listening":
+            st.session_state.lsrw_current_listening_topic = clean_topic
+            st.session_state.pop("lsrw_listening_data", None)
+            st.session_state.pop("lsrw_real_data", None)
+            st.session_state.pop("lsrw_listening_submitted", None)
+            st.session_state.pop("lsrw_real_submitted", None)
+            st.session_state["lsrw_real_play_count"] = 0
+        elif target_mod == "speaking":
+            st.session_state.lsrw_current_speaking_topic = clean_topic
+            st.session_state.pop("lsrw_speaking_cards", None)
+            st.session_state.pop("lsrw_speaking_revealed", None)
+            st.session_state.pop("lsrw_speaking_evaluated", None)
+            st.session_state.pop("lsrw_speaking_feedback", None)
+    st.rerun()
+
 
 def _render_loop_navigation_banner(current_module: str, position: str = "top"):
     """
-    Renders an interactive loop navigation banner if an LSRW learning loop is active.
-    Supports Scenario 1, Scenario 2, and Scenario 3 (New Topic).
+    Renders an interactive loop navigation banner and quick-jump bar across all LSRW modules.
+    Ensures that forward progression (Reading -> Writing -> Listening -> Speaking) is ALWAYS visible.
     Uses position suffix to ensure 100% unique Streamlit widget keys when rendered at top & bottom.
     """
-    loop_topic = st.session_state.get("lsrw_loop_topic")
-    if not loop_topic:
-        return
+    pid = _get_active_player_id()
+    loop_topic = (
+        st.session_state.get("lsrw_loop_topic")
+        or st.session_state.get(f"lsrw_current_{current_module}_topic")
+        or st.session_state.get(f"lsrw_{current_module}_topic_choice")
+    )
+    if not loop_topic or ("Alle" in str(loop_topic) and "aktiven" in str(loop_topic)):
+        learned = storage.get_learned_topics(pid)
+        loop_topic = learned[-1]["topic"] if learned else "Präpositionen (Wechselpräpositionen)"
+    st.session_state.lsrw_loop_topic = loop_topic
 
+    natural_flows = {
+        "reading": ["writing", "listening", "speaking"],
+        "writing": ["listening", "speaking", "reading"],
+        "listening": ["speaking", "reading", "writing"],
+        "speaking": ["reading", "writing", "listening"]
+    }
     queue = st.session_state.get("lsrw_loop_queue", [])
+    if not queue:
+        queue = list(natural_flows.get(current_module, ["reading", "writing", "listening", "speaking"]))
+        st.session_state.lsrw_loop_queue = queue
+
     module_names = {
         "learning": "🧠 Lernen (Learning)",
         "reading": "📖 Lesen (Reading)",
@@ -404,6 +460,8 @@ def _render_loop_navigation_banner(current_module: str, position: str = "top"):
         "speaking": "🗣️ Sprechen (Speaking)"
     }
     curr_label = module_names.get(current_module, current_module.title())
+    next_mod = queue[0] if queue else natural_flows.get(current_module, ["reading"])[0]
+    next_name = module_names.get(next_mod, next_mod.title())
 
     st.markdown(f"""<div style="background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
 border: 2px solid #d946ef; border-radius: 12px; padding: 12px 18px; margin: 10px 0 16px 0;">
@@ -413,7 +471,7 @@ border: 2px solid #d946ef; border-radius: 12px; padding: 12px 18px; margin: 10px
 🔄 Aktive LSRW-Lernschleife: <strong>{loop_topic}</strong>
 </div>
 <div style="font-size: 0.82rem; color: #701a75; margin-top: 2px;">
-Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(queue)} Module
+Aktuelles Modul: <strong>{curr_label}</strong> | Nächster Schritt: <strong>{next_name}</strong>
 </div>
 </div>
 </div>
@@ -421,44 +479,13 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
 
     col_next, col_new = st.columns([2, 1], gap="small")
     with col_next:
-        if queue:
-            next_mod = queue[0]
-            next_name = module_names.get(next_mod, next_mod.title())
-            if st.button(f"➔ Nächstes Modul in der Schleife: {next_name} ➔", type="primary", use_container_width=True, key=f"btn_loop_next_{current_module}_{position}"):
+        if st.button(f"➔ Nächstes Modul in der Reihe: {next_name} ➔", type="primary", use_container_width=True, key=f"btn_loop_next_{current_module}_{position}"):
+            if queue:
                 st.session_state.lsrw_loop_queue.pop(0)
-                st.session_state.lsrw_module = next_mod
-                st.query_params["mod"] = next_mod
-                if next_mod == "reading":
-                    st.session_state.lsrw_current_reading_topic = loop_topic
-                    st.session_state.pop("lsrw_reading_data", None)
-                    st.session_state.pop("lsrw_reading_submitted", None)
-                elif next_mod == "writing":
-                    st.session_state.lsrw_current_writing_topic = loop_topic
-                    st.session_state.pop("lsrw_writing_data", None)
-                    st.session_state.pop("lsrw_writing_evaluated", None)
-                elif next_mod == "listening":
-                    st.session_state.lsrw_current_listening_topic = loop_topic
-                    st.session_state.pop("lsrw_listening_data", None)
-                    st.session_state.pop("lsrw_real_data", None)
-                    st.session_state.pop("lsrw_listening_submitted", None)
-                    st.session_state.pop("lsrw_real_submitted", None)
-                elif next_mod == "speaking":
-                    st.session_state.lsrw_current_speaking_topic = loop_topic
-                    st.session_state.pop("lsrw_speaking_cards", None)
-                    st.session_state.pop("lsrw_speaking_revealed", None)
-                    st.session_state.pop("lsrw_speaking_evaluated", None)
-                st.rerun()
-        else:
-            if st.button("🎉 Alle 4 Module abgeschlossen! Zurück zum Lernen Studio ➔", type="primary", use_container_width=True, key=f"btn_loop_done_{current_module}_{position}"):
-                st.session_state.lsrw_loop_queue = []
-                st.session_state.lsrw_loop_topic = None
-                st.session_state.app_view = "learning"
-                st.query_params["view"] = "learning"
-                st.query_params.pop("mod", None)
-                st.rerun()
+            _switch_to_module(next_mod, loop_topic)
 
     with col_new:
-        if st.button("➕ Neues Thema im Lernstudio (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key=f"btn_loop_new_{current_module}_{position}"):
+        if st.button("➕ Neues Thema im Lernstudio", use_container_width=True, key=f"btn_loop_new_{current_module}_{position}"):
             st.session_state.lsrw_loop_queue = []
             st.session_state.lsrw_loop_topic = None
             st.session_state.pop("learn_active_topic", None)
@@ -468,6 +495,21 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
             st.query_params["view"] = "learning"
             st.query_params.pop("mod", None)
             st.rerun()
+
+    # Direktnavigation zwischen den 4 LSRW-Modulen
+    c1, c2, c3, c4 = st.columns(4)
+    modules_nav = [
+        ("reading", "📖 1. Lesen", c1),
+        ("writing", "✍️ 2. Schreiben", c2),
+        ("listening", "🎧 3. Hören", c3),
+        ("speaking", "🗣️ 4. Sprechen", c4),
+    ]
+    for mod_id, mod_label, col in modules_nav:
+        with col:
+            is_active = (current_module == mod_id)
+            btn_txt = f"▶ {mod_label}" if is_active else mod_label
+            if st.button(btn_txt, key=f"nav_quick_{mod_id}_{position}", use_container_width=True, disabled=is_active):
+                _switch_to_module(mod_id, loop_topic)
 
 
 # ==============================================================================
@@ -675,11 +717,17 @@ def _render_reading_module():
 
         _render_loop_navigation_banner("reading", position="bottom")
 
-        if st.button("🔄 Neue Leseübung generieren", use_container_width=True, key="btn_new_reading"):
-            st.session_state.pop("lsrw_reading_data", None)
-            st.session_state.pop("lsrw_reading_submitted", None)
-            st.session_state["lsrw_force_refresh_reading"] = True
-            st.rerun()
+        col_new_r, col_next_r = st.columns([1, 1])
+        with col_new_r:
+            if st.button("🔄 Neue Leseübung generieren", use_container_width=True, key="btn_new_reading"):
+                st.session_state.pop("lsrw_reading_data", None)
+                st.session_state.pop("lsrw_reading_submitted", None)
+                st.session_state["lsrw_force_refresh_reading"] = True
+                st.rerun()
+        with col_next_r:
+            active_t = topics[0] if topics else None
+            if st.button("✍️ Weiter zu Modul 2: Schreiben (Writing) ➔", type="primary", use_container_width=True, key="btn_r_to_writing"):
+                _switch_to_module("writing", active_t)
 
 
 # ==============================================================================
@@ -827,11 +875,17 @@ def _render_writing_module():
 
         _render_loop_navigation_banner("writing", position="bottom")
 
-        if st.button("🔄 Neue Schreibaufgabe starten", use_container_width=True, key="btn_new_writing"):
-            st.session_state.pop("lsrw_writing_data", None)
-            st.session_state.pop("lsrw_writing_evaluated", None)
-            st.session_state.pop("lsrw_writing_feedback", None)
-            st.rerun()
+        col_new_w, col_next_w = st.columns([1, 1])
+        with col_new_w:
+            if st.button("🔄 Neue Schreibaufgabe starten", use_container_width=True, key="btn_new_writing"):
+                st.session_state.pop("lsrw_writing_data", None)
+                st.session_state.pop("lsrw_writing_evaluated", None)
+                st.session_state.pop("lsrw_writing_feedback", None)
+                st.rerun()
+        with col_next_w:
+            active_t = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else None)
+            if st.button("🎧 Weiter zu Modul 3: Hören (Listening) ➔", type="primary", use_container_width=True, key="btn_w_to_listening"):
+                _switch_to_module("listening", active_t)
 
 
 # ==============================================================================
@@ -1053,11 +1107,17 @@ window.speechSynthesis.speak(u);
 
         _render_loop_navigation_banner("listening", position="bottom_easy")
 
-        if st.button("🔄 Neue Hörverstehensrunde starten", use_container_width=True, key="btn_new_listening_easy"):
-            st.session_state.pop("lsrw_listening_data", None)
-            st.session_state.pop("lsrw_listening_submitted", None)
-            st.session_state["lsrw_force_refresh_listening_easy"] = True
-            st.rerun()
+        col_new_l1, col_next_l1 = st.columns([1, 1])
+        with col_new_l1:
+            if st.button("🔄 Neue Hörverstehensrunde starten", use_container_width=True, key="btn_new_listening_easy"):
+                st.session_state.pop("lsrw_listening_data", None)
+                st.session_state.pop("lsrw_listening_submitted", None)
+                st.session_state["lsrw_force_refresh_listening_easy"] = True
+                st.rerun()
+        with col_next_l1:
+            active_t = topics[0] if topics else None
+            if st.button("🗣️ Weiter zu Modul 4: Sprechen (Speaking) ➔", type="primary", use_container_width=True, key="btn_l_to_speaking_easy"):
+                _switch_to_module("speaking", active_t)
 
 
 def _render_listening_real_exam(api_key, topics, pid):
@@ -1219,12 +1279,18 @@ if ('speechSynthesis' in window) {{
 
         _render_loop_navigation_banner("listening", position="bottom_real")
 
-        if st.button("🔄 Neue Prüfungssimulation starten", use_container_width=True, key="btn_new_real_exam"):
-            st.session_state.pop("lsrw_real_data", None)
-            st.session_state.pop("lsrw_real_submitted", None)
-            st.session_state["lsrw_real_play_count"] = 0
-            st.session_state["lsrw_force_refresh_listening_real"] = True
-            st.rerun()
+        col_new_l2, col_next_l2 = st.columns([1, 1])
+        with col_new_l2:
+            if st.button("🔄 Neue Prüfungssimulation starten", use_container_width=True, key="btn_new_real_exam"):
+                st.session_state.pop("lsrw_real_data", None)
+                st.session_state.pop("lsrw_real_submitted", None)
+                st.session_state["lsrw_real_play_count"] = 0
+                st.session_state["lsrw_force_refresh_listening_real"] = True
+                st.rerun()
+        with col_next_l2:
+            active_t = topics[0] if topics else None
+            if st.button("🗣️ Weiter zu Modul 4: Sprechen (Speaking) ➔", type="primary", use_container_width=True, key="btn_l_to_speaking_real"):
+                _switch_to_module("speaking", active_t)
 
 
 # ==============================================================================
@@ -1418,7 +1484,7 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
 
         _render_loop_navigation_banner("speaking", position="bottom")
 
-        col_new, col_hub = st.columns(2)
+        col_new, col_hub, col_next_s = st.columns([1, 1, 1])
         with col_new:
             if st.button("🃏 Andere Karte aufdecken", use_container_width=True, key="btn_new_card"):
                 st.session_state.lsrw_speaking_revealed = None
@@ -1432,3 +1498,7 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
                 st.session_state.pop("lsrw_speaking_evaluated", None)
                 st.session_state["lsrw_force_refresh_speaking"] = True
                 st.rerun()
+        with col_next_s:
+            active_t = topics[0] if topics else None
+            if st.button("📖 Weiter zu Modul 1: Lesen (Reading) ➔", type="primary", use_container_width=True, key="btn_s_to_reading"):
+                _switch_to_module("reading", active_t)
