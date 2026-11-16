@@ -246,7 +246,7 @@ def get_all_time_stats(category: str = "pronoun") -> List[Dict[str, Any]]:
     return summary
 
 
-def get_gemini_api_key() -> str:
+def get_shared_creator_key() -> str:
     """Returns stored Gemini API key from Streamlit secrets, environment, or settings."""
     try:
         import streamlit as st
@@ -259,6 +259,35 @@ def get_gemini_api_key() -> str:
         return env_key
     data = load_data()
     return data.get("settings", {}).get("gemini_api_key", "")
+
+
+def get_gemini_api_key() -> str:
+    """
+    Returns active Gemini API key based on visitor selection:
+    1. Visitor's custom user-supplied key in session state.
+    2. Shared creator key IF the user opted into Shared/Demo Mode.
+    3. Empty string if not configured yet.
+    """
+    try:
+        import streamlit as st
+        custom = st.session_state.get("user_gemini_api_key", "").strip()
+        if custom:
+            return custom
+        if st.session_state.get("use_shared_creator_key", False):
+            return get_shared_creator_key()
+    except Exception:
+        pass
+    return ""
+
+
+def is_using_shared_key() -> bool:
+    """Checks if current session is using the shared creator fallback key."""
+    try:
+        import streamlit as st
+        custom = st.session_state.get("user_gemini_api_key", "").strip()
+        return not bool(custom) and bool(st.session_state.get("use_shared_creator_key", False))
+    except Exception:
+        return False
 
 
 def save_gemini_api_key(key: str) -> None:

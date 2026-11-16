@@ -8,7 +8,12 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 import storage
-from src.components import render_phrase_loader, dismiss_phrase_loader
+from src.components import (
+    render_phrase_loader,
+    dismiss_phrase_loader,
+    render_api_key_banner,
+    render_api_key_prompt
+)
 from src.ai_service import (
     generate_reading_exercise,
     generate_writing_prompt,
@@ -70,6 +75,9 @@ def render_lsrw_view():
             st.session_state.lsrw_module = "hub"
             st.query_params["mod"] = "hub"
             st.rerun()
+
+    # Active API Key Status / Switcher Banner
+    render_api_key_banner()
 
     module = st.session_state.lsrw_module
     if module == "learning":
@@ -359,6 +367,10 @@ border-radius: 16px; padding: 22px 28px; color: white; margin-bottom: 20px; box-
 </p>
 </div>""", unsafe_allow_html=True)
 
+    if not api_key:
+        render_api_key_prompt("Grammatik-Lernstudio (Telugu & Kannada)")
+        return
+
     learned_list = [t["topic"] for t in storage.get_learned_topics(pid)]
     available_topics = []
     for t in learned_list:
@@ -605,6 +617,9 @@ def _render_reading_module():
         st.session_state.pop("lsrw_reading_submitted", None)
 
     if "lsrw_reading_data" not in st.session_state:
+        if not api_key:
+            render_api_key_prompt("Leseverstehen (Reading)")
+            return
         force_r = st.session_state.pop("lsrw_force_refresh_reading", False)
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("📖 Erstelle Lesetexte und Aufgaben zu Ihren Grammatikthemen...")
@@ -767,6 +782,9 @@ def _render_writing_module():
         st.session_state.pop("lsrw_writing_feedback", None)
 
     if "lsrw_writing_data" not in st.session_state:
+        if not api_key:
+            render_api_key_prompt("Schriftlicher Ausdruck (Writing)")
+            return
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("✍️ Erstelle Prüfungsaufgabe (Schreiben)...")
         try:
@@ -899,6 +917,10 @@ def _render_listening_module():
     active_topics = learned_list if ("Alle" in chosen_topic and "aktiven Themen" in chosen_topic) else [chosen_topic]
     topics = active_topics
     is_real_mode = "Prüfung" in selected_mode
+
+    if not api_key:
+        render_api_key_prompt("Hörverstehen (Listening)")
+        return
 
     if is_real_mode:
         _render_listening_real_exam(api_key, active_topics, pid)
@@ -1234,6 +1256,9 @@ Sprechen Sie anschließend frei und auf Deutsch über das Thema in Ihr Mikrofon 
 </div>""", unsafe_allow_html=True)
 
     if "lsrw_speaking_cards" not in st.session_state:
+        if not api_key:
+            render_api_key_prompt("Mündlicher Ausdruck (Sprechen)")
+            return
         force_r = st.session_state.pop("lsrw_force_refresh_speaking", False)
         # Full-Screen Blur Modal Overlay with Catching Phrases (25s rotation)
         render_phrase_loader("🃏 Generiere 8 Prüfungskarten...")
