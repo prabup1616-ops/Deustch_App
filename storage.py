@@ -22,7 +22,10 @@ try:
         db_get_learned_topics,
         db_save_repo_questions,
         db_get_repo_questions,
-        db_get_all_community_topics
+        db_get_all_community_topics,
+        db_save_lsrw_submission,
+        db_get_lsrw_submissions,
+        db_clear_lsrw_submissions
     )
     if is_db_connected():
         init_db()
@@ -657,6 +660,103 @@ def get_lsrw_module_history(player_id: str, module: str = None) -> List[Dict[str
     if module:
         return [s for s in scores if s.get("module") == module]
     return scores
+
+
+def save_lsrw_submission(
+    player_id: str,
+    module: str,
+    topic: str,
+    prompt_data: Dict[str, Any],
+    user_submission: str,
+    feedback: str,
+    score: int,
+    total: int
+) -> None:
+    """
+    Saves a complete LSRW submission record, auto-registers the topic as learned,
+    and updates both local JSON and Neon Postgres.
+    """
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    clean_topic = topic.strip() if topic else "B1 Grammatik"
+    data = load_data()
+    lsrw_store = data.setdefault("lsrw_store", {})
+    player_data = lsrw_store.setdefault(clean_pid, {})
+    submissions = player_data.setdefault("submissions", [])
+    entry = {
+        "module": module,
+        "topic": clean_topic,
+        "prompt_data": prompt_data or {},
+        "user_submission": user_submission or "",
+        "feedback": feedback or "",
+        "score": score,
+        "total": total,
+        "date": date.today().isoformat(),
+        "timestamp": datetime.now().isoformat()
+    }
+    submissions.append(entry)
+    save_data(data)
+
+    # 1. Also update score history
+    save_lsrw_module_score(player_id, module, score, total, [clean_topic])
+
+    # 2. Automatically register this topic as learned so future exercises build on it cumulatively!
+    if clean_topic:
+        add_learned_topic(player_id, clean_topic)
+
+    # 3. Save to Neon Postgres for persistent cloud durability
+    if is_db_connected():
+        try:
+            db_save_lsrw_submission(
+                clean_pid,
+                module,
+                clean_topic,
+                prompt_data or {},
+                user_submission or "",
+                feedback or "",
+                score,
+                total
+            )
+        except Exception:
+            pass
+
+
+def get_lsrw_submissions(player_id: str, module: str = None, limit: int = 30) -> List[Dict[str, Any]]:
+    """
+    Retrieves full submission history and AI corrections (Postgres with local JSON fallback).
+    """
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    if is_db_connected():
+        try:
+            db_subs = db_get_lsrw_submissions(clean_pid, module=module, limit=limit)
+            if db_subs:
+                return db_subs
+        except Exception:
+            pass
+
+    data = load_data()
+    lsrw_store = data.get("lsrw_store", {})
+    player_data = lsrw_store.get(clean_pid, {})
+    subs = player_data.get("submissions", [])
+    if module:
+        subs = [s for s in subs if s.get("module") == module]
+    return list(reversed(subs[-limit:]))
+
+
+def clear_lsrw_submissions(player_id: str) -> None:
+    """Removes all saved LSRW submissions and module score history for a player."""
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+    lsrw_store = data.setdefault("lsrw_store", {})
+    if clean_pid in lsrw_store:
+        lsrw_store[clean_pid]["submissions"] = []
+        lsrw_store[clean_pid]["module_scores"] = []
+    save_data(data)
+    if is_db_connected():
+        try:
+            db_clear_lsrw_submissions(clean_pid)
+        except Exception:
+            pass
+
 
 
 # ==============================================================================

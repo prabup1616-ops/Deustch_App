@@ -5,6 +5,7 @@ Reihenfolge: Lesen (Reading) → Schreiben (Writing) → Hören (Listening) → 
 """
 import time
 import json
+import re
 import streamlit as st
 import streamlit.components.v1 as components
 import storage
@@ -98,6 +99,121 @@ def render_lsrw_view():
 
 
 # ==============================================================================
+# PRÜFUNGSARCHIV & DETAILLIERTER VERLAUF (FULL SUBMISSIONS & AI CORRECTIONS)
+# ==============================================================================
+
+def _render_exam_history(pid: str):
+    """
+    Renders an interactive, expandable archive of all past LSRW submissions
+    including written essays, questions, user answers, and AI corrections.
+    """
+    submissions = storage.get_lsrw_submissions(pid, limit=20)
+    legacy_history = storage.get_lsrw_module_history(pid)
+
+    if not submissions and not legacy_history:
+        return
+
+    st.markdown("---")
+    col_hist_h1, col_hist_h2 = st.columns([3, 1])
+    with col_hist_h1:
+        st.markdown("### 📊 Prüfungsarchiv & Detaillierter Verlauf")
+        st.caption("Klicken Sie auf einen Eintrag, um Ihre eingereichten Texte, Aufgaben und KI-Korrekturen einzusehen.")
+    with col_hist_h2:
+        if st.button("🗑️ Archiv leeren", key="btn_clear_lsrw_hist", help="Löscht den gesamten Prüfungsverlauf"):
+            storage.clear_lsrw_submissions(pid)
+            st.rerun()
+
+    if submissions:
+        for idx, sub in enumerate(submissions):
+            mod = sub.get("module", "lsrw")
+            emoji = "📖" if mod == "reading" else "✍️" if mod == "writing" else "🎧" if mod == "listening" else "🗣️"
+            mod_title = "Lesen" if mod == "reading" else "Schreiben" if mod == "writing" else "Hören" if mod == "listening" else "Sprechen"
+            topic = sub.get("topic", "B1 Grammatik")
+            score = sub.get("score", 0)
+            total = sub.get("total", 10)
+            date_str = sub.get("date") or str(sub.get("created_at", ""))[:10] or "Heute"
+
+            header_label = f"{emoji} {mod_title} — {topic} | 📅 {date_str} | ⭐ {score} / {total} Punkte"
+            with st.expander(header_label, expanded=(idx == 0)):
+                p_data = sub.get("prompt_data") or {}
+                user_sub = sub.get("user_submission", "")
+                feedback = sub.get("feedback", "")
+
+                if mod == "writing":
+                    st.markdown(f"**📝 Schreibaufgabe:** {p_data.get('type', 'E-Mail')} (Stil: *{p_data.get('register', 'informell')}*)")
+                    if p_data.get("scenario_de"):
+                        st.info(f"**Situation:** {p_data.get('scenario_de')}")
+                    if p_data.get("leitpunkte"):
+                        st.markdown("**Leitpunkte:**")
+                        for lp in p_data.get("leitpunkte", []):
+                            st.markdown(f"- {lp}")
+
+                    st.markdown("**✍️ Ihr geschriebener Text:**")
+                    st.markdown(f"""> {user_sub}""")
+
+                    st.markdown("---")
+                    st.markdown("### 📋 Goethe B1 Bewertung & Korrektur")
+                    st.markdown(feedback)
+
+                elif mod == "reading":
+                    if p_data.get("paragraph1"):
+                        p1 = p_data.get("paragraph1", {})
+                        st.markdown(f"**📖 Lesetext:** *{p1.get('title', '')}*")
+                        st.caption(p1.get("text", ""))
+
+                    st.markdown("**📋 Ihre Antworten & Auswertung:**")
+                    try:
+                        ans_dict = json.loads(user_sub) if isinstance(user_sub, str) and user_sub.startswith("{") else {}
+                        for q_key, q_val in ans_dict.items():
+                            is_correct = (q_val.get("user_ans", "").strip().lower() == q_val.get("correct", "").strip().lower())
+                            icon = "✅" if is_correct else "❌"
+                            st.markdown(f"{icon} **{q_val.get('question', '')}**")
+                            st.markdown(f"   Ihre Antwort: `{q_val.get('user_ans') or 'Keine'}` | Lösung: `{q_val.get('correct')}`")
+                            if q_val.get("exp"):
+                                st.caption(f"   💡 {q_val.get('exp')}")
+                    except Exception:
+                        st.markdown(user_sub)
+                    st.markdown(f"**Ergebnis:** {feedback}")
+
+                elif mod == "listening":
+                    st.markdown("**🎧 Hörverstehen-Protokoll:**")
+                    items = p_data.get("items") or p_data.get("questions") or []
+                    for i, itm in enumerate(items):
+                        sentence = itm.get("spoken_sentence_de") or p_data.get("passage_de", "")
+                        q_text = itm.get("question_de", f"Frage {i+1}")
+                        correct = itm.get("answer", "")
+                        st.markdown(f"**{i+1}. {q_text}** (Lösung: `{correct}`)")
+                        if sentence:
+                            safe_sentence = sentence.replace("'", "\\'").replace('"', '&quot;')
+                            st.components.v1.html(f"""
+                            <button onclick="var u=new SpeechSynthesisUtterance('{safe_sentence}'); u.lang='de-DE'; u.rate=0.88; window.speechSynthesis.speak(u);"
+                                style="background: #0284c7; color: white; border: none; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 12px; font-weight: 600;">
+                                🔊 Satz anhören (Free Speech)
+                            </button>
+                            """, height=35)
+                    st.markdown(f"**Gesamtergebnis:** {feedback}")
+
+                elif mod == "speaking":
+                    if p_data.get("card_title"):
+                        st.markdown(f"**🗣️ Sprechkarte:** *{p_data.get('card_title')}*")
+                        if p_data.get("card_situation"):
+                            st.info(f"**Situation:** {p_data.get('card_situation')}")
+                    if user_sub:
+                        st.markdown(f"**Ihr Beitrag:** {user_sub}")
+                    st.markdown("---")
+                    st.markdown("### 📋 Prüferbewertung:")
+                    st.markdown(feedback)
+    else:
+        for s in reversed(legacy_history[-6:]):
+            emoji = "📖" if s["module"] == "reading" else "✍️" if s["module"] == "writing" else "🎧" if s["module"] == "listening" else "🗣️"
+            mod_title = "Lesen" if s["module"] == "reading" else "Schreiben" if s["module"] == "writing" else "Hören" if s["module"] == "listening" else "Sprechen"
+            st.markdown(f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 14px; margin-bottom: 6px; font-size: 0.88rem;">
+<span>{emoji} <strong>{mod_title}</strong> — {', '.join(s.get('topics', []))}</span>
+<span style="font-weight: 700; color: #059669;">{s['score']} / {s['total']} Punkte</span>
+</div>""", unsafe_allow_html=True)
+
+
+# ==============================================================================
 # LSRW ÜBERSICHT (HUB)
 # ==============================================================================
 
@@ -179,25 +295,8 @@ def _render_hub():
         st.warning("⚠️ Bitte aktivieren Sie mindestens ein Grammatikthema oben, um zu beginnen.")
         return
 
-    # Letzte Prüfungsergebnisse
-    history = storage.get_lsrw_module_history(pid)
-    if history:
-        st.markdown("---")
-        col_hist_h1, col_hist_h2 = st.columns([3, 1])
-        with col_hist_h1:
-            st.markdown("### 📊 Letzte Prüfungsergebnisse")
-        with col_hist_h2:
-            if st.button("🗑️ Verlauf leeren", key="btn_clear_lsrw_hist", help="Löscht den Verlauf der bisherigen Prüfungsergebnisse"):
-                storage.clear_learned_topics(pid)
-                st.rerun()
-        recent = history[-6:]
-        for s in reversed(recent):
-            emoji = "📖" if s["module"] == "reading" else "✍️" if s["module"] == "writing" else "🎧" if s["module"] == "listening" else "🗣️"
-            mod_title = "Lesen" if s["module"] == "reading" else "Schreiben" if s["module"] == "writing" else "Hören" if s["module"] == "listening" else "Sprechen"
-            st.markdown(f"""<div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 14px; margin-bottom: 6px; font-size: 0.88rem;">
-<span>{emoji} <strong>{mod_title}</strong> — {', '.join(s.get('topics', []))}</span>
-<span style="font-weight: 700; color: #059669;">{s['score']} / {s['total']} Punkte</span>
-</div>""", unsafe_allow_html=True)
+    # Detailliertes Prüfungsarchiv & Verlauf (Submissions & AI Corrections)
+    _render_exam_history(pid)
 
     # Verbindung zum eigenständigen Grammatik-Lernstudio (Lernen)
     st.markdown("---")
@@ -533,7 +632,32 @@ def _render_reading_module():
                 if user_ans and user_ans.strip().lower() == q.get("answer", "").strip().lower():
                     score += 1
             total = len(blanks) + len(mcqs)
-            storage.save_lsrw_module_score(pid, "reading", score, total, topics)
+            answers = {}
+            for i, q in enumerate(blanks):
+                answers[f"Lücke {i+1}"] = {
+                    "question": q.get("sentence"),
+                    "user_ans": st.session_state.get(f"reading_blank_{i}", ""),
+                    "correct": q.get("answer"),
+                    "exp": q.get("explanation_de")
+                }
+            for i, q in enumerate(mcqs):
+                answers[f"Frage {i+1}"] = {
+                    "question": q.get("question"),
+                    "user_ans": st.session_state.get(f"reading_mcq_{i}", ""),
+                    "correct": q.get("answer"),
+                    "exp": q.get("explanation_de")
+                }
+            active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Lesen")
+            storage.save_lsrw_submission(
+                pid,
+                "reading",
+                active_topic,
+                prompt_data={"paragraph1": p1, "blanks": blanks, "mcqs": mcqs},
+                user_submission=json.dumps(answers, ensure_ascii=False),
+                feedback=f"Score: {score} / {total} Punkte ({round(score/total*100)}%).",
+                score=score,
+                total=total
+            )
             st.session_state.lsrw_reading_score = score
             st.session_state.lsrw_reading_total = total
             st.session_state.lsrw_reading_submitted = True
@@ -673,7 +797,24 @@ def _render_writing_module():
                         st.session_state.lsrw_writing_feedback = feedback
                         st.session_state.lsrw_writing_evaluated = True
                         st.session_state.lsrw_writing_user_text = user_text
-                        storage.save_lsrw_module_score(pid, "writing", 8, 10, topics)
+                        score = 8
+                        match = re.search(r'(\d+[\.,]?\d*)\s*/\s*10', feedback)
+                        if match:
+                            try:
+                                score = int(round(float(match.group(1).replace(",", "."))))
+                            except Exception:
+                                pass
+                        active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Schreiben")
+                        storage.save_lsrw_submission(
+                            pid,
+                            "writing",
+                            active_topic,
+                            prompt_data=data,
+                            user_submission=user_text,
+                            feedback=feedback,
+                            score=score,
+                            total=10
+                        )
                         st.rerun()
                     except Exception as e:
                         st.error(f"Bewertungsfehler: {e}")
@@ -867,9 +1008,20 @@ window.speechSynthesis.speak(u);
                 correct = item.get("answer", "")
                 if user_ans and user_ans.strip().lower() == correct.strip().lower():
                     score += 1
+            user_answers = {f"Frage {i+1}": {"question": itm.get("question_de"), "spoken": itm.get("spoken_sentence_de"), "user_ans": st.session_state.get(f"listening_q_{i}", ""), "correct": itm.get("answer"), "exp": itm.get("explanation_de")} for i, itm in enumerate(items)}
+            active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Hören")
+            storage.save_lsrw_submission(
+                pid,
+                "listening",
+                active_topic,
+                prompt_data={"mode": "easy", "items": items},
+                user_submission=json.dumps(user_answers, ensure_ascii=False),
+                feedback=f"Score: {score} / {len(items)} Richtige Antworten.",
+                score=score,
+                total=len(items)
+            )
             st.session_state.lsrw_listening_score = score
             st.session_state.lsrw_listening_submitted = True
-            storage.save_lsrw_module_score(pid, "listening", score, len(items), topics)
             st.rerun()
 
     else:
@@ -1019,9 +1171,20 @@ if ('speechSynthesis' in window) {{
                 correct = q.get("answer", "")
                 if user_ans and user_ans.strip().lower() == correct.strip().lower():
                     score += 1
+            user_answers = {f"Frage {i+1}": {"question": q.get("question_de"), "user_ans": st.session_state.get(f"real_exam_q_{i}", ""), "correct": q.get("answer"), "exp": q.get("explanation_de")} for i, q in enumerate(questions)}
+            active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Hören")
+            storage.save_lsrw_submission(
+                pid,
+                "listening",
+                active_topic,
+                prompt_data={"mode": "real_exam", "passage_de": data.get("passage_de", ""), "questions": questions},
+                user_submission=json.dumps(user_answers, ensure_ascii=False),
+                feedback=f"Score: {score} / {len(questions)} Richtige Antworten ({round(score/len(questions)*100)}%).",
+                score=score,
+                total=len(questions)
+            )
             st.session_state.lsrw_real_score = score
             st.session_state.lsrw_real_submitted = True
-            storage.save_lsrw_module_score(pid, "listening", score, len(questions), topics)
             st.rerun()
 
     else:
@@ -1192,7 +1355,24 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
                         )
                         st.session_state.lsrw_speaking_feedback = feedback
                         st.session_state.lsrw_speaking_evaluated = True
-                        storage.save_lsrw_module_score(pid, "speaking", 8, 10, topics)
+                        score = 8
+                        match = re.search(r'(\d+[\.,]?\d*)\s*/\s*10', feedback)
+                        if match:
+                            try:
+                                score = int(round(float(match.group(1).replace(",", "."))))
+                            except Exception:
+                                pass
+                        active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Sprechen")
+                        storage.save_lsrw_submission(
+                            pid,
+                            "speaking",
+                            active_topic,
+                            prompt_data=revealed if isinstance(revealed, dict) else {"topic_de": topic_de},
+                            user_submission=f"Sprachaufnahme ({audio_mime}) erfolgreich eingereicht.",
+                            feedback=feedback,
+                            score=score,
+                            total=10
+                        )
                         st.rerun()
                     except Exception as e:
                         st.error(f"Bewertungsfehler: {e}")
@@ -1210,7 +1390,24 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
                                 )
                                 st.session_state.lsrw_speaking_feedback = feedback
                                 st.session_state.lsrw_speaking_evaluated = True
-                                storage.save_lsrw_module_score(pid, "speaking", 8, 10, topics)
+                                score = 8
+                                match = re.search(r'(\d+[\.,]?\d*)\s*/\s*10', feedback)
+                                if match:
+                                    try:
+                                        score = int(round(float(match.group(1).replace(",", "."))))
+                                    except Exception:
+                                        pass
+                                active_topic = chosen_topic if chosen_topic and "Alle" not in chosen_topic else (topics[0] if topics else "Sprechen")
+                                storage.save_lsrw_submission(
+                                    pid,
+                                    "speaking",
+                                    active_topic,
+                                    prompt_data=revealed if isinstance(revealed, dict) else {"topic_de": topic_de},
+                                    user_submission=typed.strip(),
+                                    feedback=feedback,
+                                    score=score,
+                                    total=10
+                                )
                                 st.rerun()
                             except Exception as e:
                                 st.error(f"Bewertungsfehler: {e}")

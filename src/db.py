@@ -153,6 +153,22 @@ def init_db():
             );
             """)
 
+            # 6. LSRW Submissions and Full AI Corrections Archive
+            cur.execute("""
+            CREATE TABLE IF NOT EXISTS lsrw_submissions (
+                id SERIAL PRIMARY KEY,
+                player_id VARCHAR(100) NOT NULL,
+                module VARCHAR(50) NOT NULL,
+                topic VARCHAR(200) NOT NULL,
+                prompt_data JSONB DEFAULT '{}',
+                user_submission TEXT DEFAULT '',
+                feedback TEXT DEFAULT '',
+                score INT DEFAULT 0,
+                total INT DEFAULT 10,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            """)
+
             # Indexes for ultra-fast lookups
             cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_scores_player ON player_scores(player_id);
@@ -160,6 +176,8 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_bank_module_topic ON exercise_bank(module, topic);
             CREATE INDEX IF NOT EXISTS idx_qrepo_topic ON questions_repo(topic);
             CREATE INDEX IF NOT EXISTS idx_qrepo_category ON questions_repo(category);
+            CREATE INDEX IF NOT EXISTS idx_lsrw_sub_player ON lsrw_submissions(player_id);
+            CREATE INDEX IF NOT EXISTS idx_lsrw_sub_module ON lsrw_submissions(module);
             """)
 
         conn.commit()
@@ -466,4 +484,100 @@ def db_get_all_community_topics(category: str = "pronoun") -> List[str]:
         return sorted(list(topics_set))
     finally:
         conn.close()
+
+
+def db_save_lsrw_submission(
+    player_id: str,
+    module: str,
+    topic: str,
+    prompt_data: Dict[str, Any],
+    user_submission: str,
+    feedback: str,
+    score: int,
+    total: int
+) -> bool:
+    """
+    Saves a complete LSRW submission record (task, submission, AI feedback, score)
+    to Postgres for persistent review across sessions and deployments.
+    """
+    conn = _get_connection()
+    if not conn:
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO lsrw_submissions (player_id, module, topic, prompt_data, user_submission, feedback, score, total)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+            """, (
+                player_id,
+                module,
+                topic,
+                Json(prompt_data or {}),
+                user_submission or "",
+                feedback or "",
+                score,
+                total
+            ))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_save_lsrw_submission error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
+def db_get_lsrw_submissions(player_id: str, module: str = None, limit: int = 30) -> List[Dict[str, Any]]:
+    """
+    Retrieves full submission history and AI corrections for a player.
+    """
+    conn = _get_connection()
+    if not conn:
+        return []
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            if module:
+                cur.execute("""
+                SELECT id, player_id, module, topic, prompt_data, user_submission, feedback, score, total, created_at
+                FROM lsrw_submissions
+                WHERE player_id = %s AND module = %s
+                ORDER BY created_at DESC
+                LIMIT %s;
+                """, (player_id, module, limit))
+            else:
+                cur.execute("""
+                SELECT id, player_id, module, topic, prompt_data, user_submission, feedback, score, total, created_at
+                FROM lsrw_submissions
+                WHERE player_id = %s
+                ORDER BY created_at DESC
+                LIMIT %s;
+                """, (player_id, limit))
+            rows = cur.fetchall()
+            return [dict(r) for r in rows]
+    except Exception as e:
+        logger.error(f"db_get_lsrw_submissions error: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+def db_clear_lsrw_submissions(player_id: str) -> bool:
+    """Deletes all saved LSRW submissions for a player from Postgres."""
+    conn = _get_connection()
+    if not conn:
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM lsrw_submissions WHERE player_id = %s;", (player_id,))
+        conn.commit()
+        return True
+    except Exception as e:
+        logger.error(f"db_clear_lsrw_submissions error: {e}")
+        conn.rollback()
+        return False
+    finally:
+        conn.close()
+
+
 
