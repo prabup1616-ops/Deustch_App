@@ -286,10 +286,11 @@ def _render_hub():
 # LERNSCHLEIFE CONTROLLER (LSRW LOOP BANNER)
 # ==============================================================================
 
-def _render_loop_navigation_banner(current_module: str):
+def _render_loop_navigation_banner(current_module: str, position: str = "top"):
     """
     Renders an interactive loop navigation banner if an LSRW learning loop is active.
     Supports Scenario 1, Scenario 2, and Scenario 3 (New Topic).
+    Uses position suffix to ensure 100% unique Streamlit widget keys when rendered at top & bottom.
     """
     loop_topic = st.session_state.get("lsrw_loop_topic")
     if not loop_topic:
@@ -324,7 +325,7 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
         if queue:
             next_mod = queue[0]
             next_name = module_names.get(next_mod, next_mod.title())
-            if st.button(f"➔ Nächstes Modul in der Schleife: {next_name} ➔", type="primary", use_container_width=True, key=f"btn_loop_next_{current_module}"):
+            if st.button(f"➔ Nächstes Modul in der Schleife: {next_name} ➔", type="primary", use_container_width=True, key=f"btn_loop_next_{current_module}_{position}"):
                 st.session_state.lsrw_loop_queue.pop(0)
                 st.session_state.lsrw_module = next_mod
                 st.query_params["mod"] = next_mod
@@ -349,7 +350,7 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
                     st.session_state.pop("lsrw_speaking_evaluated", None)
                 st.rerun()
         else:
-            if st.button("🎉 Alle 4 Module abgeschlossen! Zurück zum Lernen Studio ➔", type="primary", use_container_width=True, key=f"btn_loop_done_{current_module}"):
+            if st.button("🎉 Alle 4 Module abgeschlossen! Zurück zum Lernen Studio ➔", type="primary", use_container_width=True, key=f"btn_loop_done_{current_module}_{position}"):
                 st.session_state.lsrw_loop_queue = []
                 st.session_state.lsrw_loop_topic = None
                 st.session_state.app_view = "learning"
@@ -358,7 +359,7 @@ Aktuelles Modul: <strong>{curr_label}</strong> | Verbleibend in Schleife: {len(q
                 st.rerun()
 
     with col_new:
-        if st.button("➕ Neues Thema im Lernstudio (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key=f"btn_loop_new_{current_module}"):
+        if st.button("➕ Neues Thema im Lernstudio (కొత్త అంశం / ಹೊಸ ವಿಷಯ)", use_container_width=True, key=f"btn_loop_new_{current_module}_{position}"):
             st.session_state.lsrw_loop_queue = []
             st.session_state.lsrw_loop_topic = None
             st.session_state.pop("learn_active_topic", None)
@@ -400,7 +401,7 @@ def _render_reading_module():
             available_topics.append(t)
 
     st.markdown("## 📖 Modul 1: Leseverstehen")
-    _render_loop_navigation_banner("reading")
+    _render_loop_navigation_banner("reading", position="top")
 
     col_t1, col_t2, col_t3 = st.columns([2, 1, 1])
     with col_t1:
@@ -548,7 +549,7 @@ def _render_reading_module():
 <p style="margin: 0; color: #bfdbfe;">Getestete Grammatikthemen: {', '.join(topics)}</p>
 </div>""", unsafe_allow_html=True)
 
-        _render_loop_navigation_banner("reading")
+        _render_loop_navigation_banner("reading", position="bottom")
 
         if st.button("🔄 Neue Leseübung generieren", use_container_width=True, key="btn_new_reading"):
             st.session_state.pop("lsrw_reading_data", None)
@@ -575,7 +576,7 @@ def _render_writing_module():
             available_topics.append(t)
 
     st.markdown("## ✍️ Modul 2: Schriftlicher Ausdruck")
-    _render_loop_navigation_banner("writing")
+    _render_loop_navigation_banner("writing", position="top")
 
     col_t1, col_t2, col_t3 = st.columns([2, 1, 1])
     with col_t1:
@@ -683,7 +684,7 @@ def _render_writing_module():
         st.markdown("### 📋 Prüfungsbewertung & Korrektur")
         st.markdown(st.session_state.get("lsrw_writing_feedback", ""))
 
-        _render_loop_navigation_banner("writing")
+        _render_loop_navigation_banner("writing", position="bottom")
 
         if st.button("🔄 Neue Schreibaufgabe starten", use_container_width=True, key="btn_new_writing"):
             st.session_state.pop("lsrw_writing_data", None)
@@ -710,7 +711,7 @@ def _render_listening_module():
             available_topics.append(t)
 
     st.markdown("## 🎧 Modul 3: Hörverstehen (Blind-Modus)")
-    _render_loop_navigation_banner("listening")
+    _render_loop_navigation_banner("listening", position="top")
 
     col_mode, col_topic = st.columns([1, 1], gap="medium")
     with col_mode:
@@ -898,7 +899,7 @@ window.speechSynthesis.speak(u);
             if exp:
                 st.caption(f"   💡 {exp}")
 
-        _render_loop_navigation_banner("listening")
+        _render_loop_navigation_banner("listening", position="bottom_easy")
 
         if st.button("🔄 Neue Hörverstehensrunde starten", use_container_width=True, key="btn_new_listening_easy"):
             st.session_state.pop("lsrw_listening_data", None)
@@ -1053,7 +1054,7 @@ if ('speechSynthesis' in window) {{
             if exp:
                 st.caption(f"   💡 Erklärung: {exp}")
 
-        _render_loop_navigation_banner("listening")
+        _render_loop_navigation_banner("listening", position="bottom_real")
 
         if st.button("🔄 Neue Prüfungssimulation starten", use_container_width=True, key="btn_new_real_exam"):
             st.session_state.pop("lsrw_real_data", None)
@@ -1081,7 +1082,7 @@ def _render_speaking_module():
             available_topics.append(t)
 
     st.markdown("## 🗣️ Modul 4: Mündlicher Ausdruck (Sprechen)")
-    _render_loop_navigation_banner("speaking")
+    _render_loop_navigation_banner("speaking", position="top")
 
     col_t1, col_t2 = st.columns([3, 1])
     with col_t1:
@@ -1218,7 +1219,7 @@ box-shadow: 0 8px 30px rgba(124,58,237,0.3);">
         st.markdown("### 📝 Bewertung des mündlichen Ausdrucks")
         st.markdown(st.session_state.get("lsrw_speaking_feedback", ""))
 
-        _render_loop_navigation_banner("speaking")
+        _render_loop_navigation_banner("speaking", position="bottom")
 
         col_new, col_hub = st.columns(2)
         with col_new:
