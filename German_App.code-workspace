@@ -1,0 +1,43 @@
+{
+    "folders": [
+        {
+            "name": "🚀 1. App Core & Launchers",
+            "path": "."
+        },
+        {
+            "name": "🖥️ 2. UI Views (Screens)",
+            "path": "src/views"
+        },
+        {
+            "name": "🧩 3. Interactive Components",
+            "path": "src/components"
+        },
+        {
+            "name": "⚙️ 4. AI & Backend Services",
+            "path": "src"
+        }
+    ],
+    "settings": {
+        "python.analysis.extraPaths": [
+            "${workspaceFolder:🚀 1. App Core & Launchers}",
+            "${workspaceFolder:🚀 1. App Core & Launchers}/src"
+        ],
+        "python.autoComplete.extraPaths": [
+            "${workspaceFolder:🚀 1. App Core & Launchers}",
+            "${workspaceFolder:🚀 1. App Core & Launchers}/src"
+        ],
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.expand": false,
+        "explorer.fileNesting.patterns": {
+            "app.py": "requirements.txt, pyproject.toml, .env, .gitignore, README.md, build.py, build.bat, run_app.bat, push_to_github.bat, share_with_friends.bat",
+            "storage.py": "duel_data.json, lsrw_cache.json, german_phrases.json",
+            "generate_questions.py": "questions.py, questions_bank.json",
+            "generate_gender_questions.py": "gender_questions.py, gender_questions_bank.json"
+        },
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/.pytest_cache": true,
+            "node_modules": true
+        }
+    }
+}

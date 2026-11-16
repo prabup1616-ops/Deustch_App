@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Streamlit: Debug German App (app.py)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${workspaceFolder}/app.py",
+                "--server.port=8501",
+                "--server.headless=false"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "🐍 Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "🎯 Debug Pronoun Questions Generator",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/generate_questions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "🏷️ Debug Gender Questions Generator",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/generate_gender_questions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "⚡ Debug Storage / DB Sync",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/storage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

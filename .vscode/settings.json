@@ -1,0 +1,27 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/src"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/src"
+    ],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "app.py": "requirements.txt, pyproject.toml, .env, .gitignore, README.md, build.py, build.bat, run_app.bat, push_to_github.bat, share_with_friends.bat",
+        "storage.py": "duel_data.json, lsrw_cache.json, german_phrases.json",
+        "generate_questions.py": "questions.py, questions_bank.json",
+        "generate_gender_questions.py": "gender_questions.py, gender_questions_bank.json",
+        "package.json": "package-lock.json, neon.ts, .neon"
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "node_modules": true
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.rulers": [100]
+}
