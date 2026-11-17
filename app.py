@@ -124,8 +124,10 @@ def init_session_state():
     if "quiz_stage" not in st.session_state:
         st.session_state.quiz_stage = "lobby"  # 'lobby', 'arena', 'results'
 
-    if "player_name" not in st.session_state:
-        st.session_state.player_name = ""
+    if "player_name" not in st.session_state or not st.session_state.player_name:
+        last_p = storage.get_last_active_player()
+        st.session_state.player_name = last_p.get("name", "Prabu")
+        st.session_state.player_avatar = last_p.get("avatar", "🦁") if isinstance(last_p, dict) and "avatar" in last_p else "🦁"
 
     if "player_avatar" not in st.session_state:
         st.session_state.player_avatar = "🦁"

@@ -47,8 +47,12 @@ PRESET_TOPICS = [
 
 
 def _get_active_player_id():
-    name = st.session_state.get("player_name", "gast")
-    return name.lower().replace(" ", "_") if name else "gast"
+    name = st.session_state.get("player_name", "")
+    if not name or name.lower() in ("gast", "guest"):
+        last_p = storage.get_last_active_player()
+        name = last_p.get("name", "Prabu") if last_p else "Prabu"
+        st.session_state.player_name = name
+    return name.lower().replace(" ", "_")
 
 
 # ==============================================================================
@@ -245,9 +249,21 @@ def _render_hub():
         render_api_key_prompt("Goethe B1 LSRW Meisterstudio")
         return
 
-    # Kumulative Grammatikthemen
-    st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
-    st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
+    # Kumulative Grammatikthemen & Lerner-Profil
+    col_t1, col_t2 = st.columns([3, 1])
+    with col_t1:
+        st.markdown("### 📚 Ihre gelernten Grammatikthemen (Kumulativ)")
+        st.caption("Themen sammeln sich an: Neue Übungen enthalten automatisch ALLE zuvor gelernten Themen.")
+    with col_t2:
+        saved_all = storage.get_all_saved_players()
+        p_names = [p["name"] for p in saved_all] if saved_all else ["Prabu"]
+        active_disp = st.session_state.get("player_name", "Prabu")
+        def_idx = p_names.index(active_disp) if active_disp in p_names else 0
+        switched = st.selectbox("👤 Lerner-Profil:", options=p_names, index=def_idx, key="lsrw_hub_player_select")
+        if switched != active_disp:
+            st.session_state.player_name = switched
+            storage.set_last_active_player(switched.lower().replace(" ", "_"), switched)
+            st.rerun()
 
     learned = storage.get_learned_topics(pid)
     topic_names = [t["topic"] for t in learned]

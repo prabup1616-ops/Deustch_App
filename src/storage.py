@@ -182,6 +182,32 @@ def get_all_saved_players() -> List[Dict[str, Any]]:
     return players
 
 
+def set_last_active_player(player_id: str, player_name: str = "") -> None:
+    """Remembers the last active player profile across reloads and tab navigations."""
+    clean_pid = str(player_id).strip().lower().replace(" ", "_")
+    data = load_data()
+    p_info = data.get("players", {}).get(clean_pid)
+    name = player_name or (p_info.get("name") if p_info else clean_pid.title())
+    data["last_active_player"] = {"id": clean_pid, "name": name}
+    save_data(data)
+
+
+def get_last_active_player() -> Dict[str, str]:
+    """Retrieves the last active player profile, defaulting to Prabu if unassigned."""
+    data = load_data()
+    last = data.get("last_active_player")
+    if last and isinstance(last, dict) and last.get("id"):
+        return last
+    # Fallback to 'prabu' if exists, otherwise first registered player
+    players = get_all_saved_players()
+    for p in players:
+        if p.get("id") == "prabu":
+            return {"id": "prabu", "name": p.get("name", "Prabu")}
+    if players:
+        return {"id": players[0]["id"], "name": players[0]["name"]}
+    return {"id": "prabu", "name": "Prabu"}
+
+
 def update_settings(smtp_server: str, smtp_port: int, smtp_user: str, smtp_pass: str, enabled: bool) -> None:
     data = load_data()
     data["settings"] = {
@@ -556,16 +582,23 @@ def get_learned_topics(player_id: str) -> List[Dict[str, str]]:
             learned.append({"topic": item.strip(), "date": date.today().isoformat()})
             existing_lower.append(item.strip().lower())
 
-    # Fallback to guest topics if current user has no topics yet
-    if not learned and clean_pid != "guest":
-        guest_topics = lsrw_store.get("guest", {}).get("learned_topics", [])
-        for gt in guest_topics:
-            if gt.get("topic", "").strip().lower() not in existing_lower:
-                learned.append(gt)
-                existing_lower.append(gt.get("topic", "").strip().lower())
+    # Fallback to last active player or primary player topics if current ID has none
+    if not learned:
+        last_p = get_last_active_player()
+        last_id = last_p.get("id", "prabu") if last_p else "prabu"
+        if last_id != clean_pid:
+            p_topics = lsrw_store.get(last_id, {}).get("learned_topics", [])
+            for pt in p_topics:
+                if pt.get("topic", "").strip().lower() not in existing_lower:
+                    learned.append(pt)
+                    existing_lower.append(pt.get("topic", "").strip().lower())
 
-    # Default fallback: at least have Perfekt vs Präteritum
-    # Do not auto-inject default topic if user cleared or has no topics yet
+    # Safe Baseline Fallback: Ensure learner is never blocked on blank state
+    if not learned:
+        learned = [
+            {"topic": "Präpositionen (Wechselpräpositionen)", "date": date.today().isoformat()}
+        ]
+
     return learned
 
 
@@ -578,20 +611,30 @@ def add_learned_topic(player_id: str, topic: str) -> None:
 
     data = load_data()
     lsrw_store = data.setdefault("lsrw_store", {})
-    player_data = lsrw_store.setdefault(clean_pid, {})
-    learned = player_data.setdefault("learned_topics", [])
 
-    # Check for duplicate (case-insensitive)
-    existing_lower = [t["topic"].lower() for t in learned]
-    if clean_topic.lower() not in existing_lower:
-        learned.append({"topic": clean_topic, "date": date.today().isoformat()})
-        save_data(data)
+    # Determine targets: the requested pid plus the primary active player if pid is generic guest/gast
+    targets = [clean_pid]
+    if clean_pid in ("guest", "gast", ""):
+        last_p = get_last_active_player()
+        target_id = last_p.get("id", "prabu") if last_p else "prabu"
+        if target_id not in targets:
+            targets.append(target_id)
+
+    for t_pid in targets:
+        player_data = lsrw_store.setdefault(t_pid, {})
+        learned = player_data.setdefault("learned_topics", [])
+        existing_lower = [t["topic"].lower() for t in learned]
+        if clean_topic.lower() not in existing_lower:
+            learned.append({"topic": clean_topic, "date": date.today().isoformat()})
+
+    save_data(data)
 
     if is_db_connected():
-        try:
-            db_add_learned_topic(clean_pid, clean_topic)
-        except Exception:
-            pass
+        for t_pid in targets:
+            try:
+                db_add_learned_topic(t_pid, clean_topic)
+            except Exception:
+                pass
 
 
 def remove_learned_topic(player_id: str, topic: str) -> None:
