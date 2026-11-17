@@ -327,7 +327,7 @@ def _render_hub():
             st.query_params.pop("mod", None)
             st.rerun()
     with col_hub_act2:
-        if st.button("📊 Zur KI-Lernanalyse & B1 Readiness (ML) ➔", use_container_width=True, key="btn_goto_analytics_from_hub"):
+        if st.button("📊 View Progress & Exam Readiness ➔", use_container_width=True, key="btn_goto_analytics_from_hub"):
             st.session_state.app_view = "analytics"
             st.query_params["view"] = "analytics"
             st.query_params.pop("mod", None)

@@ -1,7 +1,7 @@
 """
-Machine Learning & Learning Analytics Dashboard View.
-Visualizes CEFR B1 Exam Readiness Prediction, Ebbinghaus Forgetting Curves,
-and weak grammar topic breakdowns using Pandas, NumPy, and Scikit-Learn.
+Learning Analytics & Goethe B1 Exam Readiness View.
+Presents learner performance, memory retention schedules,
+and grammar skill breakdowns in clean, student-facing English.
 """
 
 import streamlit as st
@@ -9,21 +9,19 @@ import pandas as pd
 from src.services.analytics_service import (
     predict_goethe_b1_readiness,
     calculate_ebbinghaus_spaced_repetition,
-    analyze_weak_grammar_topics,
-    get_learner_performance_dataframe
+    analyze_weak_grammar_topics
 )
 
 
 def render_analytics_view():
     pid = st.session_state.get("player_name", "gast").strip().lower().replace(" ", "_")
-    st.markdown("## 📊 KI-Lernanalyse & Goethe B1 Prüfungsbereitschaft")
-    st.caption("Echtzeit-Berechnung mit Machine Learning, Pandas & NumPy auf Basis Ihrer bisherigen LSRW-Prüfungsdaten.")
+    st.markdown("## 📊 Learning Progress & Goethe B1 Exam Readiness")
+    st.caption("Personalized performance analytics, spaced repetition memory tracking, and exam pass readiness.")
 
-    tab_pred, tab_curve, tab_topics, tab_api = st.tabs([
-        "🎯 B1 Readiness Predictor (ML)",
-        "🧠 Ebbinghaus Forgetting Curve (NumPy)",
-        "🔍 Schwachstellen-Analyse (Pandas)",
-        "🚀 FastAPI Backend & Swagger Docs"
+    tab_pred, tab_curve, tab_topics = st.tabs([
+        "🎯 Exam Readiness Predictor",
+        "🧠 Memory Retention Schedule",
+        "🔍 Grammar Strengths & Weaknesses"
     ])
 
     # --------------------------------------------------------------------------
@@ -35,93 +33,74 @@ def render_analytics_view():
         color = "#10b981" if score_val >= 75 else "#f59e0b" if score_val >= 60 else "#ef4444"
 
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 16px; padding: 24px; text-align: center; color: white; margin-bottom: 20px; border: 2px solid {color};">
-            <h3 style="margin: 0 0 6px 0; color: #94a3b8; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Projizierter Goethe B1 Erfolgsindex (ML)</h3>
-            <div style="font-size: 3.5rem; font-weight: 900; color: {color}; margin: 8px 0;">{score_val}%</div>
-            <div style="font-size: 1.15rem; font-weight: 700; color: #f8fafc; margin-bottom: 6px;">{pred['verdict']}</div>
-            <p style="margin: 0; color: #cbd5e1; font-size: 0.95rem;">{pred['recommendation']}</p>
+        <div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 16px; padding: 26px; text-align: center; color: white; margin-bottom: 20px; border: 2px solid {color};">
+            <h3 style="margin: 0 0 6px 0; color: #94a3b8; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;">Projected Goethe B1 Exam Readiness</h3>
+            <div style="font-size: 3.8rem; font-weight: 900; color: {color}; margin: 8px 0;">{score_val}%</div>
+            <div style="font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 6px;">{pred['verdict']}</div>
+            <p style="margin: 0; color: #cbd5e1; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">{pred['recommendation']}</p>
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("#### 📋 Modul-Bereitschaft (4 Fertigkeiten):")
+        st.markdown("#### 📋 Skill Breakdown (4 Goethe B1 Competencies):")
         c1, c2, c3, c4 = st.columns(4)
         breakdown = pred["module_breakdown"]
         with c1:
-            st.metric("📖 Lesen (Reading)", f"{breakdown['reading_pct']}%", delta="Bestanden (>=60%)" if breakdown['reading_pct'] >= 60 else "Noch Üben")
+            st.metric("📖 Reading (Lesen)", f"{breakdown['reading_pct']}%", delta="Passing (>=60%)" if breakdown['reading_pct'] >= 60 else "Needs Practice")
         with c2:
-            st.metric("✍️ Schreiben (Writing)", f"{breakdown['writing_pct']}%", delta="Bestanden (>=60%)" if breakdown['writing_pct'] >= 60 else "Noch Üben")
+            st.metric("✍️ Writing (Schreiben)", f"{breakdown['writing_pct']}%", delta="Passing (>=60%)" if breakdown['writing_pct'] >= 60 else "Needs Practice")
         with c3:
-            st.metric("🎧 Hören (Listening)", f"{breakdown['listening_pct']}%", delta="Bestanden (>=60%)" if breakdown['listening_pct'] >= 60 else "Noch Üben")
+            st.metric("🎧 Listening (Hören)", f"{breakdown['listening_pct']}%", delta="Passing (>=60%)" if breakdown['listening_pct'] >= 60 else "Needs Practice")
         with c4:
-            st.metric("🗣️ Sprechen (Speaking)", f"{breakdown['speaking_pct']}%", delta="Bestanden (>=60%)" if breakdown['speaking_pct'] >= 60 else "Noch Üben")
+            st.metric("🗣️ Speaking (Sprechen)", f"{breakdown['speaking_pct']}%", delta="Passing (>=60%)" if breakdown['speaking_pct'] >= 60 else "Needs Practice")
 
-        st.info(f"📌 **Goethe-Zertifikat B1 Regel:** Zum Bestehen der Gesamtprüfung müssen alle 4 Module mindestens 60% erreichen. Aktueller Status: **{pred['modules_at_pass_threshold']}**.")
+        st.info(f"📌 **Official Goethe-Zertifikat B1 Requirement:** To pass the overall exam, a candidate must score at least **60% in each individual module**. Your current status: **{pred['modules_at_pass_threshold']}**.")
 
     # --------------------------------------------------------------------------
-    # TAB 2: EBBINGHAUS FORGETTING CURVE
+    # TAB 2: MEMORY RETENTION SCHEDULE (SPACED REPETITION)
     # --------------------------------------------------------------------------
     with tab_curve:
-        st.markdown("### 🧠 Ebbinghaus Vergessenskurve (Spaced Repetition)")
-        st.caption("Berechnet die geschätzte Erinnerungswahrscheinlichkeit $R = e^{-\\Delta t / S}$ mit Vektor-Operationen in NumPy.")
+        st.markdown("### 🧠 Spaced Repetition & Memory Retention Forecast")
+        st.caption("Calculates your estimated memory retention per topic over time to ensure you review grammar before forgetting.")
         items = calculate_ebbinghaus_spaced_repetition(pid)
 
         if not items:
-            st.info("Noch keine Grammatikthemen vorhanden. Absolvieren Sie eine LSRW-Übung, um Ihre Kurve zu visualisieren.")
+            st.info("No grammar practice recorded yet. Complete any LSRW exercise to view your memory retention schedule.")
         else:
             table_data = []
             for itm in items:
                 table_data.append({
-                    "Grammatikthema": itm["topic"],
-                    "Erinnerungs-Wahrscheinlichkeit": f"{itm['retention_probability']}%",
-                    "Tage seit letzter Übung": f"{itm['days_since_last_practice']} Tage",
-                    "Übungsanzahl": itm["practice_count"],
-                    "Durchschnittsnote": f"{itm['mean_score_pct']}%",
-                    "Status": itm["status"]
+                    "Grammar Topic": itm["topic"],
+                    "Estimated Retention": f"{itm['retention_probability']}%",
+                    "Days Since Last Practice": f"{itm['days_since_last_practice']} days ago",
+                    "Times Practiced": f"{itm['practice_count']} sessions",
+                    "Average Score": f"{itm['mean_score_pct']}%",
+                    "Review Status": itm["status"]
                 })
             st.dataframe(pd.DataFrame(table_data), use_container_width=True, hide_index=True)
 
     # --------------------------------------------------------------------------
-    # TAB 3: WEAKEST TOPICS
+    # TAB 3: GRAMMAR STRENGTHS & WEAKNESSES
     # --------------------------------------------------------------------------
     with tab_topics:
-        st.markdown("### 🔍 Grammatik-Schwachstellen-Analyse (Pandas GroupBy)")
+        st.markdown("### 🔍 Grammar Strengths & Weaknesses Analysis")
+        st.caption("Detailed breakdown of your topics ranked by consistency and average score.")
         weak_data = analyze_weak_grammar_topics(pid)
 
-        col_w, col_s = st.columns(2)
+        col_w, col_s = st.columns(2, gap="medium")
         with col_w:
-            st.markdown("#### ⚠️ Themen mit höchstem Wiederholungsbedarf:")
+            st.markdown("#### ⚠️ Topics Needing Review Most:")
             weak_list = weak_data.get("weakest_topics", [])
             if not weak_list:
-                st.info("Noch nicht genügend Daten für Schwachstellenanalyse.")
+                st.info("Complete more exercises across different topics to generate recommendations.")
             else:
                 for w in weak_list:
-                    st.warning(f"**{w['topic']}**: Durchschnitt `{w['mean_pct']}%` ({w['attempts']} Versuche)")
+                    st.warning(f"**{w['topic']}** — Average Score: `{w['mean_pct']}%` ({w['attempts']} attempts)")
 
         with col_s:
-            st.markdown("#### 🌟 Ihre stärksten Grammatikthemen:")
+            st.markdown("#### 🌟 Your Strongest Grammar Topics:")
             strong_list = weak_data.get("strongest_topics", [])
             if not strong_list:
-                st.info("Noch keine starken Themen registriert.")
+                st.info("No mastered topics recorded yet.")
             else:
                 for s in strong_list:
-                    st.success(f"**{s['topic']}**: Durchschnitt `{s['mean_pct']}%` ({s['attempts']} Versuche)")
-
-    # --------------------------------------------------------------------------
-    # TAB 4: FASTAPI & SWAGGER DOCS
-    # --------------------------------------------------------------------------
-    with tab_api:
-        st.markdown("### 🚀 Integrierte FastAPI REST-Schnittstelle")
-        st.markdown("""
-        Dieses Projekt verfügt über eine vollwertige **FastAPI-Backend-Architektur** (`src/api/`):
-        - **Swagger UI Dokumentation**: Interaktive API-Testumgebung unter `/docs`
-        - **ReDoc Dokumentation**: Unter `/redoc`
-        - **Pydantic V2 Schemas**: Strikte Validierung für alle Prüfungs- und Bewertungseingaben
-        - **CORS Middleware**: Nahtlose Anbindung an mobile Apps und externe Clients
-        """)
-
-        st.code("""# FastAPI Server lokal starten:
-python run_api.py
-
-# Anschließend im Browser öffnen:
-http://localhost:8000/docs
-        """, language="bash")
+                    st.success(f"**{s['topic']}** — Average Score: `{s['mean_pct']}%` ({s['attempts']} attempts)")

@@ -199,7 +199,7 @@ with col_nav_links:
             st.query_params["mod"] = "hub"
             st.rerun()
     with c_ml:
-        if st.button("📊 ML & API", use_container_width=True, disabled=(st.session_state.app_view == "analytics")):
+        if st.button("📊 Progress", use_container_width=True, disabled=(st.session_state.app_view == "analytics")):
             st.session_state.app_view = "analytics"
             st.query_params["view"] = "analytics"
             if "mod" in st.query_params:

@@ -101,22 +101,22 @@ Vollständiges Goethe-Zertifikat B1 Prüfungstraining: <strong>Lesen</strong> (L
 
     st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
 
-    # 5. Machine Learning & Learning Analytics Dashboard
+    # 5. Learning Analytics & Goethe B1 Readiness Dashboard
     st.markdown("""<div class="module-card unlocked" style="border-top: 4px solid #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
 <div>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 <span style="font-size: 2.5rem;">📊🎯📈</span>
 <span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px;">
-● ML READINESS & FASTAPI
+● EXAM READINESS & ANALYTICS
 </span>
 </div>
-<h3 style="margin: 0; color: #166534;">KI-Lernanalyse & Goethe B1 Prüfungsbereitschaft (ML / Pandas)</h3>
+<h3 style="margin: 0; color: #166534;">Learning Progress & Goethe B1 Exam Readiness</h3>
 <p style="font-size: 0.9rem; color: #14532d; margin: 8px 0 16px 0;">
-Echtzeit-Analyse mit <strong>Pandas & NumPy</strong>: CEFR B1 Erfolgs-Prädiktor (Machine Learning), Ebbinghaus Vergessenskurve für Spaced Repetition, Schwachstellen-Analyse und integrierte <strong>FastAPI Swagger Dokumentation (/docs)</strong>.
+Personalized performance analytics across Reading, Writing, Listening, and Speaking. Features automated exam readiness scoring, memory retention forecasts, and grammar strength breakdowns.
 </p>
 </div>
 </div>""", unsafe_allow_html=True)
-    if st.button("📊 View ML Analytics & API Docs ➔", type="primary", use_container_width=True, key="btn_home_analytics"):
+    if st.button("📊 View Progress & Exam Readiness ➔", type="primary", use_container_width=True, key="btn_home_analytics"):
         st.session_state.app_view = "analytics"
         st.query_params["view"] = "analytics"
         st.rerun()
