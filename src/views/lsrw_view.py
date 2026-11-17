@@ -738,7 +738,12 @@ def _render_reading_module():
                 pid,
                 "reading",
                 active_topic,
-                prompt_data={"paragraph1": p1, "blanks": blanks, "mcqs": mcqs},
+                prompt_data={
+                    "paragraph1": data.get("paragraph1", {}),
+                    "paragraph2": data.get("paragraph2", {}),
+                    "blanks": blanks,
+                    "mcqs": mcqs
+                },
                 user_submission=json.dumps(answers, ensure_ascii=False),
                 feedback=f"Score: {score} / {total} Punkte ({round(score/total*100)}%).",
                 score=score,
@@ -1045,15 +1050,15 @@ def _render_listening_module():
         return
 
     if is_real_mode:
-        _render_listening_real_exam(api_key, active_topics, pid)
+        _render_listening_real_exam(api_key, active_topics, pid, chosen_topic=chosen_topic)
     else:
-        _render_listening_easy_mode(api_key, active_topics, pid)
+        _render_listening_easy_mode(api_key, active_topics, pid, chosen_topic=chosen_topic)
 
     # Modulspezifischer Verlauf (Unten als aufklappbarer Bereich)
     _render_module_history("listening", pid)
 
 
-def _render_listening_easy_mode(api_key, topics, pid):
+def _render_listening_easy_mode(api_key, topics, pid, chosen_topic: str = ""):
     """Einfacher Modus: 10 Sätze, jeweils 1 Audio pro Frage."""
     st.markdown("""<div style="background: #fef3c7; border: 2px solid #fbbf24; border-radius: 12px; padding: 12px 18px; margin: 12px 0 16px 0;">
 <strong>🎧 Modus Einfach:</strong> Sie hören für jede Frage einen einzelnen deutschen Satz.
@@ -1202,7 +1207,7 @@ window.speechSynthesis.speak(u);
                 _switch_to_module("speaking", active_t)
 
 
-def _render_listening_real_exam(api_key, topics, pid):
+def _render_listening_real_exam(api_key, topics, pid, chosen_topic: str = ""):
     """Echter Prüfungsmodus: 1 zusammenhängender A2/B1 Hörtext, max. 2x abspielen, 10 Fragen."""
     st.markdown("""<div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 14px; padding: 14px 20px; margin: 12px 0 16px 0;">
 <h4 style="margin: 0 0 6px 0; color: #1e40af;">🎓 Goethe-Zertifikat B1 Prüfungssimulation (Hören)</h4>
