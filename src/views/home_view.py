@@ -99,6 +99,28 @@ Vollständiges Goethe-Zertifikat B1 Prüfungstraining: <strong>Lesen</strong> (L
         st.query_params["mod"] = "hub"
         st.rerun()
 
+    st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
+
+    # 5. Machine Learning & Learning Analytics Dashboard
+    st.markdown("""<div class="module-card unlocked" style="border-top: 4px solid #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<span style="font-size: 2.5rem;">📊🎯📈</span>
+<span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px;">
+● ML READINESS & FASTAPI
+</span>
+</div>
+<h3 style="margin: 0; color: #166534;">KI-Lernanalyse & Goethe B1 Prüfungsbereitschaft (ML / Pandas)</h3>
+<p style="font-size: 0.9rem; color: #14532d; margin: 8px 0 16px 0;">
+Echtzeit-Analyse mit <strong>Pandas & NumPy</strong>: CEFR B1 Erfolgs-Prädiktor (Machine Learning), Ebbinghaus Vergessenskurve für Spaced Repetition, Schwachstellen-Analyse und integrierte <strong>FastAPI Swagger Dokumentation (/docs)</strong>.
+</p>
+</div>
+</div>""", unsafe_allow_html=True)
+    if st.button("📊 View ML Analytics & API Docs ➔", type="primary", use_container_width=True, key="btn_home_analytics"):
+        st.session_state.app_view = "analytics"
+        st.query_params["view"] = "analytics"
+        st.rerun()
+
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 📚 Reference & Exam Preparation Modules")
     col_ref1, col_ref2, col_ref3, col_ref4 = st.columns(4, gap="medium")

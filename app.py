@@ -14,6 +14,7 @@ from src.views import (
     render_gender_view,
     render_lsrw_view,
     render_learning_view,
+    render_analytics_view,
 )
 
 # 1. Page Configuration
@@ -207,5 +208,7 @@ elif st.session_state.app_view == "gender":
     render_gender_view()
 elif st.session_state.app_view == "lsrw":
     render_lsrw_view()
+elif st.session_state.app_view == "analytics":
+    render_analytics_view()
 elif st.session_state.app_view == "chart":
     render_chart_view()
