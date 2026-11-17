@@ -584,6 +584,33 @@
     }
   ],
   "lsrw_store": {
+    "prabu": {
+      "learned_topics": [
+        {
+          "topic": "Präpositionen (Wechselpräpositionen)",
+          "date": "2026-11-16"
+        }
+      ],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": [],
+      "submissions": []
+    },
+    "guest": {
+      "learned_topics": [],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": []
+    },
+    "gast": {
+      "learned_topics": [],
+      "current_topic": null,
+      "practiced_list": [],
+      "explained_list": [],
+      "module_scores": []
+    },
     "__lsrw_test_player__": {
       "practiced_list": [
         "Relativsatz"
@@ -601,62 +628,6 @@
           "content": "Hallo"
         }
       ]
-    },
-    "prabu": {
-      "learned_topics": [
-        {
-          "topic": "Präpositionen (Wechselpräpositionen)",
-          "date": "2026-11-16"
-        }
-      ],
-      "current_topic": null,
-      "practiced_list": [],
-      "explained_list": [],
-      "module_scores": [
-        {
-          "module": "writing",
-          "score": 8,
-          "total": 10,
-          "topics": [
-            "Präpositionen (Wechselpräpositionen)"
-          ],
-          "date": "2026-11-16",
-          "timestamp": "2026-11-16T13:31:28.035759"
-        }
-      ],
-      "submissions": [
-        {
-          "module": "writing",
-          "topic": "Präpositionen (Wechselpräpositionen)",
-          "prompt_data": {
-            "scenario_de": "Test-Umzug",
-            "leitpunkte": [
-              "Punkt 1",
-              "Punkt 2"
-            ]
-          },
-          "user_submission": "Hallo, ich wohne jetzt in Berlin.",
-          "feedback": "Sehr gut! Gesamtpunktzahl: 8 / 10",
-          "score": 8,
-          "total": 10,
-          "date": "2026-11-16",
-          "timestamp": "2026-11-16T13:31:28.014756"
-        }
-      ]
-    },
-    "guest": {
-      "learned_topics": [],
-      "current_topic": null,
-      "practiced_list": [],
-      "explained_list": [],
-      "module_scores": []
-    },
-    "gast": {
-      "learned_topics": [],
-      "current_topic": null,
-      "practiced_list": [],
-      "explained_list": [],
-      "module_scores": []
     }
   },
   "questions_repo": {

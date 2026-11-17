@@ -203,6 +203,16 @@ def task_test():
     data = storage.load_data()
     data["attempts"] = [a for a in data.get("attempts", []) if a.get("player_id") != "__iso_test__"]
     storage.save_data(data)
+    if storage.is_db_connected():
+        try:
+            conn = storage.db._get_connection()
+            if conn:
+                with conn.cursor() as cur:
+                    cur.execute("DELETE FROM player_scores WHERE player_id = '__iso_test__';")
+                    cur.execute("DELETE FROM players WHERE player_id LIKE '__test%';")
+                    conn.commit()
+        except Exception:
+            pass
     print("   [PASS] Strict scoreboard isolation verified.")
 
     # Test 6: LSRW Module State Persistence
