@@ -171,15 +171,37 @@ def init_session_state():
 init_session_state()
 
 # 4. Top Navigation Bar
-col_nav1, col_nav2 = st.columns([4, 1])
-with col_nav1:
-    st.markdown("### 🇩🇪 German Goethe-Zertifikat B1 Hub")
-with col_nav2:
-    if st.session_state.app_view != "home":
-        if st.button("🏠 Back to Home", use_container_width=True):
+col_nav_title, col_nav_links = st.columns([1, 2])
+with col_nav_title:
+    st.markdown("### 🇩🇪 German B1 Master Hub")
+
+with col_nav_links:
+    c_home, c_learn, c_lsrw, c_ml = st.columns(4)
+    with c_home:
+        if st.button("🏠 Home", use_container_width=True, disabled=(st.session_state.app_view == "home")):
             st.session_state.app_view = "home"
-            if st.query_params.get("view") != "home":
-                st.query_params["view"] = "home"
+            st.query_params["view"] = "home"
+            if "mod" in st.query_params:
+                del st.query_params["mod"]
+            st.rerun()
+    with c_learn:
+        if st.button("🧠 Lernen", use_container_width=True, disabled=(st.session_state.app_view == "learning")):
+            st.session_state.app_view = "learning"
+            st.query_params["view"] = "learning"
+            if "mod" in st.query_params:
+                del st.query_params["mod"]
+            st.rerun()
+    with c_lsrw:
+        if st.button("🎯 LSRW", use_container_width=True, disabled=(st.session_state.app_view == "lsrw")):
+            st.session_state.app_view = "lsrw"
+            st.session_state.lsrw_module = "hub"
+            st.query_params["view"] = "lsrw"
+            st.query_params["mod"] = "hub"
+            st.rerun()
+    with c_ml:
+        if st.button("📊 ML & API", use_container_width=True, disabled=(st.session_state.app_view == "analytics")):
+            st.session_state.app_view = "analytics"
+            st.query_params["view"] = "analytics"
             if "mod" in st.query_params:
                 del st.query_params["mod"]
             st.rerun()

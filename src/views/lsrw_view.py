@@ -319,11 +319,19 @@ def _render_hub():
     </div>
 </div>
 </div>""", unsafe_allow_html=True)
-    if st.button("🧠 Zum Grammatik-Lernstudio (వ్యాకరణం / ವ್ಯಾಕರಣ) wechseln ➔", use_container_width=True, key="btn_goto_learning_from_hub"):
-        st.session_state.app_view = "learning"
-        st.query_params["view"] = "learning"
-        st.query_params.pop("mod", None)
-        st.rerun()
+    col_hub_act1, col_hub_act2 = st.columns([1, 1], gap="medium")
+    with col_hub_act1:
+        if st.button("🧠 Zum Grammatik-Lernstudio (వ్యాకరణం / ವ್ಯಾಕರಣ) ➔", use_container_width=True, key="btn_goto_learning_from_hub"):
+            st.session_state.app_view = "learning"
+            st.query_params["view"] = "learning"
+            st.query_params.pop("mod", None)
+            st.rerun()
+    with col_hub_act2:
+        if st.button("📊 Zur KI-Lernanalyse & B1 Readiness (ML) ➔", use_container_width=True, key="btn_goto_analytics_from_hub"):
+            st.session_state.app_view = "analytics"
+            st.query_params["view"] = "analytics"
+            st.query_params.pop("mod", None)
+            st.rerun()
 
     # Die 4 Prüfungsmodule (LSRW)
     st.markdown("---")
