@@ -9,7 +9,7 @@ import os
 import hashlib
 import random
 from typing import Dict, Any, Optional, List
-from src.config import BASE_DIR
+from src.config import BASE_DIR, LSRW_CACHE_FILE
 from src.db import (
     is_db_connected,
     db_save_exercise_to_bank,
@@ -17,7 +17,7 @@ from src.db import (
     db_count_bank_exercises
 )
 
-CACHE_FILE = os.path.join(BASE_DIR, "lsrw_cache.json")
+CACHE_FILE = LSRW_CACHE_FILE
 
 
 def _get_cache_key(module: str, topics: List[str], extra: str = "") -> str:

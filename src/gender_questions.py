@@ -9,16 +9,20 @@ import os
 import hashlib
 from typing import List, Dict, Any
 
-JSON_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "gender_questions_bank.json")
+from src.config import GENDER_QUESTIONS_FILE as JSON_PATH
 
 
 def load_all_gender_questions() -> List[Dict[str, Any]]:
     if not os.path.exists(JSON_PATH):
-        # Fallback to generating if missing
-        import generate_gender_questions
-        generate_gender_questions.build_gender_questions()
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        try:
+            from scripts import generate_gender_questions
+            generate_gender_questions.build_gender_questions()
+        except Exception:
+            pass
+    if os.path.exists(JSON_PATH):
+        with open(JSON_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
 
 GENDER_QUESTIONS_DATA = load_all_gender_questions()

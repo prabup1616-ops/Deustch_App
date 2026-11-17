@@ -13,7 +13,7 @@ from datetime import date
 from typing import List, Dict, Any, Set, Tuple
 import streamlit as st
 import storage
-import questions
+import src.questions as questions
 import src.gender_questions as gq
 
 

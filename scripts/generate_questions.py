@@ -959,6 +959,10 @@ def generate_162_questions():
 if __name__ == "__main__":
     q_list = generate_162_questions()
     print(f"Generated {len(q_list)} total questions successfully!")
-    with open("questions_bank.json", "w", encoding="utf-8") as f:
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir = os.path.join(base_dir, "data")
+    os.makedirs(out_dir, exist_ok=True)
+    out_file = os.path.join(out_dir, "questions_bank.json")
+    with open(out_file, "w", encoding="utf-8") as f:
         json.dump(q_list, f, ensure_ascii=False, indent=2)
-    print("Saved to questions_bank.json")
+    print(f"Saved to {out_file}")

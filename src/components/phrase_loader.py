@@ -10,9 +10,7 @@ import json
 import random
 import os
 import streamlit.components.v1 as components
-from src.config import BASE_DIR
-
-PHRASES_FILE = os.path.join(BASE_DIR, "german_phrases.json")
+from src.config import BASE_DIR, PHRASES_FILE
 
 
 def load_german_phrases():

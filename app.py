@@ -1,6 +1,12 @@
 import os
+import sys
 import time
 from datetime import date
+
+# Ensure src/ is on sys.path for direct module imports (storage, questions, etc.)
+SRC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 import streamlit as st
 import streamlit.components.v1 as components

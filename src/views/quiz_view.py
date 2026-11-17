@@ -2,8 +2,8 @@ import time
 from datetime import date
 import streamlit as st
 import storage
-import email_service
-from questions import get_daily_questions, get_day_pack_questions, QUESTIONS_DATA
+from src.services import email_service
+from src.questions import get_daily_questions, get_day_pack_questions, QUESTIONS_DATA
 from src.config import AVATAR_CHOICES
 from src.components import render_50sec_timer, trigger_confetti_and_sound, tts_button
 from src.components.duel_engine import (

@@ -585,11 +585,22 @@
   ],
   "lsrw_store": {
     "__lsrw_test_player__": {
-      "learned_topics": [],
-      "current_topic": null,
-      "practiced_list": [],
-      "explained_list": [],
-      "module_scores": []
+      "practiced_list": [
+        "Relativsatz"
+      ],
+      "explained_list": [
+        "Passiv",
+        "weil vs obwohl"
+      ],
+      "has_seen_kasus": true,
+      "current_topic": "Passiv",
+      "current_stage": "scenario_selection",
+      "chat_history": [
+        {
+          "role": "assistant",
+          "content": "Hallo"
+        }
+      ]
     },
     "prabu": {
       "learned_topics": [

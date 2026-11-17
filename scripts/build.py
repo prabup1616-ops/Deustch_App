@@ -24,7 +24,13 @@ import py_compile
 import subprocess
 import json
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC_DIR = os.path.join(BASE_DIR, "src")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 
 def log_header(title: str):
@@ -102,11 +108,11 @@ def task_compile():
         "static/templates/confetti.html",
         "static/templates/grammar_chart.html",
         "static/templates/phrase_loader.html",
-        "german_phrases.json",
-        "lsrw_cache.json",
-        "questions_bank.json",
-        "gender_questions_bank.json",
-        "duel_data.json"
+        "data/german_phrases.json",
+        "data/lsrw_cache.json",
+        "data/questions_bank.json",
+        "data/gender_questions_bank.json",
+        "data/duel_data.json"
     ]
     for asset in required_assets:
         full_p = os.path.join(BASE_DIR, asset)
@@ -128,9 +134,9 @@ def task_test():
 
     # Test 1: Questions Bank Integrity
     print("1. Testing questions_bank.json integrity...")
-    q_file = os.path.join(BASE_DIR, "questions_bank.json")
+    q_file = os.path.join(DATA_DIR, "questions_bank.json")
     if not os.path.exists(q_file):
-        log_failed("questions_bank.json not found!")
+        log_failed(f"questions_bank.json not found in {DATA_DIR}!")
     with open(q_file, "r", encoding="utf-8") as f:
         q_data = json.load(f)
     if len(q_data) < 162:

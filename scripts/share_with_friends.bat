@@ -1,5 +1,6 @@
 @echo off
 title German B1 Daily Duel - Server & Real-Time Sharing
+cd /d "%~dp0\.."
 echo ===================================================================
 echo             GERMAN B1 DAILY DUEL - REAL-TIME SERVER
 echo ===================================================================

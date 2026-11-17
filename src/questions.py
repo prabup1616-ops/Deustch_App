@@ -10,18 +10,22 @@ import os
 import hashlib
 from typing import List, Dict, Any
 
-JSON_PATH = os.path.join(os.path.dirname(__file__), "questions_bank.json")
+from src.config import QUESTIONS_FILE as JSON_PATH
 
 def load_all_questions() -> List[Dict[str, Any]]:
     if not os.path.exists(JSON_PATH):
-        # Fallback to generating if missing
-        import generate_questions
-        q = generate_questions.generate_162_questions()
-        with open(JSON_PATH, "w", encoding="utf-8") as f:
-            json.dump(q, f, ensure_ascii=False, indent=2)
-        return q
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        try:
+            from scripts import generate_questions
+            q = generate_questions.generate_162_questions()
+            with open(JSON_PATH, "w", encoding="utf-8") as f:
+                json.dump(q, f, ensure_ascii=False, indent=2)
+            return q
+        except Exception:
+            pass
+    if os.path.exists(JSON_PATH):
+        with open(JSON_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
 QUESTIONS_DATA = load_all_questions()
 

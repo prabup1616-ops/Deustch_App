@@ -575,7 +575,10 @@ def build_gender_questions():
         }
         questions.append(q_record)
 
-    out_file = os.path.join(os.path.dirname(__file__), "gender_questions_bank.json")
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir = os.path.join(base_dir, "data")
+    os.makedirs(out_dir, exist_ok=True)
+    out_file = os.path.join(out_dir, "gender_questions_bank.json")
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(questions, f, ensure_ascii=False, indent=2)
     

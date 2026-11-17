@@ -6,8 +6,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 CSS_DIR = os.path.join(STATIC_DIR, "css")
 TEMPLATES_DIR = os.path.join(STATIC_DIR, "templates")
-DATA_FILE = os.path.join(BASE_DIR, "duel_data.json")
-QUESTIONS_FILE = os.path.join(BASE_DIR, "questions_bank.json")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+SCRIPTS_DIR = os.path.join(BASE_DIR, "scripts")
+
+# Data File Paths (with fallback to root if not in data/)
+def _get_data_path(filename: str) -> str:
+    path_in_data = os.path.join(DATA_DIR, filename)
+    path_in_root = os.path.join(BASE_DIR, filename)
+    if os.path.exists(path_in_data):
+        return path_in_data
+    if os.path.exists(path_in_root):
+        return path_in_root
+    return path_in_data
+
+DATA_FILE = _get_data_path("duel_data.json")
+QUESTIONS_FILE = _get_data_path("questions_bank.json")
+GENDER_QUESTIONS_FILE = _get_data_path("gender_questions_bank.json")
+PHRASES_FILE = _get_data_path("german_phrases.json")
+LSRW_CACHE_FILE = _get_data_path("lsrw_cache.json")
 
 # App Constants
 APP_TITLE = "German B1 Goethe Prep & Duel | జర్మన్ B1 | ಜರ್ಮನ್ B1"

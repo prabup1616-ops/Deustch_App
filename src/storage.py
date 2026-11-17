@@ -33,7 +33,12 @@ except Exception:
     def is_db_connected():
         return False
 
-DATA_FILE = os.path.join(os.path.dirname(__file__), "duel_data.json")
+try:
+    from src.config import DATA_FILE
+except Exception:
+    _root = os.path.dirname(os.path.abspath(__file__))
+    _data_cand = os.path.join(_root, "data", "duel_data.json")
+    DATA_FILE = _data_cand if os.path.exists(_data_cand) else os.path.join(_root, "duel_data.json")
 
 DEFAULT_SETTINGS = {
     "smtp_server": "smtp.gmail.com",

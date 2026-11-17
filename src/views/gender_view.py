@@ -2,7 +2,7 @@ import time
 from datetime import date
 import streamlit as st
 import storage
-import email_service
+from src.services import email_service
 from src.gender_questions import (
     get_daily_gender_questions,
     get_gender_pack_questions,
