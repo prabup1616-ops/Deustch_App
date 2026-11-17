@@ -264,16 +264,27 @@ def render_10day_topic_unlock_card(
     hist_data = storage.get_player_continuous_history(clean_pid, category=category)
     total_days = hist_data.get("total_days_completed", 0)
     cur_day = hist_data.get("current_day_number", 1)
+    history = hist_data.get("history", [])
 
-    is_milestone_reached = (total_days >= 10 or cur_day >= 10)
+    # Rule 2 (Early Fast-Track Mastery): 4 consecutive days with at least one 5/5 score
+    has_4_consecutive_perfect = False
+    if len(history) >= 4:
+        has_4_consecutive_perfect = all(d.get("best_score", 0) >= 5 for d in history[-4:])
+
+    # Rule 1 (Day 10 Milestone Mastery): Day 10+ AND last 3 days achieved 5/5
+    has_10_day_milestone_perfect = False
+    if (total_days >= 10 or cur_day >= 10) and len(history) >= 3:
+        has_10_day_milestone_perfect = all(d.get("best_score", 0) >= 5 for d in history[-3:])
+
+    is_milestone_reached = (has_4_consecutive_perfect or has_10_day_milestone_perfect)
 
     if not is_milestone_reached:
         days_left = max(1, 10 - total_days)
         st.markdown(f"""
         <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 10px 14px; margin: 10px 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748b;">
-                <span>🎯 <strong>10-Day Topic Unlock:</strong> {total_days}/10 days completed</span>
-                <span>{days_left} more day(s) to unlock custom grammar topics!</span>
+                <span>🎯 <strong>Goethe B1 Progression:</strong> Day {total_days}/10 completed</span>
+                <span>{days_left} more day(s) to next curriculum unlock!</span>
             </div>
             <div style="width: 100%; background: #e2e8f0; height: 6px; border-radius: 999px; margin-top: 6px; overflow: hidden;">
                 <div style="width: {min(100, int((total_days / 10.0) * 100))}%; background: #2563eb; height: 100%;"></div>
@@ -282,85 +293,117 @@ def render_10day_topic_unlock_card(
         """, unsafe_allow_html=True)
         return
 
-    # 10 Days Milestone Reached!
-    community_topics = storage.get_community_topics(category=category)
+    # =========================================================================
+    # MILESTONE UNLOCKED!
+    # =========================================================================
     player_unlocked = storage.get_player_unlocked_topics(clean_pid, category=category)
     current_topic = storage.get_player_current_topic(clean_pid, category=category)
 
-    # Filter community topics that player hasn't added yet
-    available_community = [t for t in community_topics if t not in player_unlocked]
+    if category == "gender":
+        # Strictly Pre-defined Chapters for Gender Duel (No custom user input)
+        from src.gender_questions import GENDER_CHAPTERS
+        unlocked_titles = set(player_unlocked)
+        next_chap = next((c for c in GENDER_CHAPTERS if c["title"] not in unlocked_titles), None)
 
-    st.markdown(f"""
-    <div style="background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%); border: 2px solid #eab308; border-radius: 14px; padding: 18px 22px; margin: 14px 0; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.8rem;">🎉</span>
-            <div>
-                <h3 style="margin: 0; font-size: 1.22rem; color: #854d0e;">10-Day Goethe B1 Milestone Unlocked!</h3>
-                <p style="margin: 2px 0 0 0; font-size: 0.88rem; color: #713f12;">
-                    Congratulations, <strong>{player_name}</strong>! You have reached 10 days of continuous duels. You can now unlock your next grammar topic (e.g. <em>Weak Masculine Declination</em>, <em>Passiv</em>, <em>Relativsätze</em>).
-                </p>
+        if not next_chap:
+            st.success("🏆 **Mastery Achieved!** You have unlocked all 5 official Goethe B1 Gender & Grammar chapters! You can switch between them in Step 3 below.")
+            return
+
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%); border: 2px solid #eab308; border-radius: 14px; padding: 18px 22px; margin: 14px 0; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.8rem;">🎉</span>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.22rem; color: #854d0e;">Goethe B1 Milestone Unlocked!</h3>
+                    <p style="margin: 2px 0 0 0; font-size: 0.88rem; color: #713f12;">
+                        Congratulations, <strong>{player_name}</strong>! Your consistent practice and mastery have unlocked <strong>{next_chap['badge']}</strong>!
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    with st.expander("🔓 Unlock a New Grammar Topic (Type or Choose from Community)", expanded=True):
-        col_type, col_com = st.columns([1, 1], gap="medium")
-
-        with col_type:
-            st.markdown("**Option A: Type Your Next Topic**")
-            new_custom_topic = st.text_input(
-                "Write your next grammar topic:",
-                placeholder="e.g. Weak Masculine Declination (N-Deklination)",
-                key=f"{key_prefix}_custom_topic_input"
-            )
-
-        with col_com:
-            st.markdown("**Option B: Community Topics from Other Learners**")
-            com_selection = st.selectbox(
-                "Choose from community pool:",
-                options=["-- Select a community topic --"] + (available_community if available_community else community_topics),
-                index=0,
-                key=f"{key_prefix}_community_topic_select"
-            )
-
-        unlock_clicked = st.button("🚀 Unlock & Feed Topic into DB Repository", type="primary", key=f"{key_prefix}_submit_new_topic_btn")
-
-        if unlock_clicked:
-            chosen_topic = ""
-            if new_custom_topic and new_custom_topic.strip():
-                chosen_topic = new_custom_topic.strip()
-            elif com_selection and not com_selection.startswith("--"):
-                chosen_topic = com_selection.strip()
-
-            if not chosen_topic:
-                st.warning("⚠️ Please type a new topic or select one from the community suggestions!")
-            else:
-                # 1. Register topic for player & community
-                storage.add_player_unlocked_topic(clean_pid, chosen_topic, category=category)
-                storage.set_player_current_topic(clean_pid, chosen_topic, category=category)
-
-                # 2. Check if questions already exist in questions_repo
-                existing_qs = storage.get_repo_questions_for_topic(chosen_topic, category=category)
-
-                # 3. Launch background AI generator with Gemini if fewer than 5 questions
-                if len(existing_qs) < 5:
-                    def _bg_generate(t_name, cat, pid):
-                        try:
-                            from src.ai_service import generate_topic_questions
-                            api_k = storage.get_gemini_api_key()
-                            past_t = storage.get_player_unlocked_topics(pid, category=cat)
-                            new_qs = generate_topic_questions(t_name, category=cat, count=10, api_key=api_k, past_topics=past_t)
-                            if new_qs:
-                                storage.save_repo_questions_for_topic(t_name, cat, new_qs, created_by=f"ai_{pid}")
-                        except Exception:
-                            pass
-
-                    bg_thread = threading.Thread(target=_bg_generate, args=(chosen_topic, category, clean_pid), daemon=True)
-                    bg_thread.start()
-
-                st.success(f"✨ Topic **'{chosen_topic}'** unlocked and set as your active duel topic! Questions are ready and syncing with DB in the background.")
+        with st.expander(f"🔓 Unlock {next_chap['badge']}: {next_chap['title']}", expanded=True):
+            st.markdown(f"#### 📖 {next_chap['badge']}: {next_chap['title']}")
+            st.markdown(f"<p style='color: #475569;'>{next_chap['desc']}</p>", unsafe_allow_html=True)
+            if st.button(f"🚀 Activate & Start {next_chap['badge']} ➔", type="primary", key=f"{key_prefix}_unlock_gender_chap_{next_chap['id']}"):
+                storage.add_player_unlocked_topic(clean_pid, next_chap["title"], category="gender")
+                storage.set_player_current_topic(clean_pid, next_chap["title"], category="gender")
+                st.success(f"✨ {next_chap['badge']} ({next_chap['title']}) is now your active duel curriculum!")
                 st.rerun()
+
+    else:
+        # Pronoun / Translation Duel: User can type custom topic or choose from community
+        community_topics = storage.get_community_topics(category=category)
+        available_community = [t for t in community_topics if t not in player_unlocked]
+
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%); border: 2px solid #eab308; border-radius: 14px; padding: 18px 22px; margin: 14px 0; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.15);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.8rem;">🎉</span>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.22rem; color: #854d0e;">Goethe B1 Milestone Unlocked!</h3>
+                    <p style="margin: 2px 0 0 0; font-size: 0.88rem; color: #713f12;">
+                        Congratulations, <strong>{player_name}</strong>! Your consistent practice and mastery have unlocked custom topic selection.
+                    </p>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        with st.expander("🔓 Unlock a New Grammar Topic (Type or Choose from Community)", expanded=True):
+            col_type, col_com = st.columns([1, 1], gap="medium")
+
+            with col_type:
+                st.markdown("**Option A: Type Your Next Topic**")
+                new_custom_topic = st.text_input(
+                    "Write your next grammar topic:",
+                    placeholder="e.g. Weak Masculine Declination (N-Deklination)",
+                    key=f"{key_prefix}_custom_topic_input"
+                )
+
+            with col_com:
+                st.markdown("**Option B: Community Topics from Other Learners**")
+                com_selection = st.selectbox(
+                    "Choose from community pool:",
+                    options=["-- Select a community topic --"] + (available_community if available_community else community_topics),
+                    index=0,
+                    key=f"{key_prefix}_community_topic_select"
+                )
+
+            unlock_clicked = st.button("🚀 Unlock & Feed Topic into DB Repository", type="primary", key=f"{key_prefix}_submit_new_topic_btn")
+
+            if unlock_clicked:
+                chosen_topic = ""
+                if new_custom_topic and new_custom_topic.strip():
+                    chosen_topic = new_custom_topic.strip()
+                elif com_selection and not com_selection.startswith("--"):
+                    chosen_topic = com_selection.strip()
+
+                if not chosen_topic:
+                    st.warning("⚠️ Please type a new topic or select one from the community suggestions!")
+                else:
+                    storage.add_player_unlocked_topic(clean_pid, chosen_topic, category=category)
+                    storage.set_player_current_topic(clean_pid, chosen_topic, category=category)
+
+                    existing_qs = storage.get_repo_questions_for_topic(chosen_topic, category=category)
+                    if len(existing_qs) < 5:
+                        def _bg_generate(t_name, cat, pid):
+                            try:
+                                from src.ai_service import generate_topic_questions
+                                api_k = storage.get_gemini_api_key()
+                                past_t = storage.get_player_unlocked_topics(pid, category=cat)
+                                new_qs = generate_topic_questions(t_name, category=cat, count=10, api_key=api_k, past_topics=past_t)
+                                if new_qs:
+                                    storage.save_repo_questions_for_topic(t_name, cat, new_qs, created_by=f"ai_{pid}")
+                            except Exception:
+                                pass
+
+                        bg_thread = threading.Thread(target=_bg_generate, args=(chosen_topic, category, clean_pid), daemon=True)
+                        bg_thread.start()
+
+                    st.success(f"✨ Topic **'{chosen_topic}'** unlocked and set as your active duel topic! Questions are ready and syncing with DB in the background.")
+                    st.rerun()
 
 
 def render_topic_selector(player_id: str, category: str = "pronoun", key_prefix: str = "quiz") -> str:

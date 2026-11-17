@@ -926,7 +926,7 @@ def _render_writing_module():
 
         col_new_w, col_next_w = st.columns([1, 1])
         with col_new_w:
-            if st.button("🔄 Neue Schreibaufgabe starten", use_container_width=True, key="btn_new_writing"):
+            if st.button("🔄 Start New Writing Task", use_container_width=True, key="btn_new_writing"):
                 st.session_state.pop("lsrw_writing_data", None)
                 st.session_state.pop("lsrw_writing_evaluated", None)
                 st.session_state.pop("lsrw_writing_feedback", None)

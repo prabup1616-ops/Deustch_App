@@ -903,6 +903,17 @@ def get_repo_questions_for_topic(topic: str, category: str = "pronoun") -> List[
     Fetches stored questions for a given topic from DB (questions_repo) or local storage.
     """
     clean_topic = topic.strip()
+
+    # Pre-defined Gender Chapters priority
+    if category == "gender":
+        try:
+            from src.gender_questions import get_predefined_gender_questions
+            pre_qs = get_predefined_gender_questions(clean_topic)
+            if pre_qs:
+                return pre_qs
+        except Exception:
+            pass
+
     # 1. Check Neon DB first
     if is_db_connected():
         try:

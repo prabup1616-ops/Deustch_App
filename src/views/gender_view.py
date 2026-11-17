@@ -261,8 +261,53 @@ def render_gender_view():
         # 50s Countdown Timer strictly per question
         render_50sec_timer(curr_idx, st.session_state.gender_q_start_time)
 
-        # Main Question Card - Cleanly formatted without markdown indentation issues
-        st.markdown(f"""<div class="question-card-anim" style="border-left: 6px solid #059669; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 20px;">
+        # Main Question Card
+        is_sentence_q = ("options" in current_q)
+
+        if is_sentence_q:
+            # Chapters 2-5: Sentence-based Fill-in-the-blank (Kasus / Verben / Deklinationen)
+            sent_text = current_q.get("sentence_de") or current_q.get("target_de", "")
+            st.markdown(f"""<div class="question-card-anim" style="border-left: 6px solid #2563eb; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<span style="font-weight: 800; color: #1e40af; font-size: 1.15rem; letter-spacing: 0.5px;">
+QUESTION {curr_idx + 1} OF 5 • {current_q.get('topic', 'GOETHE B1 GRAMMATIK')}
+</span>
+<span style="color: #64748b; font-size: 0.85rem; font-weight: 600; background: #f1f5f9; padding: 4px 10px; border-radius: 999px;">
+⏱️ 50 Seconds Limit
+</span>
+</div>
+<div style="padding: 20px; background: #eff6ff; border-radius: 14px; border: 2px dashed #93c5fd; margin-bottom: 18px;">
+<div style="font-size: 0.9rem; color: #1d4ed8; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
+Wählen Sie die richtige Option für die Lücke:
+</div>
+<div style="font-size: 1.55rem; font-weight: 900; color: #1e3a8a; line-height: 1.4;">
+{sent_text}
+</div>
+</div>
+</div>""", unsafe_allow_html=True)
+
+            if lang == "te" and current_q.get("meaning_te"):
+                st.markdown(f"""<div style="background: #fdf4ff; border-left: 4px solid #c026d3; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #701a75;">
+🇮🇳 తెలుగు సందర్భం: <strong>{current_q['meaning_te']}</strong>
+</div>""", unsafe_allow_html=True)
+            elif lang == "kn" and current_q.get("meaning_kn"):
+                st.markdown(f"""<div style="background: #fefce8; border-left: 4px solid #ca8a04; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #713f12;">
+🇮🇳 ಕನ್ನಡ ಸಂದರ್ಭ: <strong>{current_q['meaning_kn']}</strong>
+</div>""", unsafe_allow_html=True)
+
+            selected_option = st.radio(
+                f"Option für Frage {curr_idx + 1}:",
+                options=current_q["options"],
+                index=None,
+                key=f"gender_choice_{curr_idx}_{current_q['id']}",
+                label_visibility="collapsed"
+            )
+            final_typed = selected_option or ""
+            der_btn, die_btn, das_btn = False, False, False
+
+        else:
+            # Chapter 1: Standard Noun Gender Typing & Fast-Click Badges
+            st.markdown(f"""<div class="question-card-anim" style="border-left: 6px solid #059669; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 20px;">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
 <span style="font-weight: 800; color: #065f46; font-size: 1.15rem; letter-spacing: 0.5px;">
 QUESTION {curr_idx + 1} OF 5 • GOETHE B1 WORTLISTE
@@ -276,71 +321,71 @@ QUESTION {curr_idx + 1} OF 5 • GOETHE B1 WORTLISTE
 Type the correct German Gender (der / die / das):
 </div>
 <div style="font-size: 2.8rem; font-weight: 900; color: #1e3a8a; letter-spacing: 1px;">
-<span style="color: #94a3b8; font-weight: 400; font-size: 2.2rem;">[ ? ]</span> {current_q['noun']}
+<span style="color: #94a3b8; font-weight: 400; font-size: 2.2rem;">[ ? ]</span> {current_q.get('noun', '')}
 </div>
 <div style="margin-top: 10px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
 <span style="background: white; border: 1px solid #cbd5e1; padding: 4px 14px; border-radius: 20px; font-size: 0.95rem; color: #334155;">
-📚 Plural: <strong>{current_q['plural']}</strong>
+📚 Plural: <strong>{current_q.get('plural', '')}</strong>
 </span>
 <span style="background: white; border: 1px solid #cbd5e1; padding: 4px 14px; border-radius: 20px; font-size: 0.95rem; color: #334155;">
-🇬🇧 English: <strong>{current_q['meaning_en']}</strong>
+🇬🇧 English: <strong>{current_q.get('meaning_en', '')}</strong>
 </span>
 </div>
 </div>
 </div>""", unsafe_allow_html=True)
 
-        # Optional Regional Language Annotations
-        if lang == "te" and current_q.get("meaning_te"):
-            st.markdown(f"""<div style="background: #fdf4ff; border-left: 4px solid #c026d3; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #701a75;">
+            # Optional Regional Language Annotations
+            if lang == "te" and current_q.get("meaning_te"):
+                st.markdown(f"""<div style="background: #fdf4ff; border-left: 4px solid #c026d3; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #701a75;">
 🇮🇳 తెలుగు అర్థం: <strong>{current_q['meaning_te']}</strong>
 </div>""", unsafe_allow_html=True)
-        elif lang == "kn" and current_q.get("meaning_kn"):
-            st.markdown(f"""<div style="background: #fefce8; border-left: 4px solid #ca8a04; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #713f12;">
+            elif lang == "kn" and current_q.get("meaning_kn"):
+                st.markdown(f"""<div style="background: #fefce8; border-left: 4px solid #ca8a04; border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.95rem; color: #713f12;">
 🇮🇳 ಕನ್ನಡ ಅರ್ಥ: <strong>{current_q['meaning_kn']}</strong>
 </div>""", unsafe_allow_html=True)
 
-        # Contextual Sentence from Wortliste
-        if current_q.get("example_de"):
-            st.markdown(f"""<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px;">
+            # Contextual Sentence from Wortliste
+            if current_q.get("example_de"):
+                st.markdown(f"""<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px;">
 <span style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Context Example (B1 Wortliste):</span><br>
 <span style="font-size: 1.02rem; color: #1e293b; font-style: italic;">„{current_q['example_de']}“</span>
 </div>""", unsafe_allow_html=True)
 
-        # Gender Input Field (Typing der / die / das as requested)
-        st.markdown("##### ✍️ Type German Gender (`der` / `die` / `das`):")
-        
-        typed_key = f"gender_input_{curr_idx}_{current_q['id']}"
-        
-        col_type, col_quick1, col_quick2, col_quick3 = st.columns([3, 1, 1, 1])
-        
-        with col_type:
-            typed_answer = st.text_input(
-                "Type Gender:",
-                value="",
-                placeholder="Type 'der', 'die', or 'das'...",
-                key=typed_key,
-                label_visibility="collapsed"
-            )
+            # Gender Input Field (Typing der / die / das as requested)
+            st.markdown("##### ✍️ Type German Gender (`der` / `die` / `das`):")
+            
+            typed_key = f"gender_input_{curr_idx}_{current_q['id']}"
+            
+            col_type, col_quick1, col_quick2, col_quick3 = st.columns([3, 1, 1, 1])
+            
+            with col_type:
+                typed_answer = st.text_input(
+                    "Type Gender:",
+                    value="",
+                    placeholder="Type 'der', 'die', or 'das'...",
+                    key=typed_key,
+                    label_visibility="collapsed"
+                )
 
-        # Quick 1-tap badges for mobile/convenience
-        with col_quick1:
-            der_btn = st.button("🔵 der (M)", use_container_width=True, key=f"quick_der_{curr_idx}")
-        with col_quick2:
-            die_btn = st.button("🔴 die (F)", use_container_width=True, key=f"quick_die_{curr_idx}")
-        with col_quick3:
-            das_btn = st.button("🟢 das (N)", use_container_width=True, key=f"quick_das_{curr_idx}")
+            # Quick 1-tap badges for mobile/convenience
+            with col_quick1:
+                der_btn = st.button("🔵 der (M)", use_container_width=True, key=f"quick_der_{curr_idx}")
+            with col_quick2:
+                die_btn = st.button("🔴 die (F)", use_container_width=True, key=f"quick_die_{curr_idx}")
+            with col_quick3:
+                das_btn = st.button("🟢 das (N)", use_container_width=True, key=f"quick_das_{curr_idx}")
 
-        final_typed = typed_answer.strip()
-        if der_btn:
-            final_typed = "der"
-        elif die_btn:
-            final_typed = "die"
-        elif das_btn:
-            final_typed = "das"
+            final_typed = typed_answer.strip()
+            if der_btn:
+                final_typed = "der"
+            elif die_btn:
+                final_typed = "die"
+            elif das_btn:
+                final_typed = "das"
 
         col_submit, col_exit = st.columns([3, 1])
         with col_submit:
-            btn_label = "✅ Lock In Gender & Next Question ➔" if curr_idx < 4 else "🚀 Submit Final Gender Quiz & See Score 🏆"
+            btn_label = "✅ Lock In Answer & Next Question ➔" if curr_idx < 4 else "🚀 Submit Final Quiz & See Score 🏆"
             lock_clicked = st.button(btn_label, type="primary", use_container_width=True, key=f"btn_gender_lock_{curr_idx}")
         with col_exit:
             exit_clicked = st.button("❌ Quit to Lobby", use_container_width=True, key=f"btn_gender_exit_{curr_idx}")
@@ -353,25 +398,25 @@ Type the correct German Gender (der / die / das):
         elapsed = now - st.session_state.gender_q_start_time
 
         # Auto-advance if 50s expired OR lock button clicked OR quick badge pressed
-        if lock_clicked or der_btn or die_btn or das_btn or elapsed >= 50.0:
+        if lock_clicked or (not is_sentence_q and (der_btn or die_btn or das_btn)) or elapsed >= 50.0:
             is_timeout = (elapsed >= 50.0)
 
             if is_timeout:
                 is_correct = False
                 user_article = "⏰ Timed Out (>50s) - 0 Marks (Skipped)"
             else:
-                user_article = final_typed.strip().lower()
+                user_article = final_typed.strip()
                 if not user_article:
                     is_correct = False
-                    user_article = "No Answer Typed (0 Marks)"
+                    user_article = "No Option Selected (0 Marks)" if is_sentence_q else "No Answer Typed (0 Marks)"
                 else:
-                    correct_article = current_q["article"].strip().lower()
-                    is_correct = (user_article == correct_article)
+                    correct_target = current_q.get("target_de") or current_q.get("article", "")
+                    is_correct = (user_article.strip().lower() == str(correct_target).strip().lower())
 
             st.session_state.gender_per_q_results.append({
                 "question": current_q,
                 "user_choice": user_article,
-                "correct_article": current_q["article"],
+                "correct_article": current_q.get("target_de") or current_q.get("article", ""),
                 "is_correct": is_correct,
                 "is_timeout": is_timeout,
                 "elapsed": min(50.0, round(elapsed, 1))
@@ -445,9 +490,15 @@ Type the correct German Gender (der / die / das):
             if st.button("🔄 Retake Gender Quiz (Improve Average)", type="primary", use_container_width=True, key="gender_retake_btn"):
                 prev_results = res.get("details", [])
                 seen_ids = set(st.session_state.get("gender_seen_q_ids", []))
+                active_t = st.session_state.get("active_gender_topic", "baseline")
+                is_base = ("baseline" in active_t.lower() or "nouns" in active_t.lower())
+                topic_pool = GENDER_QUESTIONS_DATA if is_base else storage.get_repo_questions_for_topic(active_t, category="gender")
+                if not topic_pool:
+                    topic_pool = GENDER_QUESTIONS_DATA
+
                 retake_questions, updated_seen, wrong_cnt = build_retake_question_set(
                     prev_results,
-                    GENDER_QUESTIONS_DATA,
+                    topic_pool,
                     seen_ids,
                     target_count=5
                 )
@@ -493,12 +544,12 @@ Type the correct German Gender (der / die / das):
             status_bg = "#ecfdf5" if is_corr else "#fef2f2"
             status_fg = "#047857" if is_corr else "#b91c1c"
 
-            art_color = "#2563eb" if correct_art == "der" else "#db2777" if correct_art == "die" else "#059669"
-
-            st.markdown(f"""<div style="border-left: 6px solid {border_color}; background: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+            if "noun" in q:
+                art_color = "#2563eb" if correct_art == "der" else "#db2777" if correct_art == "die" else "#059669"
+                st.markdown(f"""<div style="border-left: 6px solid {border_color}; background: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
 <div style="font-weight: 800; font-size: 1.1rem; color: #1e3a8a;">
-Question {idx}: <span style="color: {art_color}; font-size: 1.3rem;">{correct_art} {q['noun']}</span>
+Question {idx}: <span style="color: {art_color}; font-size: 1.3rem;">{correct_art} {q.get('noun', '')}</span>
 </div>
 <div style="display: flex; gap: 10px; align-items: center;">
 <span style="font-size: 0.8rem; color: #64748b;">⏱️ {elapsed_sec:.1f}s / 50s</span>
@@ -510,11 +561,33 @@ Question {idx}: <span style="color: {art_color}; font-size: 1.3rem;">{correct_ar
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; font-size: 0.92rem;">
 <div><strong>Your Answer:</strong> <span style="font-weight: 700; color: {'#15803d' if is_corr else '#dc2626'};">{user_art}</span></div>
 <div><strong>Correct Gender:</strong> <span style="font-weight: 800; color: {art_color};">{correct_art}</span></div>
-<div><strong>Plural Form:</strong> <span style="font-weight: 700; color: #0284c7;">{q['plural']}</span></div>
-<div><strong>English Meaning:</strong> <span style="font-weight: 700; color: #1e293b;">{q['meaning_en']}</span></div>
+<div><strong>Plural Form:</strong> <span style="font-weight: 700; color: #0284c7;">{q.get('plural', '')}</span></div>
+<div><strong>English Meaning:</strong> <span style="font-weight: 700; color: #1e293b;">{q.get('meaning_en', '')}</span></div>
 </div>
 <div style="background: #f8fafc; border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; color: #475569;">
 💬 <strong>Goethe B1 Example:</strong> <em>„{q.get('example_de', '')}“</em>
+</div>
+</div>""", unsafe_allow_html=True)
+            else:
+                sent_text = q.get('sentence_de') or q.get('target_de', '')
+                st.markdown(f"""<div style="border-left: 6px solid {border_color}; background: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+<div style="font-weight: 800; font-size: 1.05rem; color: #1e3a8a;">
+Question {idx}: <span style="color: #2563eb; font-size: 1.15rem;">{sent_text}</span>
+</div>
+<div style="display: flex; gap: 10px; align-items: center;">
+<span style="font-size: 0.8rem; color: #64748b;">⏱️ {elapsed_sec:.1f}s / 50s</span>
+<span style="background: {status_bg}; color: {status_fg}; font-weight: 700; font-size: 0.82rem; padding: 4px 12px; border-radius: 999px;">
+{status_badge}
+</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; font-size: 0.92rem;">
+<div><strong>Your Answer:</strong> <span style="font-weight: 700; color: {'#15803d' if is_corr else '#dc2626'};">{user_art}</span></div>
+<div><strong>Correct Answer:</strong> <span style="font-weight: 800; color: #16a34a;">{correct_art}</span></div>
+</div>
+<div style="background: #f8fafc; border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; color: #475569;">
+💡 <strong>Grammatische Erklärung:</strong> {q.get('explanation', '')}
 </div>
 </div>""", unsafe_allow_html=True)
 
