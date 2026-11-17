@@ -474,45 +474,28 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
     is_returning = ("Existing Player" in player_type)
 
     # --------------------------------------------------------------------------
-    # FLOW A: EXISTING RETURNING PLAYER (INSTANT GOOGLE-STYLE AUTOCOMPLETE)
+    # FLOW A: EXISTING RETURNING PLAYER
     # --------------------------------------------------------------------------
     if is_returning:
-        # Search callback executed on every keystroke (real-time Google-style suggestions)
-        def _search_saved_players(query: str):
-            if not query or not query.strip():
-                return []
-            q = query.strip().lower()
-            matches = [p for p in all_saved if q in p.get("name", "").lower()]
-            # Returns (Label, Value) tuples for the live dropdown menu (WITHOUT ID)
-            return [(f"{p.get('avatar', '👤')}  {p['name']}", p["id"]) for p in matches]
+        typed_name = st.text_input(
+            "Player Name / మీ పేరు / ನಿಮ್ಮ ಹೆಸರು:",
+            value=st.session_state.get(f"{key_prefix}_returning_name_val", ""),
+            placeholder="Type your name (e.g. Prabu, Prakash)...",
+            key=f"{key_prefix}_returning_name_input"
+        )
 
-        selected_player_id = None
+        clean_typed = typed_name.strip()
+        chosen_player = None
 
-        try:
-            from streamlit_searchbox import st_searchbox
+        if clean_typed:
+            # Case-insensitive match against saved players
+            exact_matches = [p for p in all_saved if p.get("name", "").strip().lower() == clean_typed.lower()]
+            partial_matches = [p for p in all_saved if clean_typed.lower() in p.get("name", "").strip().lower()]
 
-            selected_player_id = st_searchbox(
-                _search_saved_players,
-                placeholder="🔍 Type to search your name (e.g. type 'P', 'Prabu', 'Prakash')...",
-                label="Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
-                default=None,
-                debounce=100,
-                key=f"{key_prefix}_instant_player_searchbox",
-            )
-        except Exception:
-            # Fallback to searchable selectbox if custom component not loaded
-            player_options = {f"{p.get('avatar', '👤')} {p['name']}": p["id"] for p in all_saved}
-            choice = st.selectbox(
-                "Search your name / మీ పేరును వెతకండి / ನಿಮ್ಮ ಹೆಸರನ್ನು ಹುಡುಕಿ:",
-                options=list(player_options.keys()),
-                index=None,
-                placeholder="🔍 Type to search your name (e.g. Prabu, Prakash)...",
-                key=f"{key_prefix}_fallback_player_selectbox",
-            )
-            selected_player_id = player_options.get(choice) if choice else None
-            selected_player_id = player_options.get(choice) if choice else None
-
-        chosen_player = next((p for p in all_saved if p["id"] == selected_player_id), None) if selected_player_id else None
+            if exact_matches:
+                chosen_player = exact_matches[0]
+            elif partial_matches:
+                chosen_player = partial_matches[0]
 
         if chosen_player:
             p_name = chosen_player["name"]
@@ -534,13 +517,6 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
             </div>
             """, unsafe_allow_html=True)
 
-            col_btn, _ = st.columns([1, 2])
-            with col_btn:
-                if st.button("🔄 Clear / Search Different Player", key=f"{key_prefix}_clear_search_btn"):
-                    if f"{key_prefix}_instant_player_searchbox" in st.session_state:
-                        del st.session_state[f"{key_prefix}_instant_player_searchbox"]
-                    st.rerun()
-
             with st.expander("✏️ Customize Avatar / Email (Optional)"):
                 col_a, col_e = st.columns([1, 2])
                 with col_a:
@@ -558,8 +534,6 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
                 "is_new": False
             }
         else:
-            st.info("👆 Start typing your name in the search box above (e.g. type 'P') to see live Google-style suggestions, then click to select.")
-            st.caption("💡 Don't see your name? Change **Player Type** above to **➕ New Player (Register)** to create your profile!")
             return {
                 "selected_player_id": None,
                 "player_name": "",
@@ -584,7 +558,6 @@ def render_dynamic_player_selector(category: str = "pronoun", key_prefix: str = 
         clean_new_name = new_name_raw.strip()
 
         if not clean_new_name:
-            st.info("👆 Please enter your name above to register as a new player.")
             return {
                 "selected_player_id": None,
                 "player_name": "",
